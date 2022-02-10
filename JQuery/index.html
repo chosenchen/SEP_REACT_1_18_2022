@@ -12,10 +12,12 @@
     <script>
       class PQuery {
         constructor(selector) {
-          this.element = document.querySelector(selector);
+          this.element = document.querySelectorAll(selector);
         }
         html(templateStr) {
-          this.element.innerHTML = templateStr;
+          this.element.forEach((ele)=>{
+            ele.innerHTML = templateStr;
+          });
         }
       }
 
