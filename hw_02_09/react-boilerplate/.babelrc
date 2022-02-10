@@ -1,0 +1,6 @@
+{
+    "presets": [
+        "@babel/preset-env", // transpile code from es6 to es5
+        "@babel/preset-react"  // transpile .js(x) code to es5
+    ]
+}
