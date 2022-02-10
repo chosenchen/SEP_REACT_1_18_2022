@@ -28,4 +28,11 @@ module.exports = {
       filename: "public/index.html",
     }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "build/public"),
+    },
+    compress: true,
+    port: 9000,
+  },
 };
