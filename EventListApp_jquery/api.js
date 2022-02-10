@@ -14,7 +14,7 @@ const getEvents = () =>
 
 const addEvent = (events) =>
   $.ajax([baseurl, path].join("/"), {
-    type: 'POST',
+    type: "POST",
     data: events,
     success: function (data, status, xhr) {
       let returnedData = JSON.parse(JSON.stringify(data));
