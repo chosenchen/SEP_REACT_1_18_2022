@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import Logo from "./Logo";
+import "./styles.scss";
 
 class HelloMessage extends React.Component {
-    state = { name: 'Trey' };
+    state = { name: 'Trey!' };
     render() {
       return (
-        <div>
+        <div class="txt-container">
           <Logo></Logo> Hello {this.props.name} From {this.state.name}
         </div>
       );
