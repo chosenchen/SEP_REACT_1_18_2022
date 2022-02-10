@@ -7,7 +7,6 @@ async function getData() {
 
 // selectors
 const table = document.querySelector('#table_body');
-// const addBtn = document.querySelector('#add-btn');
 
 // function to format date
 const getDate = function (date) {
@@ -54,23 +53,23 @@ const createRow = (item) => {
         if (keys === 'id') { // key === id, create four buttons
             const editButton = document.createElement('button');  // edit button
             editButton.id = `edit_button_${item.id}`;  // add id
-            editButton.innerHTML = 'Edit';    // set content
+            $(editButton).html("Edit");
             tableData.appendChild(editButton);  // append button to td
-            editButton.addEventListener('click', editRow);  // add eventlistener for edit button
+            $(editButton).on("click", editRow);
 
             const deleteButton = document.createElement('button');  // delete button
             deleteButton.id = `delete_button_${item.id}`;
-            deleteButton.innerHTML = 'Delete';
+            $(deleteButton).html("Delete");
             tableData.appendChild(deleteButton);
-            deleteButton.addEventListener('click', deleteRow); //eventlistener for delete button
+            $(deleteButton).on("click", deleteRow);
 
             const updateButton = document.createElement('button');  // update button
             updateButton.id = `update_button_${item.id}`;
-            updateButton.innerHTML = 'Update';
+            $(updateButton).html("Update");
             tableData.appendChild(updateButton);
             // by default, hide the update button
             updateButton.style.display = 'none';
-            updateButton.addEventListener('click', updateRow); // eventlistener for update button
+            $(updateButton).on("click", updateRow);
         } else {
             tableData.innerHTML = item[keys];
         }
@@ -97,7 +96,7 @@ function editRow(row) {
     const name_data = name.innerHTML;
     const start_data = start.innerHTML;
     const end_data = end.innerHTML;
-
+    
     // write content to each td
     name.innerHTML = "<input type='text' id='eventName_text" + no + "' value='" + name_data + "'>";
     start.innerHTML = "<input type='date' id='startDate_text" + no + "' value='" + start_data + "'>";
@@ -115,7 +114,7 @@ async function deleteRow(row) {
             Accept: "application/json",
         }
     });
-    document.getElementById("row" + id).remove();
+    $("#row"+id).remove();
 }
 
 // function to update row and reflect to localhost
@@ -160,8 +159,7 @@ async function updateRow(row) {
     }   
 }
 
-// add new btn event listener
-// addBtn.addEventListener('click', addRow);
+
 $("#add-btn").on("click", addRow);
 
 // function to add an empty row  
@@ -198,15 +196,15 @@ function addRow() {
     // create save button and close button
     const saveButton = document.createElement('button');  // save button
     saveButton.id = `save_button_${No}`;
-    saveButton.innerHTML = 'Save';
+    $(saveButton).html("Save");
     cell4.appendChild(saveButton);
-    saveButton.addEventListener('click', saveRow); // eventlistener for save button
+    $(saveButton).on("click", saveRow);
 
     const closeButton = document.createElement('button');  // close button
     closeButton.id = `close_button_${No}`;
-    closeButton.innerHTML = 'Close';
+    $(closeButton).html("Close");
     cell4.appendChild(closeButton);
-    closeButton.addEventListener('click', closeRow); // eventlistener for close button
+    $(closeButton).on("click", closeRow);
 }
 
 
@@ -250,8 +248,5 @@ async function saveRow(row) {
 function closeRow(row) {
     const targets = row.target.id.split('_');
     const no = targets[2];  
-    document.getElementById("row" + no).remove();
+    $("#row"+no).remove();
 }
-
-
-
