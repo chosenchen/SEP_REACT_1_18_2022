@@ -1,0 +1,15 @@
+{
+  "name": "react_boiler_plate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Patrick-FRE/SEP_REACT_1_18_2022/tree/by_LunghaoLee"
+  },
+  "author": "Lunghao Lee",
+  "license": "ISC"
+}
