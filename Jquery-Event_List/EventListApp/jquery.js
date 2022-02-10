@@ -30,9 +30,6 @@ class myQuery {
         });
         return name;
     }
-    format = () => {
-        
-    }
     inputVal = () => {
         let name;
         this.elements.forEach((element) => {
@@ -105,20 +102,15 @@ const View = (() => {
         element.innerHTML = tmp;
     };
 
-    const formatDate = (ele) => {
-        ele.startDate = new Date(+ele.startDate);
-        ele.endDate = new Date(+ele.endDate);
-        ele.startDate = ele.startDate.getFullYear() + '-' + (ele.startDate.getMonth() + 1) + '-' + (ele.startDate.getDate() + 1);
-        ele.endDate = ele.endDate.getFullYear() + '-' + (ele.endDate.getMonth() + 1) + '-' + (ele.endDate.getDate() + 1);
-        ele.startDate = ele.startDate.split(/\D/).slice(0, 3).map(num => num.padStart(2, "0")).join("-");
-        ele.endDate = ele.endDate.split(/\D/).slice(0, 3).map(num => num.padStart(2, "0")).join("-");
-    }
-
     const createTmp = (arr) => {
         let tmp = "";
         arr.forEach((ele) => {
 
-            formatDate(ele);
+            const start = new Date(+ele.startDate);
+            const startDate = start.toISOString().substring(0,10);
+            console.log(startDate)
+            const end = new Date(+ele.endDate);
+            const endDate = end.toISOString().substring(0,10);
 
             tmp += `
             <tr class="event_display_container">
@@ -126,10 +118,10 @@ const View = (() => {
                 <input disabled class=${ele.eventName} id="event__name" value=${ele.eventName}>
               </td>
               <td>
-                <input disabled type="date" class=${ele.eventName} id="event__start__date" value=${ele.startDate}>
+                <input disabled type="date" class=${ele.eventName} id="event__start__date" value=${startDate}>
               </td>
               <td>
-              <input disabled type="date" class=${ele.eventName} id="event__end__date" value=${ele.endDate}>
+              <input disabled type="date" class=${ele.eventName} id="event__end__date" value=${endDate}>
               </td>
               <td>
                 <button class="btn edit__btn" id="edit__btn" name="edit" value=${ele.eventName}>EDIT</button>
@@ -197,13 +189,13 @@ const Controller = ((model, view) => {
     const state = new model.State();
 
     const addEvent = () => {
-        const input_event_start_date = document.querySelector(view.eleId.input_event_start_date);
-        const input_event_end_date = document.querySelector(view.eleId.input_event_end_date);
         X(view.eleId.input_event_submit).onEvent("click", (event) => {
+            let start = new Date(X(view.eleId.input_event_start_date).val());
+            let end = new Date(X(view.eleId.input_event_end_date).val());;
             const eventNew = new model.Event(
                 X(view.eleId.input_event_name).val(),
-                input_event_start_date.valueAsNumber.toString(),
-                input_event_end_date.valueAsNumber.toString()
+                start.getTime().toString(),
+                end.getTime().toString(),
             );
             console.log(eventNew);
             model.addEvent(eventNew)
@@ -238,15 +230,13 @@ const Controller = ((model, view) => {
                 });
                 X(document).onEvent("keyup", (event) => {
                     if (event.key === "Enter") {
-                        const input_event_start_date = X(`#event__start__date.${selected_event.eventName}`);
-                        let start = new Date(input_event_start_date.val());
-                        console.log(start.getTime().toString());
-                        const input_event_end_date = document.querySelector(`#event__end__date.${selected_event.eventName}`);
+                        let start = new Date(X(`#event__start__date.${selected_event.eventName}`).inputVal());
+                        let end = new Date(X(`#event__end__date.${selected_event.eventName}`).inputVal());;
                         console.log(X(`#event__name.${selected_event.eventName}`));
                         const eventUpdated = new model.Event(
                             X(`#event__name.${selected_event.eventName}`).inputVal(),
                             start.getTime().toString(),
-                            input_event_end_date.valueAsNumber.toString(),
+                            end.getTime().toString(),
                             id = selected_event.id
                         );
                         console.log(eventUpdated);

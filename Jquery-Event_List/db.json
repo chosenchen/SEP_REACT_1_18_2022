@@ -2,8 +2,8 @@
   "events": [
     {
       "eventName": "TEST-1",
-      "startDate": "1641859200000",
-      "endDate": "1641859200000",
+      "startDate": "1641790800000",
+      "endDate": "1641790800000",
       "id": 1
     },
     {
@@ -11,30 +11,6 @@
       "startDate": "1644037200000",
       "endDate": "1644469200000",
       "id": 2
-    },
-    {
-      "eventName": "TEST-3",
-      "startDate": "1644364800000",
-      "endDate": "1644364800000",
-      "id": 3
-    },
-    {
-      "eventName": "TEST",
-      "startDate": "1644451200000",
-      "endDate": "1644451200000",
-      "id": 4
-    },
-    {
-      "eventName": "TEST-8",
-      "startDate": "1643932800000",
-      "endDate": "1643932800000",
-      "id": 5
-    },
-    {
-      "eventName": "TEST-9",
-      "startDate": "1645488000000",
-      "endDate": "1645488000000",
-      "id": 6
     }
   ]
 }
