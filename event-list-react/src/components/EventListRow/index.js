@@ -24,15 +24,21 @@ class EventListRow extends React.Component {
   };
 
   onStartDate = (e) => {
-    this.setState({ startDate: e.target.value });
+    this.setState({ startDate: dateStrToTimestamp(e.target.value) });
   };
 
   onEndDate = (e) => {
-    this.setState({ endDate: e.target.value });
+    this.setState({ endDate: dateStrToTimestamp(e.target.value) });
   };
 
   onUpdate = () => {
-    if (!this.state.isUpdate) {
+    if (this.props.isAdd) {
+      this.props.onUpdate(this.props.eventItem.id, {
+        eventName: this.state.eventName,
+        startDate: `${dateStrToTimestamp(this.state.startDate)}`,
+        endDate: `${dateStrToTimestamp(this.state.endDate)}`,
+      });
+    } else if (!this.state.isUpdate) {
       this.setState({ isUpdate: true });
     } else {
       this.props.onUpdate(this.props.eventItem.id, {
@@ -47,7 +53,12 @@ class EventListRow extends React.Component {
 
   onDelete = () => {
     if (this.state.isUpdate) {
-      this.setState({ isUpdate: false });
+      this.setState({
+        isUpdate: false,
+        eventName: this.props.eventItem.eventName,
+        startDate: this.props.eventItem.startDate,
+        endDate: this.props.eventItem.endDate,
+      });
     } else {
       this.props.onDelete(this.props.eventItem.id);
     }
@@ -69,7 +80,7 @@ class EventListRow extends React.Component {
         <div className="eventlist__item">
           <input
             type={!this.state.isUpdate && !this.props.isAdd ? "text" : "date"}
-            value={this.state.endDate && timestampToStr(this.state.startDate)}
+            value={this.state.startDate && timestampToStr(this.state.startDate)}
             disabled={!this.state.isUpdate && !this.props.isAdd}
             onChange={this.onStartDate}
           />
@@ -85,7 +96,7 @@ class EventListRow extends React.Component {
         <div className="eventlist__actions">
           <input
             type="button"
-            value={this.state.isUpdate ? "UPDATE" : "EDIT"}
+            value={this.state.isUpdate || this.props.isAdd ? "UPDATE" : "EDIT"}
             onClick={this.onUpdate}
           />
           <input

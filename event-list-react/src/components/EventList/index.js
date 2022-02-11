@@ -17,7 +17,7 @@ class EventList extends React.Component {
   onUpdate = (id, newEvent) => {
     if (+id === -1) {
       API.addEvent(newEvent).then((response) => {
-        console.log(response);
+        this.setState({ eventList: [...this.state.eventList, response] });
 
         this.props.onAddNewSuccess();
       });
@@ -74,7 +74,6 @@ class EventList extends React.Component {
       });
 
       if (this.props.isAdd) {
-        console.log("add new");
         eventListJSX.push(
           <EventListRow
             key={-1}
