@@ -2,22 +2,23 @@ import './App.css';
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EventList from './events.js';
+import EventRow from './Components/EventRow.js';
 
 function showBtn() {
-  document.getElementById('event__add__input__container').style.visibility='visible';
+  document.getElementById('event__add__input__container').style.visibility = 'visible';
 }
 function hideBtn() {
-  document.getElementById('event__add__input__container').style.visibility='hidden';
+  document.getElementById('event__add__input__container').style.visibility = 'hidden';
 }
 
 class App extends React.Component {
+
   render() {
     return (
       <section className='event__list__container'>
         <header className="table_header">
           <button id="addEvent-btn"
-            onClick={showBtn}  
+            onClick={showBtn}
           >Add New</button>
         </header>
         <table className='events_table'>
@@ -29,7 +30,7 @@ class App extends React.Component {
               <th>Actions</th>
             </tr>
           </thead>
-          <EventList />
+          <EventRow />
           <tfoot id="event__add__input__container">
             <tr>
               <td>
