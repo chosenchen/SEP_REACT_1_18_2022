@@ -1,7 +1,7 @@
 import Logo from "./Logo";
 
 class HelloMessage extends React.Component {
-  state = { name: "Ying" };
+  state = { name: "HIIII" };
   render() {
     return (
       <div>
