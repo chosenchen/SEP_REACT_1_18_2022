@@ -1,25 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { appApi } from "./appApi.js";
+import Event from "./components/Event.js";
+import NewEvent from "./components/NewEvent.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { events: [], add: false };
+    this.handleAddOnClick = this.handleAddOnClick.bind(this);
+    this.handleCloseOnClick = this.handleCloseOnClick.bind(this);
+
+  }
+
+  async componentDidMount() {
+    const events = await appApi.getEvents();
+    this.setState({ events });
+  }
+
+  handleAddOnClick(e) {
+    this.setState({ ...this.state, add: true });
+  }
+
+  handleCloseOnClick(e) {
+    if (e.target.name === "new") {
+      this.setState({ ...this.state, add: false });
+    }
+  }
+
+  render() {
+    // console.log(this.state)
+    return (
+      <main className="event-list">
+        <header className="event-list__header">
+          <button
+            className="event-list__addBtn"
+            onClick={this.handleAddOnClick}
+          >
+            ADD NEW
+          </button>
+        </header>
+
+        <table className="event-list__table">
+          <thead>
+            <tr className="event-list__table-row event-list__table-row-header">
+              <th>Event name</th>
+              <th>Start date</th>
+              <th>End date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody className="event-list__entry-container">
+            {this.state.events.map((event, index) => {
+              return (
+                <Event
+                  key={index}
+                  eventName={event.eventName}
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  eventId={event.id}
+                  handleCloseOnClick={this.handleCloseOnClick}
+                 
+                />
+              );
+            })}
+            {this.state.add && (
+              <NewEvent
+                handleCloseOnClick={this.handleCloseOnClick}
+              />
+            )}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
 }
 
 export default App;
