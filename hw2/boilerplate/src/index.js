@@ -1,7 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Logo from "./Logo";
 
 class HelloMessage extends React.Component {
-    state = { name: 'patrick' };
+    state = { name: 'Sam' };
     render() {
         return (
             <div>

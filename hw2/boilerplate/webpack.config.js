@@ -1,4 +1,6 @@
 const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
 
@@ -12,7 +14,7 @@ module.exports = {
                 test: /\.(js|jsx)$/, // checks for .js or .jsx files
                 exclude: /(node_modules)/,
                 loader: "babel-loader",
-                options: { presets: ["@babel/env"] },
+                options: { presets: ["@babel/preset-env", "@babel/preset-react"] },
             },
             {
                 test: /\.css$/, //checks for .css files
@@ -29,7 +31,11 @@ module.exports = {
     // output the bundles and assets
     output: {
         path: path.resolve(__dirname, "dist/"),
-        publicPath: "/dist/",
+        // publicPath: "/dist/",
         filename: "bundle.js",
     },
+    plugins: [new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'public/index.html'
+    })],
 };
