@@ -1,9 +1,8 @@
 import React from "react";
 
-import {fromUnixDate, toUnixDate} from ".././utils.js"
+import { fromUnixDate, toUnixDate } from ".././utils.js";
 
-import {appApi} from ".././appApi.js"
-
+import { appApi } from ".././appApi.js";
 
 export default class Event extends React.Component {
   constructor(props) {
@@ -22,23 +21,21 @@ export default class Event extends React.Component {
     this.handleSaveOnClick = this.handleSaveOnClick.bind(this);
   }
 
-
-
   handleInputOnChange(e) {
     this.setState({ ...this.state, [e.target.name]: e.target.value });
   }
 
-  handleEditOnClick(){
-      this.setState({...this.state, edit: true})
+  handleEditOnClick() {
+    this.setState({ ...this.state, edit: true });
   }
 
-  handleCloseOnClick(){
-    this.setState({...this.state, edit: false})
+  handleCloseOnClick() {
+    this.setState({ ...this.state, edit: false });
   }
 
-  handleDeleteOnClick(){
-    appApi.deleteEvent(this.state.eventId)
-    window.location.reload()
+  handleDeleteOnClick() {
+    appApi.deleteEvent(this.state.eventId);
+    window.location.reload();
   }
 
   handleSaveOnClick() {
@@ -46,10 +43,19 @@ export default class Event extends React.Component {
       eventName: this.state.eventName,
       startDate: toUnixDate(this.state.startDate),
       endDate: toUnixDate(this.state.endDate),
-      id: this.state.eventId
+      id: this.state.eventId,
     };
-    appApi.updateEvent(event);
-    window.location.reload()
+
+    if (
+      this.state.eventName === "" ||
+      this.state.startDate === "" ||
+      this.state.endDate === ""
+    ) {
+      alert("input all the required fields");
+    } else {
+      appApi.updateEvent(event);
+      window.location.reload();
+    }
   }
 
   render() {
@@ -61,7 +67,7 @@ export default class Event extends React.Component {
             name="eventName"
             onChange={this.handleInputOnChange}
             value={this.state.eventName}
-            disabled = {!this.state.edit}
+            disabled={!this.state.edit}
           />
         </td>
         <td>
@@ -70,7 +76,7 @@ export default class Event extends React.Component {
             name="startDate"
             onChange={this.handleInputOnChange}
             value={this.state.startDate}
-            disabled = {!this.state.edit}
+            disabled={!this.state.edit}
           />
         </td>
         <td>
@@ -79,14 +85,16 @@ export default class Event extends React.Component {
             name="endDate"
             onChange={this.handleInputOnChange}
             value={this.state.endDate}
-            disabled = {!this.state.edit}
+            disabled={!this.state.edit}
           />
         </td>
         <td>
           {this.state.edit ? (
             <div>
               <button onClick={this.handleSaveOnClick}>SAVE</button>
-              <button name="not new" onClick={this.handleCloseOnClick}>CLOSE</button>
+              <button name="not new" onClick={this.handleCloseOnClick}>
+                CLOSE
+              </button>
             </div>
           ) : (
             <div>

@@ -13,16 +13,10 @@
       "id": 2
     },
     {
-      "eventName": "chea",
-      "startDate": "1642118400000",
-      "endDate": "1643328000000",
+      "eventName": "TEST-3",
+      "startDate": "1643932800000",
+      "endDate": "1645660800000",
       "id": 3
-    },
-    {
-      "eventName": "stpehen",
-      "startDate": "1644537600000",
-      "endDate": "1645142400000",
-      "id": 4
     }
   ]
 }

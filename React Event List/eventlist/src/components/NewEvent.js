@@ -25,12 +25,24 @@ export default class NewEvent extends React.Component {
       startDate: toUnixDate(this.state.startDate),
       endDate: toUnixDate(this.state.endDate),
     };
-    appApi.saveEvent(event);
-    window.location.reload()
+
+    if (
+      this.state.eventName === "" ||
+      this.state.startDate === "" ||
+      this.state.endDate === ""
+    ) {
+      alert("input all the required fields");
+    } else{
+      
+      appApi.saveEvent(event);
+      window.location.reload();
+    }
+      
+
+    
   }
 
   render() {
-
     return (
       <tr className="event-list__table-row event-list__table-row_add">
         <td>
