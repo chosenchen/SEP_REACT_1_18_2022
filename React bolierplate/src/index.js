@@ -1,4 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import BlogHeader from './blog';
+import "./index.scss";
 
 class EventList extends React.Component {
   constructor(props) {
