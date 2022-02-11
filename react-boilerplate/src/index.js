@@ -1,11 +1,21 @@
-import Logo from './logo';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Logo from './Logo';
+
+import './index.scss';
 
 class HelloMessage extends React.Component {
-  state = { name: 'Khoa' };
+  constructor(props){
+    super(props);
+    this.state = {
+      name : 'Khoa'
+    } 
+  }
+
   render() {
     return (
-      <div>
-        <Logo></Logo> Hello {this.props.name} From {this.state.name}
+      <div className='container'>
+        <Logo></Logo> Hello {this.props.name} from {this.state.name}
       </div>
     );
   }
