@@ -1,4 +1,4 @@
-//To set up the babel-loader and make it work as a web pack loader
+// To set up the babel-loader and make it work as a web pack loader
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 

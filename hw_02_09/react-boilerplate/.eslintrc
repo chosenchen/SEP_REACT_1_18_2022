@@ -3,6 +3,7 @@
   "plugins": [
     "react"
   ],
+  "requireConfigFile": false,
   "extends": [
     "plugin:prettier/recommended"
   ],
