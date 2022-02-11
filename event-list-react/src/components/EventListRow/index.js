@@ -62,23 +62,23 @@ class EventListRow extends React.Component {
           <input
             type="text"
             value={this.state.eventName}
-            disabled={!this.state.isUpdate}
+            disabled={!this.state.isUpdate && !this.props.isAdd}
             onChange={this.onEventName}
           />
         </div>
         <div className="eventlist__item">
           <input
-            type={!this.state.isUpdate ? "text" : "date"}
-            value={timestampToStr(this.state.startDate)}
-            disabled={!this.state.isUpdate}
+            type={!this.state.isUpdate && !this.props.isAdd ? "text" : "date"}
+            value={this.state.endDate && timestampToStr(this.state.startDate)}
+            disabled={!this.state.isUpdate && !this.props.isAdd}
             onChange={this.onStartDate}
           />
         </div>
         <div className="eventlist__item">
           <input
-            type={!this.state.isUpdate ? "text" : "date"}
-            value={timestampToStr(this.state.endDate)}
-            disabled={!this.state.isUpdate}
+            type={!this.state.isUpdate && !this.props.isAdd ? "text" : "date"}
+            value={this.state.endDate && timestampToStr(this.state.endDate)}
+            disabled={!this.state.isUpdate && !this.props.isAdd}
             onChange={this.onEndDate}
           />
         </div>

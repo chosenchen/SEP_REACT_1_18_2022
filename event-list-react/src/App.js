@@ -11,7 +11,13 @@ class App extends React.Component {
 
   // Add New Button Event
   onClickAddNew = (e) => {
-    this.setState({ isAdd: true });
+    if (!this.state.isAdd) {
+      this.setState({ isAdd: true });
+    }
+  };
+
+  onAddNewSuccess = () => {
+    this.setState({ isAdd: false });
   };
 
   render() {
@@ -33,7 +39,10 @@ class App extends React.Component {
               </ul>
             </header>
             <div className="eventlist__body" id="eventlist_container">
-              <EventList isAdd={this.state.isAdd} />
+              <EventList
+                isAdd={this.state.isAdd}
+                onAddNewSuccess={this.onAddNewSuccess}
+              />
             </div>
           </div>
         </section>
