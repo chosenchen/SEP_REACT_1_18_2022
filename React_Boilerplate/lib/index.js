@@ -2,6 +2,10 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+var _Logo = _interopRequireDefault(require("./Logo"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -50,7 +54,7 @@ var HelloMessage = /*#__PURE__*/function (_React$Component) {
   _createClass(HelloMessage, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, "Hello ", this.props.name, " from ", this.state.name);
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_Logo["default"], null), "Hello ", this.props.name, " from ", this.state.name);
     }
   }]);
 
