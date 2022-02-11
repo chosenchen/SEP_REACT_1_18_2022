@@ -1,3 +1,5 @@
-export default function () {
-    return <h1> LOGO</h1>;
-  }
+import React from "react";
+
+export default function Logo () {
+  return <h1> LOGO</h1>;
+}
