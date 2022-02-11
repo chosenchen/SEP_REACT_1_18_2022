@@ -3,6 +3,8 @@ import { appApi } from "./appApi.js";
 import Event from "./components/Event.js";
 import NewEvent from "./components/NewEvent.js";
 
+import './index.css'
+
 class App extends React.Component {
   constructor() {
     super();

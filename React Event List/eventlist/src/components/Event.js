@@ -46,8 +46,9 @@ export default class Event extends React.Component {
       eventName: this.state.eventName,
       startDate: toUnixDate(this.state.startDate),
       endDate: toUnixDate(this.state.endDate),
+      id: this.state.eventId
     };
-    appApi.saveEvent(event);
+    appApi.updateEvent(event);
     window.location.reload()
   }
 
