@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+
 import Logo from "./Logo";
 
 class HelloMessage extends React.Component {
-    state = { name: 'Sam' };
+    constructor(props) {
+        super(props);
+        this.state = { name: 'Sam' };
+    }
     render() {
         return (
             <div>
@@ -11,6 +16,9 @@ class HelloMessage extends React.Component {
             </div>
         );
     }
+}
+HelloMessage.propTypes = {
+    name: PropTypes.string,
 }
 
 ReactDOM.render(

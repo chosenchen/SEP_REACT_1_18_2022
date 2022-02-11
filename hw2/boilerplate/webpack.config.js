@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
 
@@ -14,11 +14,11 @@ module.exports = {
                 test: /\.(js|jsx)$/, // checks for .js or .jsx files
                 exclude: /(node_modules)/,
                 loader: "babel-loader",
-                options: { presets: ["@babel/preset-env", "@babel/preset-react"] },
+                options: { presets: ["@babel/preset-env", "@babel/preset-react"] }
             },
             {
-                test: /\.css$/, //checks for .css files
-                use: ["style-loader", "css-loader"],
+                test: /\.scss$/, //checks for .scss files
+                use: ["style-loader", "css-loader", "sass-loader"],
             },
         ],
     },
@@ -37,5 +37,7 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'public/index.html'
-    })],
+    }),
+    new ESLintPlugin()
+    ],
 };

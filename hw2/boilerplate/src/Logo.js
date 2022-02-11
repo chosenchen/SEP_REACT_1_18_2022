@@ -1,6 +1,7 @@
 import React from 'react';
-import './Logo.css';
+import './Logo.scss';
 
-export default function () {
+function Logo () {
     return <h1 className="logo">This is a LOGO</h1>;
 }
+export default Logo;
