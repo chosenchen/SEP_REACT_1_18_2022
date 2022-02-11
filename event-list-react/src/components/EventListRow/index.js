@@ -37,8 +37,8 @@ class EventListRow extends React.Component {
     } else {
       this.props.onUpdate(this.props.eventItem.id, {
         eventName: this.state.eventName,
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
+        startDate: dateStrToTimestamp(this.state.startDate),
+        endDate: dateStrToTimestamp(this.state.endDate),
       });
 
       this.setState({ isUpdate: false });
@@ -46,7 +46,11 @@ class EventListRow extends React.Component {
   };
 
   onDelete = () => {
-    this.props.onDelete(this.props.eventItem.id);
+    if (this.state.isUpdate) {
+      this.setState({ isUpdate: false });
+    } else {
+      this.props.onDelete(this.props.eventItem.id);
+    }
   };
 
   render() {
@@ -64,7 +68,7 @@ class EventListRow extends React.Component {
         </div>
         <div className="eventlist__item">
           <input
-            type="text"
+            type={!this.state.isUpdate ? "text" : "date"}
             value={timestampToStr(this.state.startDate)}
             disabled={!this.state.isUpdate}
             onChange={this.onStartDate}
@@ -72,7 +76,7 @@ class EventListRow extends React.Component {
         </div>
         <div className="eventlist__item">
           <input
-            type="text"
+            type={!this.state.isUpdate ? "text" : "date"}
             value={timestampToStr(this.state.endDate)}
             disabled={!this.state.isUpdate}
             onChange={this.onEndDate}
@@ -84,7 +88,11 @@ class EventListRow extends React.Component {
             value={this.state.isUpdate ? "UPDATE" : "EDIT"}
             onClick={this.onUpdate}
           />
-          <input type="button" value="DEL" onClick={this.onDelete} />
+          <input
+            type="button"
+            value={this.state.isUpdate ? "CANCEL" : "DEL"}
+            onClick={this.onDelete}
+          />
         </div>
       </div>
     );
