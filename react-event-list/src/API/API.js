@@ -8,7 +8,11 @@ export const API = (() => {
         let response = await axios.get(url);
         return response.data;
     }
+
+    const addEvent = async (event) => {
+        await axios.post(url, event);
+    }
    
 
-    return { getEvents }
+    return { getEvents, addEvent }
 })();

@@ -1,14 +1,11 @@
 import './App.css';
-import $ from 'jquery';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import EventRow from './Components/EventRow.js';
+import AddEvent from './Components/AddEvent';
+
 
 function showBtn() {
   document.getElementById('event__add__input__container').style.visibility = 'visible';
-}
-function hideBtn() {
-  document.getElementById('event__add__input__container').style.visibility = 'hidden';
 }
 
 class App extends React.Component {
@@ -31,28 +28,11 @@ class App extends React.Component {
             </tr>
           </thead>
           <EventRow />
-          <tfoot id="event__add__input__container">
-            <tr>
-              <td>
-                <input id="event__add__name__input" />
-              </td>
-              <td>
-                <input id="event__add__start__date__input" type="date" />
-              </td>
-              <td>
-                <input id="event__add__end__date__input" type="date" />
-              </td>
-              <td>
-                <button id="event__add__submit" className="btn">Save</button>
-                <button className="btn"
-                  onClick={hideBtn}
-                >Close</button>
-              </td>
-            </tr>
-          </tfoot>
+          <AddEvent />
         </table>
       </section>
     )
   }
 }
+
 export default App;
