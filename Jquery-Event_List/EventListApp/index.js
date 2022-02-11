@@ -1,4 +1,4 @@
-//Convert json string date to html date in format yyyy-mm-dd
+//Convert json Milliseconds string date to html date in format yyyy-mm-dd
 const convertDate = (str) => {
   const date = new Date(Number(str));
   const year = date.getFullYear().toString();
