@@ -1,11 +1,12 @@
 import React from "react";
 import './Main.css'
+// json-server -p 4000 db.json change Json server port, otherwise port conflict
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'http://localhost:3001/events',
+            url: 'http://localhost:4000/events',
             evenLists: []
         };
     }
