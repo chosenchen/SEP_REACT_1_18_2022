@@ -12,10 +12,15 @@ class Index extends React.Component{
     }
 
     this.setAdding = this.setAdding.bind(this);
+    this.setList = this.setList.bind(this);
   }
 
   setAdding(){
     this.setState({adding : !this.state.adding});
+  }
+
+  setList(data){
+    this.setState({eventList: data});
   }
 
   componentDidMount(){
@@ -52,7 +57,11 @@ class Index extends React.Component{
               )
             }
             {
-              adding && <AddForm getEvent={API.addEvent} setAdding={this.setAdding}/>
+              adding && <AddForm 
+              getEvents={API.getEvents}
+              addEvent={API.addEvent} 
+              setAdding={this.setAdding}
+              setList={this.setList}/>
             }
           </tbody>
         </table>

@@ -1,19 +1,44 @@
 import React from 'react';
+import {dateConvert} from '../util/date_util';
 
 class AddForm extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      eventName : '',
+      startDate : '',
+      endDate : ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(field){
+    return e => this.setState({
+      [field]: e.target.value
+    });
+  }
+
+  handleSubmit(){
+    const {getEvents, addEvent, setList, setAdding} = this.props; 
+    const event = {
+      eventName : this.state.eventName,
+      startDate: dateConvert(this.state.startDate),
+      endDate: dateConvert(this.state.endDate)
+    }
+
+    addEvent(event).then(getEvents).then((data) => setList(data)).then(setAdding);
   }
 
   render(){
     const {setAdding} = this.props;
     return (
       <tr>
-        <td><input name='eventName' className='input-box' type='text'/></td>
-        <td><input name='startDate' className='input-box' type='date'/></td>
-        <td><input name='endDate' className='input-box' type='date'/></td>
+        <td><input className='input-box' type='text' onChange={this.handleChange('eventName')}/></td>
+        <td><input className='input-box' type='date' onChange={this.handleChange('startDate')}/></td>
+        <td><input className='input-box' type='date' onChange={this.handleChange('endDate')}/></td>
         <td className='action-btns'>
-          <input type='submit' className='buttons add-btn' value="ADD" />
+          <input type='submit' className='buttons add-btn' value="ADD" onClick={this.handleSubmit}/>
           <input type='button' className='buttons close-btn' defaultValue="CLOSE" onClick={setAdding}/>
         </td>
       </tr>
