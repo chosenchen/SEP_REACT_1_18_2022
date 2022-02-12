@@ -2,12 +2,15 @@ import React from "react";
 import './Main.css'
 // json-server -p 4000 db.json change Json server port, otherwise port conflict
 
+
 class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             url: 'http://localhost:4000/events',
-            evenLists: []
+            evenLists: [],
+            newRowCount: 0,
+            input: ''
         };
     }
 
@@ -20,8 +23,107 @@ class Main extends React.Component {
         const date = all_date.getDate() < 10 ? all_date.getDate().toString().padStart(2, '0') : all_date.getDate()
         return `${year}-${month}-${date}`
     }
+
+    toTimestamp = (strDate) => {
+        let datum = Date.parse(strDate);
+        return datum.toString()
+    }
+
+
+    //Add new row
+    AddRow = () => {
+        this.setState({
+            newRowCount: this.state.newRowCount + 1
+        })
+
+    }
+
+    //Post method
+    createList = (eventName, startTimeStamp, endTimeStamp) => {
+        fetch(this.state.url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({
+                eventName: eventName,
+                startDate: startTimeStamp,
+                endDate: endTimeStamp,
+            }),
+        })
+            .then((response) => response.json())
+            .then(data => {
+                const newdata = [...this.state.evenLists, data]
+                this.setState(newdata);
+            })
+    }
+
+    //Delete data
+    deleteList = (url, id) => {
+        fetch([url, id].join('/'), {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+        })
+            .then((response) => response.json())
+    }
+    //Update data
+    updateList = (id, eventName, startTimeStamp, endTimeStamp) => {
+        fetch([this.state.url, id].join("/"), {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({
+                eventName: eventName,
+                startDate: startTimeStamp,
+                endDate: endTimeStamp,
+            }),
+        })
+            .then((response) => response.json())
+    }
+
+    //Press save button
+    saveData = (e) => {
+        const id = e.target.id.split('_')[1]
+        const eve_name = document.getElementById(`eventName_${id}`).value
+        const start_date = document.getElementById(`startDate_${id}`).value
+        const end_date = document.getElementById(`endDate_${id}`).value
+        const start_timestamp = this.toTimestamp(start_date)
+        const end_timestamp = this.toTimestamp(end_date)
+        if (eve_name && start_date && end_date) {
+            this.createList(eve_name, start_timestamp, end_timestamp)
+            window.location.reload();
+        } else {
+            alert('Please fill out Event name, Start date, End date')
+        }
+    }
+
+    //Delete data
+    deleteData = (e) => {
+        const id = e.target.id.split('_')[1]
+        this.deleteList(this.state.url, id)
+        window.location.reload();
+    }
+
+    updateData = (e) =>{
+        let id = e.target.id.split('_')[1]
+        let eve_name = document.getElementById(`eventName_${id}`)
+        let start_date = document.getElementById(`startDate_${id}`)
+        let end_date = document.getElementById(`endDate_${id}`)
+
+        eve_name.removeAttribute("disabled")
+        eve_name.value= this.state.input
+       
+        e.target.value='UPDATE'
+    }
     
 
+    //Update data
     componentDidMount() {
         fetch(this.state.url)
             .then((response) => response.json())
@@ -30,13 +132,15 @@ class Main extends React.Component {
             });
     }
 
+  
+
     render() {
         return (
             <>
                 <main>
                     <section className="table__container">
                         <header className="table__toprow">
-                            <button className="add_new">ADD NEW</button>
+                            <button className="add_new" onClick={this.AddRow}>ADD NEW</button>
                         </header>
                         <table>
                             <thead className="table__head">
@@ -50,30 +154,55 @@ class Main extends React.Component {
                             <tbody id="table_eventlist">
                                 {this.state.evenLists.map((item, index) => {
                                     return (
-                                             <tr className="table__content" key={index}>  
-                                                <td>
-                                                     <input disabled value={item["eventName"]} id={`eventName_${item["id"]}`} />
-                                                 </td>
-                                                 <td>
-                                                     <input disabled value={this.timeConverter(item["startDate"])} id={`startDate_${item["id"]}`} />
-                                                 </td>
-                                                 <td>
-                                                     <input disabled value={this.timeConverter(item["endDate"])} id={`endDate_${item["id"]}`} />
-                                                 </td>
-                                                 <td>
-                                                     <input type="submit" className="edit_button" id={`submit_${item["id"]}`} value="EDIT" />
-                                                     <input type="submit" id="delete-event" value="DELETE" />
-                                                 </td>
-                                                </tr>
-                                        )
-                                     } 
-                                 )}
-                        </tbody>
+                                        <tr className="table__content" key={index}>
+                                            <td>
+                                                <input disabled value={item["eventName"]} onChange={this.handlechange} id={`eventName_${item["id"]}`} />
+                                            </td>
+                                            <td>
+                                                <input disabled value={this.timeConverter(item["startDate"])} id={`startDate_${item["id"]}`} />
+                                            </td>
+                                            <td>
+                                                <input disabled value={this.timeConverter(item["endDate"])} id={`endDate_${item["id"]}`} />
+                                            </td>
+                                            <td>
+                                                <input type="submit" className="edit_button" id={`Edit_${item["id"]}`} onClick={this.updateData} value="EDIT" />
+                                                <input type="submit" id={`delete_${item["id"]}`} value="DELETE" onClick={this.deleteData} />
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+                                )}
+                                {[...Array(this.state.newRowCount)].map((item, i) => {
+                                    let len = this.state.evenLists.length + 1
 
-                    </table>
+                                    return (<>
+                                        <tr id={`Input_${len}`}>
+                                            <td>
+                                                <input type="text" id={`eventName_${len}`} defaultValue='' />
+                                            </td>
+                                            <td>
+                                                <input type="date" id={`startDate_${len}`} defaultValue='' />
+                                            </td>
+                                            <td >
+                                                <input type="date" id={`endDate_${len}`} defaultValue='' />
+                                            </td>
+                                            <td>
+                                                <input type="submit" id={`save_${len}`} value="SAVE" onClick={this.saveData} />
+                                                <input type="submit" id={`close_${len}`} value="CLOSE" />
+                                            </td>
+                                        </tr>
 
-                </section>
-            </main>
+                                    </>
+                                    )
+                                }
+                                )}
+                            </tbody>
+
+
+                        </table>
+
+                    </section>
+                </main>
             </>
 
         );

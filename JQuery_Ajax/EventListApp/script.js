@@ -179,7 +179,7 @@ const getList = (url) => {
 }
 
 //Post
-const createList = (url, eventName, startTimeStamp, endTimeStamp) => {
+const createList = (eventName, startTimeStamp, endTimeStamp) => {
     fetch(url, {
         method: "POST",
         headers: {
