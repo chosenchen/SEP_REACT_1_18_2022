@@ -51,8 +51,10 @@ class Index extends React.Component{
                 <EventItemIndex 
                 key={`event-${event.id}`} 
                 event={event}
+                getEvents={API.getEvents}
                 editEvent = {API.editEvent}
                 deleteEvent = {API.deleteEvent}
+                setList={this.setList}
                 />
               )
             }
