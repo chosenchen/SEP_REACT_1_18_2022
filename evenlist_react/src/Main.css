@@ -84,7 +84,7 @@ button{
     background-color: var(--color-button-add);
     color:#347CC0
 }
-input[type="submit"]{
+input[type="button"]{
     border: none;
     color: var(--color-button-text);
     background-color: rgba(0,0,0,0);

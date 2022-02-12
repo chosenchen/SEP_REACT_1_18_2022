@@ -10,7 +10,7 @@ class Main extends React.Component {
             url: 'http://localhost:4000/events',
             evenLists: [],
             newRowCount: 0,
-            input: ''
+            updateName:'Edit'
         };
     }
 
@@ -85,6 +85,7 @@ class Main extends React.Component {
             }),
         })
             .then((response) => response.json())
+
     }
 
     //Press save button
@@ -98,6 +99,7 @@ class Main extends React.Component {
         if (eve_name && start_date && end_date) {
             this.createList(eve_name, start_timestamp, end_timestamp)
             window.location.reload();
+           
         } else {
             alert('Please fill out Event name, Start date, End date')
         }
@@ -110,26 +112,47 @@ class Main extends React.Component {
         window.location.reload();
     }
 
+
     updateData = (e) =>{
+        e.currentTarget.value="UPDATE"
         let id = e.target.id.split('_')[1]
         let eve_name = document.getElementById(`eventName_${id}`)
         let start_date = document.getElementById(`startDate_${id}`)
         let end_date = document.getElementById(`endDate_${id}`)
 
         eve_name.removeAttribute("disabled")
-        eve_name.value= this.state.input
-       
-        e.target.value='UPDATE'
-    }
+        start_date.removeAttribute("disabled")
+        start_date.setAttribute("type", "Date")
+        end_date.removeAttribute("disabled")
+        end_date.setAttribute("type", "Date")
+
+        
+        let eventName = eve_name.value
+        let startTimeStamp = this.toTimestamp(start_date.value)
+        let endTimeStamp = this.toTimestamp(end_date.value)
+
+        if(eventName && startTimeStamp && endTimeStamp){
+            this.updateList(id, eventName, startTimeStamp, endTimeStamp)
+        }else{
+            alert('Please fill out Event name, Start date, End date')
+        }
     
+    }
+   
 
     //Update data
     componentDidMount() {
         fetch(this.state.url)
             .then((response) => response.json())
             .then(data => {
-                this.setState({ evenLists: data });
+                this.setState({ 
+                    evenLists: data,
+                    eventName: this.props.eventName,
+                    startDate: this.props.startDate,
+                    endDate: this.props.endDate
+                });
             });
+
     }
 
   
@@ -153,20 +176,21 @@ class Main extends React.Component {
                             </thead>
                             <tbody id="table_eventlist">
                                 {this.state.evenLists.map((item, index) => {
+                                   
                                     return (
                                         <tr className="table__content" key={index}>
                                             <td>
-                                                <input disabled value={item["eventName"]} onChange={this.handlechange} id={`eventName_${item["id"]}`} />
+                                                <input disabled defaultValue={item.eventName} id={`eventName_${item["id"]}`} />
                                             </td>
                                             <td>
-                                                <input disabled value={this.timeConverter(item["startDate"])} id={`startDate_${item["id"]}`} />
+                                                <input disabled defaultValue={this.timeConverter(item["startDate"])} id={`startDate_${item["id"]}`} />
                                             </td>
                                             <td>
-                                                <input disabled value={this.timeConverter(item["endDate"])} id={`endDate_${item["id"]}`} />
+                                                <input disabled defaultValue={this.timeConverter(item["endDate"])} id={`endDate_${item["id"]}`} />
                                             </td>
                                             <td>
-                                                <input type="submit" className="edit_button" id={`Edit_${item["id"]}`} onClick={this.updateData} value="EDIT" />
-                                                <input type="submit" id={`delete_${item["id"]}`} value="DELETE" onClick={this.deleteData} />
+                                                <input type="button" className="edit_button" id={`Edit_${item["id"]}`} onClick={this.updateData}  value="EDIT" />
+                                                <input type="button" id={`delete_${item["id"]}`} value="DELETE" onClick={this.deleteData} />
                                             </td>
                                         </tr>
                                     )
@@ -176,7 +200,7 @@ class Main extends React.Component {
                                     let len = this.state.evenLists.length + 1
 
                                     return (<>
-                                        <tr id={`Input_${len}`}>
+                                        <tr id={`Input_${len}`} key={`${item}_${i}`}>
                                             <td>
                                                 <input type="text" id={`eventName_${len}`} defaultValue='' />
                                             </td>
@@ -187,8 +211,8 @@ class Main extends React.Component {
                                                 <input type="date" id={`endDate_${len}`} defaultValue='' />
                                             </td>
                                             <td>
-                                                <input type="submit" id={`save_${len}`} value="SAVE" onClick={this.saveData} />
-                                                <input type="submit" id={`close_${len}`} value="CLOSE" />
+                                                <input type="button" id={`save_${len}`} defaultValue="SAVE" onClick={this.saveData} />
+                                                <input type="button" id={`close_${len}`} defaultValue="CLOSE" />
                                             </td>
                                         </tr>
 
