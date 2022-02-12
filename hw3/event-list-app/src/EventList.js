@@ -1,12 +1,33 @@
 import React from "react";
+
+import AddNewRow from "./AddNewRow";
 import EventRow from "./EventRow";
+import { getEvents, addEvent } from "./Api";
 
 
 export default class EventList extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = { eventList: [] };
+        this.handleEventRowChange = this.handleEventRowChange.bind(this);
+        this.handleAddNewRowChange = this.handleAddNewRowChange.bind(this);
+    }
+    componentDidMount() {
+        getEvents().then((res) => {
+            this.setState({ eventList: res });
+        });
+    }
+    handleEventRowChange() {
+        
+    }
+    handleAddNewRowChange(newEvent) {
+        addEvent(newEvent).then((res) => this.setState(res));
+        getEvents().then((res) => {
+            this.setState({ eventList: res });
+        });
+        this.props.isAdd = false;
+    }
     render() {
-        let events = this.props.events;
-        // console.log("events",events);
         return (
             <table>
                 <thead>
@@ -18,7 +39,8 @@ export default class EventList extends React.Component {
                     </tr>
                 </thead>
                 <tbody id="table-body">
-                    {events.map((event) => <EventRow event={event} key={event.id}></EventRow>)}
+                    {this.state.eventList.map((event) => <EventRow event={event} key={event.id} onEventChange={this.handleEventRowChange}></EventRow>)}
+                    {this.props.isAdd ? <AddNewRow onNewRowChange={this.handleAddNewRowChange}></AddNewRow> : null}
                 </tbody>
             </table>
         );

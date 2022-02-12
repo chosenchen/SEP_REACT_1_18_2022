@@ -2,35 +2,28 @@ import React from 'react';
 
 import './App.css';
 import EventList from './EventList';
-import {getEvents} from "./Api";
 
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { eventList: [] };
+    this.state = {
+      isAdd: false
+    };
+    this.handleAddNew = this.handleAddNew.bind(this);
   }
 
-  componentDidMount() {
-    getEvents().then((res) => {
-      this.setState({ eventList: res });
-    });
-    
+  handleAddNew() {
+    this.setState({isAdd: true})
   }
-
   render() {
     return (
       <section className="table-container">
         <div className="add-content">
-          <button className="add-btn">ADD NEW</button>
+          <button className="add-btn" onClick={this.handleAddNew}>ADD NEW</button>
         </div>
-          
-          {/* <tbody id="table-body">
-            
-          </tbody> */}
-          <EventList events={this.state.eventList}></EventList>
-        
+        <EventList isAdd={this.state.isAdd}></EventList>
       </section>
     )
 
