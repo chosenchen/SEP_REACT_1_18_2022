@@ -7,8 +7,8 @@ class EventItemIndex extends React.Component{
     this.state = {
       editing : false,
       eventName : this.props.event.eventName,
-      startDate : this.props.event.startDate,
-      endDate : this.props.event.endDate
+      startDate : dateCalc(this.props.event.startDate),
+      endDate : dateCalc(this.props.event.endDate)
     }
 
     this.setEditing = this.setEditing.bind(this);
@@ -24,12 +24,13 @@ class EventItemIndex extends React.Component{
   handleChange(field){
     return e => this.setState({
       [field]: e.target.value
-    });
+    }, console.log(this.state));
   }
 
   handleSubmit(){
     const {getEvents, editEvent, setList} = this.props; 
     const event = {
+      id : this.props.event.id,
       eventName : this.state.eventName,
       startDate: dateConvert(this.state.startDate),
       endDate: dateConvert(this.state.endDate)
@@ -50,9 +51,22 @@ class EventItemIndex extends React.Component{
 
     return (
       <tr>
-        <td><input className='input-box' type='text' defaultValue={`${event.eventName}`} disabled={!editing } /></td>
-        <td><input className='input-box' type='date' defaultValue={`${startDate}`} disabled={!editing}/></td>
-        <td><input className='input-box' type='date' defaultValue={`${endDate}`} disabled={!editing}/></td>
+        <td><input className='input-box' type='text' 
+              defaultValue={`${event.eventName}`}
+              disabled={!editing } 
+              onChange={this.handleChange('eventName')}/>
+        </td>
+        <td><input className='input-box' type='date' 
+              defaultValue={`${startDate}`} 
+              disabled={!editing}
+              onChange={this.handleChange('startDate')}/>
+        </td>
+        <td>
+          <input className='input-box' type='date' 
+            defaultValue={`${endDate}`} 
+            disabled={!editing}
+            onChange={this.handleChange('endDate')}/>
+        </td>
         <td className='action-btns'>
           <button className='buttons edit-btn' id={`${event.id}`} 
             onClick={editing ? this.handleSubmit : this.setEditing}>{editing ? 'SAVE' : 'EDIT'}</button>
