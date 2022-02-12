@@ -9,12 +9,20 @@ class EventRow extends React.Component {
         this.state = {
             events: []
         };
+        this.delete = this.delete.bind(this);
     }
 
     async componentDidMount() {
         const events = await API.getEvents();
         this.setState({ events });
     }
+
+    delete(id) {
+        API.deleteEvent(id);
+        window.location.reload();
+    }
+
+
 
     render() {
         return (
@@ -32,7 +40,7 @@ class EventRow extends React.Component {
                     </td>
                     <td>
                         <button className="btn edit__btn" id="edit__btn" name="edit" value={event.id}>EDIT</button>
-                        <button className="btn del__btn" name="delete" id={event.id}>DELETE</button>
+                        <button className="btn del__btn" name="delete" id={event.id} onClick={e => this.delete(e.target.id)}>DELETE</button>
                     </td>
                 </tr>
                 )}

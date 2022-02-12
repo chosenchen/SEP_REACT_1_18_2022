@@ -12,7 +12,10 @@ export const API = (() => {
     const addEvent = async (event) => {
         await axios.post(url, event);
     }
-   
 
-    return { getEvents, addEvent }
+    const deleteEvent = async (id) => {
+        await axios.delete([url, id].join("/"));
+    }
+
+    return { getEvents, addEvent, deleteEvent }
 })();
