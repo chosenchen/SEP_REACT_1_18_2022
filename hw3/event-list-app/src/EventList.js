@@ -1,9 +1,12 @@
 import React from "react";
+import EventRow from "./EventRow";
+
 
 export default class EventList extends React.Component {
-
-
+    
     render() {
+        let events = this.props.events;
+        // console.log("events",events);
         return (
             <table>
                 <thead>
@@ -15,23 +18,9 @@ export default class EventList extends React.Component {
                     </tr>
                 </thead>
                 <tbody id="table-body">
-                    <tr className="row" id="4">
-                        <td>
-                            <input disabled value="test1" />
-                        </td>
-                        <td>
-                            <input disabled value="2022-2-20" />
-                        </td>
-                        <td>
-                            <input disabled value="2022-2-25" />
-                        </td>
-                        <td>
-                            <button value="EDIT" className="edit-btn">EDIT</button>
-                            <button className="delete-btn" id="4" value="DELETE">DELETE</button>
-                        </td>
-                    </tr>
+                    {events.map((event) => <EventRow event={event} key={event.id}></EventRow>)}
                 </tbody>
-            </table >
+            </table>
         );
     }
 };

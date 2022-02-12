@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,18 +15,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 table {
     width: 100%;
     border: 1px solid rgba(134, 132, 132, 0.575);
     border-collapse: collapse;
     text-align: center;
-}
-
-tr {
-    font-size: 4rem;
-    border-bottom: 1px solid rgba(134, 132, 132, 0.575);
-    line-height: 6rem;
 }
 
 .header {
@@ -35,18 +29,3 @@ tr {
     color: #666563;
 }
 
-td>button {
-    border: none;
-    background: none;
-    color: #0496f7b2;
-    cursor: pointer;
-}
-
-.delete-btn,
-#input__closebtn {
-    margin-left: 15px;
-}
-
-td {
-    width: 15rem;
-}
