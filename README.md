@@ -11,3 +11,5 @@ This is a repo to record the SEP-REACT-TRAINING assignments.
 - git branch by_your_name/hw
 - git checkout by_your_name/hw
 - implement the assignment under this feature branch.
+
+Try on github
