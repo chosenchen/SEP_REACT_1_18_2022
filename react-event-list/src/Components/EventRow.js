@@ -13,13 +13,13 @@ class EventRow extends React.Component {
             id: props.id,
             edit: false
         };
-        this.input = this.input.bind(this);
+        this.onInput = this.onInput.bind(this);
         this.saveChange = this.saveChange.bind(this);
         this.editEvent = this.editEvent.bind(this);
         this.delEvent = this.delEvent.bind(this);
     }
 
-   input(e) {
+   onInput(e) {
         this.setState({ ...this.state, [e.target.name]: e.target.value });
       }
 
@@ -51,7 +51,7 @@ class EventRow extends React.Component {
                         <input
                              type="text"
                              name="eventName"
-                             onChange={this.input}
+                             onChange={this.onInput}
                              value={this.state.eventName}
                              disabled={!this.state.edit}
                         />
@@ -59,6 +59,7 @@ class EventRow extends React.Component {
                     <td>
                         <input
                             type="date"
+                            name="startDate"
                             onChange={this.onInput}
                             value={this.state.startDate}
                             disabled={!this.state.edit}
@@ -67,6 +68,7 @@ class EventRow extends React.Component {
                     <td>
                         <input
                             type="date"
+                            name="endDate"
                             onChange={this.onInput}
                             value={this.state.endDate}
                             disabled={!this.state.edit}
