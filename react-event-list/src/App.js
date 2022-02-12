@@ -1,14 +1,26 @@
 import './App.css';
 import React from 'react';
+import { API } from "./ConnectDB.js";
 import EventRow from './Components/EventRow.js';
 import AddEvent from './Components/AddEvent';
 
 
 function showBtn() {
   document.getElementById('event__add__input__container').style.visibility = 'visible';
+  document.getElementById('event__add__input__container').style.border = '1px solid lightslategrey';
 }
 
 class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = { events: [] };
+  }
+
+  async componentDidMount() {
+    const events = await API.getEvents();
+    this.setState({ events });
+  }
 
   render() {
     return (
@@ -27,7 +39,17 @@ class App extends React.Component {
               <th>Actions</th>
             </tr>
           </thead>
-          <EventRow />
+          {this.state.events.map((event) => {
+            return (
+              <EventRow
+                key={event.id}
+                eventName={event.eventName}
+                startDate={event.startDate}
+                endDate={event.endDate}
+                id={event.id} 
+              />
+            )
+          })}
           <AddEvent />
         </table>
       </section>

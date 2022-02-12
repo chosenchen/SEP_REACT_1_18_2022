@@ -1,9 +1,10 @@
 import React from "react";
-import { API } from '../API/API';
+import { API } from '../ConnectDB';
 import { convertToUnix } from "../Utils/format-date.js";
 
 function hideBtn() {
     document.getElementById('event__add__input__container').style.visibility = 'hidden';
+    document.getElementById('event__add__input__container').style.border = 'none';
 }
 
 class AddEvent extends React.Component {
@@ -52,10 +53,10 @@ class AddEvent extends React.Component {
                     <td>
                         <button id="event__add__submit" className="btn"
                             onClick={this.save}
-                        >Save</button>
+                        >SAVE</button>
                         <button className="btn"
                             onClick={hideBtn}
-                        >Close</button>
+                        >CLOSE</button>
                     </td>
                 </tr>
             </tfoot>

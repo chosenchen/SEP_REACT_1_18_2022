@@ -1,51 +1,93 @@
 import React from "react";
-import { API }from '../API/API';
-import { convertToDate } from "../Utils/format-date.js";
+import { API } from '../ConnectDB.js';
+import { convertToDate, convertToUnix } from "../Utils/format-date.js";
 
 class EventRow extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            events: []
+            eventName: props.eventName,
+            startDate: convertToDate(props.startDate),
+            endDate: convertToDate(props.endDate),
+            id: props.id,
+            edit: false
         };
-        this.delete = this.delete.bind(this);
+        this.input = this.input.bind(this);
+        this.saveChange = this.saveChange.bind(this);
+        this.editEvent = this.editEvent.bind(this);
+        this.delEvent = this.delEvent.bind(this);
     }
 
-    async componentDidMount() {
-        const events = await API.getEvents();
-        this.setState({ events });
+   input(e) {
+        this.setState({ ...this.state, [e.target.name]: e.target.value });
+      }
+
+    editEvent() {
+        this.setState({ ...this.state, edit:true });
     }
 
-    delete(id) {
-        API.deleteEvent(id);
+    delEvent() {
+        API.deleteEvent(this.state.id);
         window.location.reload();
     }
 
-
+    saveChange() {
+        const event = {
+            eventName: this.state.eventName,
+            startDate: convertToUnix(this.state.startDate),
+            endDate: convertToUnix(this.state.endDate),
+            id: this.state.id,
+        };
+        API.editEvent(event);
+        this.setState({...this.state, edit:false});
+    }
 
     render() {
         return (
             <tbody id="event__container">
-                {this.state.events.map((event)=>
-                <tr className="event_display_container" key={event.id}>
+                <tr className="event_display_container">
                     <td className="event_display_name">
-                        <input disabled id="event__name" value={event.eventName} />
+                        <input
+                             type="text"
+                             name="eventName"
+                             onChange={this.input}
+                             value={this.state.eventName}
+                             disabled={!this.state.edit}
+                        />
                     </td>
                     <td>
-                        <input disabled type="date" id="event__start__date" value={convertToDate(event.startDate)} />
+                        <input
+                            type="date"
+                            onChange={this.onInput}
+                            value={this.state.startDate}
+                            disabled={!this.state.edit}
+                        />
                     </td>
                     <td>
-                        <input disabled type="date" id="event__end__date" value={convertToDate(event.endDate)} />
+                        <input
+                            type="date"
+                            onChange={this.onInput}
+                            value={this.state.endDate}
+                            disabled={!this.state.edit}
+                        />
                     </td>
                     <td>
-                        <button className="btn edit__btn" id="edit__btn" name="edit" value={event.id}>EDIT</button>
-                        <button className="btn del__btn" name="delete" id={event.id} onClick={e => this.delete(e.target.id)}>DELETE</button>
+                        {this.state.edit ? (
+                            <div>
+                                <button className="btn" onClick={this.saveChange}>SAVE</button>
+                                <button className="btn"  onClick={this.delEvent}>DELETE</button>
+                            </div>
+                        ) : (
+                            <div>
+                               <button className="btn" onClick={this.editEvent}>EDIT</button>
+                               <button className="btn" onClick={this.delEvent}>DELETE</button>
+                            </div>
+                        )}
                     </td>
                 </tr>
-                )}
             </tbody>
-        )
+        );
     }
 }
 

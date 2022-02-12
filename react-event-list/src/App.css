@@ -5,6 +5,7 @@
 html, body{
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 * {
@@ -17,20 +18,32 @@ html, body{
   visibility: hidden;
 }
 
-.events_table, .addEvent-btn{
+.events_table, #addEvent-btn {
   margin: auto;
+}
+ 
+input{
+  width: 150px;
+  padding-right: 20px;
+  padding: 2.5px;
+  box-sizing: content-box;
+}
+ 
+
+.event__list__container{
+  margin: 5% 5%;
+  font-size: 1.5rem;
 }
 
 .table_header{
-  width: 800px;
+  width: 650px;
   padding: 10px 0;
   margin: auto;
 
 }
 
-.event__list__container{
-  margin: 5% 5%;
-  font-size: 1.5rem;
+button{
+  cursor: pointer;
 }
 
 #addEvent-btn{
@@ -44,25 +57,13 @@ html, body{
   color: var(--color-primary);
   border: none;
   background: none;
-  padding-left: 5px;
+  padding-right: 5px;
 }
 
-th{
- font-size: 16px;
- text-align: left;
-}
+table{ border-collapse: collapse; width: 650px;}
 
-td{
-  width: 200px;
-}
+th{ background-color: rgb(200, 217, 228); padding: 10px 5px; font-size: 16px; text-align: left;}
 
-input{
-  width: 150px;
-  padding-right: 20px;
-  padding: 2.5px;
-  box-sizing: content-box;
-}
+td{ padding: 10px 5px;  width: 200px; }
 
-button{
-  cursor: pointer;
-}
+tbody > tr, thead{ border: 1px solid lightslategrey;}

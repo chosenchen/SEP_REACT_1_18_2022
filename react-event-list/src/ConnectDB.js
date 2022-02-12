@@ -17,5 +17,9 @@ export const API = (() => {
         await axios.delete([url, id].join("/"));
     }
 
-    return { getEvents, addEvent, deleteEvent }
+    const editEvent = async (event) => {
+        await axios.put([url, event.id].join("/"), event);
+    }
+
+    return { getEvents, addEvent, deleteEvent, editEvent }
 })();
