@@ -30,21 +30,21 @@ export default class AddNewRow extends React.Component {
         e.preventDefault();
         this.props.onNewRowChange(this.state.event);
     }
-    handleClose() {
-
+    handleClose(e) {
+        e.preventDefault();
+        this.props.onNewRowChange(null);
     }
     render() {
-        const newEvent = this.state.event;
         return (
             <tr>
                 <td>
-                    <input type='text' name='eventName' value={newEvent.eventName} onChange={this.handleChange} />
+                    <input type='text' name='eventName' onChange={this.handleChange} />
                 </td>
                 <td>
-                    <input type='date' name='startDate' value={newEvent.startDate} onChange={this.handleChange} />
+                    <input type='date' name='startDate'  onChange={this.handleChange} />
                 </td>
                 <td>
-                    <input type='date' name='endDate' value={newEvent.endDate} onChange={this.handleChange} />
+                    <input type='date' name='endDate' onChange={this.handleChange} />
                 </td>
                 <td>
                     <button name='savebtn' onClick={this.handleSubmit}>SAVE</button>
