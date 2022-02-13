@@ -2,7 +2,7 @@ import React from "react";
 
 import AddNewRow from "./AddNewRow";
 import EventRow from "./EventRow";
-import { getEvents, addEvent, deleteEvent } from "./Api";
+import { getEvents, addEvent, deleteEvent, editEvent } from "./Api";
 
 
 export default class EventList extends React.Component {
@@ -18,7 +18,7 @@ export default class EventList extends React.Component {
     }
     componentDidMount() {
         getEvents().then((res) => {
-            this.setState({ eventList: res});
+            this.setState({ eventList: res });
         });
     }
 
@@ -26,11 +26,21 @@ export default class EventList extends React.Component {
         this.setState({ ifAdd: true });
     }
 
-    handleEventRowChange(event, id) {
-        deleteEvent(id);
-        getEvents().then((res) => {
-            this.setState({ eventList: res });
-        });
+    handleEventRowChange(event, id, btn) {
+        if (btn === 'DELETE') {
+            deleteEvent(id);
+            getEvents().then((res) => {
+                this.setState({ eventList: res });
+            })
+        } else {
+            editEvent(id, event)
+                .then(() => getEvents().then((res) => {
+                    this.setState({ eventList: res });
+                }));
+            
+        }
+
+
     }
 
     handleAddNewRowChange(newEvent) {
