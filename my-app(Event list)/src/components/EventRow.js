@@ -21,9 +21,9 @@ export default class Events extends Component {
 
             this.handleDeleteRow = this.handleDeleteRow.bind(this);
 
-            this.handleCloseRow = this.handleCloseRow.bind(this);
+            this.handleCancelRow = this.handleCancelRow.bind(this);
 
-            this.handleSaveRow = this.handleSaveRow.bind(this);
+            this.handleUpdateRow = this.handleUpdateRow.bind(this);
         }
       
         // input change
@@ -38,7 +38,8 @@ export default class Events extends Component {
         }
       
         // close row
-        handleCloseRow() {
+        handleCancelRow() {
+            // this.setState({ ...this.state, edit: false });
             this.setState({ ...this.state, edit: false });
         }
       
@@ -48,7 +49,7 @@ export default class Events extends Component {
             window.location.reload();
         }
       
-        handleSaveRow() {
+        handleUpdateRow() {
             const event = {
                 eventName: this.state.eventName,
                 startDate: getMill(this.state.startDate),
@@ -61,9 +62,9 @@ export default class Events extends Component {
                 || this.state.endDate === "" ) {
                   alert("The table can not be empty. Please fullfill it.");
             } else {
-                API.updateEvent(event);
-                // window.location.reload();
+                API.updateEvent(event, event.id);               
                 this.setState({ ...this.state, edit: false });
+                // window.location.reload();
             }
           }
       
@@ -100,8 +101,8 @@ export default class Events extends Component {
                   <td>
                     {this.state.edit ? (
                       <div>
-                        <button className="btn" onClick={this.handleSaveRow}>Save</button>
-                        <button className="btn" onClick={this.handleCloseRow}>Close</button>
+                        <button className="btn" onClick={this.handleUpdateRow}>Update</button>
+                        <button className="btn" onClick={this.handleCancelRow}>Cancel</button>
                       </div>
                     ) : (
                       <div>
@@ -114,5 +115,3 @@ export default class Events extends Component {
           );
         } 
 }
-
-
