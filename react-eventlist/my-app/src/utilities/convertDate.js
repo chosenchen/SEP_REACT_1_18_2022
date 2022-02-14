@@ -1,19 +1,12 @@
 export const convertDate = (str) => {
   const date = new Date(Number(str));
   const year = date.getFullYear().toString();
-  var month = date.getMonth();
-  var day = date.getDate();
-
-  if (date.getMonth() == 0) {
-    month = "01";
-  } else if (date.getMonth() < 10) {
-    month = "0" + month;
-  }
-
-  if (date.getDate() < 10) {
-    day = "0" + day;
-  }
-
-  var newDate = `${year}-${month}-${day}`;
-  return newDate.toString();
+  const month = date.toLocaleString("en-US", { month: "2-digit" });
+  const day = date.toLocaleString("en-US", { day: "2-digit" });
+  const newDate = `${year}-${month}-${day}`;
+  return newDate;
+};
+export const convertToUnix = (date) => {
+  const newDate = new Date(date).getTime().toString();
+  return newDate;
 };

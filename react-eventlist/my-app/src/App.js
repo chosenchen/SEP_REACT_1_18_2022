@@ -1,15 +1,31 @@
-//import "./App.css";
+import "./App.css";
 import React from "react";
 import EventList from "./components/eventList";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addNew: false,
+    };
+    this.handleAdd = this.handleAdd.bind(this);
+  }
+  handleAdd() {
+    this.setState({ addNew: true });
+    console.log("add new");
+  }
+
   render() {
     return (
       <table>
         <thead>
           <tr>
             <td>
-              <button type="button" className="add__new">
+              <button
+                type="button"
+                className="add__new"
+                onClick={this.handleAdd}
+              >
                 ADD NEW
               </button>
             </td>
@@ -21,7 +37,7 @@ class App extends React.Component {
             <th>Actions</th>
           </tr>
         </thead>
-        <EventList />
+        <EventList addRow={this.state.addNew} />
       </table>
     );
   }
