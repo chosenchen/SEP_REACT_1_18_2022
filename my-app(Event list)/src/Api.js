@@ -29,7 +29,7 @@ const deleteEvent = (id) =>
     .then(response => response.json());
  
     
-const updateEvent = (id, event) =>
+const updateEvent = (event, id) =>
     fetch(baseUrl + "/" + id, {
         method: 'PUT',
         headers: {
