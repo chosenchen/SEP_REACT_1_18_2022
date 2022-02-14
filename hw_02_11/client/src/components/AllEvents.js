@@ -1,79 +1,151 @@
 import React, { Component } from 'react'
+import API from './API';
+
 
 export default class AllEvents extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            data: [],
+            addStatus: false,
             isLoaded: false,
-            items: {
-                data: [],
+            del: 1,
+            items: [{
+                id: '',
+                eventName: '',
+                startDate: '',
+                endDate: '',
                 InputDisabled: "True",
                 eventStatus: "EDIT"
-                },
-            
+            }],
+            newItem: {
+                id: '',
+                eventName: '',
+                startDate: '',
+                endDate: '',
+                InputDisabled: "True",
+                eventStatus: "EDIT"
+            }
         };
     };
   
     componentDidMount = () => {
-        console.log(this.state.items.eventStatus)
-        fetch('http://localhost:3005/events')
-            .then(res => res.json())
+        API.getEvents()
             .then((data) => {
-                
-                this.setState(data.forEach((e) => ({
-                        items:{
-                            data: e,
+                console.log(data)
+                data.forEach((e) => {this.setState({
+                        items:[...this.state.items, {
+                            id: e.id,
+                            eventName: e.eventName,
+                            startDate: e.startDate,
+                            endDate: e.endDate,
                             InputDisabled: "True",
                             eventStatus: "EDIT"
-                        }
-                    }))
+                        }]
+                    })}
                 )
-                console.log(this.state.data)
+                this.setState({items: this.state.items.slice(1)})
             })
             .then((data) => {
                 this.setState({
-                    items: {
-                        data: data,
-                        InputDisabled: "True",
-                        eventStatus: "EDIT"
-                    },
                     isLoaded: true,
                 });
             })
     }
 
-    deleteEvent = (id) => {
-        console.log(id)
-        const delAndReload = (id)=>{
-            console.log(id)
-            fetch(`http://localhost:3005/events/${id}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            });
-            this.componentDidMount();
+    deleteEvent = (id, index) => {
+        fetch(`http://localhost:3005/events/${id}`, { method: "DELETE" })
+            .then(() => {
+                const newItems = this.state.items.filter((e) => { return e.id !== id });
+                this.setState({ items: newItems})
+                
+            })
+        
+    };
+
+    editHandle = (index) => {
+        const newItems = this.state.items;
+        newItems[index].eventStatus = "SAVE";
+        newItems[index].InputDisabled = "";
+        console.log(newItems[index])
+        this.setState({ items: newItems })
+    };
+
+    saveHandle = (index) => {
+        const newItems = this.state.items;
+        newItems[index].eventStatus = "EDIT";
+        newItems[index].InputDisabled = "True";
+        this.setState({ items: newItems })
+
+        const event = {
+            eventName: newItems[index].eventName,
+            startDate: newItems[index].startDate,
+            endDate: newItems[index].endDate,
+            id: newItems[index].id,
         }
-        return delAndReload(id)
-    };
+        API.updateEvent(newItems[index].id, event)
+    }
 
-    editEvent = (id) => {
-        this.setState(prevState => ({
-            items: {                   // object that we want to update
-                ...prevState.items,    // keep all other key-value pairs
-                InputDisabled: "",
-                eventStatus: "SAVE"     // update the value of specific key
-        }}))
-    };
-
-
+    editChange = (index, property, target) => {
+        console.log(property);
+        console.log(target);
+        
+        let items = this.state.items
     
+        if ( this.state.items.length > index ){
+            let newItems = this.state.items;
+            newItems[index][property] = target;
+            console.log(newItems)
+            this.setState({ items: newItems })
+            console.log(this.state.items)
+        }
+        
+        else if ( index === items.length ) { 
+            console.log(this.state.newItem.eventName)
+            let newItem = this.state.newItem;
+            newItem.id = index + 1;
+            newItem[property] = target;
+            console.log(newItem)
+            this.setState({ newItem: newItem })
+            console.log(this.state.newItem)
+            
+        }
+        
+    }
+
+    addNewHandle = () => {
+        this.setState({ items: [...this.state.items, this.state.newItem]})
+        this.setState( {addStatus : false });
+        const item = this.state.newItem;
+        const event = {
+            "eventName": item.eventName,
+            "startDate": item.startDate,
+            "endDate": item.endDate,
+            "id": item.id
+        }
+        API.addEvent(event);
+        console.log(this.state.newItem)
+        console.log(this.state.items)
+    }
     
     render() {
-        
+        let newTr;
+        console.log(this.state.addStatus)
+        if (this.state.addStatus) {
+            newTr = (<tr>
+                <td><input onChange={(e) => 
+                    this.editChange(this.state.items.length, 'eventName', e.target.value)}/>
+                    </td>
+                <td><input onChange={(e) =>
+                    this.editChange(this.state.items.length, 'startDate', e.target.value)}/>
+                    </td>
+                <td><input onChange={(e) =>
+                    this.editChange(this.state.items.length, 'endDate', e.target.value)}/>
+                    </td>
+                <td><button onClick={() => this.addNewHandle()}>SAVE</button><button onClick={ () => {
+                    this.setState({ addStatus: false })
+                }}>DELETE</button></td></tr>)
+        }
         const { error, isLoaded, items } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -81,6 +153,12 @@ export default class AllEvents extends Component {
             return <div>Loading...</div>;
         } else {
             return (
+                <>
+                <div>
+                <button className="addbtn" onClick={()=>this.setState({addStatus : true})}>ADD NEW</button>
+                </div>
+        
+                <div className="event-container"></div>
                 <table>
                     <thead>
                     <tr>
@@ -90,23 +168,36 @@ export default class AllEvents extends Component {
                         <th>Actions</th>
                     </tr></thead>
                     <tbody>
-                        {items.data.map(item => (
+                        {items.map((item, index) => (
                             <tr key={item.id}>
-                            <td><input disabled={this.state.items.InputDisabled} value={item.eventName} onChange={this.edit}/></td>
-                            <td><input disabled={this.state.items.InputDisabled} value={item.startDate}/></td>
-                            <td><input disabled={this.state.items.InputDisabled} value={item.endDate}/></td>
-                            <td><button onClick={() => this.editEvent(
-                                ()=>{
-
-                                }
-                            )}>{this.state.items.eventStatus}</button>
-                                <button onClick={() => this.deleteEvent(item.id)}>DELETE</button>
+                                <td><input type="text" disabled={this.state.items[index].InputDisabled} 
+                                    value={this.state.items[index].eventName} 
+                                    onChange={(e) => 
+                                    this.eidChange(index, 'eventName', e.target.value) }/></td>
+                            <td><input disabled={this.state.items[index].InputDisabled} 
+                                    value={this.state.items[index].startDate} onChange={(e) =>
+                                        this.editChange(index, 'startDate', e.target.value)}/></td>
+                            <td><input disabled={this.state.items[index].InputDisabled} 
+                                    value={this.state.items[index].endDate} onChange={(e) =>
+                                        this.editChange(index, 'endDate', e.target.value)}/></td>
+                        
+                                <td><button onClick={() => {
+                                    let status = this.state.items[index].eventStatus;
+                                    if(status === "EDIT"){
+                                        this.editHandle(index);
+                                    }
+                                    if(status === "SAVE"){
+                                        this.saveHandle(index);
+                                    }
+                                    }}>{this.state.items[index].eventStatus}</button>
+                                <button onClick={() => this.deleteEvent(item.id, index)}>DELETE</button>
                             </td>
                             </tr>
                         ))}
+                        { newTr }
                     </tbody>
                 </table>
-                
+                </>
             );
         }
     }

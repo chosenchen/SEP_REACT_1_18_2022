@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import AllEvents from './AllEvents';
 
 export default class AddEvent extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-        };
-    }
+   
+    saveEvent = (e, id) => {
+        console.log(id)
+    };
 
     render() {
         return (
-        <div>
-            
-        </div>
+        <>
+
+        </>
         )
+        
     }
 }

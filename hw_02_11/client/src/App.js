@@ -1,20 +1,25 @@
-import AllEvents from "./components/AllEvents";
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
+import AllEvents from "./components/AllEvents";
+import AddEvent from "./components/AddEvent";
+
+export default class App extends Component {
+    
+    
+    render(){
+    return (
+      <div className="App">
       <header>
         <h1>Event List App</h1>
       </header>
 
       <div className="container">
-        <button className="addbtn">ADD NEW</button>
-        <div className="event-container">
-        <AllEvents/>
+        
+        <AllEvents />
+      
         </div>
+    
     </div>
-    </div>
-  );
+  )}
 }
 
-export default App;
