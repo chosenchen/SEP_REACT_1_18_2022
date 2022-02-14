@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import API from './API';
+import EpochTime from './EpochTime';
 
 
 export default class AllEvents extends Component {
@@ -37,8 +38,8 @@ export default class AllEvents extends Component {
                         items:[...this.state.items, {
                             id: e.id,
                             eventName: e.eventName,
-                            startDate: e.startDate,
-                            endDate: e.endDate,
+                            startDate: EpochTime.convertStringtoISO(e.startDate),
+                            endDate: EpochTime.convertStringtoISO(e.endDate),
                             InputDisabled: "True",
                             eventStatus: "EDIT"
                         }]
@@ -67,7 +68,6 @@ export default class AllEvents extends Component {
         const newItems = this.state.items;
         newItems[index].eventStatus = "SAVE";
         newItems[index].InputDisabled = "";
-        console.log(newItems[index])
         this.setState({ items: newItems })
     };
 
@@ -87,28 +87,20 @@ export default class AllEvents extends Component {
     }
 
     editChange = (index, property, target) => {
-        console.log(property);
-        console.log(target);
-        
         let items = this.state.items
     
         if ( this.state.items.length > index ){
             let newItems = this.state.items;
             newItems[index][property] = target;
-            console.log(newItems)
             this.setState({ items: newItems })
-            console.log(this.state.items)
         }
         
         else if ( index === items.length ) { 
-            console.log(this.state.newItem.eventName)
+            
             let newItem = this.state.newItem;
             newItem.id = index + 1;
             newItem[property] = target;
-            console.log(newItem)
             this.setState({ newItem: newItem })
-            console.log(this.state.newItem)
-            
         }
         
     }
@@ -119,27 +111,24 @@ export default class AllEvents extends Component {
         const item = this.state.newItem;
         const event = {
             "eventName": item.eventName,
-            "startDate": item.startDate,
-            "endDate": item.endDate,
+            "startDate": EpochTime.convertDatetoString(item.startDate),
+            "endDate": EpochTime.convertDatetoString(item.endDate),
             "id": item.id
         }
         API.addEvent(event);
-        console.log(this.state.newItem)
-        console.log(this.state.items)
     }
     
     render() {
         let newTr;
-        console.log(this.state.addStatus)
         if (this.state.addStatus) {
             newTr = (<tr>
                 <td><input onChange={(e) => 
                     this.editChange(this.state.items.length, 'eventName', e.target.value)}/>
                     </td>
-                <td><input onChange={(e) =>
+                <td><input type="date" onChange={(e) =>
                     this.editChange(this.state.items.length, 'startDate', e.target.value)}/>
                     </td>
-                <td><input onChange={(e) =>
+                <td><input type="date" onChange={(e) =>
                     this.editChange(this.state.items.length, 'endDate', e.target.value)}/>
                     </td>
                 <td><button onClick={() => this.addNewHandle()}>SAVE</button><button onClick={ () => {
