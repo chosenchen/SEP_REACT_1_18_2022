@@ -44,6 +44,7 @@ button {
   color: rgb(98, 74, 233);
   height: 30x;
   width: 100px;
+  border: 1px solid rgb(204, 204, 204);
 }
 
 .add-container {
