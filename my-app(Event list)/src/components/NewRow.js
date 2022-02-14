@@ -4,6 +4,12 @@ import { getMill } from "../ConvertDate.js";
 
 import API from "../Api";
 
+// when click on close, we just simply unsave and close the table row
+function hideRow() {
+    document.getElementById("new-row").style.display = 'none';
+    window.location.reload();
+}
+
 export default class NewRow extends React.Component {
     constructor(props) {
         super(props);
@@ -16,16 +22,11 @@ export default class NewRow extends React.Component {
 
         this.handleSave = this.handleSave.bind(this);
 
-        this.handleCloseRow = this.handleCloseRow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
   
     handleInput(e) {
         this.setState({ ...this.state, [e.target.name]: e.target.value });
-    }
-
-    // close row
-    handleCloseRow() {
-        this.setState({ ...this.state, edit: false });
     }
   
     handleSave() {
@@ -46,11 +47,10 @@ export default class NewRow extends React.Component {
         }
     }
 
-   
     render() {
         return (
-            <tr>
-                <td>
+            <tr id="new-row">
+                <td >
                     <input
                     className="new-event-name"
                     type="text"
@@ -86,7 +86,7 @@ export default class NewRow extends React.Component {
                         </button>
                         <button
                             className="close-btn"
-                            onClick={this.handleCloseRow}
+                            onClick={hideRow}
                             name="new"
                         >Close
                         </button>
@@ -96,4 +96,3 @@ export default class NewRow extends React.Component {
       );
     }
 }
-
