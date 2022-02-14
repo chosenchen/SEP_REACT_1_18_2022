@@ -21,8 +21,6 @@ export default class NewRow extends React.Component {
         this.handleInput = this.handleInput.bind(this);
 
         this.handleSave = this.handleSave.bind(this);
-
-        this.handleClose = this.handleClose.bind(this);
     }
   
     handleInput(e) {
@@ -87,7 +85,6 @@ export default class NewRow extends React.Component {
                         <button
                             className="close-btn"
                             onClick={hideRow}
-                            name="new"
                         >Close
                         </button>
                     </div>
