@@ -15,6 +15,7 @@ class EventRow extends React.Component {
         };
         this.onInput = this.onInput.bind(this);
         this.saveChange = this.saveChange.bind(this);
+        this.cancelSave = this.saveChange.bind(this);
         this.editEvent = this.editEvent.bind(this);
         this.delEvent = this.delEvent.bind(this);
     }
@@ -45,6 +46,10 @@ class EventRow extends React.Component {
             API.editEvent(event);
             this.setState({ ...this.state, edit: false });
         }
+    }
+
+    cancelSave() {
+        this.setState({ ...this.state, edit: false });
     }
 
     render() {
@@ -82,7 +87,7 @@ class EventRow extends React.Component {
                         {this.state.edit ? (
                             <div>
                                 <button className="btn" onClick={this.saveChange}>SAVE</button>
-                                <button className="btn" onClick={this.delEvent}>DELETE</button>
+                                <button className="btn" onClick={this.cancelSave}>CANCEL</button>
                             </div>
                         ) : (
                             <div>
