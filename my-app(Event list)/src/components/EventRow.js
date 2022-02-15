@@ -13,8 +13,11 @@ export default class Events extends Component {
             endDate: getDate(props.endDate),
             id: props.id,
             edit: false
-          };
-          
+            };
+
+            // Save the base sate for cancel click
+            this.baseSate = this.state;
+            
             this.handleInputChange = this.handleInputChange.bind(this);
 
             this.handleEditRow = this.handleEditRow.bind(this);         
@@ -37,10 +40,10 @@ export default class Events extends Component {
             this.setState({ ...this.state, edit: true })
         }
       
-        // close row
+        // cancel row, when click on cancel button, it will cancel editing and 
+        // come back to state where editing was just started
         handleCancelRow() {
-            // this.setState({ ...this.state, edit: false });
-            this.setState({ ...this.state, edit: false });
+            this.setState(this.baseSate);
         }
       
         // delete row
@@ -115,3 +118,4 @@ export default class Events extends Component {
           );
         } 
 }
+
