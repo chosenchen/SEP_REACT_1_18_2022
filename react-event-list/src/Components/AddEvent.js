@@ -15,26 +15,30 @@ class AddEvent extends React.Component {
             startDate: "",
             endDate: "",
             id: ""
-        }  
+        }
         this.input = this.input.bind(this);
         this.save = this.save.bind(this);
     }
 
     input(event) {
-        this.setState({...this.state, [event.target.name]: event.target.value});
+        this.setState({ ...this.state, [event.target.name]: event.target.value });
     }
 
     save() {
-        const event = {
-            eventName: this.state.eventName,
-            startDate: convertToUnix(this.state.startDate),
-            endDate: convertToUnix(this.state.endDate)
-        };
+        if (this.state.eventName === '' || this.state.startDate === '' || this.state.endDate === '') {
+            alert('Values cannot be empty!');
+        } else {
+            const event = {
+                eventName: this.state.eventName,
+                startDate: convertToUnix(this.state.startDate),
+                endDate: convertToUnix(this.state.endDate)
+            };
 
-        console.log(event);
+            console.log(event);
 
-        API.addEvent(event);
-        window.location.reload();
+            API.addEvent(event);
+            window.location.reload();
+        }
     }
 
     render() {
@@ -42,19 +46,39 @@ class AddEvent extends React.Component {
             <tfoot id="event__add__input__container">
                 <tr>
                     <td>
-                        <input id="event__add__name__input" name="eventName" value={this.state.eventName} onChange={this.input}/>
+                        <input
+                            id="event__add__name__input"
+                            name="eventName"
+                            value={this.state.eventName}
+                            onChange={this.input}
+                        />
                     </td>
                     <td>
-                        <input id="event__add__start__date__input" name="startDate" type="date" value={this.state.startDate} onChange={this.input} />
+                        <input
+                            id="event__add__start__date__input"
+                            name="startDate"
+                            type="date"
+                            value={this.state.startDate}
+                            onChange={this.input}
+                        />
                     </td>
                     <td>
-                        <input id="event__add__end__date__input" name="endDate" type="date" value={this.state.endDate} onChange={this.input}/>
+                        <input
+                            id="event__add__end__date__input"
+                            name="endDate"
+                            type="date"
+                            value={this.state.endDate}
+                            onChange={this.input}
+                        />
                     </td>
                     <td>
-                        <button id="event__add__submit" className="btn"
+                        <button
+                            id="event__add__submit"
+                            className="btn"
                             onClick={this.save}
                         >SAVE</button>
-                        <button className="btn"
+                        <button
+                            className="btn"
                             onClick={hideBtn}
                         >CLOSE</button>
                     </td>

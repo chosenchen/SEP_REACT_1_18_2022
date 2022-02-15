@@ -11,7 +11,7 @@ class EventRow extends React.Component {
             startDate: convertToDate(props.startDate),
             endDate: convertToDate(props.endDate),
             id: props.id,
-            edit: false
+            edit: false,
         };
         this.onInput = this.onInput.bind(this);
         this.saveChange = this.saveChange.bind(this);
@@ -19,12 +19,12 @@ class EventRow extends React.Component {
         this.delEvent = this.delEvent.bind(this);
     }
 
-   onInput(e) {
+    onInput(e) {
         this.setState({ ...this.state, [e.target.name]: e.target.value });
-      }
+    }
 
     editEvent() {
-        this.setState({ ...this.state, edit:true });
+        this.setState({ ...this.state, edit: true });
     }
 
     delEvent() {
@@ -33,14 +33,18 @@ class EventRow extends React.Component {
     }
 
     saveChange() {
-        const event = {
-            eventName: this.state.eventName,
-            startDate: convertToUnix(this.state.startDate),
-            endDate: convertToUnix(this.state.endDate),
-            id: this.state.id,
-        };
-        API.editEvent(event);
-        this.setState({...this.state, edit:false});
+        if (this.state.eventName === '' || this.state.startDate === '' || this.state.endDate === '') {
+            alert('Values cannot be empty!');
+        } else {
+            const event = {
+                eventName: this.state.eventName,
+                startDate: convertToUnix(this.state.startDate),
+                endDate: convertToUnix(this.state.endDate),
+                id: this.state.id,
+            };
+            API.editEvent(event);
+            this.setState({ ...this.state, edit: false });
+        }
     }
 
     render() {
@@ -49,11 +53,11 @@ class EventRow extends React.Component {
                 <tr className="event_display_container">
                     <td className="event_display_name">
                         <input
-                             type="text"
-                             name="eventName"
-                             onChange={this.onInput}
-                             value={this.state.eventName}
-                             disabled={!this.state.edit}
+                            type="text"
+                            name="eventName"
+                            onChange={this.onInput}
+                            value={this.state.eventName}
+                            disabled={!this.state.edit}
                         />
                     </td>
                     <td>
@@ -78,12 +82,12 @@ class EventRow extends React.Component {
                         {this.state.edit ? (
                             <div>
                                 <button className="btn" onClick={this.saveChange}>SAVE</button>
-                                <button className="btn"  onClick={this.delEvent}>DELETE</button>
+                                <button className="btn" onClick={this.delEvent}>DELETE</button>
                             </div>
                         ) : (
                             <div>
-                               <button className="btn" onClick={this.editEvent}>EDIT</button>
-                               <button className="btn" onClick={this.delEvent}>DELETE</button>
+                                <button className="btn" onClick={this.editEvent}>EDIT</button>
+                                <button className="btn" onClick={this.delEvent}>DELETE</button>
                             </div>
                         )}
                     </td>
