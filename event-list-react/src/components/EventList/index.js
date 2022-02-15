@@ -1,29 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import EventListRow from "../EventListRow";
 import API from "../../api";
 
-class EventList extends React.Component {
-  state = {
-    eventList: [],
-  };
+const EventList = ({ isAdd, onAddNewSuccess }) => {
+  const [eventList, setEventList] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     API.getEventList().then((eventList) => {
-      this.setState({ eventList });
+      setEventList(eventList);
     });
-  }
+  }, []);
 
-  onUpdate = (id, newEvent) => {
+  const onUpdate = (id, newEvent) => {
     if (+id === -1) {
       API.addEvent(newEvent).then((response) => {
-        this.setState({ eventList: [...this.state.eventList, response] });
+        setEventList([...eventList, response]);
 
-        this.props.onAddNewSuccess();
+        onAddNewSuccess();
       });
     } else {
       API.updateEvent(newEvent, id).then((response) => {
-        const updatedEventList = this.state.eventList.map((item) => {
+        const updatedEventList = eventList.map((item) => {
           if (+id === item.id) {
             newEvent.id = item.id;
             return newEvent;
@@ -32,17 +30,17 @@ class EventList extends React.Component {
           return item;
         });
 
-        this.setState({ eventList: [...updatedEventList] });
+        setEventList([...updatedEventList]);
       });
     }
   };
 
-  onDelete = (id) => {
+  const onDelete = (id) => {
     if (+id === -1) {
-      this.props.onAddNewSuccess();
+      onAddNewSuccess();
     } else {
       API.deleteEvent(id).then((response) => {
-        const updatedEventList = this.state.eventList.filter((item) => {
+        const updatedEventList = eventList.filter((item) => {
           if (+id !== item.id) {
             return true;
           }
@@ -50,50 +48,48 @@ class EventList extends React.Component {
           return false;
         });
 
-        this.setState({ eventList: [...updatedEventList] });
+        setEventList([...updatedEventList]);
       });
     }
   };
 
-  render() {
-    const _eventList = this.state.eventList;
+  const _eventList = eventList;
 
-    let eventListJSX;
+  let eventListJSX;
 
-    if (_eventList.length) {
-      eventListJSX = _eventList.map((eventItem) => {
-        return (
-          <EventListRow
-            key={eventItem.id}
-            isAdd={false}
-            eventItem={eventItem}
-            onUpdate={this.onUpdate}
-            onDelete={this.onDelete}
-          />
-        );
-      });
+  if (_eventList.length) {
+    eventListJSX = _eventList.map((eventItem) => {
+      return (
+        <EventListRow
+          key={eventItem.id}
+          isAdd={false}
+          eventItem={eventItem}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
+      );
+    });
 
-      if (this.props.isAdd) {
-        eventListJSX.push(
-          <EventListRow
-            key={-1}
-            isAdd={true}
-            eventItem={{
-              eventName: "",
-              startDate: "",
-              endDate: "",
-              id: -1,
-            }}
-            onUpdate={this.onUpdate}
-            onDelete={this.onDelete}
-          />
-        );
-      }
-    } else {
-      eventListJSX = <h1>Empty List</h1>;
+    if (isAdd) {
+      eventListJSX.push(
+        <EventListRow
+          key={-1}
+          isAdd={true}
+          eventItem={{
+            eventName: "",
+            startDate: "",
+            endDate: "",
+            id: -1,
+          }}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
+      );
     }
-    return <>{eventListJSX}</>;
+  } else {
+    eventListJSX = <h1>Empty List</h1>;
   }
-}
+  return <>{eventListJSX}</>;
+};
 
 export default EventList;

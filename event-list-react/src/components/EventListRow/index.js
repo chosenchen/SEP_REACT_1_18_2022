@@ -1,115 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { timestampToStr, dateStrToTimestamp } from "../../util/timestamp";
 
-class EventListRow extends React.Component {
-  state = {
-    isUpdate: false,
-    eventName: "",
-    startDate: "",
-    endDate: "",
+const EventListRow = ({ isAdd, eventItem, onUpdate, onDelete }) => {
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  const [eventName, setEventName] = useState(eventItem.eventName);
+  const [startDate, setStartDate] = useState(eventItem.startDate);
+  const [endDate, setEndDate] = useState(eventItem.endDate);
+
+  const onEventName = (e) => {
+    setEventName(e.target.value);
   };
 
-  componentDidMount() {
-    const _eventItem = this.props.eventItem;
-    this.setState({
-      eventName: _eventItem.eventName,
-      startDate: _eventItem.startDate,
-      endDate: _eventItem.endDate,
-    });
-  }
-
-  onEventName = (e) => {
-    this.setState({ eventName: e.target.value });
+  const onStartDate = (e) => {
+    setStartDate(dateStrToTimestamp(e.target.value));
   };
 
-  onStartDate = (e) => {
-    this.setState({ startDate: dateStrToTimestamp(e.target.value) });
+  const onEndDate = (e) => {
+    setEndDate(dateStrToTimestamp(e.target.value));
   };
 
-  onEndDate = (e) => {
-    this.setState({ endDate: dateStrToTimestamp(e.target.value) });
-  };
-
-  onUpdate = () => {
-    if (this.props.isAdd) {
-      this.props.onUpdate(this.props.eventItem.id, {
-        eventName: this.state.eventName,
-        startDate: `${dateStrToTimestamp(this.state.startDate)}`,
-        endDate: `${dateStrToTimestamp(this.state.endDate)}`,
+  const onHandleUpdate = () => {
+    if (isAdd) {
+      onUpdate(eventItem.id, {
+        eventName: eventName,
+        startDate: `${dateStrToTimestamp(startDate)}`,
+        endDate: `${dateStrToTimestamp(endDate)}`,
       });
-    } else if (!this.state.isUpdate) {
-      this.setState({ isUpdate: true });
+    } else if (!isUpdate) {
+      setIsUpdate(true);
     } else {
-      this.props.onUpdate(this.props.eventItem.id, {
-        eventName: this.state.eventName,
-        startDate: dateStrToTimestamp(this.state.startDate),
-        endDate: dateStrToTimestamp(this.state.endDate),
+      onUpdate(eventItem.id, {
+        eventName: eventName,
+        startDate: dateStrToTimestamp(startDate),
+        endDate: dateStrToTimestamp(endDate),
       });
 
-      this.setState({ isUpdate: false });
+      setIsUpdate(false);
     }
   };
 
-  onDelete = () => {
-    if (this.state.isUpdate) {
-      this.setState({
-        isUpdate: false,
-        eventName: this.props.eventItem.eventName,
-        startDate: this.props.eventItem.startDate,
-        endDate: this.props.eventItem.endDate,
-      });
+  const onHandleDelete = () => {
+    if (isUpdate) {
+      setIsUpdate(false);
+      setEventName(eventItem.eventName);
+      setStartDate(eventItem.startDate);
+      setEndDate(eventItem.endDate);
     } else {
-      this.props.onDelete(this.props.eventItem.id);
+      onDelete(eventItem.id);
     }
   };
 
-  render() {
-    let eventItemJSX;
+  let eventItemJSX;
 
-    eventItemJSX = (
-      <div className="eventlist__row">
-        <div className="eventlist__item">
-          <input
-            type="text"
-            value={this.state.eventName}
-            disabled={!this.state.isUpdate && !this.props.isAdd}
-            onChange={this.onEventName}
-          />
-        </div>
-        <div className="eventlist__item">
-          <input
-            type={!this.state.isUpdate && !this.props.isAdd ? "text" : "date"}
-            value={this.state.startDate && timestampToStr(this.state.startDate)}
-            disabled={!this.state.isUpdate && !this.props.isAdd}
-            onChange={this.onStartDate}
-          />
-        </div>
-        <div className="eventlist__item">
-          <input
-            type={!this.state.isUpdate && !this.props.isAdd ? "text" : "date"}
-            value={this.state.endDate && timestampToStr(this.state.endDate)}
-            disabled={!this.state.isUpdate && !this.props.isAdd}
-            onChange={this.onEndDate}
-          />
-        </div>
-        <div className="eventlist__actions">
-          <input
-            type="button"
-            value={this.state.isUpdate || this.props.isAdd ? "UPDATE" : "EDIT"}
-            onClick={this.onUpdate}
-          />
-          <input
-            type="button"
-            value={this.state.isUpdate ? "CANCEL" : "DEL"}
-            onClick={this.onDelete}
-          />
-        </div>
+  eventItemJSX = (
+    <div className="eventlist__row">
+      <div className="eventlist__item">
+        <input
+          type="text"
+          value={eventName}
+          disabled={!isUpdate && !isAdd}
+          onChange={onEventName}
+        />
       </div>
-    );
+      <div className="eventlist__item">
+        <input
+          type={!isUpdate && !isAdd ? "text" : "date"}
+          value={startDate && timestampToStr(startDate)}
+          disabled={!isUpdate && !isAdd}
+          onChange={onStartDate}
+        />
+      </div>
+      <div className="eventlist__item">
+        <input
+          type={!isUpdate && !isAdd ? "text" : "date"}
+          value={endDate && timestampToStr(endDate)}
+          disabled={!isUpdate && !isAdd}
+          onChange={onEndDate}
+        />
+      </div>
+      <div className="eventlist__actions">
+        <input
+          type="button"
+          value={isUpdate || isAdd ? "UPDATE" : "EDIT"}
+          onClick={onHandleUpdate}
+        />
+        <input
+          type="button"
+          value={isUpdate ? "CANCEL" : "DEL"}
+          onClick={onHandleDelete}
+        />
+      </div>
+    </div>
+  );
 
-    return <>{eventItemJSX}</>;
-  }
-}
+  return <>{eventItemJSX}</>;
+};
 
 export default EventListRow;

@@ -27,9 +27,7 @@ const deleteEvent = (id) =>
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  }).then((response) => response.json());
 
 const updateEvent = (event, id) =>
   fetch([base_url, EVENTS, id].join("/"), {
