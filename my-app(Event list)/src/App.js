@@ -17,8 +17,6 @@ class App extends React.Component {
     };
     // This binding is nessary to make 'this' work in callback
     this.handleAddNew = this.handleAddNew.bind(this);
-    this.handleNewRowChange = this.handleNewRowChange.bind(this);
-    this.handleEventRowChange = this.handleEventRowChange.bind(this);
   }
 
   // get data from back end
@@ -32,38 +30,11 @@ class App extends React.Component {
     this.setState({ ...this.state, isAdd: true });
   }
 
-  handleNewRowChange(newEevent) {
-    if(newEevent === null) {
-      API.getEvents().then(res => this.setState({ events: res, isAdd: false }));
-    } else {
-      API.addEvent(newEevent)
-      .then(res => API.getEvents()
-      .then(res => {
-        this.setState({ events: res, isAdd: false })
-      }));
-    }
-  }
-
-  handleEventRowChange(event, id, btn) {
-    if (btn ==='Delete') {
-      API.deleteEvent(id);
-      API.getEvents().then(res => {
-        this.setState({ events: res });
-      })
-    } else {
-      API.updateEvent(id, event)
-        .then(() => API.getEvents()
-        .then(res => {
-          this.setState({ events: res });
-        }))
-    }
-  }
-
   render(){
     return (
         <div className="container">
           <div className="add-container">
-              <button className="add-btn" onClick={this.handleAddNew}>Add New</button>
+              <button className="add-btn" onClick={this.handleAddNew }>Add New</button>
           </div>
         
           <table className="event-table">
@@ -84,14 +55,11 @@ class App extends React.Component {
                       startDate = {event.startDate}
                       endDate = {event.endDate}
                       id = {event.id}
-                      onChange = {this.handleEventRowChange}
                       />
                   );
                 })}
                 {this.state.isAdd && (
-                  <NewRow
-                    onChange = {this.handleEventRowChange}
-                    />
+                  <NewRow  />
                 )}        
               </tbody> 
           </table>
