@@ -1,0 +1,19 @@
+tr {
+    font-size: 4rem;
+    border-bottom: 1px solid rgba(134, 132, 132, 0.575);
+    line-height: 6rem;
+}
+td>button {
+    border: none;
+    background: none;
+    color: #0496f7b2;
+    cursor: pointer;
+    margin-left: 15px;
+}
+td {
+    width: 15rem;
+    margin: auto 3rem;
+}
+.delete-btn{
+    margin-left: 15px;
+}
