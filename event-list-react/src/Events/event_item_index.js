@@ -43,6 +43,7 @@ class EventItemIndex extends React.Component{
     const {event, deleteEvent, getEvents, setList} = this.props;
     deleteEvent(event.id).then(getEvents).then((data) => setList(data))
   }
+  
   render(){
     const {event} = this.props ;
     const {editing} = this.state;

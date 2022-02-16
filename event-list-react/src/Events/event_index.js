@@ -3,7 +3,7 @@ import { API } from '../util/api';
 import EventItemIndex from './event_item_index';
 import AddForm from './add_form';
 
-class Index extends React.Component{
+class EventIndex extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -72,4 +72,4 @@ class Index extends React.Component{
   }
 }
 
-export default Index;
+export default EventIndex;

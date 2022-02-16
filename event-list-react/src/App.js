@@ -1,9 +1,9 @@
-import Index from './Events/index';
+import EventIndex from './Events/event_index';
 
 function App() {
   return (
     <div className="App">
-      <Index/>
+      <EventIndex/>
     </div>
   );
 }
