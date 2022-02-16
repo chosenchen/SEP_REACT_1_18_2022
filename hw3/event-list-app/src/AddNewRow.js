@@ -1,5 +1,7 @@
 import React from "react";
 
+import './AddNewRow.css';
+
 export default class AddNewRow extends React.Component {
     constructor(props) {
         super(props);
@@ -48,7 +50,7 @@ export default class AddNewRow extends React.Component {
                 </td>
                 <td>
                     <button name='savebtn' onClick={this.handleSubmit}>SAVE</button>
-                    <button name='closebtn' onClick={this.handleClose}>CLOSE</button>
+                    <button className="input__closebtn" name='closebtn' onClick={this.handleClose}>CLOSE</button>
                 </td>
             </tr>
         );

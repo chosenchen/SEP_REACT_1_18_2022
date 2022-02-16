@@ -4,6 +4,8 @@ import AddNewRow from "./AddNewRow";
 import EventRow from "./EventRow";
 import { getEvents, addEvent, deleteEvent, editEvent } from "./Api";
 
+import './EventList.css';
+
 
 export default class EventList extends React.Component {
     constructor(props) {

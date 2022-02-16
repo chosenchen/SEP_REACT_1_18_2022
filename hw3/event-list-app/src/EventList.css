@@ -1,0 +1,33 @@
+.table-container {
+    width: 80%;
+}
+table {
+    width: 100%;
+    border: 1px solid rgba(134, 132, 132, 0.575);
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.header {
+    height: 8rem;
+    background-color: #0496f744;
+    color: #666563;
+}
+.add-btn {
+    background-color: #f5f6f7;
+    color: #0496f7b2;
+    border: none;
+    width: 15rem;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+
+
+
+
+
+
+
+
+

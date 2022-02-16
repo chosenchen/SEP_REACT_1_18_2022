@@ -1,5 +1,8 @@
 import React from "react";
+
 import { dateConvert } from './TimeConvert';
+
+import './EventRow.css';
 
 export default class EventRow extends React.Component {
     constructor(props) {

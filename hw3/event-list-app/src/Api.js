@@ -1,4 +1,3 @@
-// const Api = () => {
 const baseurl = "http://localhost:8000/events";
 
 export const getEvents = () => fetch(baseurl).then((response) => response.json());
@@ -32,11 +31,3 @@ export const editEvent = (id, event) =>
         body: JSON.stringify(event),
     }).then((response) => response.json());
 
-    // return {
-    //     getEvents,
-    //     addEvent,
-    //     deleteEvent,
-    //     editEvent,
-    // };
-// };
-// export default Api;
