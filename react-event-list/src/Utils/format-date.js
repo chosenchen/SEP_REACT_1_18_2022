@@ -1,7 +1,7 @@
 export const convertToDate = (ms) => {
-  const date = new Date(+ms);
+  const convertToDate = new Date(+ms);
 
-  return date.toISOString().split("").splice(0, 10).join("");
+  return convertToDate.toISOString().substring(0, 10);
 };
 
 export const convertToUnix = (date) => {

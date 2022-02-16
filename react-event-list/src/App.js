@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
-import { API } from "./ConnectDB.js";
+import { API } from "./Services/ConnectDB.js";
 import EventRow from './Components/EventRow.js';
 import AddEvent from './Components/AddEvent';
 
 
-function showBtn() {
+function showAddEvent() {
   document.getElementById('event__add__input__container').style.visibility = 'visible';
   document.getElementById('event__add__input__container').style.border = '1px solid lightslategrey';
 }
@@ -27,7 +27,7 @@ class App extends React.Component {
       <section className='event__list__container'>
         <header className="table_header">
           <button id="addEvent-btn"
-            onClick={showBtn}
+            onClick={showAddEvent}
           >Add New</button>
         </header>
         <table className='events_table'>

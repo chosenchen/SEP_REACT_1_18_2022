@@ -1,5 +1,5 @@
 import React from "react";
-import { API } from '../ConnectDB.js';
+import { API } from '../Services/ConnectDB.js';
 import { convertToDate, convertToUnix } from "../Utils/format-date.js";
 
 class EventRow extends React.Component {

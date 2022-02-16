@@ -1,8 +1,8 @@
 import React from "react";
-import { API } from '../ConnectDB';
+import { API } from '../Services/ConnectDB.js';
 import { convertToUnix } from "../Utils/format-date.js";
 
-function hideBtn() {
+function hideAddEvent() {
     document.getElementById('event__add__input__container').style.visibility = 'hidden';
     document.getElementById('event__add__input__container').style.border = 'none';
 }
@@ -76,7 +76,7 @@ class AddEvent extends React.Component {
                         >SAVE</button>
                         <button
                             className="btn"
-                            onClick={hideBtn}
+                            onClick={hideAddEvent}
                         >CLOSE</button>
                     </td>
                 </tr>
