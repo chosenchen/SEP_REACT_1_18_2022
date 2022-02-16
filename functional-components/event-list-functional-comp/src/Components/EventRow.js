@@ -1,27 +1,19 @@
-import React from "react";
+import {React, useState} from "react";
 
 import { dateConvert } from './TimeConvert';
 
 import './EventRow.css';
 
-export default class EventRow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            event: this.props.event,
-            editable: false
-        };
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
+function EventRow(props) {
+    const [event, setEvent] = useState(props.event);
+    const [editable, setEditable] = useState(false);
 
-    handleDelete(e) {
+    const handleDelete = (e) => {
         e.preventDefault();
-        this.props.onEventChange(this.props.event, this.props.event.id, e.target.value);
+        props.onEventChange(props.event, e.target.value);
     }
 
-    handleChange(e) {
+    const handleChange = (e) => {
         const name = e.target.name;
         let value;
         if (name === 'startDate' || name === 'endDate') {
@@ -30,43 +22,42 @@ export default class EventRow extends React.Component {
         } else {
             value = e.target.value;
         }
-        this.setState({ event: { ...this.state.event, [name]: value } });
+        setEvent({ ...event, [name]: value });
     }
 
-    handleEdit(e) {
+    const handleEdit = (e) => {
         e.preventDefault();
-        if (this.state.editable) {
-            this.setState({editable: false});
-            this.props.onEventChange(this.state.event, this.state.event.id, e.target.value);
+        if (editable) {
+            setEditable(false);
+            props.onEventChange(event, e.target.value);
         } else {
-            this.setState({ editable: true });
+            setEditable(true);
         }
-        
+
     }
 
-    render() {
-        let eventRow = this.state.event;
-        let startDate = dateConvert(eventRow.startDate);
-        let endDate = dateConvert(eventRow.endDate);
+    let eventRow = event;
+    let startDate = dateConvert(eventRow.startDate);
+    let endDate = dateConvert(eventRow.endDate);
 
-        let disabled = !this.state.editable;
+    let disabled = !editable;
 
-        return (
-            <tr className="row">
-                <td>
-                    <input disabled={disabled} name='eventName' value={eventRow.eventName} onChange={this.handleChange} />
-                </td>
-                <td>
-                    <input type="date" disabled={disabled} name='startDate' value={startDate} onChange={this.handleChange} />
-                </td>
-                <td>
-                    <input type="date" disabled={disabled} name='endDate' value={endDate} onChange={this.handleChange} />
-                </td>
-                <td>
-                    <button value="EDIT" className="edit-btn" onClick={this.handleEdit}>{disabled ? 'EDIT' : 'SAVE'}</button>
-                    <button className="delete-btn" value="DELETE" onClick={this.handleDelete}>DELETE</button>
-                </td>
-            </tr>
-        )
-    }
-};
+    return (
+        <tr className="row">
+            <td>
+                <input disabled={disabled} name='eventName' value={eventRow.eventName} onChange={handleChange} />
+            </td>
+            <td>
+                <input type="date" disabled={disabled} name='startDate' value={startDate} onChange={handleChange} />
+            </td>
+            <td>
+                <input type="date" disabled={disabled} name='endDate' value={endDate} onChange={handleChange} />
+            </td>
+            <td>
+                <button value="EDIT" className="edit-btn" onClick={handleEdit}>{disabled ? 'EDIT' : 'SAVE'}</button>
+                <button className="delete-btn" value="DELETE" onClick={handleDelete}>DELETE</button>
+            </td>
+        </tr>
+    );
+}
+export default EventRow;

@@ -1,15 +1,12 @@
 import React from 'react';
 
 import './App.css';
-import EventList from './EventList';
+import EventList from './Components/EventList';
 
+function App() {
+  return (
+    <EventList/>
+  )
+}
 
-
-export default class App extends React.Component {
-  render() {
-    return (
-      <EventList></EventList>
-    )
-
-  }
-};
+export default App;

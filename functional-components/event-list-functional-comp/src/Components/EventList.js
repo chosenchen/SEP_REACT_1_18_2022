@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect, useCallback} from "react";
 
 import AddNewRow from "./AddNewRow";
 import EventRow from "./EventRow";
@@ -6,75 +6,77 @@ import { getEvents, addEvent, deleteEvent, editEvent } from "./Api";
 
 import './EventList.css';
 
+function EventList() {
+    const [eventList, setEventList] = useState([]);
+    const [ifAdd, setIfAdd] = useState(false);
 
-export default class EventList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            eventList: [],
-            ifAdd: false
-        };
-        this.handleEventRowChange = this.handleEventRowChange.bind(this);
-        this.handleAddNewRowChange = this.handleAddNewRowChange.bind(this);
-        this.handleAddNew = this.handleAddNew.bind(this);
-    }
-    componentDidMount() {
+    const getEventFromApi = useCallback(() => {
         getEvents().then((res) => {
-            this.setState({ eventList: res });
-        });
+            setEventList(res);
+        })
+    }, []);
+
+    useEffect(() => {
+        getEventFromApi()
+    },[getEventFromApi]
+    );
+
+    const handleAddNew = () => {
+        setIfAdd(true );
     }
 
-    handleAddNew() {
-        this.setState({ ifAdd: true });
-    }
-
-    handleEventRowChange(event, id, btn) {
+    const handleEventRowChange = (event,btn) => {
         if (btn === 'DELETE') {
-            deleteEvent(id);
+            deleteEvent(event.id);
             getEvents().then((res) => {
-                this.setState({ eventList: res });
+                setEventList(res); 
             })
         } else {
-            editEvent(id, event)
+            editEvent(event.id, event)
                 .then(() => getEvents().then((res) => {
-                    this.setState({ eventList: res });
+                    setEventList(res);
                 }));
-            
+
         }
 
 
     }
 
-    handleAddNewRowChange(newEvent) {
+    const handleAddNewRowChange = (newEvent) => {
         if (newEvent === null) {
-            getEvents().then(res => this.setState({ eventList: res, ifAdd: false }));
+            getEvents().then(res => {
+                setEventList(res);
+                setIfAdd(false);
+            });
         } else {
             addEvent(newEvent).then((res) => getEvents().then((res) => {
-                this.setState({ eventList: res, ifAdd: false });
+                setEventList(res); 
+                setIfAdd(false);
             }));
         }
     }
-    render() {
-        return (
-            <section className="table-container">
-                <div className="add-content">
-                    <button className="add-btn" onClick={this.handleAddNew}>ADD NEW</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr className="header">
-                            <th>Event name</th>
-                            <th>Start date</th>
-                            <th>End date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        {this.state.eventList.map((event) => <EventRow event={event} key={event.id} onEventChange={this.handleEventRowChange}></EventRow>)}
-                        {this.state.ifAdd ? <AddNewRow onNewRowChange={this.handleAddNewRowChange}></AddNewRow> : null}
-                    </tbody>
-                </table>
-            </section>
-        );
-    }
-};
+
+    return (
+        <section className="table-container">
+            <div className="add-content">
+                <button className="add-btn" onClick={handleAddNew}>ADD NEW</button>
+            </div>
+            <table>
+                <thead>
+                    <tr className="header">
+                        <th>Event name</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    {eventList.map((event) => <EventRow event={event} key={event.id} onEventChange={handleEventRowChange}></EventRow>)}
+                    {ifAdd ? <AddNewRow onNewRowChange={handleAddNewRowChange}></AddNewRow> : null}
+                </tbody>
+            </table>
+        </section>
+    );
+}
+
+export default EventList;

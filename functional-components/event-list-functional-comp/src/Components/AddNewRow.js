@@ -1,22 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import './AddNewRow.css';
 
-export default class AddNewRow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            event: {
-                eventName: '',
-                startDate: '',
-                endDate: ''
-            }
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-    }
-    handleChange(e) {
+function AddNewRow(props) {
+    const [event, setEvent] = useState({
+        eventName: '',
+        startDate: '',
+        endDate: ''
+    });
+
+    const handleChange = (e) => {
         const name = e.target.name;
         let value;
         if (name === 'startDate' || name === 'endDate') {
@@ -25,34 +18,35 @@ export default class AddNewRow extends React.Component {
         } else {
             value = e.target.value;
         }
-    
-        this.setState({event: { ...this.state.event, [name]: value }});
+
+        setEvent({ ...event, [name]: value });
     }
-    handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onNewRowChange(this.state.event);
+        props.onNewRowChange(event);
     }
-    handleClose(e) {
+
+    const handleClose = (e) => {
         e.preventDefault();
-        this.props.onNewRowChange(null);
+        props.onNewRowChange(null);
     }
-    render() {
-        return (
-            <tr>
-                <td>
-                    <input type='text' name='eventName' onChange={this.handleChange} />
-                </td>
-                <td>
-                    <input type='date' name='startDate'  onChange={this.handleChange} />
-                </td>
-                <td>
-                    <input type='date' name='endDate' onChange={this.handleChange} />
-                </td>
-                <td>
-                    <button name='savebtn' onClick={this.handleSubmit}>SAVE</button>
-                    <button className="input__closebtn" name='closebtn' onClick={this.handleClose}>CLOSE</button>
-                </td>
-            </tr>
-        );
-    }
+
+    return (
+        <tr>
+            <td>
+                <input type='text' name='eventName' onChange={handleChange} />
+            </td>
+            <td>
+                <input type='date' name='startDate' onChange={handleChange} />
+            </td>
+            <td>
+                <input type='date' name='endDate' onChange={handleChange} />
+            </td>
+            <td>
+                <button name='savebtn' onClick={handleSubmit}>SAVE</button>
+                <button className="input__closebtn" name='closebtn' onClick={handleClose}>CLOSE</button>
+            </td>
+        </tr>
+    );
 }
+export default AddNewRow;

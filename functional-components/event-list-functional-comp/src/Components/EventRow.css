@@ -2,6 +2,8 @@ tr {
     font-size: 4rem;
     border-bottom: 1px solid rgba(134, 132, 132, 0.575);
     line-height: 6rem;
+    display: flex;
+    justify-content: space-around;
 }
 td>button {
     border: none;

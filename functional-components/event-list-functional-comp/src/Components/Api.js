@@ -19,7 +19,9 @@ export const deleteEvent = (id) =>
             "Content-Type": "application/json",
             Accept: "application/json",
         },
-    }).then((response) => response.json());
+    }).then((response) => 
+        response.json()
+    );
 
 export const editEvent = (id, event) =>
     fetch([baseurl, id].join("/"), {
