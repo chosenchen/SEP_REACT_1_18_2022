@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const events = await API.getEvents();
+    const events = await API.getAllEvents();
     this.setState({ events });
   }
 

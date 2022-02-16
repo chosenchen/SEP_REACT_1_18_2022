@@ -16,15 +16,15 @@ class AddEvent extends React.Component {
             endDate: "",
             id: ""
         }
-        this.input = this.input.bind(this);
-        this.save = this.save.bind(this);
+        this.handleOnInput = this.handleOnInput.bind(this);
+        this.handleOnSave = this.handleOnSave.bind(this);
     }
 
-    input(event) {
+    handleOnInput(event) {
         this.setState({ ...this.state, [event.target.name]: event.target.value });
     }
 
-    save() {
+    handleOnSave() {
         if (this.state.eventName === '' || this.state.startDate === '' || this.state.endDate === '') {
             alert('Values cannot be empty!');
         } else {
@@ -33,9 +33,6 @@ class AddEvent extends React.Component {
                 startDate: convertToUnix(this.state.startDate),
                 endDate: convertToUnix(this.state.endDate)
             };
-
-            console.log(event);
-
             API.addEvent(event);
             window.location.reload();
         }
@@ -50,7 +47,7 @@ class AddEvent extends React.Component {
                             id="event__add__name__input"
                             name="eventName"
                             value={this.state.eventName}
-                            onChange={this.input}
+                            onChange={this.handleOnInput}
                         />
                     </td>
                     <td>
@@ -59,7 +56,7 @@ class AddEvent extends React.Component {
                             name="startDate"
                             type="date"
                             value={this.state.startDate}
-                            onChange={this.input}
+                            onChange={this.handleOnInput}
                         />
                     </td>
                     <td>
@@ -68,14 +65,14 @@ class AddEvent extends React.Component {
                             name="endDate"
                             type="date"
                             value={this.state.endDate}
-                            onChange={this.input}
+                            onChange={this.handleOnInput}
                         />
                     </td>
                     <td>
                         <button
                             id="event__add__submit"
                             className="btn"
-                            onClick={this.save}
+                            onClick={this.handleOnSave}
                         >SAVE</button>
                         <button
                             className="btn"

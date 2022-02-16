@@ -4,7 +4,7 @@ export const API = (() => {
 
     const url = "http://localhost:4000/events";
 
-    const getEvents = async () => {
+    const getAllEvents = async () => {
         let response = await axios.get(url);
         return response.data;
     }
@@ -21,5 +21,5 @@ export const API = (() => {
         await axios.put([url, event.id].join("/"), event);
     }
 
-    return { getEvents, addEvent, deleteEvent, editEvent }
+    return { getAllEvents, addEvent, deleteEvent, editEvent }
 })();
