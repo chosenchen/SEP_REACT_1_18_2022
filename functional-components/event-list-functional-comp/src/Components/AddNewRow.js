@@ -8,7 +8,7 @@ function AddNewRow(props) {
         startDate: '',
         endDate: ''
     });
-
+//TODO
     const handleChange = (e) => {
         const name = e.target.name;
         let value;
