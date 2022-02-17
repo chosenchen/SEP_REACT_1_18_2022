@@ -77,7 +77,8 @@ class EventItemIndex extends React.Component{
         </td>
         <td className='action-btns'>
           <button className='buttons edit-btn'
-            onClick={editing ? this.handleSubmit : this.setEditing}>{editing ? 'SAVE' : 'EDIT'}</button>
+            onClick={editing ? this.handleSubmit : this.setEditing}
+            disabled={editing && !dateValidation(startDate, endDate)}>{editing ? 'SAVE' : 'EDIT'}</button>
           <button className='buttons delete-btn'
             onClick={editing ? this.setEditing : this.handleDelete}>{editing ? 'CLOSE' : 'DELETE'}</button>
         </td>
