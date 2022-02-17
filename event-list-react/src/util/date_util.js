@@ -21,7 +21,5 @@ export const dateValidation = (startDate, endDate) => {
   startDate = dateConvert(startDate);
   endDate = dateConvert(endDate);
 
-  console.log(endDate - startDate >= 0);
-
   return endDate - startDate >= 0 ;
 }

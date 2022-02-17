@@ -31,7 +31,7 @@ class EventItemIndex extends React.Component{
           [field]: e.target.value
         }
       }
-    }, console.log(this.state));
+    });
   }
 
   handleSubmit(){
