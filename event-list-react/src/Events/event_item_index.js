@@ -1,5 +1,5 @@
 import React from 'react';
-import {dateCalc, dateConvert} from '../util/date_util';
+import {dateCalc, dateConvert, dateValidation} from '../util/date_util';
 
 class EventItemIndex extends React.Component{
   constructor(props){
@@ -24,9 +24,14 @@ class EventItemIndex extends React.Component{
   }
 
   handleChange(field){
-    return e => this.setState({
-      [field]: e.target.value
-    });
+    return e => this.setState(prevState => {
+      return { 
+        event : {
+          ...prevState.event,
+          [field]: e.target.value
+        }
+      }
+    }, console.log(this.state));
   }
 
   handleSubmit(){
@@ -48,8 +53,7 @@ class EventItemIndex extends React.Component{
   }
   
   render(){
-    const {event} = this.state ;
-    const {editing} = this.state;
+    const {event, editing} = this.state;
     const startDate = event.startDate;
     const endDate = event.endDate;
 

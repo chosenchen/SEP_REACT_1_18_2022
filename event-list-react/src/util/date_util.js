@@ -16,3 +16,10 @@ export const dateConvert = (value) => {
   
   return result;
 }
+
+export const dateValidation = (startDate, endDate) => {
+  startDate = dateConvert(startDate);
+  endDate = dateConvert(endDate);
+
+  return endDate - startDate >= 0 ;
+}
