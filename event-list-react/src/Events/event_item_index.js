@@ -6,9 +6,11 @@ class EventItemIndex extends React.Component{
     super(props);
     this.state = {
       editing : false,
-      eventName : this.props.event.eventName,
-      startDate : dateCalc(this.props.event.startDate),
-      endDate : dateCalc(this.props.event.endDate)
+      event : {
+        eventName : this.props.event.eventName,
+        startDate : dateCalc(this.props.event.startDate),
+        endDate : dateCalc(this.props.event.endDate)
+      }
     }
 
     this.setEditing = this.setEditing.bind(this);
@@ -24,19 +26,20 @@ class EventItemIndex extends React.Component{
   handleChange(field){
     return e => this.setState({
       [field]: e.target.value
-    }, console.log(this.state));
+    });
   }
 
   handleSubmit(){
-    const {getEvents, editEvent, setList} = this.props; 
-    const event = {
+    const {getEvents, editEvent, setList} = this.props;
+    const {event} = this.state ; 
+    const newEvent = {
       id : this.props.event.id,
-      eventName : this.state.eventName,
-      startDate: dateConvert(this.state.startDate),
-      endDate: dateConvert(this.state.endDate)
+      eventName : event.eventName,
+      startDate: dateConvert(event.startDate),
+      endDate: dateConvert(event.endDate)
     }
 
-    editEvent(event).then(getEvents).then((data) => setList(data)).then(this.setEditing);
+    editEvent(newEvent).then(getEvents).then((data) => setList(data)).then(this.setEditing);
   }
 
   handleDelete(){
@@ -45,10 +48,10 @@ class EventItemIndex extends React.Component{
   }
   
   render(){
-    const {event} = this.props ;
+    const {event} = this.state ;
     const {editing} = this.state;
-    const startDate = dateCalc(event.startDate);
-    const endDate = dateCalc(event.endDate);
+    const startDate = event.startDate;
+    const endDate = event.endDate;
 
     return (
       <tr>
@@ -69,9 +72,9 @@ class EventItemIndex extends React.Component{
             onChange={this.handleChange('endDate')}/>
         </td>
         <td className='action-btns'>
-          <button className='buttons edit-btn' id={`${event.id}`} 
+          <button className='buttons edit-btn'
             onClick={editing ? this.handleSubmit : this.setEditing}>{editing ? 'SAVE' : 'EDIT'}</button>
-          <button className='buttons delete-btn' id={`${event.id}`}
+          <button className='buttons delete-btn'
             onClick={editing ? this.setEditing : this.handleDelete}>{editing ? 'CLOSE' : 'DELETE'}</button>
         </td>
       </tr>

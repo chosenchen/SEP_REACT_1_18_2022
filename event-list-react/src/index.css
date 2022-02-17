@@ -63,9 +63,14 @@ body{
   border-bottom: 2px solid lightgray;
 }
 
-/* .action-header{
+.col-header{
+  text-align: start;
+}
+
+.action-header{
+  margin-right: 4.5vw;
   text-align: end;
-} */
+}
 
 table{
   width: 100%;
