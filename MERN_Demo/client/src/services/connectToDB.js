@@ -4,22 +4,22 @@ export const API = (() => {
 
     const url = "http://localhost:5000/records";
 
-    const getAllEvents = async () => {
+    const getAllRecords = async () => {
         let response = await axios.get(url);
         return response.data;
     }
 
-    const addEvent = async (event) => {
-        await axios.post(url, event);
+    const addRecord = async (event) => {
+        await axios.post([url, 'add'].join("/"), event);
     }
 
-    const deleteEvent = async (id) => {
+    const deleteRecord = async (id) => {
         await axios.delete([url, id].join("/"));
     }
 
-    const editEvent = async (event) => {
+    const editRecord = async (event) => {
         await axios.put([url, event.id].join("/"), event);
     }
 
-    return { getAllEvents, addEvent, deleteEvent, editEvent }
+    return { getAllRecords, addRecord, deleteRecord, editRecord }
 })();

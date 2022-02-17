@@ -1,0 +1,37 @@
+.homePage-record__list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 35px;
+}
+
+.card{
+    width: 500px;
+}
+
+.card-header{
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.card-header > p, .card-footer > p{
+    margin: 0;
+}
+
+.card-img-top{
+    height: 285px;
+}
+
+.homePage-location__icon{
+    padding-right: 5px;
+}
+
+.card-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+

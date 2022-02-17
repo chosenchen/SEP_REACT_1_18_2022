@@ -6,7 +6,7 @@ const dbo = require("../db/connect");
 
 const ObjectId = require("mongodb").ObjectId;
 
-recordRoutes.route("/record").get(function (req, res) {
+recordRoutes.route("/records").get(function (req, res) {
   let db_connect = dbo.getDb("MongoDB");
   db_connect
     .collection("records")
@@ -17,7 +17,7 @@ recordRoutes.route("/record").get(function (req, res) {
     });
 });
 
-recordRoutes.route("/record/:id").get(function (req, res) {
+recordRoutes.route("/records/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
   db_connect
@@ -28,12 +28,14 @@ recordRoutes.route("/record/:id").get(function (req, res) {
       });
 });
 
-recordRoutes.route("/record/add").post(function (req, response) {
+recordRoutes.route("/records/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
-    name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    photoLabel: req.body.photoLabel,
+    dateTaken: req.body.dateTaken,
+    url: req.body.url,
+    city: req.body.city,
+    country: req.body.country
   };
   db_connect.collection("records").insertOne(myobj, function (err, res) {
     if (err) throw err;
