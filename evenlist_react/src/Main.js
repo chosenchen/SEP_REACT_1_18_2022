@@ -85,6 +85,7 @@ class Main extends React.Component {
             }),
         })
             .then((response) => response.json())
+           
 
     }
 
@@ -133,6 +134,7 @@ class Main extends React.Component {
 
         if(eventName && startTimeStamp && endTimeStamp){
             this.updateList(id, eventName, startTimeStamp, endTimeStamp)
+
         }else{
             alert('Please fill out Event name, Start date, End date')
         }
