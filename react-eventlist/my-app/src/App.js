@@ -1,6 +1,10 @@
 import React from "react";
 import EventTable from "./components/EventTable";
+//import Header from "./components/Header/Header";
+import ComingEvent from "./components/ComingEvent/ComingEvent";
 import "./App.css";
+import { Link } from "react-router-dom";
+import Navigation from "./components/Header/Navigation";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +20,12 @@ class App extends React.Component {
   }
 
   render() {
-    return <EventTable />;
+    return (
+      <div>
+        <Navigation />
+        <EventTable />
+      </div>
+    );
   }
 }
 

@@ -2,7 +2,6 @@ import React from "react";
 import AddEvent from "./AddEvent";
 import EventRow from "./EventRow";
 import "./EventTable.css";
-import { convertDate, convertToMill } from "../utilities/convertDate";
 import {
   getAllEvents,
   addEvent,

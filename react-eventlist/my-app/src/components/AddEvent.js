@@ -56,10 +56,10 @@ class AddEvent extends React.Component {
           />
         </td>
         <td>
-          <button type="button" className="save" onClick={this.handleSave}>
+          <button className="save" onClick={this.handleSave}>
             SAVE
           </button>
-          <button type="button" className="close" onClick={this.handleClose}>
+          <button className="close" onClick={this.handleClose}>
             CLOSE
           </button>
         </td>
