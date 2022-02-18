@@ -33,8 +33,15 @@ html{
   letter-spacing: 1px;
   text-transform: capitalize;
   padding-left: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
+.header_item{
+  cursor: pointer;
+  border: 2px solid gray;
+  border-radius: 8px solid gray;
+}
 
 .content {
   height: calc(100% - var(--height-header));

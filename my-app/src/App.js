@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import Header from './header';
+import AfterEvents from './AfterEvent';
 
 class Eventslist_header extends React.Component {
   constructor(props) {
@@ -230,48 +232,47 @@ class Eventslist extends React.Component {
     return (
       <section className="eventslist">
       <form>
-        <Eventslist_container />
+        <Eventslist_container  />
         </form>
       </section>
     )
   }
 }
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <header className="header">
-        <h1>Event Lists</h1>
-      </header>
-    )
-  }
-}
-
-
 class Content extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
+
+    const eventslist_selections = this.props.eventState === 0 ? <Eventslist /> : <AfterEvents />;
+
     return (
       <main className="content">
-        <Eventslist / >
-        </main>
+        {eventslist_selections}
+      </main>
     )
   }
 }
 class MyAPP extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {eventState:0};
   }
+
+  switchToAllEvent = ()=>{
+    this.setState({eventState:0});
+  }
+  switchToAfterEvent =()=>{
+    this.setState({eventState:1});   
+  }
+
+
   render() {
     return (
       <>
-      <Header/>
-      <Content/>
+      <Header switchToAllEvent={this.switchToAllEvent} switchToAfterEvent={this.switchToAfterEvent} />
+      <Content eventState={this.state.eventState}/>
       </>
     )
   }
