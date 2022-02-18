@@ -2,7 +2,7 @@ const baseurl = "http://localhost:3005";
 const path = "events";
 
 // get data
-const getEvents = () =>
+const getAllEvents = () =>
     fetch([baseurl, path].join("/")).then((response) => response.json());
 
 // create new data
@@ -31,6 +31,6 @@ const updateEvent = (id, event) => {
         .then((response) => response.json())
 }
 
-const API = {getEvents, updateEvent, deleteEvent, addEvent}
+const API = {getAllEvents, updateEvent, deleteEvent, addEvent}
 
 export default API

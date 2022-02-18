@@ -12,7 +12,8 @@ const convertStringtoISO = (string) => {
 const convertDatetoString = (string) => {
     try {
         let date = new Date(string);
-        return String(date.getTime())
+        console.log(date.getTime())
+        return '' + date.getTime()
     } catch {
         return ''
     }

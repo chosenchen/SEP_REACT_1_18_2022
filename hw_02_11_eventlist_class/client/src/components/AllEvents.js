@@ -18,7 +18,7 @@ export default class AllEvents extends Component {
                 startDate: '',
                 endDate: '',
                 InputDisabled: "True",
-                eventStatus: "EDIT"
+                eventStatus: ["EDIT", "DELETE"]
             }],
             newItem: {
                 id: '',
@@ -26,35 +26,36 @@ export default class AllEvents extends Component {
                 startDate: '',
                 endDate: '',
                 InputDisabled: "True",
-                eventStatus: "EDIT"
+                eventStatus: ["EDIT", "DELETE"]
             }
         };
     };
 
-    componentDidMount = () => {
-        API.getAllEvents()
-            .then((data) => {
-                console.log(data)
-                data.forEach((e) => {
-                    this.setState({
-                        items: [...this.state.items, {
-                            id: e.id,
-                            eventName: e.eventName,
-                            startDate: EpochTime.convertStringtoISO(e.startDate),
-                            endDate: EpochTime.convertStringtoISO(e.endDate),
-                            InputDisabled: "True",
-                            eventStatus: "EDIT"
-                        }]
-                    })
-                }
-                )
-                this.setState({ items: this.state.items.slice(1) })
-            })
-            .then((data) => {
+    fetchAllData = () =>{ API.getAllEvents()
+        .then((data) => {
+            console.log(data)
+            data.forEach((e) => {
                 this.setState({
-                    isLoaded: true,
-                });
-            })
+                    items: [...this.state.items, {
+                        id: e.id,
+                        eventName: e.eventName,
+                        startDate: EpochTime.convertStringtoISO(e.startDate),
+                        endDate: EpochTime.convertStringtoISO(e.endDate),
+                        InputDisabled: "True",
+                        eventStatus: ["EDIT", "DELETE"]
+                    }]
+                })
+            }
+            )
+            this.setState({ items: this.state.items.slice(1) });
+            
+        }).then((data) => {
+            this.setState({
+                isLoaded: true,
+            });
+        })}
+    componentDidMount = () => {
+        this.fetchAllData();    
     }
 
     deleteEvent = (id, index) => {
@@ -67,57 +68,72 @@ export default class AllEvents extends Component {
 
     };
 
+    cancelEvent = (index) => {
+        console.log(this.state.items)
+        this.setState({
+            items: [{
+                id: '',
+                eventName: '',
+                startDate: '',
+                endDate: '',
+                InputDisabled: "True",
+                eventStatus: ["EDIT", "DELETE"]
+            }] }, this.fetchAllData()
+        );
+        
+    }
+
     editHandle = (index) => {
         const newItems = this.state.items;
-        newItems[index].eventStatus = "SAVE";
+        newItems[index].eventStatus = ["SAVE", "CANCEL"];
         newItems[index].InputDisabled = "";
         this.setState({ items: newItems })
     };
 
     saveHandle = (index) => {
         const newItems = this.state.items;
-        newItems[index].eventStatus = "EDIT";
+        newItems[index].eventStatus = ["EDIT", "DELETE"];
         newItems[index].InputDisabled = "True";
         this.setState({ items: newItems })
 
         const event = {
             eventName: newItems[index].eventName,
-            startDate: newItems[index].startDate,
-            endDate: newItems[index].endDate,
+            startDate: EpochTime.convertDatetoString(newItems[index].startDate),
+            endDate: EpochTime.convertDatetoString(newItems[index].endDate),
             id: newItems[index].id,
         }
+        console.log(newItems[index])
         API.updateEvent(newItems[index].id, event)
     }
 
     editChange = (index, property, target) => {
-        let items = this.state.items
+        let items = this.state.items;
 
         if (this.state.items.length > index) {
             let newItems = this.state.items;
             newItems[index][property] = target;
             this.setState({ items: newItems })
-        }
-
-        else if (index === items.length) {
-
+        } else if (index === items.length) {
             let newItem = this.state.newItem;
-            newItem.id = index + 1;
+          
             newItem[property] = target;
             this.setState({ newItem: newItem })
-        }
+        };
 
     }
 
     addNewHandle = () => {
-        this.setState({ items: [...this.state.items, this.state.newItem] })
+        this.setState({ items: [...this.state.items, this.state.newItem] });
         this.setState({ addStatus: false });
         const item = this.state.newItem;
+        console.log(item)
         const event = {
             "eventName": item.eventName,
             "startDate": EpochTime.convertDatetoString(item.startDate),
             "endDate": EpochTime.convertDatetoString(item.endDate),
-            "id": item.id
+         
         }
+        console.log(event)
         API.addEvent(event);
     }
 
@@ -136,7 +152,7 @@ export default class AllEvents extends Component {
                 </td>
                 <td><button onClick={() => this.addNewHandle()}>SAVE</button><button onClick={() => {
                     this.setState({ addStatus: false })
-                }}>DELETE</button></td></tr>)
+                }}>CLOSE</button></td></tr>)
         }
         const { error, isLoaded } = this.state;
         if (error) {
@@ -166,24 +182,32 @@ export default class AllEvents extends Component {
                                         <td><input type="text" disabled={this.state.items[index].InputDisabled}
                                             value={this.state.items[index].eventName}
                                             onChange={(e) =>
-                                                this.eidChange(index, 'eventName', e.target.value)} /></td>
-                                        <td><input disabled={this.state.items[index].InputDisabled}
+                                                this.editChange(index, 'eventName', e.target.value)} /></td>
+                                        <td><input type="date" disabled={this.state.items[index].InputDisabled}
                                             value={this.state.items[index].startDate} onChange={(e) =>
                                                 this.editChange(index, 'startDate', e.target.value)} /></td>
-                                        <td><input disabled={this.state.items[index].InputDisabled}
+                                        <td><input type="date" disabled={this.state.items[index].InputDisabled}
                                             value={this.state.items[index].endDate} onChange={(e) =>
                                                 this.editChange(index, 'endDate', e.target.value)} /></td>
 
                                         <td><button onClick={() => {
-                                            let status = this.state.items[index].eventStatus;
+                                            let status = this.state.items[index].eventStatus[0];
                                             if (status === "EDIT") {
                                                 this.editHandle(index);
                                             }
-                                            if (status === "SAVE") {
+                                            else if (status === "SAVE") {
                                                 this.saveHandle(index);
                                             }
-                                        }}>{this.state.items[index].eventStatus}</button>
-                                            <button onClick={() => this.deleteEvent(item.id, index)}>DELETE</button>
+                                        }}>{this.state.items[index].eventStatus[0]}</button>
+                                            <button onClick={() =>{ 
+                                            let status= this.state.items[index].eventStatus[1];
+                                            if ( status === "DELETE"){
+                                                this.deleteEvent(item.id, index);
+                                            } else if ( status === "CANCEL"){
+                                                this.cancelEvent(index);
+                                            }
+                                                    
+                                            }}>{this.state.items[index].eventStatus[1]}</button>
                                         </td>
                                     </tr>
                                 ))}
