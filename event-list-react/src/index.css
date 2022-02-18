@@ -48,10 +48,14 @@ body{
   justify-content: left;
 }
 
-.add-new-btn{
+.event-btn, .add-new-btn{
   padding: 1rem;
   color: var(--button-blue);
   font-weight: bold;
+}
+
+.event-btn{
+  border-right: 2px solid lightgray;
 }
 
 .events-header-container{

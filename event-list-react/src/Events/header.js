@@ -10,8 +10,8 @@ class Header extends React.Component{
     return (
       <div>
         <div className='header-container'>
-          <button className='event-btn' onClick={setCurrentApp} disabled={eventIndex}>Event Manager</button>
-          <button className='event-btn' onClick={setCurrentApp} disabled={eventUpcoming}>Upcoming Events</button>
+          <button className='buttons event-btn' onClick={setCurrentApp} disabled={eventIndex}>Event Manager</button>
+          <button className='buttons event-btn' onClick={setCurrentApp} disabled={eventUpcoming}>Upcoming Events</button>
         </div>
       </div>
     )

@@ -23,3 +23,9 @@ export const dateValidation = (startDate, endDate) => {
 
   return endDate - startDate >= 0 ;
 }
+
+export const upcomingDate = (startDate) => {
+  let today = new Date().getTime();
+
+  return startDate - today >= 0;
+}
