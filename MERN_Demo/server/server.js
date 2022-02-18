@@ -15,5 +15,5 @@ app.listen(port, () => {
     if (err) console.error(err);
 
   });
-  console.log(`http://localhost:${port}/record`);
+  console.log(`http://localhost:${port}/records`);
 });

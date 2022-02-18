@@ -9,16 +9,16 @@ export const API = (() => {
         return response.data;
     }
 
-    const addRecord = async (event) => {
-        await axios.post([url, 'add'].join("/"), event);
+    const addRecord = async (log) => {
+        await axios.post([url, 'add'].join("/"), log);
     }
 
     const deleteRecord = async (id) => {
         await axios.delete([url, id].join("/"));
     }
 
-    const editRecord = async (event) => {
-        await axios.put([url, event.id].join("/"), event);
+    const editRecord = async (log) => {
+        await axios.put([url, log._id].join("/"), log);
     }
 
     return { getAllRecords, addRecord, deleteRecord, editRecord }

@@ -6,6 +6,10 @@ const dbo = require("../db/connect");
 
 const ObjectId = require("mongodb").ObjectId;
 
+// <--------------- RECORDS --------------->
+
+// <---------- GET ---------->
+
 recordRoutes.route("/records").get(function (req, res) {
   let db_connect = dbo.getDb("MongoDB");
   db_connect
@@ -17,6 +21,7 @@ recordRoutes.route("/records").get(function (req, res) {
     });
 });
 
+
 recordRoutes.route("/records/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
@@ -27,6 +32,8 @@ recordRoutes.route("/records/:id").get(function (req, res) {
         res.json(result);
       });
 });
+
+// <---------- POST ---------->
 
 recordRoutes.route("/records/add").post(function (req, response) {
   let db_connect = dbo.getDb();
@@ -42,6 +49,8 @@ recordRoutes.route("/records/add").post(function (req, response) {
     response.json(res);
   });
 });
+
+// <---------- PUT ---------->
 
 recordRoutes.route("/update/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
@@ -62,7 +71,8 @@ recordRoutes.route("/update/:id").post(function (req, response) {
     });
 });
 
-// This section will help you delete a record
+// <---------- DELETE ---------->
+
 recordRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: ObjectId( req.params.id )};
@@ -72,5 +82,48 @@ recordRoutes.route("/:id").delete((req, response) => {
     response.json(obj);
   });
 });
+
+// <--------------- RECORDS --------------->
+
+// <---------- GET ---------->
+
+recordRoutes.route("/users").get(function (req, res) {
+  let db_connect = dbo.getDb("MongoDB");
+  db_connect
+    .collection("users")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
+});
+
+recordRoutes.route("/users/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId( req.params.id )};
+  db_connect
+      .collection("users")
+      .findOne(myquery, function (err, result) {
+        if (err) throw err;
+        res.json(result);
+      });
+});
+
+
+// <---------- POST ---------->
+
+recordRoutes.route("/user/add").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myobj = {
+    userName: req.body.userName,
+    email: req.body.email,
+    password: req.body.password,
+  };
+  db_connect.collection("users").insertOne(myobj, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+});
+
 
 module.exports = recordRoutes;

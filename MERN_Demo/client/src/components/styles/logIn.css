@@ -1,0 +1,7 @@
+.form-signin{
+    width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}

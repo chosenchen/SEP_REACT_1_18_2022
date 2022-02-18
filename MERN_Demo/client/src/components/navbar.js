@@ -23,8 +23,12 @@ class Navbar extends React.Component {
             <NavLink className="nav-link" to="/create-log">
               <button type="button" className="btn btn-primary me-2">Create Log</button>
             </NavLink>
-            <button type="button" className="btn btn-outline-light me-2">Login</button>
-            <button type="button" className="btn btn-warning">Sign-up</button>
+            <NavLink className="nav-link" to="/log-in">
+              <button type="button" className="btn btn-outline-light me-2">Login</button>
+            </NavLink>
+            <NavLink className="nav-link" to="/sign-up">
+              <button type="button" className="btn btn-warning">Sign-up</button>
+            </NavLink>
           </div>
         </div>
       </nav>
