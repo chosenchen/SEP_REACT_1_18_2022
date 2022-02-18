@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import EventListRow from "../EventListRow";
 import API from "../../api";
 
-const EventList = ({ isAdd, onAddNewSuccess }) => {
+const EventList = () => {
+  const [isAdd, setIsAdd] = useState(false);
   const [eventList, setEventList] = useState([]);
 
   useEffect(() => {
@@ -11,6 +12,17 @@ const EventList = ({ isAdd, onAddNewSuccess }) => {
       setEventList(eventList);
     });
   }, []);
+
+  // Add New Button Event
+  const onClickAddNew = (e) => {
+    if (!isAdd) {
+      setIsAdd(true);
+    }
+  };
+
+  const onAddNewSuccess = () => {
+    setIsAdd(false);
+  };
 
   const onUpdate = (id, newEvent) => {
     if (+id === -1) {
@@ -89,7 +101,31 @@ const EventList = ({ isAdd, onAddNewSuccess }) => {
   } else {
     eventListJSX = <h1>Empty List</h1>;
   }
-  return <>{eventListJSX}</>;
+
+  return (
+    <section className="container">
+      <section className="eventlist__app card">
+        <div className="eventlist__add">
+          <button className="btn" onClick={onClickAddNew}>
+            Add New
+          </button>
+        </div>
+        <div className="eventlist__content">
+          <header className="eventlist__header">
+            <ul className="eventlist__head">
+              <li>Event Name</li>
+              <li>Start Date</li>
+              <li>End Date</li>
+              <li>Actions</li>
+            </ul>
+          </header>
+          <div className="eventlist__body" id="eventlist_container">
+            {eventListJSX}
+          </div>
+        </div>
+      </section>
+    </section>
+  );
 };
 
 export default EventList;
