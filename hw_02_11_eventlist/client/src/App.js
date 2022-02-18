@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import AllEvents from "./components/AllEvents";
+import AllEvents from "./components/AllEvents/AllEvents";
 
 export default class App extends Component {
     

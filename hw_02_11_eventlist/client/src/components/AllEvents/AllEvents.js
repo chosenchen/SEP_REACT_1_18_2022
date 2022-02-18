@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import API from './API';
-import EpochTime from './EpochTime';
+import API from '../API/API';
+import EpochTime from '../EpochTime/EpochTime';
 
 
 export default class AllEvents extends Component {
@@ -11,8 +11,17 @@ export default class AllEvents extends Component {
             thead: ["EventName", "Start Date", "End Date", "Actions"],
             addStatus: false,
             isLoaded: false,
+            isEditing: false,
             del: 1,
             items: [{
+                id: '',
+                eventName: '',
+                startDate: '',
+                endDate: '',
+                InputDisabled: "True",
+                eventStatus: ["EDIT", "DELETE"]
+            }],
+            editItems: [{
                 id: '',
                 eventName: '',
                 startDate: '',
@@ -43,11 +52,19 @@ export default class AllEvents extends Component {
                         endDate: EpochTime.convertStringtoISO(e.endDate),
                         InputDisabled: "True",
                         eventStatus: ["EDIT", "DELETE"]
+                    }],
+                    editItems: [...this.state.items, {
+                        id: e.id,
+                        eventName: e.eventName,
+                        startDate: EpochTime.convertStringtoISO(e.startDate),
+                        endDate: EpochTime.convertStringtoISO(e.endDate),
+                        InputDisabled: "True",
+                        eventStatus: ["EDIT", "DELETE"]
                     }]
                 })
             }
             )
-            this.setState({ items: this.state.items.slice(1) });
+            this.setState({ items: this.state.items.slice(1), editItems: this.state.editItems.slice(1)});
             
         }).then((data) => {
             this.setState({
@@ -68,26 +85,18 @@ export default class AllEvents extends Component {
 
     };
 
-    cancelEvent = (index) => {
-        console.log(this.state.items)
-        this.setState({
-            items: [{
-                id: '',
-                eventName: '',
-                startDate: '',
-                endDate: '',
-                InputDisabled: "True",
-                eventStatus: ["EDIT", "DELETE"]
-            }] }, this.fetchAllData()
-        );
-        
+    cancelEvent = (eventIndex) => {
+        const newItems = this.state.editItems;
+        newItems[eventIndex].eventStatus = ["EDIT", "DELETE"];
+        newItems[eventIndex].InputDisabled = true;
+        this.setState({ items: newItems, isEditing: false })
     }
 
-    editHandle = (index) => {
-        const newItems = this.state.items;
-        newItems[index].eventStatus = ["SAVE", "CANCEL"];
-        newItems[index].InputDisabled = "";
-        this.setState({ items: newItems })
+    editHandle = (eventIndex) => {
+        const newItems = this.state.editItems;
+        newItems[eventIndex].eventStatus = ["SAVE", "CANCEL"];
+        newItems[eventIndex].InputDisabled = "";
+        this.setState({ items: newItems , isEditing: true})
     };
 
     saveHandle = (index) => {
@@ -107,19 +116,30 @@ export default class AllEvents extends Component {
     }
 
     editChange = (index, property, target) => {
-        let items = this.state.items;
-
-        if (this.state.items.length > index) {
-            let newItems = this.state.items;
-            newItems[index][property] = target;
-            this.setState({ items: newItems })
-        } else if (index === items.length) {
-            let newItem = this.state.newItem;
-          
-            newItem[property] = target;
-            this.setState({ newItem: newItem })
-        };
-
+        if( this.state.isEditing === false){
+            let items = this.state.items;
+            if (this.state.items.length > index) {
+                let newItems = this.state.items;
+                newItems[index][property] = target;
+                this.setState({ items: newItems })
+            } else if (index === items.length) {
+                let newItem = this.state.newItem;
+                newItem[property] = target;
+                this.setState({ newItem: newItem })
+            };
+        } else {
+            let editItems = this.state.eidtItems;
+            if (this.state.editItems.length > index) {
+                let newItems = this.state.editItems;
+                newItems[index][property] = target;
+                this.setState({ eidtItems: newItems })
+            } else if (index === editItems.length) {
+                let newItem = this.state.newItem;
+                newItem[property] = target;
+                this.setState({ newItem: newItem })
+            };
+            console.log(this.state.editItems)
+        }
     }
 
     addNewHandle = () => {
@@ -177,7 +197,7 @@ export default class AllEvents extends Component {
                                     }
                                 </tr></thead>
                             <tbody>
-                                {this.state.items?.map((item, index) => (
+                                {this.state.items?.map(((item, index) => !this.state.isEditing ?(
                                     <tr key={item.id}>
                                         <td><input type="text" disabled={this.state.items[index].InputDisabled}
                                             value={this.state.items[index].eventName}
@@ -210,7 +230,38 @@ export default class AllEvents extends Component {
                                             }}>{this.state.items[index].eventStatus[1]}</button>
                                         </td>
                                     </tr>
-                                ))}
+                                ) : (<tr key={item.id}>
+                                    <td><input type="text" disabled={this.state.editItems[index].InputDisabled}
+                                            value={this.state.editItems[index].eventName}
+                                        onChange={(e) =>
+                                        this.editChange(index, 'eventName', e.target.value)} /></td>
+                                    <td><input type="date" disabled={this.state.editItems[index].InputDisabled}
+                                        value={this.state.editItems[index].startDate} onChange={(e) =>
+                                        this.editChange(index, 'startDate', e.target.value)} /></td>
+                                    <td><input type="date" disabled={this.state.editItems[index].InputDisabled}
+                                        value={this.state.editItems[index].endDate} onChange={(e) =>
+                                        this.editChange(index, 'endDate', e.target.value)} /></td>
+
+                                    <td><button onClick={() => {
+                                            let status = this.state.editItems[index].eventStatus[0];
+                                        if (status === "EDIT") {
+                                            this.editHandle(index);
+                                        }
+                                        else if (status === "SAVE") {
+                                            this.saveHandle(index);
+                                        }
+                                        }}>{this.state.editItems[index].eventStatus[0]}</button>
+                                        <button onClick={() => {
+                                                let status = this.state.editItems[index].eventStatus[1];
+                                            if (status === "DELETE") {
+                                                this.deleteEvent(item.id, index);
+                                            } else if (status === "CANCEL") {
+                                                this.cancelEvent(index);
+                                            }
+
+                                            }}>{this.state.editItems[index].eventStatus[1]}</button>
+                                    </td>
+                                </tr>)))}
                                 {newTr}
                             </tbody>
                         </table>
