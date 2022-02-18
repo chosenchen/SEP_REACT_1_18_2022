@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import Header from "../../components/Header";
 import EventList from "../../components/EventList";
+import ComingEventList from "../../components/ComingEventList";
 
 const EventListContainer = () => {
   const [tabs, setTabs] = useState([]);
@@ -20,6 +21,17 @@ const EventListContainer = () => {
     setCurrentTab(tab);
   };
 
+  const renderCurrentPanel = () => {
+    switch (currentTab) {
+      case "Events":
+        return <EventList />;
+      case "Coming Events":
+        return <ComingEventList />;
+      default:
+        return <EventList />;
+    }
+  };
+
   return (
     <>
       <Header
@@ -27,8 +39,7 @@ const EventListContainer = () => {
         currentTab={currentTab}
         onPanelChange={onPanelChange}
       />
-      {currentTab}
-      <EventList />
+      {renderCurrentPanel()}
     </>
   );
 };

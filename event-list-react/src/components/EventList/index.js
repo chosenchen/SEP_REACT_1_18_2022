@@ -74,6 +74,7 @@ const EventList = () => {
       return (
         <EventListRow
           key={eventItem.id}
+          hasActions={true}
           isAdd={false}
           eventItem={eventItem}
           onUpdate={onUpdate}
@@ -86,6 +87,7 @@ const EventList = () => {
       eventListJSX.push(
         <EventListRow
           key={-1}
+          hasActions={true}
           isAdd={true}
           eventItem={{
             eventName: "",

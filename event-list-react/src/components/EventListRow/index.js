@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { timestampToStr, dateStrToTimestamp } from "../../util/timestamp";
 
-const EventListRow = ({ isAdd, eventItem, onUpdate, onDelete }) => {
+const EventListRow = ({ isAdd, eventItem, hasActions, onUpdate, onDelete }) => {
   const [isUpdate, setIsUpdate] = useState(false);
 
   const [eventName, setEventName] = useState(eventItem.eventName);
@@ -80,18 +80,22 @@ const EventListRow = ({ isAdd, eventItem, onUpdate, onDelete }) => {
           onChange={onEndDate}
         />
       </div>
-      <div className="eventlist__actions">
-        <input
-          type="button"
-          value={isUpdate || isAdd ? "UPDATE" : "EDIT"}
-          onClick={onHandleUpdate}
-        />
-        <input
-          type="button"
-          value={isUpdate ? "CANCEL" : "DEL"}
-          onClick={onHandleDelete}
-        />
-      </div>
+      {hasActions ? (
+        <div className="eventlist__actions">
+          <input
+            type="button"
+            value={isUpdate || isAdd ? "UPDATE" : "EDIT"}
+            onClick={onHandleUpdate}
+          />
+          <input
+            type="button"
+            value={isUpdate ? "CANCEL" : "DEL"}
+            onClick={onHandleDelete}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 
