@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import API from '../API/API';
 import EpochTime from '../EpochTime/EpochTime';
+import ComingEvent from '../ComingEvent/ComingEvent';
 
 
 export default class AllEvents extends Component {
@@ -65,7 +66,7 @@ export default class AllEvents extends Component {
             }
             )
             this.setState({ items: this.state.items.slice(1), editItems: this.state.editItems.slice(1)});
-            
+            this.eventsData = this.state.items;
         }).then((data) => {
             this.setState({
                 isLoaded: true,
@@ -266,6 +267,7 @@ export default class AllEvents extends Component {
                             </tbody>
                         </table>
                     </section>
+                    
                 </>
             );
         }

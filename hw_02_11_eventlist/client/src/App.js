@@ -1,23 +1,20 @@
 import React, { Component } from "react";
 
 import AllEvents from "./components/AllEvents/AllEvents";
+import Header from "./components/Header/Header";
+import ComingEvent from "./components/ComingEvent/ComingEvent";
 
 export default class App extends Component {
-    
+    state = {
+      showPage: "home",
+    }
+    //this.props.showPage = "home";
     
     render(){
     return (
       <div className="App">
-      <header>
-        <h1>Event List App</h1>
-      </header>
-
-      <div className="container">
+        <Header showPage = {this.state.showPage}/>
         
-        <AllEvents />
-      
-        </div>
-    
     </div>
   )}
 }
