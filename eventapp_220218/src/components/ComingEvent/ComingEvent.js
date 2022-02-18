@@ -53,7 +53,7 @@ class CommingEvent extends React.Component {
     return (
       <section className="event-app">
         <header className="comingevent__header">
-          Coming Events
+          Upcoming Events
         </header>
         <table className="event-app__table">
           <thead>
