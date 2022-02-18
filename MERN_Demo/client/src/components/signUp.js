@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         const newUser = new UserData(userName, email, password, confirm_password);
         const res = newUser.isValidForSave();
         if (res.isVaild) {
-            // USER_API.addUser(newUser);
+            USER_API.addUser(newUser);
             this.setState({ isVaild: res.isVaild, error: res.error, });
             window.location.href = "/";
         } else {
