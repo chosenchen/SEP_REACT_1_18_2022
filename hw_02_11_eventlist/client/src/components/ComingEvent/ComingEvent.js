@@ -5,17 +5,10 @@ import API from "../API/API";
 
 export default class ComingEvent extends Component {
     state = {
-        allEvents : [],
+        allEvents : this.props.eventData,
         thead : ["EventName", "Start Date", "End Date"]}
     
-    componentDidMount = () => {
-        API.getAllEvents().then((data) => {
-            data.forEach(e => {
-                this.setState({allEvents: [...this.state.allEvents]})
-            });
-            console.log(this.state.allEvents)
-        })
-    }
+    
   render() {
     return (
         <div>
@@ -25,10 +18,10 @@ export default class ComingEvent extends Component {
                             <th key={`${e}`}>{e}</th>
                     )}</tr></thead>
                 <tbody>
-                    {this.state.allEvents?.map( (e) => 
+                    {this.props.eventData?.map( (e) => 
                     (
-                        <tr>
-                            <td key={e.id}><input type="text" disabled value = {e.eventName}/></td>
+                        <tr key={e.id}>
+                            <td><input type="text" disabled value = {e.eventName}/></td>
                             <td><input type="text" disabled value={e.startDate}/></td>
                             <td><input type="text" disabled value={e.endDate}/></td>
                         </tr>
