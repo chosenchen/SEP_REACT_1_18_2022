@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "eventName": "TEST-1",
+      "startDate": "1641772800000",
+      "endDate": "1641772800000",
+      "id": 1
+    },
+    {
+      "eventName": "TEST-2",
+      "startDate": "1644624000000",
+      "endDate": "1644624000000",
+      "id": 2
+    },
+    {
+      "eventName": "TEST-3",
+      "startDate": "1644364800000",
+      "endDate": "1644883200000",
+      "id": 3
+    },
+    {
+      "eventName": "TEST-4",
+      "startDate": "1644969600000",
+      "endDate": "1644969600000",
+      "id": 4
+    },
+    {
+      "eventName": "TEST",
+      "startDate": "1645833600000",
+      "endDate": "1644019200000",
+      "id": 5
+    }
+  ]
+}
