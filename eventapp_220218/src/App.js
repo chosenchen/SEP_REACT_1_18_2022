@@ -7,7 +7,7 @@ function App() {
  const [showEvent, setshowEvent] = useState(true)
   return (
     <section>
-      <header class="navbar">
+      <header className="navbar">
         <div className={showEvent?'active':''} onClick={()=>setshowEvent(true)}>EventApp</div>
         <div className={showEvent?'':'active'} onClick={()=>setshowEvent(false)}>ComingEvent</div>
       </header>

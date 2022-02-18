@@ -17,6 +17,7 @@ class CommingEvent extends React.Component {
     events: [],
     dataCol: ['Event Name', 'Start Date', 'End Date', ''],
     isShowAddEventRow: false,
+    
   };
 
   generateEditEventstate = (event) => {
@@ -63,13 +64,18 @@ class CommingEvent extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.events?.map((event) =>
-             
-                <ComingEventDataRow
-                  key={event.id}
-                  event={event}
-                ></ComingEventDataRow>
-              
+            {this.state.events?.map((event) =>{
+             const startDate = Date.parse(event.startDate)
+             const today = Date.now()
+             console.log(today)
+             if(startDate>today){
+                return  <ComingEventDataRow
+                key={event.id}
+                event={event}
+              ></ComingEventDataRow>
+
+             }
+            }
             )}
           </tbody>
         </table>
