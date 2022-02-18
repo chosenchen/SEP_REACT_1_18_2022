@@ -8,8 +8,8 @@ function App() {
   return (
     <section>
       <header class="navbar">
-        <div onClick={()=>setshowEvent(true)}>EventApp</div>
-        <div  onClick={()=>setshowEvent(false)}>ComingEvent</div>
+        <div className={showEvent?'active':''} onClick={()=>setshowEvent(true)}>EventApp</div>
+        <div className={showEvent?'':'active'} onClick={()=>setshowEvent(false)}>ComingEvent</div>
       </header>
 
       <section className="App">

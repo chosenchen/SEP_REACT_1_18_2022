@@ -22,4 +22,13 @@
 .navbar div{
   margin: 0 3rem;
   cursor: pointer;
+  font-family: sans-serif;
+}
+
+.active{
+  color: orange;
+}
+
+.navbar div:hover{
+  color: orange;
 }
