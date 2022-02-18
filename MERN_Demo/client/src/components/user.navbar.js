@@ -4,7 +4,7 @@ import './styles/nav.css';
 
 import { NavLink } from "react-router-dom";
 
-class Navbar extends React.Component {
+class UserNavbar extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -23,11 +23,8 @@ class Navbar extends React.Component {
             <NavLink className="nav-link" to="/create-log">
               <button type="button" className="btn btn-primary me-2">Create Log</button>
             </NavLink>
-            <NavLink className="nav-link" to="/log-in">
-              <button type="button" className="btn btn-success me-2">Login</button>
-            </NavLink>
-            <NavLink className="nav-link" to="/sign-up">
-              <button type="button" className="btn btn-warning">Sign Up</button>
+            <NavLink className="nav-link" to="/">
+              <button type="button" className="btn btn-warning me-2">Log Out</button>
             </NavLink>
           </div>
         </div>
@@ -36,4 +33,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default UserNavbar;

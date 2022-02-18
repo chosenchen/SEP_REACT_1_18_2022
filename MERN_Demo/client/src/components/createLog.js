@@ -22,18 +22,16 @@ class CreateLog extends React.Component {
     }
 
     handleOnSave() {
-        if (this.state.eventName === '' || this.state.startDate === '' || this.state.endDate === '') {
-            alert('Values cannot be empty!');
-        } else {
-            const log = {
-                photoLabel: this.state.photoLabel,
-                dateTaken: this.state.dateTaken,
-                url: this.state.url,
-                city: this.state.city,
-                country: this.state.country
-            };
-            API.addRecord(log);
-        }
+        //ERROR TESTING!!!
+        const log = {
+            photoLabel: this.state.photoLabel,
+            dateTaken: this.state.dateTaken,
+            url: this.state.url,
+            city: this.state.city,
+            country: this.state.country
+        };
+        API.addRecord(log);
+        window.location.href = "/";
     }
 
     render() {

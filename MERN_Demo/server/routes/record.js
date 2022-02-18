@@ -42,7 +42,8 @@ recordRoutes.route("/records/add").post(function (req, response) {
     dateTaken: req.body.dateTaken,
     url: req.body.url,
     city: req.body.city,
-    country: req.body.country
+    country: req.body.country,
+    likes: 0
   };
   db_connect.collection("records").insertOne(myobj, function (err, res) {
     if (err) throw err;

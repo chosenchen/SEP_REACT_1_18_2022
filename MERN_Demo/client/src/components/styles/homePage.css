@@ -17,6 +17,20 @@
     align-items: center;
 }
 
+.user__img {
+    height: 36px;
+    width: 36px;
+}
+
+.likes__btn{
+    height: 36px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 7.5px;
+}
+
 .card-header > p, .card-footer > p{
     margin: 0;
 }
