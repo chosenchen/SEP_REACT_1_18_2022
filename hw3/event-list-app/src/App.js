@@ -1,15 +1,14 @@
 import React from 'react';
 
 import './App.css';
-import EventList from './EventList';
+import EventApp from './components/EventApp/EventApp';
 
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <EventList></EventList>
+      <EventApp></EventApp>
     )
-
   }
 };
