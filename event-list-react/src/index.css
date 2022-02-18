@@ -58,13 +58,22 @@ body{
   border-right: 2px solid lightgray;
 }
 
-.events-header-container{
+.events-header-container, .upcoming-header-container{
   padding: 1rem ;
   background-color: rgb(205, 233, 255);
+  border-bottom: 2px solid lightgray;
+}
+
+.events-header-container{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 5rem ;
-  border-bottom: 2px solid lightgray;
+}
+
+.upcoming-header-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5rem ;
 }
 
 .col-header{
@@ -84,12 +93,21 @@ table{
   background-color: white;
 }
 
-tr{
+.tr-index, .tr-upcoming{
   padding: 1rem;
+  border-bottom: 2px solid lightgray;
+}
+
+.tr-index{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 5rem ;
-  border-bottom: 2px solid lightgray;
+}
+
+.tr-upcoming{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5rem ;
 }
 
 .input-box{

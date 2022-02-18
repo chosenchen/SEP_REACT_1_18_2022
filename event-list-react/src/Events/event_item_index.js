@@ -59,7 +59,7 @@ class EventItemIndex extends React.Component{
     const endDate = event.endDate;
 
     return (
-      <tr>
+      <tr className={eventUpcoming ? `tr-upcoming` : `tr-index`}>
         <td><input className='input-box' type='text' 
               defaultValue={`${event.eventName}`}
               disabled={!editing } 

@@ -24,7 +24,7 @@ class EventIndex extends React.Component{
       <div>
         <table>
           <thead>
-            <tr className='events-header-container'>
+            <tr className='upcoming-header-container'>
               <th className='col-header'>Event name</th>
               <th className='col-header'>Start date</th>
               <th className='col-header'>End date</th>
