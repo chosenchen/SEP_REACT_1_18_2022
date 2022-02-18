@@ -23,12 +23,16 @@ class MyApp extends MyReact.Component {
   }
 
   handleAdd=()=>{
-    //Add callback function to add counter
+   // Add callback function to add counter
+   //Define setState is async, parameters is callback function
     this.setState((preState)=>
    {return {counter: this.state.counter + 1}})
    this.setState((preState)=>
    {return {counter: this.state.counter + 1}})
   }
+    //  console.log(this)
+    //  this.setState({counter: this.state.counter+1})
+    //  this.setState({counter: this.state.counter+1})
   
 
   render() {
