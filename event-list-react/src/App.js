@@ -1,9 +1,9 @@
-import EventList from "./components/EventList";
-
 import "./App.css";
 
+import EventListContainer from "./containers/EventListContainer";
+
 const App = () => {
-  return <EventList />;
+  return <EventListContainer />;
 };
 
 export default App;

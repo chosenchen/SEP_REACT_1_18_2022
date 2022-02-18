@@ -41,8 +41,7 @@ input[type="button"]:hover {
 }
 
 .container {
-  height: 100vh;
-
+  margin-top: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,6 +63,32 @@ input[type="button"]:hover {
   cursor: pointer;
   color: var(--default-text-color);
   background-color: var(--btn-hover-bg);
+}
+
+.nav-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.nav-list > li {
+  padding: var(--default-padding);
+}
+.nav-list > li:hover {
+  cursor: pointer;
+  color: aquamarine;
+}
+.active-tab {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.app__header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: burlywood;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 /* EventList App */
