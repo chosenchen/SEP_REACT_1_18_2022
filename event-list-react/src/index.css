@@ -114,3 +114,7 @@ tr{
 .add-new-btn:hover, .buttons:hover{
   cursor: pointer;
 }
+
+:disabled{
+  cursor: not-allowed;
+}

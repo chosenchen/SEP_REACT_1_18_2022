@@ -1,26 +1,14 @@
 import React from 'react';
 import { API } from '../util/api';
 import EventItemIndex from './event_item_index';
-import AddForm from './add_form';
+import { upcomingDate } from '../util/date_util';
 
 class EventIndex extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      adding : false ,
       eventList : [] ,
     }
-
-    this.setAdding = this.setAdding.bind(this);
-    this.setList = this.setList.bind(this);
-  }
-
-  setAdding(){
-    this.setState({adding : !this.state.adding});
-  }
-
-  setList(data){
-    this.setState({eventList: data});
   }
 
   componentDidMount(){
@@ -30,19 +18,16 @@ class EventIndex extends React.Component{
   }
 
   render(){
-    const {eventList, adding} = this.state;
+    let {eventList} = this.state;
+    eventList = eventList.filter((day) => upcomingDate(day.startDate));
     return (
       <div>
-        <div className='add-new-btn-container'>
-            <button className='add-new-btn' onClick={this.setAdding}>ADD NEW</button>
-        </div>
         <table>
           <thead>
             <tr className='events-header-container'>
               <th className='col-header'>Event name</th>
               <th className='col-header'>Start date</th>
               <th className='col-header'>End date</th>
-              <th className='col-header action-header'>Actions</th> 
             </tr>
           </thead>
           <tbody id='eventlist-container'>
@@ -58,13 +43,6 @@ class EventIndex extends React.Component{
                 eventUpcoming={this.props.eventUpcoming}
                 />
               )
-            }
-            {
-              adding && <AddForm 
-              getEvents={API.getEvents}
-              addEvent={API.addEvent} 
-              setAdding={this.setAdding}
-              setList={this.setList}/>
             }
           </tbody>
         </table>

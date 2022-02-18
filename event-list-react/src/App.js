@@ -1,5 +1,6 @@
 import React from 'react';
 import EventIndex from './Events/event_index';
+import EventUpcoming from './Events/event_upcoming_index';
 import Header from './Events/header';
 
 class App extends React.Component {
@@ -27,7 +28,8 @@ class App extends React.Component {
         eventUpcoming={eventUpcoming}
         setCurrentApp={this.setCurrentApp}
         />
-        {eventIndex && <EventIndex/>}
+        {eventIndex && <EventIndex eventUpcoming={eventUpcoming}/>}
+        {eventUpcoming && <EventUpcoming eventUpcoming={eventUpcoming}/>}
       </div>
     )
   }

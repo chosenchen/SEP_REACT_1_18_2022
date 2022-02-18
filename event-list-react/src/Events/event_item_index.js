@@ -53,6 +53,7 @@ class EventItemIndex extends React.Component{
   }
   
   render(){
+    const {eventUpcoming} = this.props;
     const {event, editing} = this.state;
     const startDate = event.startDate;
     const endDate = event.endDate;
@@ -75,13 +76,15 @@ class EventItemIndex extends React.Component{
             disabled={!editing}
             onChange={this.handleChange('endDate')}/>
         </td>
-        <td className='action-btns'>
-          <button className='buttons edit-btn'
-            onClick={editing ? this.handleSubmit : this.setEditing}
-            disabled={editing && !dateValidation(startDate, endDate)}>{editing ? 'SAVE' : 'EDIT'}</button>
-          <button className='buttons delete-btn'
-            onClick={editing ? this.setEditing : this.handleDelete}>{editing ? 'CLOSE' : 'DELETE'}</button>
-        </td>
+        {
+          !eventUpcoming && <td className='action-btns'>
+            <button className='buttons edit-btn'
+              onClick={editing ? this.handleSubmit : this.setEditing}
+              disabled={editing && !dateValidation(startDate, endDate)}>{editing ? 'SAVE' : 'EDIT'}</button>
+            <button className='buttons delete-btn'
+              onClick={editing ? this.setEditing : this.handleDelete}>{editing ? 'CLOSE' : 'DELETE'}</button>
+          </td>
+        }
       </tr>
     )
   }

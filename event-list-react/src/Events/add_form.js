@@ -31,7 +31,7 @@ class AddForm extends React.Component{
   }
 
   render(){
-    const {setAdding} = this.props;
+    const {setAdding, eventIndex, eventUpcoming} = this.props;
     return (
       <tr>
         <td><input className='input-box' type='text' onChange={this.handleChange('eventName')}/></td>
