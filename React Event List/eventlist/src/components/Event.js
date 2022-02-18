@@ -4,6 +4,8 @@ import { fromUnixDate, toUnixDate } from ".././utils.js";
 
 import { appApi } from ".././appApi.js";
 
+
+
 export default class Event extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +38,8 @@ export default class Event extends React.Component {
   handleDeleteOnClick() {
     appApi.deleteEvent(this.state.eventId);
     window.location.reload();
+    // this.forceUpdate();
+
   }
 
   handleSaveOnClick() {
@@ -88,7 +92,7 @@ export default class Event extends React.Component {
             disabled={!this.state.edit}
           />
         </td>
-        <td>
+        {!this.props.upcoming? (<td>
           {this.state.edit ? (
             <div>
               <button onClick={this.handleSaveOnClick}>SAVE</button>
@@ -102,7 +106,8 @@ export default class Event extends React.Component {
               <button onClick={this.handleDeleteOnClick}>DELETE</button>
             </div>
           )}
-        </td>
+        </td>):<></> }
+       
       </tr>
     );
   }

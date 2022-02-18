@@ -1,0 +1,25 @@
+:root {
+  --NavBar-height: 4rem;
+}
+
+.page-header {
+  background-color: rgb(33, 33, 33);
+  height: var(--NavBar-height);
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.page-header ul {
+  display: flex;
+  list-style: none;
+  line-height: var(--NavBar-height);
+}
+
+.page-header ul li {
+  margin: 0 1rem;
+}
+
+.page-header ul li:hover {
+    cursor: pointer;
+  }

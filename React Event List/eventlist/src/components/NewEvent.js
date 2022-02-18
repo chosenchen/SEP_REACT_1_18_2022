@@ -4,8 +4,8 @@ import { appApi } from ".././appApi.js";
 import { toUnixDate } from ".././utils.js";
 
 export default class NewEvent extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       eventName: "",
       startDate: "",

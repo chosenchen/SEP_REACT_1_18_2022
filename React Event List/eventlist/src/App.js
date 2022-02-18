@@ -1,78 +1,36 @@
 import React from "react";
-import { appApi } from "./appApi.js";
-import Event from "./components/Event.js";
-import NewEvent from "./components/NewEvent.js";
-
-import './index.css'
+import EventList from './components/EventList/EventList.js';
+import NavBar from "./components/NavBar/NavBar.js";
+import UpcomingEvents from "./components/UpcomingEvents/UpcomingEvents.js";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = { events: [], add: false };
-    this.handleAddOnClick = this.handleAddOnClick.bind(this);
-    this.handleCloseOnClick = this.handleCloseOnClick.bind(this);
 
+  state = {
+    view : 'eventList'
   }
+  
+  handleNavLinkOnClick=(e)=>{
 
-  async componentDidMount() {
-    const events = await appApi.getEvents();
-    this.setState({ events });
-  }
-
-  handleAddOnClick(e) {
-    this.setState({ ...this.state, add: true });
-  }
-
-  handleCloseOnClick(e) {
-    if (e.target.name === "new") {
-      this.setState({ ...this.state, add: false });
+    if(e.target.getAttribute("name") === "eventList"){
+      this.setState({view: 'eventList' })
+    }else if(e.target.getAttribute("name") === "upcomming"){
+      this.setState({view: 'upcomming' })
     }
   }
 
   render() {
-    // console.log(this.state)
-    return (
-      <main className="event-list">
-        <header className="event-list__header">
-          <button
-            className="event-list__addBtn"
-            onClick={this.handleAddOnClick}
-          >
-            ADD NEW
-          </button>
-        </header>
 
-        <table className="event-list__table">
-          <thead>
-            <tr className="event-list__table-row event-list__table-row-header">
-              <th>Event name</th>
-              <th>Start date</th>
-              <th>End date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody className="event-list__entry-container">
-            {this.state.events.map((event, index) => {
-              return (
-                <Event
-                  key={index}
-                  eventName={event.eventName}
-                  startDate={event.startDate}
-                  endDate={event.endDate}
-                  eventId={event.id}
-                  handleCloseOnClick={this.handleCloseOnClick}
-                 
-                />
-              );
-            })}
-            {this.state.add && (
-              <NewEvent
-                handleCloseOnClick={this.handleCloseOnClick}
-              />
-            )}
-          </tbody>
-        </table>
-      </main>
+    return (
+      <div className="App">
+      <NavBar handleNavLinkOnClick={this.handleNavLinkOnClick}/>
+      {this.state.view === 'eventList' && (
+        <EventList />
+      )}
+      {this.state.view === 'upcomming' && (
+        <UpcomingEvents/>
+      )}
+      
+    </div>
     );
   }
 }
