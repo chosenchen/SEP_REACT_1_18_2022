@@ -8,9 +8,9 @@ import {
 } from '../../services/event.api';
 
 import { EventData } from '../../models/EventData';
-import EventEditRow from '../EventEditRow/EventEditRow';
-import EventRow from '../EventRow/EventRow';
-import EventAddRow from '../EventAddRow/EventAddRow';
+// import EventEditRow from '../EventEditRow/EventEditRow';
+// import EventRow from '../EventRow/EventRow';
+// import EventAddRow from '../EventAddRow/EventAddRow';
 import EventDataRow from '../EventDataRow/EventDataRow';
 import Button from '../Button/Button';
 
