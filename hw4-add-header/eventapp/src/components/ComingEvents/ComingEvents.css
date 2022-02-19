@@ -1,0 +1,24 @@
+.coming-events__table {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 900px;
+  border-collapse: collapse;
+}
+
+.coming-events__header {
+  /* height: 60px;
+  display: flex;
+  align-items: center; */
+}
+
+.coming-events__table tr {
+  height: 60px;
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
+.coming-events__header th {
+  text-align: left;
+  background-color: rgb(150, 169, 230);
+  padding: 0 20px;
+}
+.coming-events__table td {
+  padding: 0 20px;
+}

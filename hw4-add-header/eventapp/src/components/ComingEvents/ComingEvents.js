@@ -3,6 +3,8 @@ import React from "react";
 import { getAllEvents } from "../../services/event.api";
 import { EventData } from "../../models/EventData";
 
+import './ComingEvents.css';
+
 class ComingEvents extends React.Component {
     state = {
         events: [],
@@ -40,8 +42,8 @@ class ComingEvents extends React.Component {
 
     render() {
         return (
-            <table>
-                <thead>
+            <table className="coming-events__table">
+                <thead className="coming-events__header">
                     <tr>
                         {this.state.dataCol?.map((col) => (
                             <th key={`${col}`}>{col}</th>
