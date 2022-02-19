@@ -8,7 +8,6 @@ class EventDataRow extends React.Component {
       handleOnchange,
       actions: [actionOne, actionTwo],
     } = this.props;
-    console.log(handleOnchange);
 
     return (
       <tr key={event.id}>
@@ -49,7 +48,7 @@ class EventDataRow extends React.Component {
           <Button onClick={() => actionOne.actionFn(event)}>
             {actionOne.actionName}
           </Button>
-          <Button onClick={() => actionTwo.actionFn(event)}>
+          <Button onClick={() => actionTwo.actionFn(event.id)}>
             {actionTwo.actionName}
           </Button>
         </td>

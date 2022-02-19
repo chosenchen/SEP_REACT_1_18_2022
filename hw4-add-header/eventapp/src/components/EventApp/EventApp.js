@@ -13,6 +13,7 @@ import { EventData } from '../../models/EventData';
 // import EventAddRow from '../EventAddRow/EventAddRow';
 import EventDataRow from '../EventDataRow/EventDataRow';
 import Button from '../Button/Button';
+import EventList from '../EventList/EventList';
 
 class EventApp extends React.Component {
   state = {
@@ -96,7 +97,6 @@ class EventApp extends React.Component {
     }
   };
   hanldeEdit = ({ id }) => {
-    console.log('edit', id);
     this.setState({
       events: this.state.events.map((event) => {
         if (event.id === id) {
@@ -154,69 +154,19 @@ class EventApp extends React.Component {
         <header className="event-app__header">
           <Button onClick={this.hanldeAddEvent}>Add Event</Button>
         </header>
-        <table className="event-app__table">
-          <thead>
-            <tr>
-              {this.state.dataCol?.map((col, index) => (
-                <th key={`${col}`}>{col}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.events?.map((event) =>
-              event.isEditing ? (
-                <EventDataRow
-                  key={event.id}
-                  event={event.editEvent}
-                  actions={[
-                    {
-                      actionName: 'Save',
-                      actionFn: this.hanldeEditSave,
-                    },
-                    {
-                      actionName: 'Cancel',
-                      actionFn: this.hanldeCancel,
-                    },
-                  ]}
-                  handleOnchange={this.hanldeOnChangeEdit}
-                ></EventDataRow>
-              ) : (
-                <EventDataRow
-                  key={event.id}
-                  event={event}
-                  actions={[
-                    {
-                      actionName: 'Edit',
-                      actionFn: this.hanldeEdit,
-                    },
-                    {
-                      actionName: 'Delete',
-                      actionFn: this.hanldeDelete,
-                    },
-                  ]}
-                ></EventDataRow>
-              )
-            )}
-          </tbody>
-          <tfoot>
-            {this.state.isShowAddEventRow ? (
-              <EventDataRow
-                event={this.state.newEvent}
-                actions={[
-                  {
-                    actionName: 'Save',
-                    actionFn: this.hanldeSaveAddNew,
-                  },
-                  {
-                    actionName: 'Close',
-                    actionFn: this.handleClose,
-                  },
-                ]}
-                handleOnchange={this.hanldeOnChange}
-              ></EventDataRow>
-            ) : null}
-          </tfoot>
-        </table>
+        <EventList dataCol={this.state.dataCol}
+          events={this.state.events}
+          hanldeEditSave={this.hanldeEditSave}
+          hanldeCancel={this.hanldeCancel}
+          hanldeOnChangeEdit={this.hanldeOnChangeEdit}
+          hanldeEdit={this.hanldeEdit}
+          hanldeDelete={this.hanldeDelete}
+          hanldeSaveAddNew={this.hanldeSaveAddNew}
+          handleClose={this.handleClose}
+          hanldeOnChange={this.hanldeOnChange}
+          isShowAddEventRow={this.state.isShowAddEventRow}
+          newEvent={this.state.newEvent}
+        />
       </section>
     );
   }
