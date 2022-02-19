@@ -1,0 +1,23 @@
+.coming-event-container {
+    height: auto;
+    position: relative;
+    background-color: rgb(184, 225, 238);
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.17);
+} 
+
+.coming-event-container h3 {
+    text-align: center; 
+    padding: 25px 5px;
+    color: rgb(75, 73, 73);  
+}
+
+hr {
+    border: 2px solid #fff;
+}
+  
+
+  
+  
+  
+  
+  
