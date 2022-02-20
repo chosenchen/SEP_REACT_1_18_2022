@@ -1,0 +1,9 @@
+.header-container {
+  top: 0rem;
+  position: absolute;
+}
+
+.event-nav-bar {
+  color: black;
+  background-color: bisque;
+}
