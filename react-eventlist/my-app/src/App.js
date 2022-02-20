@@ -1,16 +1,16 @@
 import React from "react";
 import EventTable from "./components/EventTable";
-//import Header from "./components/Header/Header";
+import Header from "./components/Header/Header";
 import ComingEvent from "./components/ComingEvent/ComingEvent";
 import "./App.css";
-import { Link } from "react-router-dom";
-import Navigation from "./components/Header/Navigation";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       addNew: false,
+      showEvents: true,
+      showComingEvents: false,
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
@@ -18,12 +18,16 @@ class App extends React.Component {
     this.setState({ addNew: true });
     console.log("add new");
   }
+  handleHeader = (a, b) => {
+    this.setState({ ...this.state, showEvents: a, showComingEvents: b });
+  };
 
   render() {
     return (
       <div>
-        <Navigation />
-        <EventTable />
+        <Header showComponent={this.handleHeader}></Header>
+        {this.state.showEvents && <EventTable />}
+        {this.state.showComingEvents && <ComingEvent />}
       </div>
     );
   }

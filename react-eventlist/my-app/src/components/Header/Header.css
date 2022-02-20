@@ -1,0 +1,15 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+li {
+  list-style: none;
+  background-color: #d6eeee;
+}
+li:hover {
+  background-color: aquamarine;
+}
+li:active {
+  background-color: rgb(255, 185, 127);
+}

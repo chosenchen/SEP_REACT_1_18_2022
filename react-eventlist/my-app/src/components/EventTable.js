@@ -17,6 +17,7 @@ class EventTable extends React.Component {
       DataisLoaded: false,
       addNew: false,
       update: false,
+      cancle: false,
     };
     this.handleAdd = this.handleAdd.bind(this);
   }
@@ -56,11 +57,6 @@ class EventTable extends React.Component {
       });
     });
   };
-  handleCancle = () => {
-    getAllEvents().then((data) => {
-      this.setState({ ...this.state, events: data, DataisLoaded: true });
-    });
-  };
 
   render() {
     return (
@@ -95,7 +91,6 @@ class EventTable extends React.Component {
                 id={event.id}
                 edit={this.handleEdit}
                 delete={this.handleDelete}
-                cancle={this.handleCancle}
               />
             );
           })}

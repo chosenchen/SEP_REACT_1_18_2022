@@ -47,7 +47,13 @@ class EventRow extends React.Component {
     this.props.delete(this.state.id);
   }
   onCancle() {
-    this.props.cancle();
+    this.setState({
+      eventName: this.props.eventName,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
+      id: this.props.id,
+      edit: false,
+    });
   }
 
   render() {

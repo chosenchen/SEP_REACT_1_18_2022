@@ -1,6 +1,6 @@
 import react from "react";
 import { getAllEvents } from "../../utilities/event.api";
-import { convertDate, convertToMill } from "../../utilities/convertDate";
+import { convertDate } from "../../utilities/convertDate";
 
 class ComingEvent extends react.Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class ComingEvent extends react.Component {
   componentDidMount() {
     getAllEvents().then((data) => {
       const newEvents = data.filter(this.checkDate);
-      console.log(newEvents);
       this.setState({ upcomingEvents: newEvents });
     });
   }

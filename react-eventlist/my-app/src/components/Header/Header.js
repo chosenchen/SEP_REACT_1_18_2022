@@ -1,15 +1,29 @@
 import react from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Navigation from "./Navigation";
-import EventTable from "../EventTable";
-import ComingEvent from "../ComingEvent/ComingEvent";
+import "./Header.css";
 
 class Header extends react.Component {
   constructor(props) {
     super(props);
   }
+  handleNav = (e) => {
+    if (e.target.className === "events") {
+      this.props.showComponent(true, false);
+    }
+    if (e.target.className === "comingEvents") {
+      this.props.showComponent(false, true);
+    }
+  };
   render() {
-    return <h1>Header</h1>;
+    return (
+      <nav>
+        <li className="events" onClick={this.handleNav}>
+          Events
+        </li>
+        <li className="comingEvents" onClick={this.handleNav}>
+          Coming Events
+        </li>
+      </nav>
+    );
   }
 }
 export default Header;
