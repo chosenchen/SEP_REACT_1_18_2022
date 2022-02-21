@@ -18,8 +18,11 @@ class HomePage extends React.Component {
         this.setState({ records });
     }
 
-    onUserLikedLog(e) {
-        console.log(e.target.id);
+    async onUserLikedLog(e) {
+        const currentLog = await API.findRecord(e.target.id);
+        currentLog.likes += 1;
+        API.editRecord(currentLog);
+        window.location.reload();
     }
 
     render() {

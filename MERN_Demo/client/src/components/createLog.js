@@ -11,7 +11,9 @@ class CreateLog extends React.Component {
             dateTaken: "",
             url: "",
             city: "",
-            country: ""
+            country: "",
+            isVaild: true,
+            error: "",
         }
         this.handleOnInput = this.handleOnInput.bind(this);
         this.handleOnSave = this.handleOnSave.bind(this);
@@ -21,17 +23,25 @@ class CreateLog extends React.Component {
         this.setState({ ...this.state, [event.target.name]: event.target.value });
     }
 
-    handleOnSave() {
-        //ERROR TESTING!!!
-        const log = {
-            photoLabel: this.state.photoLabel,
-            dateTaken: this.state.dateTaken,
-            url: this.state.url,
-            city: this.state.city,
-            country: this.state.country
-        };
-        API.addRecord(log);
-        window.location.href = "/";
+    async handleOnSave() {
+        if (this.state.photoLabel === '' || this.state.url === '' || this.state.city === '' || this.state.country === '') {
+            this.setState({ isVaild: false, error: 'Inputs cannot be empty'})
+        } else {
+            let user = sessionStorage.getItem("user");
+            user = JSON.parse(user);
+            const log = {
+                photoLabel: this.state.photoLabel,
+                dateTaken: this.state.dateTaken,
+                url: this.state.url,
+                city: this.state.city,
+                country: this.state.country,
+                user: {
+                    userName: user.userName,
+                }
+            };
+            await API.addRecord(log);
+            window.location.href = "/";
+        }
     }
 
     render() {
@@ -41,7 +51,7 @@ class CreateLog extends React.Component {
                     <h1>Upload Log Post</h1>
                 </header>
 
-                <form className='create-log__form'>
+                <section className='create-log__form'>
 
                     <div className="input-group mb-3">
                         <input
@@ -101,9 +111,18 @@ class CreateLog extends React.Component {
                         />
                     </div>
 
-                    <button className="btn btn-primary" onClick={this.handleOnSave}>Upload</button>
+                    <button className="btn btn-primary" onClick={this.handleOnSave}>Upload</button> <br/>
 
-                </form>
+                    {!this.state.isVaild ?
+                        <div className="alert alert-danger d-flex align-items-center" role="alert">
+                            <i className="bi bi-exclamation-triangle-fill bi flex-shrink-0 me-2"></i>
+                            <div>
+                                {this.state.error}
+                            </div>
+                        </div>
+                        : ''}
+
+                </section>
 
             </section>
         )

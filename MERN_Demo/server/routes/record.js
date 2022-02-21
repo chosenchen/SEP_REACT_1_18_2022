@@ -24,13 +24,13 @@ recordRoutes.route("/records").get(function (req, res) {
 
 recordRoutes.route("/records/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId(req.params.id) };
   db_connect
-      .collection("records")
-      .findOne(myquery, function (err, result) {
-        if (err) throw err;
-        res.json(result);
-      });
+    .collection("records")
+    .findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
 });
 
 // <---------- POST ---------->
@@ -43,7 +43,10 @@ recordRoutes.route("/records/add").post(function (req, response) {
     url: req.body.url,
     city: req.body.city,
     country: req.body.country,
-    likes: 0
+    likes: 0,
+    user:{
+      userName: req.body.user.userName
+    }
   };
   db_connect.collection("records").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -55,12 +58,15 @@ recordRoutes.route("/records/add").post(function (req, response) {
 
 recordRoutes.route("/update/:id").post(function (req, response) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
     $set: {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      photoLabel: req.body.photoLabel,
+      dateTaken: req.body.dateTaken,
+      url: req.body.url,
+      city: req.body.city,
+      country: req.body.country,
+      likes: req.body.likes
     },
   };
   db_connect
@@ -76,7 +82,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
 
 recordRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection("records").deleteOne(myquery, function (err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
@@ -103,11 +109,11 @@ recordRoutes.route("/users/:email").get(function (req, res) {
   let db_connect = dbo.getDb();
   let myquery = { email: req.params.email };
   db_connect
-      .collection("users")
-      .findOne(myquery, function (err, result) {
-        if (err) throw err;
-        res.json(result);
-      });
+    .collection("users")
+    .findOne(myquery, function (err, result) {
+      if (err) throw err;
+      res.json(result);
+    });
 });
 
 

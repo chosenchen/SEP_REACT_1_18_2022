@@ -20,9 +20,6 @@ class Navbar extends React.Component {
                 <a className="nav-link active" aria-current="page" href="/">Home</a>
               </li>
             </ul>
-            <NavLink className="nav-link" to="/create-log">
-              <button type="button" className="btn btn-primary me-2">Create Log</button>
-            </NavLink>
             <NavLink className="nav-link" to="/log-in">
               <button type="button" className="btn btn-success me-2">Login</button>
             </NavLink>
