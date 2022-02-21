@@ -27,8 +27,8 @@ export const dateStrToTimestamp = (dateStr) => {
   // return timestamp.valueOf();
 
   try {
-    return "" + new Date(dateStr).getTime();
+    return new Date(dateStr).getTime();
   } catch {
-    return "";
+    return 0;
   }
 };
