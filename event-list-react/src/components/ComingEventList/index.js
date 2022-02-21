@@ -1,5 +1,6 @@
 import React from "react";
 import EventListRow from "../EventListRow";
+import withEventList from "../HOC/withEventList";
 
 class ComingEventList extends React.Component {
   render() {
@@ -41,4 +42,6 @@ class ComingEventList extends React.Component {
   }
 }
 
-export default ComingEventList;
+const ComingEventListHOC = withEventList(ComingEventList);
+
+export default ComingEventListHOC;

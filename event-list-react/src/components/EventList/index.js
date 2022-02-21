@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import EventListRow from "../EventListRow";
 import API from "../../api";
+import withEventList from "../HOC/withEventList";
 
 const EventList = ({ eventList, setEventList }) => {
   const [isAdd, setIsAdd] = useState(false);
@@ -120,4 +121,6 @@ const EventList = ({ eventList, setEventList }) => {
   );
 };
 
-export default EventList;
+const EventListHOC = withEventList(EventList);
+
+export default EventListHOC;

@@ -1,11 +1,12 @@
 import "./App.css";
 
 import React from "react";
-import EventListContainer from "./containers/EventListContainer";
+// import EventListContainer from "./containers/EventListContainer";
+import EventListContainerHOC from "./containers/EventListContainerHOC";
 
 class App extends React.Component {
   render() {
-    return <EventListContainer />;
+    return <EventListContainerHOC />;
   }
 }
 
