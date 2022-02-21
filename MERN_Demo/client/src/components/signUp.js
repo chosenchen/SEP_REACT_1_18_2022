@@ -25,17 +25,20 @@ class SignUp extends React.Component {
     };
 
 
-    handleOnSave() {
+    async handleOnSave() {
         const { userName, email, password, confirm_password } = this.state.newUser;
         const newUser = new UserData(userName, email, password, confirm_password);
-        const res = newUser.isValidForSave();
-        if (res.isVaild) {
-            USER_API.addUser(newUser);
-            this.setState({ isVaild: res.isVaild, error: res.error, });
-            window.location.href = "/";
-        } else {
-            this.setState({ isVaild: res.isVaild, error: res.error });
-        }
+        const currentUserData = await USER_API.findUser(this.state.newUser.email);
+        if (currentUserData === null) {
+            const res = newUser.isValidForSave();
+            if (res.isVaild) {
+                USER_API.addUser(newUser);
+                this.setState({ isVaild: res.isVaild, error: res.error, });
+                window.location.href = "/";
+            } else {
+                this.setState({ isVaild: res.isVaild, error: res.error });
+            }
+        }else { this.setState({ isVaild: false, error: 'Your email is linked with another account, please sign in.'}) }
     }
 
     render() {

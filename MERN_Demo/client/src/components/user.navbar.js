@@ -15,8 +15,8 @@ class UserNavbar extends React.Component {
   }
 
   userLogOut(){
-    this.setState({ auth: false });
-    window.location.reload();
+    sessionStorage.setItem("auth", false);
+    window.location.href = "/";
   }
 
   render() {

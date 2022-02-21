@@ -14,7 +14,12 @@ class App extends React.Component {
 
   constructor() {
     super();
-    this.state = { auth: false }
+    let auth = sessionStorage.getItem("auth");
+    if (auth === 'true') { auth = true } else if (auth === 'false') { auth = false };
+    let user = sessionStorage.getItem("user");
+    user = JSON.parse(user);
+    this.state = { auth: auth, authUser: user };
+    
   }
 
   render() {
@@ -23,10 +28,10 @@ class App extends React.Component {
         {this.state.auth ?
           <UserNavbar auth={this.state.auth} /> : <Navbar />
         }
-        
+
         <section style={{ margin: 20 }}>
           <Routes>
-            <Route exact path="/" element={<HomePage auth={this.state.auth}/>} />
+            <Route exact path="/" element={<HomePage auth={this.state.auth} />} />
             <Route exact path="/log-in" element={<LogIn auth={this.state.auth} />} />
             <Route exact path="/sign-up" element={<SignUp />} />
             <Route exact path="/create-log" element={<CreateLog />} />
