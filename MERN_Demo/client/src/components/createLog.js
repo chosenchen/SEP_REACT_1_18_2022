@@ -2,6 +2,7 @@ import React from "react";
 import { API } from '../services/connectToDB';
 
 import './styles/createLog.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class CreateLog extends React.Component {
     constructor(props) {
@@ -51,7 +52,7 @@ class CreateLog extends React.Component {
                     <h1>Upload Log Post</h1>
                 </header>
 
-                <section className='create-log__form'>
+                <section className='form'>
 
                     <div className="input-group mb-3">
                         <input
@@ -111,7 +112,7 @@ class CreateLog extends React.Component {
                         />
                     </div>
 
-                    <button className="btn btn-primary" onClick={this.handleOnSave}>Upload</button> <br/>
+                    <button className="btn btn-primary" onClick={this.handleOnSave}>Upload</button>
 
                     {!this.state.isVaild ?
                         <div className="alert alert-danger d-flex align-items-center" role="alert">

@@ -44,7 +44,7 @@ class LogIn extends React.Component {
 
     render() {
         return (
-            <section className="form-signin">
+            <section className="form">
                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <input
                     type="email"

@@ -43,7 +43,7 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <section className="form-signin">
+            <section className="form">
 
                 <img className="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
 
