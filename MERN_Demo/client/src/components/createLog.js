@@ -38,6 +38,7 @@ class CreateLog extends React.Component {
                 country: this.state.country,
                 user: {
                     userName: user.userName,
+                    profile_img: user.profile_img
                 }
             };
             await API.addRecord(log);

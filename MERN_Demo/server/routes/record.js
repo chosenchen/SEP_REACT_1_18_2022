@@ -45,7 +45,8 @@ recordRoutes.route("/records/add").post(function (req, response) {
     country: req.body.country,
     likes: 0,
     user:{
-      userName: req.body.user.userName
+      userName: req.body.user.userName,
+      profile_img: req.body.user.profile_img
     }
   };
   db_connect.collection("records").insertOne(myobj, function (err, res) {
@@ -119,12 +120,13 @@ recordRoutes.route("/users/:email").get(function (req, res) {
 
 // <---------- POST ---------->
 
-recordRoutes.route("/user/add").post(function (req, response) {
+recordRoutes.route("/users/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+    profile_img: req.body.profile_img
   };
   db_connect.collection("users").insertOne(myobj, function (err, res) {
     if (err) throw err;

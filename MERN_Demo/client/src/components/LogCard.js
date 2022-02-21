@@ -11,7 +11,7 @@ class LogCard extends React.Component {
         return (
             <div className="card">
                 <div className="card-header">
-                    <img className="user__img" src="./images/user-profile.png" alt="user-profile" />
+                    <img className="user__img" src={this.log.user.profile_img} alt="user-profile" />
                     <p>{this.log.user.userName}</p>
                     <button className="btn btn-primary likes__btn" id={this.log._id}
                          onClick={this.props.onUserLikedLog}>

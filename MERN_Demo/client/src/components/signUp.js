@@ -13,7 +13,7 @@ class SignUp extends React.Component {
         this.state = {
             isVaild: true,
             error: "",
-            newUser: new UserData('', '', '', '')
+            newUser: new UserData('', '', '', '', '')
         }
         this.handleOnInput = this.handleOnInput.bind(this);
         this.handleOnSave = this.handleOnSave.bind(this);
@@ -21,25 +21,27 @@ class SignUp extends React.Component {
 
 
     handleOnInput(e) {
-        this.setState({ newUser: { ...this.state.newUser, [e.target.name]: e.target.value }, });
+        this.setState({ newUser: { ...this.state.newUser, [e.target.id]: e.target.value } });
     };
 
 
     async handleOnSave() {
-        const { userName, email, password, confirm_password } = this.state.newUser;
-        const newUser = new UserData(userName, email, password, confirm_password);
-        const currentUserData = await USER_API.findUser(this.state.newUser.email);
-        if (currentUserData === null) {
-            const res = newUser.isValidForSave();
-            if (res.isVaild) {
+        const { userName, email, password, confirm_password, profile_img } = this.state.newUser;
+        const newUser = new UserData(userName, email, password, confirm_password, profile_img);
+        const res = newUser.isValidForSave();
+        if (res.isVaild) {
+            const currentUserData = await USER_API.findUser(this.state.newUser.email);
+            if (currentUserData === null) {
                 USER_API.addUser(newUser);
                 this.setState({ isVaild: res.isVaild, error: res.error, });
                 window.location.href = "/";
             } else {
-                this.setState({ isVaild: res.isVaild, error: res.error });
+                this.setState({ isVaild: false, error: 'Your email is linked with another account, please sign in.' });
+                console.log(this.state.isVaild, this.state.error);
             }
-        }else { this.setState({ isVaild: false, error: 'Your email is linked with another account, please sign in.'}) }
+        }
     }
+
 
     render() {
         return (
@@ -49,7 +51,7 @@ class SignUp extends React.Component {
 
                 <input
                     type="text"
-                    name="userName"
+                    id="userName"
                     className="form-control"
                     placeholder="Username"
                     onChange={this.handleOnInput}
@@ -59,7 +61,7 @@ class SignUp extends React.Component {
                 />
                 <input
                     type="email"
-                    name="email"
+                    id="email"
                     className="form-control"
                     placeholder="Email Address"
                     onChange={this.handleOnInput}
@@ -68,7 +70,7 @@ class SignUp extends React.Component {
                 />
                 <input
                     type="password"
-                    name="password"
+                    id="password"
                     className="form-control"
                     placeholder="Password"
                     onChange={this.handleOnInput}
@@ -77,13 +79,47 @@ class SignUp extends React.Component {
                 />
                 <input
                     type="password"
-                    name="confirm_password"
+                    id="confirm_password"
                     className="form-control"
                     placeholder="Confirm Password"
                     onChange={this.handleOnInput}
                     value={this.state.confirm_password}
                     required
                 />
+
+                <label>Select Profile Picture</label>
+                <section className="user__profile__img__selction">
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id='profile_img'
+                            value={'./images/users/user-profile-1.png'} onChange={this.handleOnInput} />
+                        <img className="user__img" src="./images/users/user-profile-1.png" alt="user-profile" />
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id='profile_img'
+                            value={'./images/users/user-profile-2.png'} onChange={this.handleOnInput} />
+                        <img className="user__img" src="./images/users/user-profile-2.png" alt="user-profile" />
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id='profile_img'
+                            value={'./images/users/user-profile-3.png'} onChange={this.handleOnInput} />
+                        <img className="user__img" src="./images/users/user-profile-3.png" alt="user-profile" />
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id='profile_img'
+                            value={'./images/users/user-profile-4.png'} onChange={this.handleOnInput} />
+                        <img className="user__img" src="./images/users/user-profile-4.png" alt="user-profile" />
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id='profile_img'
+                            value={'./images/users/user-profile-5.png'} onChange={this.handleOnInput} />
+                        <img className="user__img" src="./images/users/user-profile-5.png" alt="user-profile" />
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="radio" name="flexRadioDefault" id='profile_img'
+                            value={'./images/users/user-profile-6.png'} onChange={this.handleOnInput} />
+                        <img className="user__img" src="./images/users/user-profile-6.png" alt="user-profile" />
+                    </div>
+                </section>
 
                 <button
                     type="button"
