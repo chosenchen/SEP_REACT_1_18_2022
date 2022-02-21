@@ -10,15 +10,6 @@ class ComingEvents extends React.Component {
         comingEvents: [],
       }
     }
-    // state = {
-    //   comingEvents: []
-    // };
-
-    // componentDidMount() {
-    //   API.getEvents().then(res => {
-    //     this.setState({ events: res });
-    //   });
-    // }
   
     async componentDidMount() {
         const eventsData = await API.getEvents();
