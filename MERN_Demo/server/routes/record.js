@@ -99,9 +99,9 @@ recordRoutes.route("/users").get(function (req, res) {
     });
 });
 
-recordRoutes.route("/users/:id").get(function (req, res) {
+recordRoutes.route("/users/:email").get(function (req, res) {
   let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId( req.params.id )};
+  let myquery = { email: req.params.email };
   db_connect
       .collection("users")
       .findOne(myquery, function (err, result) {
