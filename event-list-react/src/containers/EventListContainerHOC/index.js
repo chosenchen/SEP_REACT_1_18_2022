@@ -52,8 +52,9 @@ class EventListContainerHOC extends React.Component {
           onPanelChange={this.onPanelChange}
         />
         <div>
-          <h1>Counter</h1>
-          <EventListCounterHOC />
+          <p>
+            Counter <EventListCounterHOC />
+          </p>
         </div>
         {this.renderCurrentPanel()}
       </>

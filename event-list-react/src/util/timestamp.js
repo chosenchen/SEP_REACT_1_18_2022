@@ -17,7 +17,7 @@ export const timestampToStr = (timestamp) => {
 };
 
 export const dateStrToTimestamp = (dateStr) => {
-  const date = new Date(dateStr);
+  const timestamp = new Date(dateStr);
 
-  return date.getTime();
+  return timestamp.valueOf();
 };
