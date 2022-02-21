@@ -54,7 +54,7 @@ class EventListContainer extends React.Component {
   };
 
   render() {
-    const { tabs, currentTab, eventList } = this.state;
+    const { tabs, currentTab } = this.state;
     return (
       <>
         <Header
