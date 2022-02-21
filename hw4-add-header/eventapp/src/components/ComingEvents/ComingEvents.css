@@ -4,11 +4,11 @@
   border-collapse: collapse;
 }
 
-.coming-events__header {
+/* .coming-events__header { */
   /* height: 60px;
   display: flex;
   align-items: center; */
-}
+/* } */
 
 .coming-events__table tr {
   height: 60px;

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 
-import EventApp from './components/EventApp/EventApp';
 import Header from './components/Header/Header';
-import ComingEvents from './components/ComingEvents/ComingEvents';
 
 import './App.css';
+import EventTable from './components/EventTable/EventTable';
 
 function App() {
   const [showComingEvents, setShowComingEvents] = useState(false);
@@ -15,11 +14,7 @@ function App() {
   return (
     <div className="App">
       <Header handleClick={handleClick}></Header>
-      {showComingEvents ?
-        <ComingEvents isShowAddEventRow={false}/>
-        :
-        <EventApp />
-      }
+      <EventTable showComingEvents={showComingEvents }/>
     </div>
   );
 }
