@@ -3,8 +3,9 @@ import React from "react";
 import Header from "../../components/Header";
 import EventList from "../../components/EventList";
 import ComingEventList from "../../components/ComingEventList";
+import EventListCounterHOC from "../../components/EventListCounter";
 
-class EventListContainer extends React.Component {
+class EventListContainerHOC extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,15 +30,15 @@ class EventListContainer extends React.Component {
   };
 
   renderCurrentPanel = () => {
-    const { currentTab, eventList } = this.state;
+    const { currentTab } = this.state;
 
     switch (currentTab) {
       case "Events":
-        return <EventList eventList={eventList} />;
+        return <EventList />;
       case "Coming Events":
-        return <ComingEventList eventList={eventList} />;
+        return <ComingEventList />;
       default:
-        return <EventList eventList={eventList} />;
+        return <EventList />;
     }
   };
 
@@ -50,10 +51,14 @@ class EventListContainer extends React.Component {
           currentTab={currentTab}
           onPanelChange={this.onPanelChange}
         />
+        <div>
+          <h1>Counter</h1>
+          <EventListCounterHOC />
+        </div>
         {this.renderCurrentPanel()}
       </>
     );
   }
 }
 
-export default EventListContainer;
+export default EventListContainerHOC;
