@@ -6,51 +6,67 @@ import Header from "../../components/Header";
 import EventList from "../../components/EventList";
 import ComingEventList from "../../components/ComingEventList";
 
-const EventListContainer = () => {
-  const [tabs, setTabs] = useState([]);
-  const [currentTab, setCurrentTab] = useState("");
+class EventListContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tabs: [],
+      currentTab: "",
+      eventList: [],
+    };
+  }
 
-  const [eventList, setEventList] = useState([]);
-
-  useEffect(() => {
+  componentDidMount() {
     API.getEventList().then((eventList) => {
-      setEventList(eventList);
+      this.setState((prevState) => ({
+        ...prevState,
+        eventList: [...eventList],
+        tabs: ["Events", "Coming Events"],
+      }));
+      this.setState((prevState) => ({
+        ...prevState,
+        currentTab: prevState.tabs[0],
+      }));
     });
-  }, []);
+  }
 
-  useEffect(() => {
-    setTabs(["Events", "Coming Events"]);
-  }, []);
-
-  useEffect(() => {
-    setCurrentTab(tabs[0]);
-  }, [tabs]);
-
-  const onPanelChange = (tab) => {
-    setCurrentTab(tab);
+  setEventList = (eventList) => {
+    this.setState({ eventList: [...eventList] });
+  };
+  onPanelChange = (tab) => {
+    this.setState({ currentTab: tab });
   };
 
-  const renderCurrentPanel = () => {
+  renderCurrentPanel = () => {
+    const { currentTab, eventList } = this.state;
+
     switch (currentTab) {
       case "Events":
-        return <EventList eventList={eventList} setEventList={setEventList} />;
+        return (
+          <EventList eventList={eventList} setEventList={this.setEventList} />
+        );
       case "Coming Events":
         return <ComingEventList eventList={eventList} />;
       default:
-        return <EventList eventList={eventList} setEventList={setEventList} />;
+        return (
+          <EventList eventList={eventList} setEventList={this.setEventList} />
+        );
     }
   };
 
-  return (
-    <>
-      <Header
-        tabs={tabs}
-        currentTab={currentTab}
-        onPanelChange={onPanelChange}
-      />
-      {renderCurrentPanel()}
-    </>
-  );
-};
+  render() {
+    const { tabs, currentTab, eventList } = this.state;
+    return (
+      <>
+        <Header
+          tabs={tabs}
+          currentTab={currentTab}
+          onPanelChange={this.onPanelChange}
+        />
+        {this.renderCurrentPanel()}
+      </>
+    );
+  }
+}
 
 export default EventListContainer;

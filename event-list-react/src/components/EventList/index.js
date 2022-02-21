@@ -20,9 +20,8 @@ const EventList = ({ eventList, setEventList }) => {
   const onUpdate = (id, newEvent) => {
     if (+id === -1) {
       API.addEvent(newEvent).then((response) => {
-        setEventList([...eventList, response]);
-
         onAddNewSuccess();
+        setEventList([...eventList, response]);
       });
     } else {
       API.updateEvent(newEvent, id).then((response) => {

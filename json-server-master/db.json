@@ -7,9 +7,9 @@
       "id": 1
     },
     {
-      "eventName": "TEST-CHANGED",
-      "startDate": "1641790800000",
-      "endDate": "1641790800000",
+      "eventName": "TEST-2",
+      "startDate": 1642723200000,
+      "endDate": 1642809600000,
       "id": 2
     },
     {
