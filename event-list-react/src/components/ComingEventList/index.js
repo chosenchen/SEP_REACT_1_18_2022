@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import EventListRow from "../EventListRow";
-import API from "../../api";
 
-const ComingEventList = () => {
-  const [eventList, setEventList] = useState([]);
-
-  useEffect(() => {
-    API.getEventList().then((eventList) => {
-      setEventList(eventList);
-    });
-  }, []);
-
-  const _eventList = eventList;
-
+const ComingEventList = ({ eventList }) => {
   let eventListJSX;
 
-  if (_eventList.length) {
-    eventListJSX = _eventList.map((eventItem) => {
+  if (eventList.length) {
+    eventListJSX = eventList.map((eventItem) => {
       return (
         <EventListRow
           key={eventItem.id}

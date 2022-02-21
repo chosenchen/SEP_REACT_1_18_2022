@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import EventListRow from "../EventListRow";
 import API from "../../api";
 
-const EventList = () => {
+const EventList = ({ eventList, setEventList }) => {
   const [isAdd, setIsAdd] = useState(false);
-  const [eventList, setEventList] = useState([]);
-
-  useEffect(() => {
-    API.getEventList().then((eventList) => {
-      setEventList(eventList);
-    });
-  }, []);
 
   // Add New Button Event
   const onClickAddNew = (e) => {
@@ -65,12 +58,10 @@ const EventList = () => {
     }
   };
 
-  const _eventList = eventList;
-
   let eventListJSX;
 
-  if (_eventList.length) {
-    eventListJSX = _eventList.map((eventItem) => {
+  if (eventList.length) {
+    eventListJSX = eventList.map((eventItem) => {
       return (
         <EventListRow
           key={eventItem.id}
