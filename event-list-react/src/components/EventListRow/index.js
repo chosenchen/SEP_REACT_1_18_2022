@@ -33,8 +33,8 @@ const EventListRow = ({ isAdd, eventItem, hasActions, onUpdate, onDelete }) => {
     } else {
       onUpdate(eventItem.id, {
         eventName: eventName,
-        startDate: dateStrToTimestamp(startDate),
-        endDate: dateStrToTimestamp(endDate),
+        startDate: `${dateStrToTimestamp(startDate)}`,
+        endDate: `${dateStrToTimestamp(endDate)}`,
       });
 
       setIsUpdate(false);

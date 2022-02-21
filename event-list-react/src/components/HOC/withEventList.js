@@ -16,6 +16,7 @@ const withEventList = (Component) => {
     };
 
     componentDidMount() {
+      console.log("++");
       API.getEventList().then((eventList) => {
         this.setState({ eventList: [...eventList] });
       });
