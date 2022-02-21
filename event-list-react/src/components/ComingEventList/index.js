@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-
 import EventListRow from "../EventListRow";
 
 const ComingEventList = ({ eventList }) => {
