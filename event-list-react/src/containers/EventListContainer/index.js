@@ -37,7 +37,7 @@ const EventListContainer = () => {
       case "Coming Events":
         return <ComingEventList eventList={eventList} />;
       default:
-        return <EventList eventList={eventList} />;
+        return <EventList eventList={eventList} setEventList={setEventList} />;
     }
   };
 
