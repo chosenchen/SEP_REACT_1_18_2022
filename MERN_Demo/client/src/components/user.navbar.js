@@ -5,6 +5,20 @@ import './styles/nav.css';
 import { NavLink } from "react-router-dom";
 
 class UserNavbar extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: this.props.auth
+    }
+    this.userLogOut = this.userLogOut.bind(this);
+  }
+
+  userLogOut(){
+    this.setState({ auth: false });
+    window.location.reload();
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -24,7 +38,7 @@ class UserNavbar extends React.Component {
               <button type="button" className="btn btn-primary me-2">Create Log</button>
             </NavLink>
             <NavLink className="nav-link" to="/">
-              <button type="button" className="btn btn-warning me-2">Log Out</button>
+              <button type="button" className="btn btn-warning me-2" onClick={this.userLogOut}>Log Out</button>
             </NavLink>
           </div>
         </div>
