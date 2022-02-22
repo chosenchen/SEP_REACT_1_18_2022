@@ -1,7 +1,6 @@
 import React from "react";
 import "./EventApp.css";
 import {
-  getAllEvents,
   addNewEvent,
   deleteEvent,
   editEvent,
@@ -14,39 +13,10 @@ import {WithEventData} from "../HOC/WithEventData"
 
 class EventApp extends React.Component {
   state = {
-    events: [],
     dataCol: ["Event Name", "Start Date", "End Date", "Actions"],
     isShowAddEventRow: false,
     newEvent: new EventData("", "" + Date.now(), "" + Date.now()),
   };
-
-  generateEditEventstate = (event) => {
-    event.isEditing = false;
-    event.editEvent = new EventData(
-      event.eventName,
-      event.startDate,
-      event.endDate,
-      event.id
-    );
-  };
-
-  fetchAllEvents = () => {
-    getAllEvents().then((data) => {
-      const events = data.map(({ eventName, startDate, endDate, id }) => {
-        const newEvent = new EventData(eventName, startDate, endDate, id);
-        this.generateEditEventstate(newEvent);
-        return newEvent;
-      });
-
-      this.setState({
-        events,
-      });
-    });
-  };
-
-  componentDidMount() {
-    this.fetchAllEvents();
-  }
 
   hanldeAddEvent = () => {
     this.setState({
@@ -147,6 +117,8 @@ class EventApp extends React.Component {
   };
 
   render() {
+
+    const {events} = this.props
     return (
       <section className="event-app">
         <header className="event-app__header">
@@ -161,7 +133,7 @@ class EventApp extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.events?.map((event) =>
+            {events?.map((event) =>
               event.isEditing ? (
                 <EventDataRow
                   key={event.id}

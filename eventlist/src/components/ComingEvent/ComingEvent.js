@@ -1,39 +1,17 @@
 import React from "react";
 import "../EventApp/EventApp.css";
-// import { getAllEvents } from "../../services/event.api";
-// import { EventData } from "../../models/EventData";
-import {WithEventData} from "../HOC/WithEventData"
+import { WithEventData } from "../HOC/WithEventData";
 class ComingEvent extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      // events: [],
       dataCol: ["Event Name", "Start Date", "End Date"],
     };
   }
-  
-
-  // fetchAllEvents = () => {
-  //   getAllEvents().then((data) => {
-  //     const events = data.map(({ eventName, startDate, endDate, id }) => {
-  //       const newEvent = new EventData(eventName, startDate, endDate, id);
-  //       return newEvent;
-  //     });
-
-  //     this.setState({
-  //       events,
-  //     });
-  //   });
-  // };
-
-  // componentDidMount() {
-  //   this.fetchAllEvents();
-  // }
-  
 
   render() {
-    console.log(this.props)
-    const {events} = this.props
+    console.log(this.props);
+    const { events } = this.props;
     return (
       <section className="event-app">
         <table className="event-app__table">

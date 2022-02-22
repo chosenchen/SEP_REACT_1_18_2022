@@ -19,8 +19,6 @@ export const WithEventData = (WrappedComponents) => {
         event.id
       );
     };
-
-    //I dont have a getevent here how to pass the props
     fetchAllEvents = () => {
       getAllEvents().then((data) => {
         const events = data.map(({ eventName, startDate, endDate, id }) => {
