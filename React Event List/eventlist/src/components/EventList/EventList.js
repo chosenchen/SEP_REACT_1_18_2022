@@ -9,18 +9,25 @@ import withEventData from ".././HOC/withEventData.js";
 class EventList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { add: false };
-    this.handleAddOnClick = this.handleAddOnClick.bind(this);
-    this.handleCloseOnClick = this.handleCloseOnClick.bind(this);
+    this.state = { 
+      isShowAddEventRow: false,
+      newEvent: {
+        eventName: "",
+        startDate: "",
+        endDate: ""
+      }
+     };
+
+ 
   }
 
-  handleAddOnClick(e) {
-    this.setState({ add: true });
+  handleAddOnClick = (e) => {
+    this.setState({ isShowAddEventRow: true });
   }
 
-  handleCloseOnClick(e) {
+  handleCloseOnClick = (e) => {
     if (e.target.name === "new") {
-      this.setState({ add: false });
+      this.setState({ isShowAddEventRow: false });
     }
   }
 
@@ -57,7 +64,7 @@ class EventList extends React.Component {
                 />
               );
             })}
-            {this.state.add && (
+            {this.state.isShowAddEventRow && (
               <NewEvent handleCloseOnClick={this.handleCloseOnClick} />
             )}
           </tbody>

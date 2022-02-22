@@ -15,7 +15,12 @@ const withEventData = (Component) =>{
 
         async componentDidMount(){
             const events = await appApi.getEvents();
-            this.setState({eventList: events})
+            const updatedEvents = events.map((event)=>{
+                event.isEditing= false
+                return event;
+            })
+
+            this.setState({eventList: updatedEvents})
         }
 
         
