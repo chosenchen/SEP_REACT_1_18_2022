@@ -1,0 +1,52 @@
+{
+  "events": [
+    {
+      "eventName": "TEST-1",
+      "startDate": "1641686400000",
+      "endDate": "1641686400000",
+      "id": 1
+    },
+    {
+      "eventName": "TEST-2",
+      "startDate": "1644037200000",
+      "endDate": "1644469200000",
+      "id": 2
+    },
+    {
+      "eventName": "TEST-3",
+      "startDate": "1641963600000",
+      "endDate": "1642309200000",
+      "id": 3
+    },
+    {
+      "eventName": "TEST-4",
+      "startDate": "1644278400000",
+      "endDate": "1645056000000",
+      "id": 4
+    },
+    {
+      "eventName": "TEST-5",
+      "startDate": "1645747200000",
+      "endDate": "1646006400000",
+      "id": 5
+    },
+    {
+      "eventName": "TEST-6",
+      "startDate": "1646179200000",
+      "endDate": "1646524800000",
+      "id": 6
+    },
+    {
+      "eventName": "TEST-7",
+      "startDate": "1646870400000",
+      "endDate": "1646956800000",
+      "id": 7
+    },
+    {
+      "eventName": "TEST-8",
+      "startDate": "1644278400000",
+      "endDate": "1645056000000",
+      "id": 8
+    }
+  ]
+}

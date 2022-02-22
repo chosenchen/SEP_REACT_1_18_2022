@@ -1,0 +1,30 @@
+.app-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    /* left: calc(((100vw - 600px) / 2)px); */
+    background-color: rgb(184, 225, 238);
+    width: 800px;
+    height: 60px;
+}
+
+.app-header ul {
+    display: flex;
+    list-style-type: none;
+    margin-top: 30px;
+}
+
+.app-header ul li {
+    font-size: large;
+    font-weight: bold;
+    margin: 15px 50px;
+    cursor: pointer;
+    color: #333;
+    padding: 10px 5px 25px 5px;
+}
+
+.app-header ul li:hover {
+    color: #fff;
+}
