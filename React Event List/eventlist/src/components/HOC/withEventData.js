@@ -41,51 +41,17 @@ const withEventData = (Component) => {
       this.fetchAllEvents();
     }
 
-    updateEventList = (id, bool, e) => {
-      if (e) {
-        this.setState({
-          eventList: this.state.eventList.map((event) => {
-            if (event.id === id) {
-              return {
-                ...event,
-                editEvent: {
-                  ...event.editEvent,
-                  [e.target.name]: e.target.value,
-                },
-              };
-            } else {
-              return event;
-            }
-          }),
-        });
-      } else {
-        this.setState({
-          eventList: this.state.eventList.map((event) => {
-            if (event.id === id) {
-              return { ...event, isEditing: bool };
-            } else {
-              return event;
-            }
-          }),
-        });
-      }
-    };
-
-    deleteSaveEvent = (id) => {
-      this.setState({
-        eventList: this.state.eventList.filter((event) => event.id !== id),
-      });
-    };
-
     handleAddOnClick = (e) => {
       this.setState({ isShowAddEventRow: true });
     };
 
     handleDeleteOnClick = async (id) => {
+      this.setState({
+        eventList: this.state.eventList.filter((event) => event.id !== id),
+      });
+
       await appApi.deleteEvent(id);
       this.fetchAllEvents();
-      this.deleteSaveEvent(id)
-    
     };
   
     handleAddInputOnChange = (e) => {
@@ -126,21 +92,68 @@ const withEventData = (Component) => {
         this.fetchAllEvents();
         this.handleAddCloseOnClick();
       }
+      
     };
   
     handleEditOnClick = (id) => {
-      this.updateEventList(id, true);
+
+
+      this.setState({
+        eventList: this.state.eventList.map((event) => {
+          if (event.id === id) {
+            return { ...event, isEditing: true };
+          } else {
+            return event;
+          }
+        }),
+      });
     };
   
     handleEditCloseOnClick = (id) => {
-      this.updateEventList(id, false);
+      this.setState({
+        eventList: this.state.eventList.map((event) => {
+          if (event.id === id) {
+            return { ...event, isEditing: false };
+          } else {
+            return event;
+          }
+        }),
+      });
     };
   
     handleEditInputOnChange = (e, id) => {
-      this.updateEventList(id, true, e);
+      this.setState({
+        eventList: this.state.eventList.map((event) => {
+          if (event.id === id) {
+            return {
+              ...event,
+              editEvent: {
+                ...event.editEvent,
+                [e.target.name]: e.target.value,
+              },
+            };
+          } else {
+            return event;
+          }
+        })
+      });
     };
   
     handleEditSaveOnClick=async(newEvent)=> {
+
+      this.setState({
+        eventList: this.state.eventList.map((event) => {
+          if (event.id === newEvent.id) {
+            return {
+              ...newEvent,
+              isEditing: false,
+            };
+          } else {
+            return event;
+          }
+        }),
+      });
+
       const event = {
         eventName: newEvent.eventName,
         startDate: toUnixDate(newEvent.startDate),
@@ -159,6 +172,7 @@ const withEventData = (Component) => {
         this.fetchAllEvents();
         
       }
+
     }
 
     render() {
@@ -166,6 +180,7 @@ const withEventData = (Component) => {
       return (
         <Component
           {...this.props}
+
           eventList={this.state.eventList}
           isShowAddEventRow={this.state.isShowAddEventRow}
           newEvent={this.state.newEvent}
