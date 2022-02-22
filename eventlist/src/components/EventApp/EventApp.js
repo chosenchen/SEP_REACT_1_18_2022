@@ -10,6 +10,7 @@ import {
 import { EventData } from "../../models/EventData";
 import EventDataRow from "../EventDataRow/EventDataRow";
 import Button from "../Button/Button";
+import {WithEventData} from "../HOC/WithEventData"
 
 class EventApp extends React.Component {
   state = {
@@ -219,4 +220,4 @@ class EventApp extends React.Component {
   }
 }
 
-export default EventApp;
+export default WithEventData(EventApp);
