@@ -1,27 +1,22 @@
 import react from "react";
 import { getAllEvents } from "../../utilities/event.api";
 import { convertDate } from "../../utilities/convertDate";
-
+import { withEventData } from "../../HOC/withEventDate";
 class ComingEvent extends react.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      upcomingEvents: [],
-      edit: false,
-    };
-  }
-
-  componentDidMount() {
-    getAllEvents().then((data) => {
-      const newEvents = data.filter(this.checkDate);
-      this.setState({ upcomingEvents: newEvents });
-    });
-  }
+  // componentDidMount() {
+  //   getAllEvents().then((data) => {
+  //     const newEvents = data.filter(this.checkDate);
+  //     this.setState({ upcomingEvents: newEvents });
+  //   });
+  // }
   checkDate(event) {
     return +event.startDate >= Date.now();
   }
 
   render() {
+    let { events } = this.props; // get events from HOC
+    const newEventList = events.filter(this.checkDate);
+
     return (
       <table className="event-app__table">
         <thead>
@@ -32,23 +27,17 @@ class ComingEvent extends react.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.upcomingEvents.map((event) => {
+          {newEventList.map((event) => {
             return (
               <tr key={event.id}>
                 <td>
-                  <input value={event.eventName} disabled={!this.state.edit} />
+                  <input value={event.eventName} disabled />
                 </td>
                 <td>
-                  <input
-                    value={convertDate(event.startDate)}
-                    disabled={!this.state.edit}
-                  />
+                  <input value={convertDate(event.startDate)} disabled />
                 </td>
                 <td>
-                  <input
-                    value={convertDate(event.endDate)}
-                    disabled={!this.state.edit}
-                  />
+                  <input value={convertDate(event.endDate)} disabled />
                 </td>
               </tr>
             );
@@ -58,4 +47,5 @@ class ComingEvent extends react.Component {
     );
   }
 }
-export default ComingEvent;
+const UpcomingEvents = withEventData(ComingEvent);
+export default UpcomingEvents;

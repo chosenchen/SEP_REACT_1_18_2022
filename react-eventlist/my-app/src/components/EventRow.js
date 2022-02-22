@@ -13,7 +13,7 @@ class EventRow extends React.Component {
     };
     this.onEdit = this.onEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.update = this.update.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onCancle = this.onCancle.bind(this);
   }
@@ -35,8 +35,8 @@ class EventRow extends React.Component {
     }
   }
 
-  update() {
-    this.props.edit(this.state.id, {
+  onUpdate() {
+    this.props.update(this.state.id, {
       eventName: this.state.eventName,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
@@ -89,7 +89,7 @@ class EventRow extends React.Component {
         <td>
           {this.state.edit ? (
             <div>
-              <button type="button" className="edit" onClick={this.update}>
+              <button type="button" className="edit" onClick={this.onUpdate}>
                 UPDATE
               </button>
               <button type="button" className="cancle" onClick={this.onCancle}>

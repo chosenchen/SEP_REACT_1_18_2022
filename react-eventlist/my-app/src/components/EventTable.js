@@ -8,6 +8,7 @@ import {
   deleteEvent,
   updateEvent,
 } from "../utilities/event.api";
+//import { withEventData } from "../HOC/withEventDate";
 
 class EventTable extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class EventTable extends React.Component {
   handleCloseAdd = (b) => {
     this.setState({ ...this.state, addNew: b });
   };
-  handleEdit = (id, event) => {
+  handleUpdate = (id, event) => {
     updateEvent(event, id).then((data) => {
       // getAllEvents().then((data) => {
       //   this.setState({
@@ -89,7 +90,7 @@ class EventTable extends React.Component {
                 startDate={event.startDate}
                 endDate={event.endDate}
                 id={event.id}
-                edit={this.handleEdit}
+                update={this.handleUpdate}
                 delete={this.handleDelete}
               />
             );
@@ -105,5 +106,5 @@ class EventTable extends React.Component {
     );
   }
 }
-
+//const EventManager = withEventData(EventTable);
 export default EventTable;
