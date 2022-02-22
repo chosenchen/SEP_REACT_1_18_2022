@@ -16,10 +16,7 @@ class App extends React.Component {
     super();
     let auth = sessionStorage.getItem("auth");
     if (auth === 'true') { auth = true } else if (auth === 'false') { auth = false };
-    let user = sessionStorage.getItem("user");
-    user = JSON.parse(user);
-    this.state = { auth: auth, authUser: user };
-    
+    this.state = { auth: auth };
   }
 
   render() {

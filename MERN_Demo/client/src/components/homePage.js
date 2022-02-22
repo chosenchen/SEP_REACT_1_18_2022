@@ -1,5 +1,7 @@
 import React from "react";
+
 import { API } from '../services/connectToDB';
+import { USER_API } from "../services/user.connectToDB";
 
 import LogCard from "./LogCard";
 
@@ -19,10 +21,19 @@ class HomePage extends React.Component {
     }
 
     async onUserLikedLog(e) {
+        let user = sessionStorage.getItem("user");
+        user = JSON.parse(user);
+
         const currentLog = await API.findRecord(e.target.id);
         currentLog.likes += 1;
+        currentLog.liked_users.push(user._id);
         API.editRecord(currentLog);
+        const currentUser = await USER_API.findUser(user.email);
+        currentUser.liked_posts.push(currentLog._id);
+        sessionStorage.setItem("user", JSON.stringify(currentUser));
+        USER_API.editUser(currentUser);
         window.location.reload();
+
     }
 
     render() {

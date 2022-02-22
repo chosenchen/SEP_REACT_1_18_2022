@@ -25,7 +25,6 @@ export const API = (() => {
     }
 
     const editRecord = async (log) => {
-        console.log([baseURL, 'update', log._id].join("/"));
         await axios.post([baseURL, 'update', log._id].join("/"), log);
     }
 

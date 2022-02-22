@@ -2,6 +2,8 @@ import axios from 'axios';
 
 export const USER_API = (() => {
 
+    const baseURL = "http://localhost:5000";
+
     const url = "http://localhost:5000/users";
 
     const addUser = async (user) => {
@@ -13,5 +15,9 @@ export const USER_API = (() => {
         return response.data;
     }
 
-    return { addUser, findUser }
+    const editUser = async (user) => {
+        await axios.post([baseURL, 'updateUser', user._id].join("/"), user);
+    }
+
+    return { addUser, findUser, editUser }
 })();

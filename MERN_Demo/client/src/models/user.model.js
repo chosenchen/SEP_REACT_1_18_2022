@@ -1,10 +1,11 @@
 export class UserData {
-    constructor(userName, email, password, confirm_password, profile_img) {
+    constructor(userName, email, password, confirm_password, profile_img, liked_posts) {
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.confirm_password = confirm_password;
         this.profile_img = profile_img;
+        this.liked_posts = liked_posts;
     }
 
     isValidForSave() {

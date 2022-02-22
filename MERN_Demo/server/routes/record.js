@@ -44,6 +44,7 @@ recordRoutes.route("/records/add").post(function (req, response) {
     city: req.body.city,
     country: req.body.country,
     likes: 0,
+    liked_users:[],
     user:{
       userName: req.body.user.userName,
       profile_img: req.body.user.profile_img
@@ -67,7 +68,12 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       url: req.body.url,
       city: req.body.city,
       country: req.body.country,
-      likes: req.body.likes
+      likes: req.body.likes,
+      liked_users: req.body.liked_users,
+      user:{
+        userName: req.body.user.userName,
+        profile_img: req.body.user.profile_img
+      }
     },
   };
   db_connect
@@ -91,7 +97,7 @@ recordRoutes.route("/:id").delete((req, response) => {
   });
 });
 
-// <--------------- RECORDS --------------->
+// <--------------- USERS --------------->
 
 // <---------- GET ---------->
 
@@ -126,7 +132,8 @@ recordRoutes.route("/users/add").post(function (req, response) {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
-    profile_img: req.body.profile_img
+    profile_img: req.body.profile_img,
+    liked_posts: []
   };
   db_connect.collection("users").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -134,5 +141,27 @@ recordRoutes.route("/users/add").post(function (req, response) {
   });
 });
 
+// <---------- PUT ---------->
+
+recordRoutes.route("/updateUser/:id").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  let newvalues = {
+    $set: {
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password,
+      profile_img: req.body.profile_img,
+      liked_posts: req.body.liked_posts
+    },
+  };
+  db_connect
+    .collection("users")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      response.json(res);
+    });
+});
 
 module.exports = recordRoutes;

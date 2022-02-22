@@ -32,6 +32,10 @@
     column-gap: 7.5px;
 }
 
+.like__btn__container{
+    margin-left: auto;
+}
+
 .card-header > p, .card-footer > p{
     margin: 0;
 }
