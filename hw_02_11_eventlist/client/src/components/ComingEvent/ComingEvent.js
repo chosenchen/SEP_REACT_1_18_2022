@@ -1,24 +1,25 @@
-import AllEvents from "../AllEvents/AllEvents";
-
 import React, { Component } from 'react';
-import API from "../API/API";
+import withEventList from "../HOC/withEventList";
 
-export default class ComingEvent extends Component {
+import "./ComingEvent.css"
+
+class ComingEvents extends Component {
     state = {
         allEvents : this.props.eventData,
         thead : ["EventName", "Start Date", "End Date"]}
     
     
   render() {
+      const {items} = this.props;
     return (
-        <div>
+        <section>
             <table>
                 <thead>
                     <tr>{this.state.thead?.map((e) =>
                             <th key={`${e}`}>{e}</th>
                     )}</tr></thead>
                 <tbody>
-                    {this.props.eventData?.map( (e) => 
+                    {items?.map( (e) => 
                     (
                         <tr key={e.id}>
                             <td><input type="text" disabled value = {e.eventName}/></td>
@@ -29,7 +30,9 @@ export default class ComingEvent extends Component {
                 </tbody>
              
             </table>
-        </div>
+        </section>
     )
   }
 }
+const ComingEventsPage = withEventList(ComingEvents);
+export default ComingEventsPage;
