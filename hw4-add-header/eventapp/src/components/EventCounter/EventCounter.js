@@ -3,16 +3,17 @@ import React from "react";
 import { withEventData } from "../HOC/withEventData";
 
 class EventCounter extends React.Component {
-
+    
     render() {
-        const { eventList } = this.props;
+        // const { events } = this.props;
         return (
-            <div className="counter">
-                <h1>Counter: {eventList.length}</h1>
-            </div>
+            // <div className="counter">
+            //     <h1>Counter: {events.length}</h1>
+            // </div>
+            this.props.children
         )
     }
 }
 
-const Counter = withEventData(EventCounter, rerender);
+const Counter = withEventData(EventCounter);
 export default Counter;

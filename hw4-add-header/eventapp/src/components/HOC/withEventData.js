@@ -8,24 +8,19 @@ import {
     editEvent,
 } from '../../services/event.api';
 
-export const withEventData = (Component, rerender) => {
+export const withEventData = (Component) => {
     return class NewComponent extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
                 events: [],
+                rerenderCounter: false,
                 eventListCols: ['Event Name', 'Start Date', 'End Date', 'Actions'],
                 commingEventCols: ['Event Name', 'Start Date', 'End Date'],
                 isShowAddEventRow: false,
                 newEvent: new EventData('', '' + Date.now(), '' + Date.now()),
             };
         }
-       
-        hadnleRerender = () => {
-            console.log('cur events', this.state.events);
-           return this.state.events;
-        }
-
         generateEditEventstate = (event) => {
             event.isEditing = false;
             event.editEvent = new EventData(
@@ -52,6 +47,14 @@ export const withEventData = (Component, rerender) => {
 
         componentDidMount() {
             this.fetchAllEvents();
+        }
+
+        componentDidUpdate(prevProps) {
+            console.log('prev', prevProps);
+            console.log('cur', this.props);
+        }
+        rerender = (events) => {
+            return (<h1>Counter: {events.length}</h1>);
         }
 
         hanldeAddEvent = () => {
@@ -157,6 +160,7 @@ export const withEventData = (Component, rerender) => {
             return (
                 <Component eventList={events}
                     {...restProps}
+                    {...this.props}
                     hanldeAddEvent={this.hanldeAddEvent}
                     hanldeEditSave={this.hanldeEditSave}
                     hanldeCancel={this.hanldeCancel}
@@ -170,8 +174,9 @@ export const withEventData = (Component, rerender) => {
                     eventListCols={this.state.eventListCols}
                     commingEventCols={this.state.commingEventCols}
                     newEvent={this.state.newEvent}
-                    // hadnleRerender={(events) => rerender(events)}
-                > 
+                    ifRerender={this.state.rerenderCounter}
+                >
+                    {this.rerender(events)}
                 </Component>
             );
         }

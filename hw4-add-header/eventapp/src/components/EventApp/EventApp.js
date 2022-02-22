@@ -9,7 +9,6 @@ import './EventApp.css';
 class EventsApp extends React.Component {
 
   render() {
-    console.log(this.props);
     const { hanldeAddEvent, eventListCols, eventList, hanldeEditSave, hanldeCancel, hanldeOnChangeEdit, hanldeEdit, hanldeDelete, hanldeSaveAddNew, handleClose, hanldeOnChange, isShowAddEventRow, newEvent } = this.props;
     return (
       <section className="event-app">           
