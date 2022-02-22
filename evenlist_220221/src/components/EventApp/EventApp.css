@@ -1,0 +1,44 @@
+.event-app{
+    width: 1000px;
+    box-shadow: 1px 1px 5px #888888;
+}
+
+.event-app header{
+   height: 60px;
+   display: flex;
+   align-items: center;
+   padding-left: 15px;
+}
+
+.event-app__table{
+    width: 100%;
+    border-collapse: collapse;
+   
+}
+
+.event-app__table tr {
+   height: 60px;
+   border-top: 1px solid rgba(211, 211, 211, 0.481);
+}
+
+thead{
+    background-color: lightblue;
+}
+
+.event-app__table th{
+    text-align: left;
+    padding: 0 20px;
+ }
+ .event-app__table th:nth-child(4){
+    text-align: right;
+ }
+
+ .event-app__table td{
+    padding: 0 20px;
+ }
+
+
+ .event-app__table td input{
+   padding: 5px 15px;
+    
+ }
