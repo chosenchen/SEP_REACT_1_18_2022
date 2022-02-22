@@ -1,31 +1,37 @@
 import React from "react";
+import { withEventData } from "../HOC/withEventData";
 import './ComingEvents.css';
 
 class ComingEvents extends React.Component {
 
     render() {
-        const { events, dataCol } = this.props;
+        const { eventList, commingEventCols } = this.props;
 
         return (
-            <table className="coming-events__table">
-                <thead className="coming-events__header">
-                    <tr>
-                        {dataCol?.map((col) => (
-                            <th key={`${col}`}>{col}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {events.map(event => (
-                        <tr key={event.id}>
-                            <td>{event.eventName}</td>
-                            <td>{event.startDate}</td>
-                            <td>{event.endDate}</td>
+            <section>
+                <header className="coming-events__header">Coming Events</header>
+                <table className="coming-events__table">
+                    <thead className="coming-events__tb-header">
+                        <tr>
+                            {commingEventCols?.map((col) => (
+                                <th key={`${col}`}>{col}</th>
+                            ))}
                         </tr>
-                    ))}
-                </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                        {eventList.map(event => (
+                            <tr key={event.id}>
+                                <td>{event.eventName}</td>
+                                <td>{event.startDate}</td>
+                                <td>{event.endDate}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+           </section>
             )
     }
 }
-export default ComingEvents;
+
+const UpComingEvents = withEventData(ComingEvents);
+export default UpComingEvents;

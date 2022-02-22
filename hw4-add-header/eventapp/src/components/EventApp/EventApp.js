@@ -1,19 +1,23 @@
 import React from 'react';
-import './EventApp.css';
+
 import Button from '../Button/Button';
 import EventList from '../EventList/EventList';
+import { withEventData } from '../HOC/withEventData';
+import './EventApp.css';
 
-class EventApp extends React.Component {
+
+class EventsApp extends React.Component {
 
   render() {
-    const { hanldeAddEvent, dataCol, events, hanldeEditSave, hanldeCancel, hanldeOnChangeEdit, hanldeEdit, hanldeDelete, hanldeSaveAddNew, handleClose, hanldeOnChange, isShowAddEventRow, newEvent } = this.props;
+    console.log(this.props);
+    const { hanldeAddEvent, eventListCols, eventList, hanldeEditSave, hanldeCancel, hanldeOnChangeEdit, hanldeEdit, hanldeDelete, hanldeSaveAddNew, handleClose, hanldeOnChange, isShowAddEventRow, newEvent } = this.props;
     return (
-      <section className="event-app">
+      <section className="event-app">           
         <header className="event-app__header">
           <Button onClick={hanldeAddEvent}>Add Event</Button>
         </header>
-        <EventList dataCol={dataCol}
-          events={events}
+        <EventList dataCol={eventListCols}
+          events={eventList}
           hanldeEditSave={hanldeEditSave}
           hanldeCancel={hanldeCancel}
           hanldeOnChangeEdit={hanldeOnChangeEdit}
@@ -29,5 +33,7 @@ class EventApp extends React.Component {
     );
   }
 }
+
+const EventApp = withEventData(EventsApp);
 
 export default EventApp;

@@ -5,16 +5,24 @@
 }
 
 /* .coming-events__header { */
-  /* height: 60px;
+/* height: 60px;
   display: flex;
   align-items: center; */
 /* } */
+
+.coming-events__header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  color: rgb(150, 169, 230);
+}
 
 .coming-events__table tr {
   height: 60px;
   border-top: 1px solid rgba(0, 0, 0, 0.16);
 }
-.coming-events__header th {
+.coming-events__tb-header th {
   text-align: left;
   background-color: rgb(150, 169, 230);
   padding: 0 20px;
