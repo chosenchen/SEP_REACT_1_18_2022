@@ -1,44 +1,47 @@
 import React from 'react';
-
-import Header from './components/Header';
 import EventApp from './components/EventApp/EventApp';
-import UpComingEvents from './components/UpComingEvents';
-
+import UpComingEvent from './components/UpComingEvents/UpComingEvents';
 import './App.css';
 
+import Header from './components/Header/Header';
+
+const PAGESINFO = {
+  EventManager: 'EventManager',
+  UpComingEvent: 'UpComingEvent',
+};
 class App extends React.Component {
+  state = {
+    currentPage: PAGESINFO.EventManager,
+    pagesInfo: PAGESINFO,
+  };
 
-  constructor() {
-    super();
-    this.state = { showEventList: false, UpComingEvents: false };
-    this.onPageChangeEventList = this.onPageChangeEventList.bind(this);
-    this.onPageUpComingEvents = this.onPageUpComingEvents.bind(this);
-  }
-
-  onPageChangeEventList() {
-    this.setState({ showEventList: true });
-    this.setState({ UpComingEvents: false });
-  }
-
-
-  onPageUpComingEvents() {
-    this.setState({ UpComingEvents: true });
-    this.setState({ showEventList: false });
-  }
+  hanldePageChange = (newPageInfo) => {
+    this.setState({
+      currentPage: newPageInfo,
+    });
+  };
 
   render() {
+    const { currentPage, pagesInfo } = this.state;
+
+    let curPage = null;
+    switch (currentPage) {
+      case PAGESINFO.EventManager:
+        curPage = <EventApp></EventApp>;
+        break;
+      case PAGESINFO.UpComingEvent:
+        curPage = <UpComingEvent></UpComingEvent>;
+        break;
+      default:
+    }
+
     return (
       <div className="App">
-        <Header className='Header'
-          onPageChangeEventList={this.onPageChangeEventList}
-          onPageUpComingEvents={this.onPageUpComingEvents}
-        />
-        {this.state.showEventList ?
-          <EventApp /> : null
-        }
-        {this.state.UpComingEvents ?
-          <UpComingEvents /> : null
-        }
+        <Header
+          pagesInfo={pagesInfo}
+          hanldePageChange={this.hanldePageChange}
+        ></Header>
+        {curPage}
       </div>
     );
   }
