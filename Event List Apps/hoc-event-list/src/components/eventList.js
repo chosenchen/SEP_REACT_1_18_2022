@@ -1,0 +1,69 @@
+import React from "react";
+import Event from "./event.js";
+import NewEvent from '../components/newEvent';
+import withEventList from ".././HOC/withEventList.js";
+
+class EventList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { add: false };
+    this.handleAddOnClick = this.handleAddOnClick.bind(this);
+    this.handleCloseOnClick = this.handleCloseOnClick.bind(this);
+  }
+
+  handleAddOnClick(e) {
+    this.setState({ add: true });
+  }
+
+  handleCloseOnClick(e) {
+    if (e.target.name === "new") {
+      this.setState({ add: false });
+    }
+  }
+
+  render() {
+    return (
+      <main className="event-list">
+        <header className="event-list__header">
+          <button
+            className="event-list__addBtn"
+            onClick={this.handleAddOnClick}
+          >
+            ADD NEW
+          </button>
+        </header>
+
+        <table className="event-list__table">
+          <thead>
+            <tr className="event-list__table-row event-list__table-row-header">
+              <th>Event name</th>
+              <th>Start date</th>
+              <th>End date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody className="event-list__entry-container">
+            {this.props.eventList?.map((event, index) => {
+              return (
+                <Event
+                  key={index}
+                  eventName={event.eventName}
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  eventId={event.id}
+                />
+              );
+            })}
+            {this.state.add && (
+              <NewEvent handleCloseOnClick={this.handleCloseOnClick} />
+            )}
+          </tbody>
+        </table>
+      </main>
+    );
+  }
+}
+
+const EventListWithEventList = withEventList(EventList);
+
+export default EventListWithEventList;
