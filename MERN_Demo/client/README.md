@@ -1,9 +1,7 @@
-# Start Project
-    cd MERN_Demo/server
-    node server.js
+# Project Client Side
 
-    cd MERN_Demo/client
-    npm run start
+- User needs to log in or create an account to perform most actions
 
-## Technology Stack
-    Mongo Database, React.js, Express, Node.js
+- Users are stored within mongoDB
+
+- Users that have logged in can create a blog post and like their own, or others posts
