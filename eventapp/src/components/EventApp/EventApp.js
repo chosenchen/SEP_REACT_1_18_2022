@@ -27,6 +27,12 @@ const EventApp = ({
     new EventData("", "" + Date.now(), "" + Date.now())
   );
 
+  useEffect(() => {
+    return () => {
+      console.log("EVENTAPP componentWillUnmount ");
+    };
+  }, []);
+
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
@@ -86,13 +92,7 @@ const EventApp = ({
     }
   };
 
-  useEffect(() => {
-    return () => {
-      console.log("EVENTAPP componentWillUnmount ");
-    };
-  }, []);
-
-  console.log("render Event App");
+  // console.log("render Event App");
 
   return (
     <EventTable
