@@ -1,9 +1,9 @@
 .event-app {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 900px;
-    height:900px;
-    top: 4rem;
-    position: absolute;
+    /* height:900px; */
+    /* top: 4rem;
+    position: absolute; */
 }
   .event-app__table {
     width: 100%;

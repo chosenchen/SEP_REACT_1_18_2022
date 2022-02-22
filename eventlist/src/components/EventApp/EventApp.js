@@ -1,22 +1,22 @@
-import React from 'react';
-import './EventApp.css';
+import React from "react";
+import "./EventApp.css";
 import {
   getAllEvents,
   addNewEvent,
   deleteEvent,
   editEvent,
-} from '../../services/event.api';
+} from "../../services/event.api";
 
-import { EventData } from '../../models/EventData';
-import EventDataRow from '../EventDataRow/EventDataRow';
-import Button from '../Button/Button';
+import { EventData } from "../../models/EventData";
+import EventDataRow from "../EventDataRow/EventDataRow";
+import Button from "../Button/Button";
 
 class EventApp extends React.Component {
   state = {
     events: [],
-    dataCol: ['Event Name', 'Start Date', 'End Date', 'Actions'],
+    dataCol: ["Event Name", "Start Date", "End Date", "Actions"],
     isShowAddEventRow: false,
-    newEvent: new EventData('', '' + Date.now(), '' + Date.now()),
+    newEvent: new EventData("", "" + Date.now(), "" + Date.now()),
   };
 
   generateEditEventstate = (event) => {
@@ -74,7 +74,7 @@ class EventApp extends React.Component {
   handleClose = () => {
     this.setState({
       isShowAddEventRow: false,
-      newEvent: new EventData('', '' + Date.now(), '' + Date.now()),
+      newEvent: new EventData("", "" + Date.now(), "" + Date.now()),
     });
   };
 
@@ -89,11 +89,11 @@ class EventApp extends React.Component {
       });
       this.handleClose();
     } else {
-      alert('inValid');
+      alert("inValid");
     }
   };
   hanldeEdit = ({ id }) => {
-    console.log('edit', id);
+    console.log("edit", id);
     this.setState({
       events: this.state.events.map((event) => {
         if (event.id === id) {
@@ -167,11 +167,11 @@ class EventApp extends React.Component {
                   event={event.editEvent}
                   actions={[
                     {
-                      actionName: 'Save',
+                      actionName: "Save",
                       actionFn: this.hanldeEditSave,
                     },
                     {
-                      actionName: 'Cancel',
+                      actionName: "Cancel",
                       actionFn: this.hanldeCancel,
                     },
                   ]}
@@ -183,11 +183,11 @@ class EventApp extends React.Component {
                   event={event}
                   actions={[
                     {
-                      actionName: 'Edit',
+                      actionName: "Edit",
                       actionFn: this.hanldeEdit,
                     },
                     {
-                      actionName: 'Delete',
+                      actionName: "Delete",
                       actionFn: this.hanldeDelete,
                     },
                   ]}
@@ -201,11 +201,11 @@ class EventApp extends React.Component {
                 event={this.state.newEvent}
                 actions={[
                   {
-                    actionName: 'Save',
+                    actionName: "Save",
                     actionFn: this.hanldeSaveAddNew,
                   },
                   {
-                    actionName: 'Close',
+                    actionName: "Close",
                     actionFn: this.handleClose,
                   },
                 ]}
