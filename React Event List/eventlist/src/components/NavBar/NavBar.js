@@ -1,5 +1,6 @@
 import React from 'react';
 import './NavBar.css';
+import EventCounter from '.././EventCounter/EventCounter.js';
 
 class NavBar extends React.Component{
 
@@ -9,7 +10,9 @@ class NavBar extends React.Component{
                 <ul>
                     <li name="eventList" onClick={this.props.handleNavLinkOnClick}>Event List</li>
                     <li name="upcomming" onClick={this.props.handleNavLinkOnClick}>Upcomming Events</li>
+                    <li><EventCounter/></li>
                 </ul>
+               
             </header>
         )
     }

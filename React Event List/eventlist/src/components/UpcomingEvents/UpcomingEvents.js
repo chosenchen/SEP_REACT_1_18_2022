@@ -3,28 +3,20 @@ import { appApi } from "../../appApi.js";
 
 import Event from ".././Event.js";
 
+import withEventData from '.././HOC/withEventData.js';
+
+
+
 class UpcomingEvents extends React.Component {
-  state = {
-    upcomingEvents: [],
-  };
 
-  async componentDidMount() {
-    const events = await appApi.getEvents();
-
-
-    const newEvents = [];
-
-    events.forEach((event) => {
-      if (+event.startDate >= Date.now()) {
-
-        return newEvents.push(event);
-      }
-    });
-
-    this.setState({ upcomingEvents: newEvents });
-  }
 
   render() {
+    const newEvents = this.props.eventList.filter((event)=>{
+      if(+event.startDate >= Date.now()){
+        return event
+      }
+    })
+
     return (
       <main className="event-list upcoming-events">
         <header className="event-list__header">
@@ -41,7 +33,7 @@ class UpcomingEvents extends React.Component {
           </thead>
 
           <tbody className="event-list__entry-container">
-            {this.state.upcomingEvents?.map((event) => {
+            {newEvents?.map((event) => {
               return (
                 <Event
                   key={event.id}
@@ -60,4 +52,6 @@ class UpcomingEvents extends React.Component {
   }
 }
 
-export default UpcomingEvents;
+const UpcomingEventsWithSubscription = withEventData(UpcomingEvents);
+
+export default UpcomingEventsWithSubscription;

@@ -3,6 +3,7 @@ import EventList from './components/EventList/EventList.js';
 import NavBar from "./components/NavBar/NavBar.js";
 import UpcomingEvents from "./components/UpcomingEvents/UpcomingEvents.js";
 
+
 class App extends React.Component {
 
   state = {

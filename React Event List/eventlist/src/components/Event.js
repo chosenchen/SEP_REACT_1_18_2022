@@ -38,8 +38,6 @@ export default class Event extends React.Component {
   handleDeleteOnClick() {
     appApi.deleteEvent(this.state.eventId);
     window.location.reload();
-    // this.forceUpdate();
-
   }
 
   handleSaveOnClick() {
