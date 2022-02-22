@@ -20,8 +20,7 @@ const withEventData=(Component)=>{
                 startDate: '' + Date.now(), //Conver number to string
                 endDate: '' + Date.now() //Conver number to string
     
-            },
-            counter: 0
+            }
         }
      } 
 

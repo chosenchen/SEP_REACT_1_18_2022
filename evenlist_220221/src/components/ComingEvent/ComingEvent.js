@@ -15,7 +15,7 @@ class ComingEvent extends React.Component {
   
  
   render() {
-    let {len, events} = this.props 
+    let {events} = this.props 
   
     return (
       <section className='event-app'>
