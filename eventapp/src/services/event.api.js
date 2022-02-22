@@ -1,59 +1,45 @@
 const baseURL = "http://localhost:9000";
 const path = "events";
 
-// export const getAllEvents = () => {
-//   const controller = new AbortController();
-//   const signal = controller.signal;
-//   return {
-//     controller,
-//     fetchResult: fetch([baseURL, path].join('/'), {
-//       method: 'GET',
-//       signal,
-//     }).then(
-//       (response) =>
-//         new Promise((res, rej) => {
-//           setTimeout(() => {
-//             res(response.json());
-//           }, 3000);
-//         })
-//     ),
-//   };
-// };
+const request = async (url, option) => {
+  // config
+  const defaultOption = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  };
 
-export const getAllEvents = () =>
-  fetch([baseURL, path].join("/"), {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  }).then((response) => response.json());
+  const { signal, ...restOptions } = option;
 
-export const addNewEvent = (newEvent) =>
-  fetch([baseURL, path].join("/"), {
+  let response;
+  if (signal) {
+    response = await fetch(url, { ...defaultOption, ...restOptions, signal });
+  } else {
+    response = await fetch(url, { ...defaultOption, ...restOptions });
+  }
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(response.json());
+    }, 3000);
+  });
+};
+
+export const getAllEvents = (signal = null) =>
+  request([baseURL, path].join("/"), { method: "GET", signal });
+
+export const addNewEvent = (newEvent, signal = null) =>
+  request([baseURL, path].join("/"), {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
     body: JSON.stringify(newEvent),
-  }).then((response) => response.json());
+    signal,
+  });
 
-export const deleteEvent = (event) =>
-  fetch([baseURL, path, event.id].join("/"), {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  }).then((response) => response.json());
+export const deleteEvent = (event, signal = null) =>
+  request([baseURL, path, event.id].join("/"), { method: "DELETE", signal });
 
-export const editEvent = (editEvent) =>
-  fetch([baseURL, path, editEvent.id].join("/"), {
+export const editEvent = (editEvent, signal = null) =>
+  request([baseURL, path, editEvent.id].join("/"), {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
     body: JSON.stringify(editEvent),
-  }).then((response) => response.json());
+    signal,
+  });

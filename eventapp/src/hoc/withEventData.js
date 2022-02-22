@@ -25,12 +25,12 @@ export const withEventData = (WrappedComponent) => {
       );
     };
     componentWillUnmount() {
-      // if (this.controllerList) {
-      //   this.controllerList.forEach((c) => {
-      //     console.log('cancelAPI call');
-      //     c.abort();
-      //   });
-      // }
+      if (this.controllerList) {
+        this.controllerList.forEach((c) => {
+          console.log("cancelAPI call");
+          c.abort();
+        });
+      }
     }
     // API CALL
     fetchAllEvents = () => {
@@ -52,17 +52,27 @@ export const withEventData = (WrappedComponent) => {
       //   });
       // });
 
-      getAllEvents().then((data) => {
-        const events = data.map(({ eventName, startDate, endDate, id }) => {
-          const newEvent = new EventData(eventName, startDate, endDate, id);
-          this.generateEditEventstate(newEvent);
-          return newEvent;
-        });
+      const controller = new AbortController();
+      if (this.controllerList) {
+        this.controllerList.push(controller);
+      } else {
+        this.controllerList = [controller];
+      }
+      getAllEvents(controller.signal)
+        .then((data) => {
+          const events = data.map(({ eventName, startDate, endDate, id }) => {
+            const newEvent = new EventData(eventName, startDate, endDate, id);
+            this.generateEditEventstate(newEvent);
+            return newEvent;
+          });
 
-        this.setState({
-          events,
+          this.setState({
+            events,
+          });
+        })
+        .catch((err) => {
+          console.warn(err);
         });
-      });
     };
     // API CALL
     handleUpdateEvent = (updateEvent) => {
