@@ -4,10 +4,10 @@
     align-items: center;
     position: fixed;
     top: 0;
-    /* left: calc(((100vw - 600px) / 2)px); */
-    background-color: rgb(184, 225, 238);
-    width: 800px;
+    background-color: rgb(192, 202, 240);
+    width: 1000px;
     height: 60px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .app-header ul {
@@ -19,10 +19,11 @@
 .app-header ul li {
     font-size: large;
     font-weight: bold;
-    margin: 15px 50px;
+    margin: 15px 100px;
     cursor: pointer;
     color: #333;
-    padding: 10px 5px 25px 5px;
+    padding: 5px 5px 30px 5px;
+    text-align: center;
 }
 
 .app-header ul li:hover {
