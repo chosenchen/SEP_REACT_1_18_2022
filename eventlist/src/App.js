@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header/Header";
 import ComingEvent from "./components/ComingEvent/ComingEvent";
 import EventApp from "./components/EventApp/EventApp";
+import EventCounter from "./components/EventCounter";
 import "./App.css";
 
 class App extends React.Component {
@@ -26,6 +27,7 @@ class App extends React.Component {
           showEventList={this.showEventList}
           showComingEvents={this.showComingEvents}
         />
+        <EventCounter />
         {this.state.isEventList ? <EventApp /> : null}
         {this.state.isComingEvents ? <ComingEvent /> : null}
       </div>

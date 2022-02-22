@@ -23,9 +23,11 @@ class EventApp extends React.Component {
       isShowAddEventRow: true,
     });
   };
+  // hanldeOnChange is undefined
   hanldeOnChange = ({ target: { name, value } }) => {
     this.setState({
       newEvent: {
+        
         ...this.state.newEvent,
         [name]: value,
       },
@@ -35,7 +37,7 @@ class EventApp extends React.Component {
   hanldeDelete = (id) => {
     deleteEvent(id)
       .then(() => {
-        this.fetchAllEvents();
+        this.props.fetchAllEvents();
       })
       .catch((error) => {
         console.warn(error);
@@ -56,7 +58,7 @@ class EventApp extends React.Component {
     if (newEvent.isValidForSave()) {
       addNewEvent(newEvent).then((data) => {
         //this.setState({ events: [data, ...this.state.events] });
-        this.fetchAllEvents();
+        this.props.fetchAllEvents();
       });
       this.handleClose();
     } else {
@@ -66,7 +68,7 @@ class EventApp extends React.Component {
   hanldeEdit = ({ id }) => {
     console.log("edit", id);
     this.setState({
-      events: this.state.events.map((event) => {
+      events: this.props.events.map((event) => {
         if (event.id === id) {
           return { ...event, isEditing: true };
         } else {
@@ -78,7 +80,7 @@ class EventApp extends React.Component {
 
   hanldeOnChangeEdit = ({ target: { name, value } }, { id }) => {
     this.setState({
-      events: this.state.events.map((event) => {
+      events: this.props.events.map((event) => {
         if (event.id === id) {
           return { ...event, editEvent: { ...event.editEvent, [name]: value } };
         } else {
@@ -90,7 +92,7 @@ class EventApp extends React.Component {
 
   hanldeCancel = (id) => {
     this.setState({
-      events: this.state.events.map((event) => {
+      events: this.props.events.map((event) => {
         if (event.id === id) {
           return { ...event, isEditing: false };
         } else {
@@ -102,7 +104,7 @@ class EventApp extends React.Component {
   hanldeEditSave = (editEventObj) => {
     editEvent(editEventObj).then((data) => {
       this.setState({
-        events: this.state.events.map((event) => {
+        events: this.props.events.map((event) => {
           if (event.id === editEventObj.id) {
             return {
               ...editEventObj,
@@ -122,7 +124,7 @@ class EventApp extends React.Component {
     return (
       <section className="event-app">
         <header className="event-app__header">
-          <Button onClick={this.hanldeAddEvent}>Add Event</Button>
+          <Button onClick={this.hanldeAddEvent}>Add New</Button>
         </header>
         <table className="event-app__table">
           <thead>
@@ -133,6 +135,7 @@ class EventApp extends React.Component {
             </tr>
           </thead>
           <tbody>
+            {/* can not read property of undefined */}
             {events?.map((event) =>
               event.isEditing ? (
                 <EventDataRow
