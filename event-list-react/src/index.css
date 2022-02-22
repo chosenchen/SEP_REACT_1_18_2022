@@ -41,6 +41,13 @@ body{
   margin: 1rem;
 }
 
+.counter{
+  background-color: white;
+  color: var(--button-blue);
+  padding: 10px;
+  font-weight: bold;
+}
+
 .add-new-btn-container{
   background-color: white;
   padding: 10px;

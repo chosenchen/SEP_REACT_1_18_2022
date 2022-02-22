@@ -20,20 +20,20 @@ class AddForm extends React.Component{
   }
 
   handleSubmit(){
-    const {getEvents, addEvent, setList, setAdding} = this.props; 
+    const {setAdding, addNewEvent} = this.props; 
     const event = {
       eventName : this.state.eventName,
       startDate: dateConvert(this.state.startDate),
       endDate: dateConvert(this.state.endDate)
     }
 
-    addEvent(event).then(getEvents).then((data) => setList(data)).then(setAdding);
+    addNewEvent(event).then(setAdding);
   }
 
   render(){
-    const {setAdding, eventIndex, eventUpcoming} = this.props;
+    const {setAdding} = this.props;
     return (
-      <tr>
+      <tr className='tr-index'>
         <td><input className='input-box' type='text' onChange={this.handleChange('eventName')}/></td>
         <td><input className='input-box' type='date' onChange={this.handleChange('startDate')}/></td>
         <td><input className='input-box' type='date' onChange={this.handleChange('endDate')}/></td>
@@ -44,6 +44,6 @@ class AddForm extends React.Component{
       </tr>
     )
   }
-}
+} 
 
 export default AddForm;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {dateCalc, dateConvert, dateValidation} from '../util/date_util';
 
-class EventItemIndex extends React.Component{
+class EventItemRow extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -35,7 +35,7 @@ class EventItemIndex extends React.Component{
   }
 
   handleSubmit(){
-    const {getEvents, editEvent, setList} = this.props;
+    const {editEvent} = this.props;
     const {event} = this.state ; 
     const newEvent = {
       id : this.props.event.id,
@@ -44,12 +44,12 @@ class EventItemIndex extends React.Component{
       endDate: dateConvert(event.endDate)
     }
 
-    editEvent(newEvent).then(getEvents).then((data) => setList(data)).then(this.setEditing);
+    editEvent(newEvent).then(this.setEditing);
   }
 
   handleDelete(){
-    const {event, deleteEvent, getEvents, setList} = this.props;
-    deleteEvent(event.id).then(getEvents).then((data) => setList(data))
+    const {event, deleteEvent} = this.props;
+    deleteEvent(event.id)
   }
   
   render(){
@@ -90,4 +90,4 @@ class EventItemIndex extends React.Component{
   }
 }
 
-export default EventItemIndex; 
+export default EventItemRow; 

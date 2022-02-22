@@ -1,6 +1,6 @@
 import React from 'react';
-import EventIndex from './Events/event_index';
-import EventUpcoming from './Events/event_upcoming_index';
+import EventIndex from './Events/eventList';
+import EventUpcoming from './Events/eventUpcomingList';
 import Header from './Events/header';
 
 class App extends React.Component {
@@ -29,7 +29,7 @@ class App extends React.Component {
         setCurrentApp={this.setCurrentApp}
         />
         {eventIndex && <EventIndex eventUpcoming={eventUpcoming}/>}
-        {eventUpcoming && <EventUpcoming eventUpcoming={eventUpcoming}/>}
+        {eventUpcoming && <EventUpcoming test={'Hello'} eventUpcoming={eventUpcoming}/>}
       </div>
     )
   }

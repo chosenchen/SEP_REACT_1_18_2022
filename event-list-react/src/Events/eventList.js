@@ -1,36 +1,26 @@
 import React from 'react';
 import { API } from '../util/api';
-import EventItemIndex from './event_item_index';
-import AddForm from './add_form';
+import EventItemIndex from './eventItemRow';
+import { withEventData } from '../HOC/withEventData';
+import AddForm from './addForm';
 
 class EventIndex extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       adding : false ,
-      eventList : [] ,
     }
 
     this.setAdding = this.setAdding.bind(this);
-    this.setList = this.setList.bind(this);
   }
 
   setAdding(){
     this.setState({adding : !this.state.adding});
   }
 
-  setList(data){
-    this.setState({eventList: data});
-  }
-
-  componentDidMount(){
-    API.getEvents().then((data) => {
-      this.setState({ eventList : data });
-    });
-  }
-
   render(){
-    const {eventList, adding} = this.state;
+    const {eventList} = this.props;
+    const {adding} = this.state;
     return (
       <div>
         <div className='add-new-btn-container'>
@@ -51,10 +41,8 @@ class EventIndex extends React.Component{
                 <EventItemIndex 
                 key={`event-${event.id}`} 
                 event={event}
-                getEvents={API.getEvents}
-                editEvent = {API.editEvent}
-                deleteEvent = {API.deleteEvent}
-                setList={this.setList}
+                editEvent = {this.props.editEvent}
+                deleteEvent = {this.props.deleteEvent}
                 eventUpcoming={this.props.eventUpcoming}
                 />
               )
@@ -62,9 +50,9 @@ class EventIndex extends React.Component{
             {
               adding && <AddForm 
               getEvents={API.getEvents}
-              addEvent={API.addEvent} 
+              addNewEvent={this.props.addNewEvent} 
               setAdding={this.setAdding}
-              setList={this.setList}/>
+              />
             }
           </tbody>
         </table>
@@ -73,4 +61,6 @@ class EventIndex extends React.Component{
   }
 }
 
-export default EventIndex;
+const EventManager = withEventData(EventIndex);
+
+export default EventManager;

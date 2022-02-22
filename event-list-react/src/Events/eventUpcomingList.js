@@ -1,24 +1,12 @@
 import React from 'react';
 import { API } from '../util/api';
-import EventItemIndex from './event_item_index';
+import EventItemIndex from './eventItemRow';
 import { upcomingDate } from '../util/date_util';
+import {withEventData} from '../HOC/withEventData';
 
-class EventIndex extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      eventList : [] ,
-    }
-  }
-
-  componentDidMount(){
-    API.getEvents().then((data) => {
-      this.setState({ eventList : data });
-    });
-  }
-
+class EventUpcomingIndex extends React.Component{
   render(){
-    let {eventList} = this.state;
+    let {eventList} = this.props;
     eventList = eventList.filter((day) => upcomingDate(day.startDate));
     return (
       <div>
@@ -51,4 +39,6 @@ class EventIndex extends React.Component{
   }
 }
 
-export default EventIndex;
+const UpcomingEvent = withEventData(EventUpcomingIndex);
+
+export default UpcomingEvent;
