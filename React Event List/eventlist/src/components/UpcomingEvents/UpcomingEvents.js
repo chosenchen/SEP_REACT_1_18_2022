@@ -3,19 +3,17 @@ import { appApi } from "../../appApi.js";
 
 import Event from ".././Event.js";
 
-import withEventData from '.././HOC/withEventData.js';
+import withEventData from ".././HOC/withEventData.js";
 
-
+import { toUnixDate } from "../.././utils.js";
 
 class UpcomingEvents extends React.Component {
-
-
   render() {
-    const newEvents = this.props.eventList.filter((event)=>{
-      if(+event.startDate >= Date.now()){
-        return event
+    const newEvents = this.props.eventList.filter((event) => {
+      if (+toUnixDate(event.startDate) >= Date.now()) {
+        return event;
       }
-    })
+    });
 
     return (
       <main className="event-list upcoming-events">
@@ -34,16 +32,7 @@ class UpcomingEvents extends React.Component {
 
           <tbody className="event-list__entry-container">
             {newEvents?.map((event) => {
-              return (
-                <Event
-                  key={event.id}
-                  eventName={event.eventName}
-                  startDate={event.startDate}
-                  endDate={event.endDate}
-                  eventId={event.id}
-                  upcoming={true}
-                />
-              );
+              return <Event key={event.id} event={event} upcoming={true} />;
             })}
           </tbody>
         </table>
