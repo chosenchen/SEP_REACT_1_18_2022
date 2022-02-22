@@ -2,6 +2,7 @@ import React from 'react'
 import './EventApp.css'
 import Button from '../Button/Button'
 import withEventData from '../HOC/withEventData'
+import EventCounter from '../Counter/Counter'
 
 class EventApp extends React.Component {
 
@@ -12,7 +13,8 @@ class EventApp extends React.Component {
   
         return (
             <section className='event-app'>
-                <div>{`Total items: ${len}`}</div>
+                {/* <div>{`Total items: ${len}`}</div> */}
+                <EventCounter len={len} />
                 <header className="event-app__header">
                     <Button onClick={handleAddEvent}>Add Event</Button>
                 </header>

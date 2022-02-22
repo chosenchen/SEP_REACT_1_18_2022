@@ -1,8 +1,4 @@
 import React from 'react'
-import {
-  getAllEvents
-} from '../../services/event.api'
-import EventData from '../../models/EventData'
 import '../EventApp/EventApp.css'
 import withEventData from '../HOC/withEventData'
 

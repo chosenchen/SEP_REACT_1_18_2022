@@ -19,40 +19,22 @@
       "id": 21
     },
     {
-      "eventName": "TEST6",
+      "eventName": "TEST-6",
       "startDate": "1645660800000",
-      "endDate": "1646092800000",
+      "endDate": "1645833600000",
       "id": 22
     },
     {
-      "eventName": "Test3",
-      "startDate": "1644883200000",
-      "endDate": "1645660800000",
+      "eventName": "TEST-7",
+      "startDate": "1645142400000",
+      "endDate": "1645833600000",
       "id": 23
     },
     {
-      "eventName": "Hello",
-      "startDate": "1643673600000",
-      "endDate": "1645056000000",
+      "eventName": "Test -8",
+      "startDate": "1645574400000",
+      "endDate": "1645833600000",
       "id": 24
-    },
-    {
-      "eventName": "test",
-      "startDate": "1645660800000",
-      "endDate": "1645747200000",
-      "id": 25
-    },
-    {
-      "eventName": "Test6",
-      "startDate": "1644278400000",
-      "endDate": "1644969600000",
-      "id": 26
-    },
-    {
-      "eventName": "Test9",
-      "startDate": "1646265600000",
-      "endDate": "1646956800000",
-      "id": 27
     }
   ]
 }
