@@ -1,0 +1,22 @@
+import React from 'react';
+import './Button.css';
+
+// PureComponent
+const Button = React.memo(
+  ({ children, ...restProps }) => {
+
+    return (
+      <button className="btn" {...restProps}>
+        {children}
+      </button>
+    );
+  },
+  (prevProps, nextProps) => {
+    return prevProps.children === nextProps.children &&
+      prevProps.onClick === nextProps.onClick
+      ? true
+      : false;
+  }
+);
+
+export default Button;
