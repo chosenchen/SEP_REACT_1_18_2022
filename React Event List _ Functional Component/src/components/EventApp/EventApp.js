@@ -55,6 +55,7 @@ import Button from "../Button/Button";
 //   };
 
 //   renderHeader = () => <Button onClick={this.hanldeAddEvent}>Add Event</Button>;
+
 //   renderFooter = () => {
 //     if (this.state.isShowAddEventRow) {
 //       return (
@@ -137,43 +138,32 @@ import Button from "../Button/Button";
 // }
 
 const EventApp = (props) => {
-  const [state, setState] = useState({
-    dataCol: ["Event Name", "Start Date", "End Date", "Actions"],
-    isShowAddEventRow: false,
-    newEvent: new EventData("", "" + Date.now(), "" + Date.now()),
-  });
+  
+  const [dataCol, setDataCol] = useState(['Event Name', 'Start Date', 'End Date', 'Actions']);
+  const [isShowAddEventRow, setIsShowAddEventRow] = useState(false);
+  const [newEvent, setNewEvent] = useState(new EventData('', '' + Date.now(), '' + Date.now()));
 
   const hanldeAddEvent = () => {
-    setState({
-      isShowAddEventRow: true,
-    });
+    setIsShowAddEventRow(true);
   };
-
   const hanldeOnChange = (newEvent) => {
-    setState({
-      newEvent: {
-        ...newEvent,
-      },
-    });
+    setNewEvent({ ...newEvent });
   };
-
   const handleCloseAddNew = () => {
-    setState({
-      isShowAddEventRow: false,
-      newEvent: new EventData("", "" + Date.now(), "" + Date.now()),
-    });
+    setIsShowAddEventRow(false);
+    setNewEvent(new EventData('', '' + Date.now(), '' + Date.now()));
   };
 
   const hanldeSaveAddNew = () => {
-    const { eventName, startDate, endDate } = state.newEvent;
-    const newEvent = new EventData(eventName, startDate, endDate);
-    newEvent.parseTimeStamp();
-    if (newEvent.isValidForSave()) {
-      props.handleAddEvent(newEvent).then((data) => {
+    const { eventName, startDate, endDate } = newEvent;
+    const myNewEvent = new EventData(eventName, startDate, endDate);
+    myNewEvent.parseTimeStamp();
+    if (myNewEvent.isValidForSave()) {
+      props.handleAddEvent(myNewEvent).then((data) => {
         handleCloseAddNew();
       });
     } else {
-      alert("inValid");
+      alert('inValid');
     }
   };
 
@@ -183,21 +173,19 @@ const EventApp = (props) => {
     });
   };
 
-  const renderHeader = () => (
-    <Button onClick={hanldeAddEvent}>Add Event</Button>
-  );
+  const renderHeader = () => <Button onClick={hanldeAddEvent}>Add Event</Button>;
   const renderFooter = () => {
-    if (state.isShowAddEventRow) {
+    if (isShowAddEventRow) {
       return (
         <EventDataRow
-          event={state.newEvent}
+          event={newEvent}
           actions={[
             {
-              actionName: "Save",
+              actionName: 'Save',
               actionFn: hanldeSaveAddNew,
             },
             {
-              actionName: "Close",
+              actionName: 'Close',
               actionFn: handleCloseAddNew,
             },
           ]}
@@ -208,19 +196,15 @@ const EventApp = (props) => {
       return null;
     }
   };
-
-  useEffect(() => {
-    return () => {
-      console.log("EVENTAPP componentWillUnmount ");
-    };
-  }, []);
-
-  const { events, handleOnChangeEditEvent, handleDeleteEvent, handleSetEdit } =
-    props;
-
+  const {
+    events,
+    handleOnChangeEditEvent,
+    handleDeleteEvent,
+    handleSetEdit,
+  } = props;
   return (
     <EventTable
-      dataCol={state.dataCol}
+      dataCol={dataCol}
       renderFooter={renderFooter}
       renderHeader={renderHeader}
     >
@@ -231,11 +215,11 @@ const EventApp = (props) => {
             event={event.editEvent}
             actions={[
               {
-                actionName: "Save",
+                actionName: 'Save',
                 actionFn: handleEditSave,
               },
               {
-                actionName: "Cancel",
+                actionName: 'Cancel',
                 actionFn: () => handleSetEdit(event, false),
               },
             ]}
@@ -247,11 +231,11 @@ const EventApp = (props) => {
             event={event}
             actions={[
               {
-                actionName: "Edit",
+                actionName: 'Edit',
                 actionFn: () => handleSetEdit(event, true),
               },
               {
-                actionName: "Delete",
+                actionName: 'Delete',
                 actionFn: handleDeleteEvent,
               },
             ]}
