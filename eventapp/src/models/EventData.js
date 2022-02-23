@@ -10,7 +10,7 @@ export class EventData {
     if (id !== undefined) {
       this.id = id;
     }
-    if (!startDate.includes("-") && !endDate.includes("-")) {
+    if (!startDate?.includes("-") && !endDate?.includes("-")) {
       this.parseDateValue();
     }
   }
@@ -33,7 +33,7 @@ export class EventData {
   }
 
   isInTheFuture() {
-    return true;
-    // return Date.now() < +convertDateValueToTimeStamp(this.startDate);
+    // return true;
+    return Date.now() < +convertDateValueToTimeStamp(this.startDate);
   }
 }

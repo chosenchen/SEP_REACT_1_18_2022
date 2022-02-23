@@ -3,6 +3,7 @@ import { withEventData } from "../../hoc/withEventData";
 
 import EventDataRow from "../EventDataRow/EventDataRow";
 import EventTable from "../EventTable/EventTable";
+import WithAbort from "../WithAbort/WithAbort";
 import WithEventData from "../WithEventData/WithEventData";
 const UpComingEvent = ({ events }) => {
   const [dataCol, setDataCol] = useState([
@@ -35,12 +36,31 @@ const UpComingEvent = ({ events }) => {
 // const UpComingEventPage =withScanData(withError(withUser(withEventData(UpComingEvent))));
 // const UpComingEventPage = withEventData(UpComingEvent);
 
-const UpComingEventPage = () => (
-  <WithEventData
-    renderChildren={(events) => {
-      return <UpComingEvent events={events} />;
-    }}
-  ></WithEventData>
-);
+const UpComingEventPage = () => {
+  return (
+    <WithEventData
+      renderChildren={(events) => {
+        return <UpComingEvent events={events} />;
+      }}
+    />
+  );
+};
+
+// const UpComingEventPage = () => {
+//   return (
+//     <WithAbort
+//       renderChildren={(createSignal) => {
+//         return (
+//           <WithEventData
+//             createSignal={createSignal}
+//             renderChildren={(events) => {
+//               return <UpComingEvent events={events} />;
+//             }}
+//           />
+//         );
+//       }}
+//     />
+//   );
+// };
 
 export default UpComingEventPage;

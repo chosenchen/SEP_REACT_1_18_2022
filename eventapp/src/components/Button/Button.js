@@ -4,7 +4,7 @@ import "./Button.css";
 // PureComponent
 const Button = React.memo(
   ({ children, ...restProps }) => {
-    console.log("Button render");
+    // console.log("Button render");
 
     return (
       <button className="btn" {...restProps}>
@@ -13,7 +13,10 @@ const Button = React.memo(
     );
   },
   (prevProps, nextProps) => {
-    return prevProps.children === nextProps.children ? true : false;
+    return prevProps.children === nextProps.children &&
+      prevProps.onClick === nextProps.onClick
+      ? true
+      : false;
   }
 );
 

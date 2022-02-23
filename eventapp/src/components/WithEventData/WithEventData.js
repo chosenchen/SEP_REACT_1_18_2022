@@ -6,8 +6,9 @@ import {
   editEvent,
 } from "../../services/event.api";
 import { EventData } from "../../models/EventData";
+import WithAbort from "../WithAbort/WithAbort";
 
-export default class WithEventData extends React.Component {
+class WithEventData extends React.Component {
   state = {
     events: [],
   };
@@ -43,60 +44,74 @@ export default class WithEventData extends React.Component {
     //   });
     // });
 
-    getAllEvents().then((data) => {
-      const events = data.map(({ eventName, startDate, endDate, id }) => {
-        const newEvent = new EventData(eventName, startDate, endDate, id);
-        this.generateEditEventstate(newEvent);
-        return newEvent;
-      });
+    getAllEvents(this.props.createSignal())
+      .then((data) => {
+        const events = data.map(({ eventName, startDate, endDate, id }) => {
+          const newEvent = new EventData(eventName, startDate, endDate, id);
+          this.generateEditEventstate(newEvent);
+          return newEvent;
+        });
 
-      this.setState({
-        events,
+        this.setState({
+          events,
+        });
+      })
+      .catch((err) => {
+        console.warn(err);
       });
-    });
   };
   // API CALL
   handleUpdateEvent = (updateEvent) => {
-    return editEvent(updateEvent).then((data) => {
-      this.setState({
-        events: this.state.events.map((event) => {
-          if (event.id === data.id) {
-            return {
-              ...event,
-              ...data,
-            };
-          } else {
-            return event;
-          }
-        }),
+    return editEvent(updateEvent, this.props.createSignal())
+      .then((data) => {
+        this.setState({
+          events: this.state.events.map((event) => {
+            if (event.id === data.id) {
+              return {
+                ...event,
+                ...data,
+              };
+            } else {
+              return event;
+            }
+          }),
+        });
+      })
+      .catch((err) => {
+        console.warn(err);
       });
-    });
   };
   // API CALL
   handleDeleteEvent = (deletedEvent) => {
-    return deleteEvent(deletedEvent).then((data) => {
-      this.setState({
-        events: this.state.events.filter((event) => {
-          if (event.id === deletedEvent.id) {
-            return false;
-          } else {
-            return true;
-          }
-        }),
+    return deleteEvent(deletedEvent, this.props.createSignal())
+      .then((data) => {
+        this.setState({
+          events: this.state.events.filter((event) => {
+            if (event.id === deletedEvent.id) {
+              return false;
+            } else {
+              return true;
+            }
+          }),
+        });
+      })
+      .catch((err) => {
+        console.warn(err);
       });
-    });
   };
   // API CALL
   handleAddEvent = (addEvent) => {
-    return addNewEvent(addEvent).then(
-      ({ eventName, startDate, endDate, id }) => {
+    return addNewEvent(addEvent, this.props.createSignal())
+      .then(({ eventName, startDate, endDate, id }) => {
         const newEvent = new EventData(eventName, startDate, endDate, id);
         this.generateEditEventstate(newEvent);
         this.setState({
           events: [...this.state.events, newEvent],
         });
-      }
-    );
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   };
   // UI STATE
   handleSetEdit = (setEditEvent, isEdit) => {
@@ -112,7 +127,6 @@ export default class WithEventData extends React.Component {
   };
   // UI STATE
   handleOnChangeEditEvent = (editEvent) => {
-    console.log(editEvent);
     this.setState({
       events: this.state.events.map((event) => {
         if (event.id === editEvent.id) {
@@ -133,7 +147,22 @@ export default class WithEventData extends React.Component {
       this.handleSetEdit,
       this.handleOnChangeEditEvent,
       this.handleAddEvent,
-      this.handleUpdateEvent
+      this.handleUpdateEvent,
+      this.handleDeleteEvent
     );
   }
 }
+
+const WithEventDataAbort = (props) => {
+  return (
+    <WithAbort
+      renderChildren={(createSignal) => {
+        return <WithEventData {...props} createSignal={createSignal} />;
+      }}
+    />
+  );
+};
+
+// const WithEventDataAbort = (props) => <WithEventData {...props} />;
+
+export default WithEventDataAbort;
