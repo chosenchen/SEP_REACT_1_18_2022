@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 class EventAddRow extends React.Component {
   render() {
-    const { newEvent, hanldeOnChange, hanldeSaveAddNew, handleClose } =
+    const { newEvent, handleOnChange, hanldeSaveAddNew, handleClose } =
       this.props;
+      console.log(this.props)
     return (
       <tr>
         <td>
@@ -11,12 +12,12 @@ class EventAddRow extends React.Component {
             type="text"
             name="eventName"
             value={newEvent.eventName}
-            onChange={hanldeOnChange}
+            onChange={handleOnChange}
           />
         </td>
         <td>
           <input
-            onChange={hanldeOnChange}
+            onChange={handleOnChange}
             type="date"
             value={newEvent.startDate}
             name="startDate"
@@ -24,7 +25,7 @@ class EventAddRow extends React.Component {
         </td>
         <td>
           <input
-            onChange={hanldeOnChange}
+            onChange={handleOnChange}
             name="endDate"
             type="date"
             value={newEvent.endDate}

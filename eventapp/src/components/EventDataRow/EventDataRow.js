@@ -3,22 +3,22 @@ import Button from '../Button/Button';
 
 class EventDataRow extends React.Component {
   handleChange = ({ target: { name, value } }, event) => {
-    this.props.handleOnchange({ ...event, [name]: value });
+    this.props.handleOnChange({ ...event, [name]: value });
   };
 
   render() {
-    const { event, handleOnchange, actions } = this.props;
-
+    const { event, handleOnChange, actions } = this.props;
+    console.log(this.props)
     return (
       <tr key={event.id}>
         <td>
           <input
             type="text"
             name="eventName"
-            disabled={handleOnchange ? false : true}
+            disabled={handleOnChange ? false : true}
             value={event.eventName}
             onChange={
-              handleOnchange ? (e) => this.handleChange(e, event) : () => {}
+              handleOnChange ? (e) => this.handleChange(e, event) : () => {}
             }
           />
         </td>
@@ -27,9 +27,9 @@ class EventDataRow extends React.Component {
             type="date"
             name="startDate"
             value={event.startDate}
-            disabled={handleOnchange ? false : true}
+            disabled={handleOnChange ? false : true}
             onChange={
-              handleOnchange ? (e) => this.handleChange(e, event) : () => {}
+              handleOnChange ? (e) => this.handleChange(e, event) : () => {}
             }
           />
         </td>
@@ -38,9 +38,9 @@ class EventDataRow extends React.Component {
             type="date"
             name="endDate"
             value={event.endDate}
-            disabled={handleOnchange ? false : true}
+            disabled={handleOnChange ? false : true}
             onChange={
-              handleOnchange ? (e) => this.handleChange(e, event) : () => {}
+              handleOnChange ? (e) => this.handleChange(e, event) : () => {}
             }
           />
         </td>
