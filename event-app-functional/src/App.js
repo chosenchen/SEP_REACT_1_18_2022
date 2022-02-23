@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import EventApp from './components/EventApp/EventApp';
 import UpComingEvent from './components/UpComingEvents/UpComingEvents';
 import './App.css';
@@ -9,42 +9,36 @@ const PAGESINFO = {
   EventManager: 'EventManager',
   UpComingEvent: 'UpComingEvent',
 };
-class App extends React.Component {
-  state = {
-    currentPage: PAGESINFO.EventManager,
-    pagesInfo: PAGESINFO,
-  };
+const App = () => {
+  const [currentPage, setCurrentPage] = useState(PAGESINFO.EventManager);
+  const [pagesInfo, setPagesInfo] = useState(PAGESINFO);
 
-  hanldePageChange = (newPageInfo) => {
+  const hanldePageChange = (newPageInfo) => {
     this.setState({
       currentPage: newPageInfo,
     });
   };
 
-  render() {
-    const { currentPage, pagesInfo } = this.state;
-
-    let curPage = null;
-    switch (currentPage) {
-      case PAGESINFO.EventManager:
-        curPage = <EventApp></EventApp>;
-        break;
-      case PAGESINFO.UpComingEvent:
-        curPage = <UpComingEvent></UpComingEvent>;
-        break;
-      default:
-    }
-
-    return (
-      <div className="App">
-        <Header
-          pagesInfo={pagesInfo}
-          hanldePageChange={this.hanldePageChange}
-        ></Header>
-        {curPage}
-      </div>
-    );
+  let curPage = null;
+  switch (currentPage) {
+    case PAGESINFO.EventManager:
+      curPage = <EventApp></EventApp>;
+      break;
+    case PAGESINFO.UpComingEvent:
+      curPage = <UpComingEvent></UpComingEvent>;
+      break;
+    default:
   }
-}
+
+  return (
+    <div className="App">
+      <Header
+        pagesInfo={pagesInfo}
+        hanldePageChange={hanldePageChange}
+      ></Header>
+      {curPage}
+    </div>
+  );
+};
 
 export default App;

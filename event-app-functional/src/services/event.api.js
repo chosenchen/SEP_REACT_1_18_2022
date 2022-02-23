@@ -14,7 +14,7 @@ export const getAllEvents = () => {
         new Promise((res, rej) => {
           setTimeout(() => {
             res(response.json());
-          }, 3000);
+          }, 0);
         })
     ),
   };
