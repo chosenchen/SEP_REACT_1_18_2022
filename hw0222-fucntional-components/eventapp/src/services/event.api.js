@@ -1,7 +1,8 @@
 const baseURL = 'http://localhost:3000';
 const path = 'events';
 
-export const getAllEvents = () => {
+export const getAllEvents = () => 
+  {
   const controller = new AbortController();
   const signal = controller.signal;
   return {
@@ -19,6 +20,9 @@ export const getAllEvents = () => {
     ),
   };
 };
+
+
+
 
 export const addNewEvent = (newEvent) =>
   fetch([baseURL, path].join('/'), {

@@ -42,6 +42,7 @@ export default class WithEventData extends React.Component {
         events,
       });
     });
+
   };
   // API CALL
   handleUpdateEvent = (updateEvent) => {

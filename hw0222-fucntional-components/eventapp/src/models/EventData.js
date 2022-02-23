@@ -2,6 +2,7 @@ import {
   convertTimestampToDateValue,
   convertDateValueToTimeStamp,
 } from '../utils/date.helper';
+
 export class EventData {
   constructor(eventName, startDate, endDate, id) {
     this.eventName = eventName;

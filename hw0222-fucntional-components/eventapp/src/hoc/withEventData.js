@@ -16,6 +16,7 @@ export const withEventData = (WrappedComponent) => {
       this.fetchAllEvents();
     }
     generateEditEventstate = (event) => {
+      console.log('startDate',event.startDate);
       event.isEditing = false;
       event.editEvent = new EventData(
         event.eventName,
@@ -124,6 +125,8 @@ export const withEventData = (WrappedComponent) => {
       });
     };
 
+
+   
     render() {
       const { events } = this.state;
       return (

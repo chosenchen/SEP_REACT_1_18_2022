@@ -1,13 +1,15 @@
 import React from 'react';
 import Button from '../Button/Button';
 
-class EventDataRow extends React.Component {
-  handleChange = ({ target: { name, value } }, event) => {
-    this.props.handleOnchange({ ...event, [name]: value });
+function EventDataRow(props) {
+  const handleChange = ({ target: { name, value } }, event) => {
+    event[name] = value;
+    // { ...event, [name]: value }
+    props.handleOnchange(event);
   };
 
-  render() {
-    const { event, handleOnchange, actions } = this.props;
+    const { event, handleOnchange, actions } = props;
+    console.log('props event', event);
 
     return (
       <tr key={event.id}>
@@ -18,7 +20,7 @@ class EventDataRow extends React.Component {
             disabled={handleOnchange ? false : true}
             value={event.eventName}
             onChange={
-              handleOnchange ? (e) => this.handleChange(e, event) : () => {}
+              handleOnchange ? (e) => handleChange(e, event) : () => { }
             }
           />
         </td>
@@ -29,7 +31,7 @@ class EventDataRow extends React.Component {
             value={event.startDate}
             disabled={handleOnchange ? false : true}
             onChange={
-              handleOnchange ? (e) => this.handleChange(e, event) : () => {}
+              handleOnchange ? (e) => handleChange(e, event) : () => { }
             }
           />
         </td>
@@ -40,7 +42,7 @@ class EventDataRow extends React.Component {
             value={event.endDate}
             disabled={handleOnchange ? false : true}
             onChange={
-              handleOnchange ? (e) => this.handleChange(e, event) : () => {}
+              handleOnchange ? (e) => handleChange(e, event) : () => { }
             }
           />
         </td>
@@ -50,7 +52,10 @@ class EventDataRow extends React.Component {
               return (
                 <Button
                   key={action.actionName}
-                  onClick={() => action.actionFn(event)}
+                  onClick={() => {
+                    console.log('add new event', event);
+                    action.actionFn(event);
+                  }}
                 >
                   {action.actionName}
                 </Button>
@@ -61,6 +66,6 @@ class EventDataRow extends React.Component {
       </tr>
     );
   }
-}
+  
 
 export default EventDataRow;
