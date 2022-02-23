@@ -36,6 +36,7 @@ class LogIn extends React.Component {
                 this.setState({ auth: true, isVaild: true, error: '' });
                 sessionStorage.setItem("auth", true);
                 sessionStorage.setItem("user", JSON.stringify(currentUserData));
+                console.log(currentUserData);
                 window.location.href = "/";
             }
         } else { this.setState({ isVaild: false, error: 'Inputs cannot be empty.' }); }

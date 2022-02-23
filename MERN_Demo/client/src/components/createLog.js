@@ -39,7 +39,8 @@ class CreateLog extends React.Component {
                 user: {
                     userName: user.userName,
                     profile_img: user.profile_img
-                }
+                },
+                liked_users: []
             };
             await API.addRecord(log);
             window.location.href = "/";

@@ -15,6 +15,9 @@ class App extends React.Component {
   constructor() {
     super();
     let auth = sessionStorage.getItem("auth");
+    if(sessionStorage.getItem("user") === null){
+      sessionStorage.setItem("user", null);
+    }
     if (auth === 'true') { auth = true } else if (auth === 'false') { auth = false };
     this.state = { auth: auth };
   }
@@ -28,8 +31,8 @@ class App extends React.Component {
 
         <section style={{ margin: 20 }}>
           <Routes>
-            <Route exact path="/" element={<HomePage auth={this.state.auth} />} />
-            <Route exact path="/log-in" element={<LogIn auth={this.state.auth} />} />
+            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/log-in" element={<LogIn />} />
             <Route exact path="/sign-up" element={<SignUp />} />
             <Route exact path="/create-log" element={<CreateLog />} />
           </Routes>
