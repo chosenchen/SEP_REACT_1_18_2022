@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "eventName": "dddd",
+      "startDate": "2022-02-15",
+      "endDate": "2022-02-16",
+      "id": 19
+    },
+    {
+      "eventName": "ddd",
+      "startDate": "2022-02-09",
+      "endDate": "2022-02-15",
+      "id": 20
+    },
+    {
+      "eventName": "TEST-5",
+      "startDate": "2022-02-15",
+      "endDate": "2022-02-23",
+      "id": 21
+    },
+    {
+      "eventName": "TEST-6",
+      "startDate": "2022-02-26",
+      "endDate": "2022-02-28",
+      "id": 22
+    }
+  ]
+}
