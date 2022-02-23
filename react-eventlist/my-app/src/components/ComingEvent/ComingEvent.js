@@ -1,5 +1,4 @@
 import react from "react";
-import { getAllEvents } from "../../utilities/event.api";
 import { convertDate } from "../../utilities/convertDate";
 import { withEventData } from "../../HOC/withEventDate";
 class ComingEvent extends react.Component {

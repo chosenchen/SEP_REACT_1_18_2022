@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  getAllEvents,
-  addEvent,
-  deleteEvent,
-  updateEvent,
-} from "../utilities/event.api";
+import { getAllEvents } from "../utilities/event.api";
 
 export const withEventData = (Component) => {
   return class Newcompoent extends React.Component {
@@ -12,9 +7,6 @@ export const withEventData = (Component) => {
       super(props);
       this.state = {
         eventList: [],
-        counterChange: false,
-        // upcomingEvents: [],
-        // DataisLoaded: false,
       };
     }
     componentDidMount() {
@@ -26,14 +18,7 @@ export const withEventData = (Component) => {
     render() {
       const { children, ...restProps } = this.props;
       const { eventList } = this.state;
-      const { counterUpdate } = this.state;
-      return (
-        <Component
-          {...restProps}
-          events={eventList}
-          counterUpdate={counterUpdate}
-        />
-      );
+      return <Component {...restProps} events={eventList} />;
     }
   };
 };

@@ -2,9 +2,6 @@ import react from "react";
 import "./Header.css";
 
 class Header extends react.Component {
-  constructor(props) {
-    super(props);
-  }
   handleNav = (e) => {
     if (e.target.className === "events") {
       this.props.showComponent(true, false);
