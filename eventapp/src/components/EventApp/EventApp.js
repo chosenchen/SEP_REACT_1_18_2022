@@ -13,15 +13,19 @@ function EventApp(props) {
     const [isShowAddEventRow, setIsShowAddEventRow] = useState(false);
     const [newEvent, setNewEvent] = useState(new EventData('', '' + Date.now(), '' + Date.now()))
 
-
     const hanldeAddEvent = () => {
       setIsShowAddEventRow(true);
     };
 
-  const hanldeOnChange = (newEvent) => {
-    setNewEvent( {...newEvent});
-    console.log(newEvent)
-  };
+    const hanldeOnChange = (newEvent) => {
+      //setNewEvent( {...newEvent});
+      setNewEvent({
+        eventName: newEvent.eventName,
+        startDate: newEvent.startDate,
+        endDate: newEvent.endDate
+      })
+      console.log(newEvent)
+    };
 
   const handleCloseAddNew = () => {
     setIsShowAddEventRow(false);
