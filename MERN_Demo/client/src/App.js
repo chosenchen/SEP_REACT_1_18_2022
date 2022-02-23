@@ -15,18 +15,20 @@ class App extends React.Component {
   constructor() {
     super();
     let auth = sessionStorage.getItem("auth");
-    if(sessionStorage.getItem("user") === null){
+    let user = sessionStorage.getItem("user");
+    user = JSON.parse(user);
+    if (sessionStorage.getItem("user") === null) {
       sessionStorage.setItem("user", null);
     }
     if (auth === 'true') { auth = true } else if (auth === 'false') { auth = false };
-    this.state = { auth: auth };
+    this.state = { auth: auth, user: user};
   }
 
   render() {
     return (
       <main>
         {this.state.auth ?
-          <UserNavbar auth={this.state.auth} /> : <Navbar />
+          <UserNavbar auth={this.state.auth} user={this.state.user} /> : <Navbar />
         }
 
         <section style={{ margin: 20 }}>

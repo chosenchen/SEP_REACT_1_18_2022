@@ -1,4 +1,4 @@
-export class LogData {
+export default class LogData {
     constructor(_id, photoLabel, dateTaken, url, city, country, likes, user, liked_users) {
         this._id = _id;
         this.photoLabel = photoLabel;

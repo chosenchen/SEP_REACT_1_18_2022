@@ -9,7 +9,8 @@ class UserNavbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: this.props.auth
+      auth: this.props.auth,
+      user: this.props.user
     }
     this.userLogOut = this.userLogOut.bind(this);
   }
@@ -36,10 +37,15 @@ class UserNavbar extends React.Component {
               </li>
             </ul>
             <NavLink className="nav-link" to="/create-log">
-              <button type="button" className="btn btn-primary me-2">Create Log</button>
+              <button type="button" className="btn btn-outline-success me-2">Create Log</button>
             </NavLink>
             <NavLink className="nav-link" to="/">
               <button type="button" className="btn btn-warning me-2" onClick={this.userLogOut}>Log Out</button>
+            </NavLink>
+            <NavLink className="nav-link" to="/profile">
+              <button type="button" className="btn nav-user__btn">
+              <img className="nav-user__img" src={this.state.user.profile_img}/>
+              </button>
             </NavLink>
           </div>
         </div>
