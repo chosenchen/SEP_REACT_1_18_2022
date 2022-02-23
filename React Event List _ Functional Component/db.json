@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "eventName": "TEST-1",
+      "startDate": "1645747200000",
+      "endDate": "1650585600000",
+      "id": 1
+    },
+    {
+      "eventName": "TEST-2",
+      "startDate": "1641790800000",
+      "endDate": "1641790800000",
+      "id": 2
+    },
+    {
+      "eventName": "TEST-10",
+      "startDate": "2022-01-11",
+      "endDate": "2022-01-29",
+      "id": 3
+    }
+  ]
+}
