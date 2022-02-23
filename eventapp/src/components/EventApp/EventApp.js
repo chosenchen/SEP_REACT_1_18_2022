@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EventApp.css";
-import { withEventData } from "../../hoc/withEventData";
 
 import { EventData } from "../../models/EventData";
 
@@ -29,17 +28,11 @@ const EventApp = ({
     new EventData("", "" + Date.now(), "" + Date.now())
   );
 
-  const newEventRef = useRef(newEvent);
-
   useEffect(() => {
     return () => {
       console.log("EVENTAPP componentWillUnmount ");
     };
   }, []);
-
-  useEffect(() => {
-    newEventRef.current = newEvent;
-  }, [newEvent]);
 
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
@@ -55,7 +48,7 @@ const EventApp = ({
   };
 
   const hanldeSaveAddNew = () => {
-    const { eventName, startDate, endDate } = newEventRef.current;
+    const { eventName, startDate, endDate } = newEvent;
     const _newEvent = new EventData(eventName, startDate, endDate);
     _newEvent.parseTimeStamp();
     if (_newEvent.isValidForSave()) {
