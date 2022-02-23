@@ -38,7 +38,7 @@ class AddForm extends React.Component{
         <td><input className='input-box' type='date' onChange={this.handleChange('startDate')}/></td>
         <td><input className='input-box' type='date' onChange={this.handleChange('endDate')}/></td>
         <td className='action-btns'>
-          <input type='submit' className='buttons add-btn' value="ADD" onClick={this.handleSubmit}/>
+          <input type='submit' className='buttons add-btn' defaultValue="ADD" onClick={this.handleSubmit}/>
           <input type='button' className='buttons close-btn' defaultValue="CLOSE" onClick={setAdding}/>
         </td>
       </tr>

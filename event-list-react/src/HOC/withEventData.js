@@ -13,7 +13,7 @@ export const withEventData = (Component) => {
     addNewEvent = (event) => {
       return API.addEvent(event).then(() => {
         return API.getEvents().then((data) => {
-          this.setState({ eventList : data });
+          this.setState({eventList : data});
         });
       });
     }
@@ -21,7 +21,7 @@ export const withEventData = (Component) => {
     editEvent = (event) => (
       API.editEvent(event).then(() =>
         API.getEvents().then((data) => {
-          this.setState({ eventList : data });
+          this.setState({eventList : data});
         })
       )
     );
@@ -29,26 +29,27 @@ export const withEventData = (Component) => {
     deleteEvent = (eventId) => (
       API.deleteEvent(eventId).then(() => 
         API.getEvents().then((data) => {
-          this.setState({ eventList : data });
+          this.setState({eventList : data});
         })
       )
     ) 
 
     componentDidMount(){
       API.getEvents().then((data) => {
-        this.setState({ eventList : data });
+        this.setState({eventList : data});
       });
     }
 
     render(){
       const {children, ...restProps} = this.props;
-      const {eventList} = this.state ;
+      const {eventList} = this.state;
       return (
         <Component {...restProps} 
-        eventList={eventList} 
+        eventList={eventList}
         addNewEvent={this.addNewEvent}
         editEvent={this.editEvent}
-        deleteEvent={this.deleteEvent}/>
+        deleteEvent={this.deleteEvent}
+        />
       )
     }
   };
