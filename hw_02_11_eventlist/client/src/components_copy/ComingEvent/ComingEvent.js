@@ -8,6 +8,7 @@ class ComingEvents extends Component {
         allEvents : this.props.eventData,
         thead : ["EventName", "Start Date", "End Date"]}
     
+    
   render() {
       const {items} = this.props;
     return (

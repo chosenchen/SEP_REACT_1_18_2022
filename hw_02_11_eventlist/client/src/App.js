@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Header from "./components/Header/Header";
 import CounterEvent from "./components/HOC/eventCounter";
 
+import RenderProps from "./components_copy/RenderProps/RenderProps";
+
 export default class App extends Component {
     state = {
       currentPage: true,
@@ -14,6 +16,7 @@ export default class App extends Component {
         <Header/>
         <br/>
         <CounterEvent />
+        
     </div>
   )}
 }
