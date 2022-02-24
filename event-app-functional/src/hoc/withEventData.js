@@ -27,7 +27,6 @@ export const withEventData = (WrappedComponent) => {
     componentWillUnmount() {
       if (this.controllerList) {
         this.controllerList.forEach((c) => {
-          console.log('cancelAPI call');
           c.abort();
         });
       }
@@ -109,7 +108,6 @@ export const withEventData = (WrappedComponent) => {
     };
     // UI STATE
     handleOnChangeEditEvent = (editEvent) => {
-      console.log(editEvent);
       this.setState({
         events: this.state.events.map((event) => {
           if (event.id === editEvent.id) {

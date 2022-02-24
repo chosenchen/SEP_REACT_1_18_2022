@@ -36,10 +36,8 @@ const EventApp = ({
   };
 
   const handleCloseAddNew = () => {
-    this.setState({
-      isShowAddEventRow: false,
-      newEvent: new EventData('', '' + Date.now(), '' + Date.now()),
-    });
+    setIsShowAddEventRow(false);
+    setNewEvent(new EventData('', '' + Date.now(), '' + Date.now()));
   };
 
   const hanldeSaveAddNew = () => {

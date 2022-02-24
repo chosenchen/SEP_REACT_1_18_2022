@@ -28,8 +28,10 @@ const WithEventData = ({ renderChildren }) => {
   const fetchAllEvents = () => {
     const { fetchResult, controller } = getAllEvents();
     if (this.controllerList) {
+      console.log('controllerList IS defined');
       this.controllerList.push(controller);
     } else {
+      console.log('controllerList is NOT defined');
       this.controllerList = [controller];
     }
     fetchResult.then((data) => {
@@ -102,7 +104,6 @@ const WithEventData = ({ renderChildren }) => {
 
   // UI STATE
   const handleOnChangeEditEvent = (editEvent) => {
-    console.log(editEvent);
     setEvents(
       events.map((event) => {
         if (event.id === editEvent.id) {

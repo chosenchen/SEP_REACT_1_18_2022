@@ -14,9 +14,7 @@ const App = () => {
   const [pagesInfo, setPagesInfo] = useState(PAGESINFO);
 
   const hanldePageChange = (newPageInfo) => {
-    this.setState({
-      currentPage: newPageInfo,
-    });
+    setCurrentPage(newPageInfo);
   };
 
   let curPage = null;
