@@ -7,8 +7,13 @@ import {
 } from "../services/event.api";
 import { EventData } from "../models/EventData";
 
+import { useDispatch } from 'react-redux'
+import {loadEventCount, incrementEvent, decrementEvent} from '.././components/EventCounter/eventCounterSlice.js';
+
 export const useEventData = () => {
   const [events, setEvents] = useState([]);
+
+  const dispatch = useDispatch();
 
   const generateEditEventstate = (event) => {
     event.isEditing = false;
@@ -50,6 +55,7 @@ export const useEventData = () => {
           }
         })
       );
+      dispatch(decrementEvent())
     });
   };
 
@@ -60,6 +66,7 @@ export const useEventData = () => {
         const newEvent = new EventData(eventName, startDate, endDate, id);
         generateEditEventstate(newEvent);
         setEvents([...events, newEvent]);
+        dispatch(incrementEvent())
       }
     );
   };
@@ -104,11 +111,16 @@ export const useEventData = () => {
       });
 
       setEvents(events);
+      dispatch(loadEventCount(events.length))
+      
       return () => {
         controller.abort();
       };
     });
+    
   }, []);
+
+  
 
   return [
     events,
