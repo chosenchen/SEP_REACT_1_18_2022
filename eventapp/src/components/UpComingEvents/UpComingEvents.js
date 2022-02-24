@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { withEventData } from '../../hoc/withEventData';
+import React, { useState } from "react";
+import { useEventData } from "../../hooks/useEventData";
 
-import EventDataRow from '../EventDataRow/EventDataRow';
-import EventTable from '../EventTable/EventTable';
-import WithEventData from '../WithEventData/WithEventData';
-const UpComingEvent = ({ events }) => {
-  const [dataCol, setDataCol] = useState([
+import EventDataRow from "../EventDataRow/EventDataRow";
+import EventTable from "../EventTable/EventTable";
+
+const UpComingEvent = () => {
+  const { events } = useEventData();
+
+  const [dataCol] = useState([
     "Event Name",
     "Start Date",
     "End Date",
@@ -35,14 +37,14 @@ const UpComingEvent = ({ events }) => {
 // const UpComingEventPage =withScanData(withError(withUser(withEventData(UpComingEvent))));
 // const UpComingEventPage = withEventData(UpComingEvent);
 
-const UpComingEventPage = () => {
-  return (
-    <WithEventData
-      renderChildren={(events) => {
-        return <UpComingEvent events={events} />;
-      }}
-    />
-  );
-};
+// const UpComingEventPage = () => {
+//   return (
+//     <WithEventData
+//       renderChildren={(events) => {
+//         return <UpComingEvent events={events} />;
+//       }}
+//     />
+//   );
+// };
 
-export default UpComingEventPage;
+export default UpComingEvent;
