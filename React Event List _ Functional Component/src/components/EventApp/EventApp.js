@@ -8,6 +8,8 @@ import EventDataRow from "../EventDataRow/EventDataRow";
 import EventTable from "../EventTable/EventTable";
 import Button from "../Button/Button";
 
+import { useEventData } from "../../hooks/useEventData";
+
 // class EventApp extends React.Component {
 //   state = {
 //     dataCol: ['Event Name', 'Start Date', 'End Date', 'Actions'],
@@ -143,6 +145,15 @@ const EventApp = (props) => {
   const [isShowAddEventRow, setIsShowAddEventRow] = useState(false);
   const [newEvent, setNewEvent] = useState(new EventData('', '' + Date.now(), '' + Date.now()));
 
+  const [
+    events,
+    handleUpdateEvent,
+    handleDeleteEvent,
+    handleAddEvent,
+    handleSetEdit,
+    handleOnChangeEditEvent,
+  ] = useEventData()
+
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
@@ -159,7 +170,7 @@ const EventApp = (props) => {
     const myNewEvent = new EventData(eventName, startDate, endDate);
     myNewEvent.parseTimeStamp();
     if (myNewEvent.isValidForSave()) {
-      props.handleAddEvent(myNewEvent).then((data) => {
+      handleAddEvent(myNewEvent).then((data) => {
         handleCloseAddNew();
       });
     } else {
@@ -168,8 +179,8 @@ const EventApp = (props) => {
   };
 
   const handleEditSave = (editEventObj) => {
-    props.handleUpdateEvent(editEventObj).then((data) => {
-      props.handleSetEdit(editEventObj, false);
+    handleUpdateEvent(editEventObj).then((data) => {
+      handleSetEdit(editEventObj, false);
     });
   };
 
@@ -196,12 +207,12 @@ const EventApp = (props) => {
       return null;
     }
   };
-  const {
-    events,
-    handleOnChangeEditEvent,
-    handleDeleteEvent,
-    handleSetEdit,
-  } = props;
+  // const {
+  //   events,
+  //   handleOnChangeEditEvent,
+  //   handleDeleteEvent,
+  //   handleSetEdit,
+  // } = props;
   return (
     <EventTable
       dataCol={dataCol}
@@ -246,6 +257,6 @@ const EventApp = (props) => {
   );
 };
 
-const EventManger = withEventData(EventApp);
+// const EventManger = withEventData(EventApp);
 
-export default EventManger;
+export default EventApp;
