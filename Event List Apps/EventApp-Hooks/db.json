@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "eventName": "TEST-1",
+      "startDate": "2022-01-10",
+      "endDate": "2022-01-10",
+      "id": 1
+    },
+    {
+      "eventName": "TEST-2",
+      "startDate": "1644624000000",
+      "endDate": "1644624000000",
+      "id": 2
+    },
+    {
+      "eventName": "TEST-3",
+      "startDate": "1644364800000",
+      "endDate": "1644883200000",
+      "id": 3
+    },
+    {
+      "eventName": "TEST-5",
+      "startDate": "1644969600000",
+      "endDate": "1644969600000",
+      "id": 4
+    },
+    {
+      "eventName": "TEST-6",
+      "startDate": "1646438400000",
+      "endDate": "1647043200000",
+      "id": 5
+    },
+    {
+      "eventName": "TEST-7",
+      "startDate": "1647043200000",
+      "endDate": "1648252800000",
+      "id": 6
+    }
+  ]
+}
