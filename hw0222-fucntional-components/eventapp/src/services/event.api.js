@@ -1,8 +1,7 @@
 const baseURL = 'http://localhost:3000';
 const path = 'events';
 
-export const getAllEvents = () => 
-  {
+export const getAllEvents = () => {
   const controller = new AbortController();
   const signal = controller.signal;
   return {
@@ -52,3 +51,4 @@ export const editEvent = (editEvent) =>
     },
     body: JSON.stringify(editEvent),
   }).then((response) => response.json());
+  

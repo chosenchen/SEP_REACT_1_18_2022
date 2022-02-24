@@ -3,13 +3,15 @@ import Button from '../Button/Button';
 
 function EventDataRow(props) {
   const handleChange = ({ target: { name, value } }, event) => {
-    event[name] = value;
+    // event[name] = value;
     // { ...event, [name]: value }
-    props.handleOnchange(event);
+    // console.log('name val', name, value);
+  
+    props.handleOnchange({ ...event, [name]: value });
   };
 
     const { event, handleOnchange, actions } = props;
-    console.log('props event', event);
+    // console.log('props event', event);
 
     return (
       <tr key={event.id}>
@@ -53,7 +55,6 @@ function EventDataRow(props) {
                 <Button
                   key={action.actionName}
                   onClick={() => {
-                    console.log('add new event', event);
                     action.actionFn(event);
                   }}
                 >

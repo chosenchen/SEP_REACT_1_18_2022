@@ -81,6 +81,7 @@ export default class WithEventData extends React.Component {
       ({ eventName, startDate, endDate, id }) => {
         const newEvent = new EventData(eventName, startDate, endDate, id);
         this.generateEditEventstate(newEvent);
+        console.log('egenarated event', newEvent);
         this.setState({
           events: [...this.state.events, newEvent],
         });
@@ -119,10 +120,12 @@ export default class WithEventData extends React.Component {
   render() {
     return this.props.renderChildren(
       this.state.events,
+      this.handleUpdateEvent,
+      this.handleDeleteEvent,
+      this.handleAddEvent,
       this.handleSetEdit,
       this.handleOnChangeEditEvent,
-      this.handleAddEvent,
-      this.handleUpdateEvent
+      
     );
   }
 }
