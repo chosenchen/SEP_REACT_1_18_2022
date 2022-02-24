@@ -4,10 +4,12 @@ import UpComingEvent from "./components/UpComingEvents/UpComingEvents";
 import "./App.css";
 
 import Header from "./components/Header/Header";
+import EventCounter from "./components/EventCounter/EventCounter";
 
 const PAGESINFO = {
   EventManager: "EventManager",
   UpComingEvent: "UpComingEvent",
+  EventCounter: "CounterFn",
 };
 const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGESINFO.EventManager);
@@ -23,6 +25,8 @@ const App = () => {
     case PAGESINFO.UpComingEvent:
       curPage = <UpComingEvent></UpComingEvent>;
       break;
+    case PAGESINFO.EventCounter:
+      curPage = <EventCounter></EventCounter>;
     default:
   }
   return (

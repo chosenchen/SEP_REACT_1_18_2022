@@ -5,8 +5,9 @@ import EventDataRow from "../EventDataRow/EventDataRow";
 import EventTable from "../EventTable/EventTable";
 import WithEventData from "../WithEventData/WithEventData";
 import { useState } from "react";
+import { useEventData } from "../../hooks/useEventData";
 const UpComingEvent = (props) => {
-  const { events } = this.props;
+  const { events } = useEventData();
   const [dataCol, setDataCol] = useState([
     "Event Name",
     "Start Date",

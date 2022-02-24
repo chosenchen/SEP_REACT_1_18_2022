@@ -7,15 +7,8 @@ import { EventData } from "../../models/EventData";
 import EventDataRow from "../EventDataRow/EventDataRow";
 import EventTable from "../EventTable/EventTable";
 import Button from "../Button/Button";
+import { useEventData } from "../../hooks/useEventData";
 const EventApp = (props) => {
-  const {
-    events,
-    handleOnChangeEditEvent,
-    handleDeleteEvent,
-    handleSetEdit,
-    handleAddEvent,
-    handleUpdateEvent,
-  } = props;
   const [dataCol, setDataCol] = useState([
     "Event Name",
     "Start Date",
@@ -26,6 +19,16 @@ const EventApp = (props) => {
   const [newEvent, setNewEvent] = useState(
     new EventData("", "" + Date.now(), "" + Date.now())
   );
+
+  const {
+    events,
+    handleOnChangeEditEvent,
+    handleDeleteEvent,
+    handleSetEdit,
+    handleAddEvent,
+    handleUpdateEvent,
+  } = useEventData();
+
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
@@ -250,6 +253,6 @@ const EventApp = (props) => {
 //   }
 // }
 
-const EventManger = withEventData(EventApp);
+//const EventManger = withEventData(EventApp);
 
-export default EventManger;
+export default EventApp;
