@@ -16,7 +16,7 @@ export const eventDataReducer = (state = initialState, action) => {
       };
 
     case "event/update":
-      const { updatedEvent } = action.payload;
+      const updatedEvent = action.payload;
 
       const updatedEvents = events.map((event) => {
         if (event.id === updatedEvent.id) {
@@ -29,7 +29,7 @@ export const eventDataReducer = (state = initialState, action) => {
         events: updatedEvents,
       };
     case "event/delete":
-      const { deletedEvent } = action.payload;
+      const deletedEvent = action.payload;
 
       const newEvents = events.filter((event) => {
         if (event.id === deletedEvent.id) {

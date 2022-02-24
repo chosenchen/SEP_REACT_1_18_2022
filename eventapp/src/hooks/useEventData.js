@@ -13,11 +13,21 @@ import { EventData } from "../models/EventData";
 import { useAbort } from "./useAbort";
 import { string } from "prop-types";
 
+const getEventsState = () => {
+  const { events } = store.getState();
+
+  console.log(events);
+
+  return events;
+};
+
 export const useEventData = () => {
   const { createSignal } = useAbort();
-  // const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(getEventsState());
 
-  const { events } = store.getState();
+  store.subscribe(() => {
+    setEvents(getEventsState());
+  });
 
   useEffect(() => {
     fetchAllEvents();
@@ -45,7 +55,6 @@ export const useEventData = () => {
           return newEvent;
         });
 
-        // setEvents(events);
         store.dispatch({ type: "event/get", payload: events });
       })
       .catch((err) => {
@@ -56,8 +65,10 @@ export const useEventData = () => {
   // API CALL
   const handleUpdateEvent = (updateEvent) => {
     return editEvent(updateEvent, createSignal())
-      .then((data) => {
-        store.dispatch({ type: "event/update", payload: data });
+      .then(({ eventName, startDate, endDate, id }) => {
+        const updatedEvent = new EventData(eventName, startDate, endDate, id);
+        generateEditEventstate(updatedEvent);
+        store.dispatch({ type: "event/update", payload: updatedEvent });
 
         // setEvents(
         //   events.map((event) => {
@@ -102,7 +113,6 @@ export const useEventData = () => {
         generateEditEventstate(newEvent);
 
         store.dispatch({ type: "event/add", payload: newEvent });
-        // setEvents([...events, newEvent]);
       })
       .catch((err) => {
         console.warn(err);
@@ -151,5 +161,3 @@ export const useEventData = () => {
     handleUpdateEvent,
   };
 };
-
-store.subscribe(useEventData);
