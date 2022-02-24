@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 
 const CounterFn = (props) => {
-  //   const [state, setState] = React.useState({
-  //     title: 'Counter Fn ',
-  //     counter: 0,
-  //   });
-
+  
   console.log('CounterFn called');
   const [title] = React.useState('Counter Fn !');
   const [counter, setCounter] = React.useState(0);
@@ -20,7 +16,7 @@ const CounterFn = (props) => {
   }, []);
 
   // DidUpdate + DidMount
-  useEffect(() => {
+  useEffect((counter) => {
     if (shouldAlert) {
       alert(counter);
       setShouldAlert(false);

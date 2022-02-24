@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000';
+const baseURL = 'http://localhost:4000';
 const path = 'events';
 
 export const getAllEvents = () => {
@@ -12,9 +12,7 @@ export const getAllEvents = () => {
     }).then(
       (response) =>
         new Promise((res, rej) => {
-          setTimeout(() => {
-            res(response.json());
-          }, 3000);
+          res(response.json());
         })
     ),
   };

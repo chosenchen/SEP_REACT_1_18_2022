@@ -1,6 +1,4 @@
 import React from 'react';
-import { withEventData } from '../../hoc/withEventData';
-
 import EventDataRow from '../EventDataRow/EventDataRow';
 import EventTable from '../EventTable/EventTable';
 import WithEventData from '../WithEventData/WithEventData';
