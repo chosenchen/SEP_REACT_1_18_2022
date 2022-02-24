@@ -1,4 +1,5 @@
 import React from 'react';
+import { myStore } from '../../MyRedux/MyRedux';
 
 export default class Counter extends React.Component {
   state = {
@@ -6,8 +7,19 @@ export default class Counter extends React.Component {
     counter: 0,
   };
 
-  handleClick = () => {
-    this.setState({ counter: this.state.counter + 1 });
+  componentDidMount() {
+    myStore.subscribe(() => {
+      console.log('subscribe update');
+      this.forceUpdate();
+    });
+  }
+
+  handleAdd = () => {
+    myStore.dispatch({ type: 'counter/incremented' });
+  };
+
+  handleSub = () => {
+    myStore.dispatch({ type: 'counter/decremented' });
   };
   handleAlert = () => {
     setTimeout(() => {
@@ -18,8 +30,9 @@ export default class Counter extends React.Component {
     return (
       <section>
         <header>{this.state.title}</header>
-        <p>Counter: {this.state.counter}</p>
-        <button onClick={this.handleClick}>Add</button>
+        <p>Counter: {myStore.getState().value}</p>
+        <button onClick={this.handleAdd}>Add</button>
+        <button onClick={this.handleSub}>Sub</button>
         <button onClick={this.handleAlert}>AlertCounter After 5s</button>
       </section>
     );

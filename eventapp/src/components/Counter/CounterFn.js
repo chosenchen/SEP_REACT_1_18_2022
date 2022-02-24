@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { myStore } from '../../MyRedux/MyRedux';
 
 const CounterFn = (props) => {
   //   const [state, setState] = React.useState({
@@ -10,6 +11,13 @@ const CounterFn = (props) => {
   const [title] = React.useState('Counter Fn !');
   const [counter, setCounter] = React.useState(0);
   const [shouldAlert, setShouldAlert] = React.useState(false);
+  const [_, forceUpdate] = React.useState(false);
+
+  useEffect(() => {
+    myStore.subscribe(() => {
+      forceUpdate((_) => !_);
+    });
+  }, []);
 
   //DIDMOUNT
   useEffect(() => {
@@ -38,7 +46,7 @@ const CounterFn = (props) => {
   return (
     <section>
       <header>{title}</header>
-      <p>Counter: {counter}</p>
+      <p>Counter: {myStore.getState().value}</p>
       <button onClick={hanldeClick}>Add</button>
       <button onClick={handleAlert}>AlertCounterAfter5s</button>
     </section>
