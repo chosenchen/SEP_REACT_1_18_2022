@@ -33,18 +33,20 @@ import WithEventData from '../WithEventData/WithEventData';
 //   }
 // }
 
+import { useEventData } from '../../hooks/useEventData';
+
 const UpComingEvent = (props)=>{
-  const [state, setState] = useState({
-    dataCol: ['Event Name', 'Start Date', 'End Date']
-  });
+  const [dataCol, setDataCol] = useState(['Event Name', 'Start Date', 'End Date']
+  );
+
+ const [events] = useEventData()
 
   const renderHeader = () => {
     return <h5>UpComingEvent</h5>;
   };
-  const { events } = props;
 
   return(
-    <EventTable renderHeader={renderHeader} dataCol={state.dataCol}>
+    <EventTable renderHeader={renderHeader} dataCol={dataCol}>
     {events
       ?.filter((event) => {
         if (event.isInTheFuture()) {
@@ -64,12 +66,12 @@ const UpComingEvent = (props)=>{
 // const UpComingEventPage =withScanData(withError(withUser(withEventData(UpComingEvent))));
 // const UpComingEventPage = withEventData(UpComingEvent);
 
-const UpComingEventPage = () => (
-  <WithEventData
-    renderChildren={(events) => {
-      return <UpComingEvent events={events} />;
-    }}
-  ></WithEventData>
-);
+// const UpComingEventPage = () => (
+//   <WithEventData
+//     renderChildren={(events) => {
+//       return <UpComingEvent events={events} />;
+//     }}
+//   ></WithEventData>
+// );
 
-export default UpComingEventPage;
+export default UpComingEvent;

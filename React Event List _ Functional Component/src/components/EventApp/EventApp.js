@@ -207,12 +207,7 @@ const EventApp = (props) => {
       return null;
     }
   };
-  // const {
-  //   events,
-  //   handleOnChangeEditEvent,
-  //   handleDeleteEvent,
-  //   handleSetEdit,
-  // } = props;
+
   return (
     <EventTable
       dataCol={dataCol}

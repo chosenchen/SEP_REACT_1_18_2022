@@ -8,8 +8,12 @@ import { withEventData } from '../../hoc/withEventData';
 //   }
 // }
 
+import { useEventData } from '../../hooks/useEventData';
+
 const EventCounter = (props)=>{
-  const {events} = props;
+
+
+  const [events] = useEventData()
   return <h1>{events.length}</h1>;
 }
 
