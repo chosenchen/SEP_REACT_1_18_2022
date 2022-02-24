@@ -39,7 +39,6 @@ const App = () => {
       curPage = <CounterFn />;
       break;
     default:
-      curPage = <EventApp />;
   }
 
   return (
