@@ -11,7 +11,6 @@ import store from "../store/appStore";
 
 import { EventData } from "../models/EventData";
 import { useAbort } from "./useAbort";
-import { string } from "prop-types";
 
 const getEventsState = () => {
   const { events } = store.getState();
