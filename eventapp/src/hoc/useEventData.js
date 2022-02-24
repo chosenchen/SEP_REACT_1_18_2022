@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   getAllEvents,
   addNewEvent,
@@ -6,42 +6,6 @@ import {
   editEvent,
 } from '../services/event.api';
 import { EventData } from '../models/EventData';
-
-const useEventData = () => {
-  const [events, setEvents] = useState([]);
-  const generateEditEventstate = (event) => {
-    event.isEditing = false;
-    event.editEvent = new EventData(
-      event.eventName,
-      event.startDate,
-      event.endDate,
-      event.id
-    );
-  };
-
-
-  useEffect(() => {
-    const { fetchResult, controller } = getAllEvents();
-    if (this.controllerList) {
-      this.controllerList.push(controller);
-    } else {
-      this.controllerList = [controller];
-    }
-    fetchResult.then((data) => {
-      const events = data.map(({ eventName, startDate, endDate, id }) => {
-        const newEvent = new EventData(eventName, startDate, endDate, id);
-        generateEditEventstate(newEvent);
-        return newEvent;
-      });
-
-      setEvents(events);
-    });
-
-    return () => {
-      controller.abort();
-    }
-  },[]);
-}
 
 export const withEventData = (WrappedComponent) => {
   return class NewComponent extends React.Component {

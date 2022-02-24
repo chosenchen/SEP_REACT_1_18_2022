@@ -8,7 +8,7 @@ class EventDataRow extends React.Component {
 
   render() {
     const { event, handleOnChange, actions } = this.props;
-    console.log(this.props)
+
     return (
       <tr key={event.id}>
         <td>
