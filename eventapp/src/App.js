@@ -1,6 +1,9 @@
 import React from 'react';
 import EventApp from './components/EventApp/EventApp';
 import UpComingEvent from './components/UpComingEvents/UpComingEvents';
+import CounterClass from './components/Counter/Counter';
+import CounterFn from './components/Counter/CounterFn';
+
 import './App.css';
 
 import Header from './components/Header/Header';
@@ -8,6 +11,8 @@ import Header from './components/Header/Header';
 const PAGESINFO = {
   EventManager: 'EventManager',
   UpComingEvent: 'UpComingEvent',
+  CounterClass: 'CounterClass',
+  CounterFn: 'CounterFn',
 };
 class App extends React.Component {
   state = {
@@ -31,6 +36,12 @@ class App extends React.Component {
         break;
       case PAGESINFO.UpComingEvent:
         curPage = <UpComingEvent></UpComingEvent>;
+        break;
+      case PAGESINFO.CounterClass:
+        curPage = <CounterClass></CounterClass>;
+        break;
+      case PAGESINFO.CounterFn:
+        curPage = <CounterFn></CounterFn>;
         break;
       default:
     }

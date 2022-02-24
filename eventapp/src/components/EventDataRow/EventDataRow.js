@@ -1,14 +1,16 @@
 import React from 'react';
 import Button from '../Button/Button';
 
+const a = 5;
 class EventDataRow extends React.Component {
   handleChange = ({ target: { name, value } }, event) => {
+    console.log({ ...event, [name]: value });
     this.props.handleOnchange({ ...event, [name]: value });
   };
 
   render() {
     const { event, handleOnchange, actions } = this.props;
-
+    console.log('render DataRow', event);
     return (
       <tr key={event.id}>
         <td>
