@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import EventApp from "./components/EventApp/EventApp";
 import UpComingEvent from "./components/UpComingEvents/UpComingEvents";
+import Counter from "./components/Counter/Counter";
+import CounterFn from "./components/Counter/CounterFn";
+
 import "./App.css";
 
 import Header from "./components/Header/Header";
@@ -8,10 +11,13 @@ import Header from "./components/Header/Header";
 const PAGESINFO = {
   EventManager: "EventManager",
   UpComingEvent: "UpComingEvent",
+  CounterClass: "CounterClass",
+  CounterFn: "CounterFn",
 };
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGESINFO.EventManager);
+  // eslint-disable-next-line no-unused-vars
   const [pagesInfo, setPagesInfo] = useState(PAGESINFO);
 
   const hanldePageChange = (newPageInfo) => {
@@ -26,7 +32,14 @@ const App = () => {
     case PAGESINFO.UpComingEvent:
       curPage = <UpComingEvent></UpComingEvent>;
       break;
+    case PAGESINFO.CounterClass:
+      curPage = <Counter />;
+      break;
+    case PAGESINFO.CounterFn:
+      curPage = <CounterFn />;
+      break;
     default:
+      curPage = <EventApp />;
   }
 
   return (

@@ -6,17 +6,19 @@ import { EventData } from "../../models/EventData";
 import EventDataRow from "../EventDataRow/EventDataRow";
 import EventTable from "../EventTable/EventTable";
 import Button from "../Button/Button";
-import WithAbort from "../WithAbort/WithAbort";
-import WithEventData from "../WithEventData/WithEventData";
+import { useEventData } from "../../hooks/useEventData";
 
-const EventApp = ({
-  events,
-  handleOnChangeEditEvent,
-  handleDeleteEvent,
-  handleSetEdit,
-  handleAddEvent,
-  handleUpdateEvent,
-}) => {
+const EventApp = () => {
+  const {
+    events,
+    handleOnChangeEditEvent,
+    handleDeleteEvent,
+    handleSetEdit,
+    handleAddEvent,
+    handleUpdateEvent,
+  } = useEventData();
+
+  // eslint-disable-next-line no-unused-vars
   const [dataCol, setDataCol] = useState([
     "Event Name",
     "Start Date",
@@ -30,7 +32,7 @@ const EventApp = ({
 
   useEffect(() => {
     return () => {
-      console.log("EVENTAPP componentWillUnmount ");
+      // console.log("EVENTAPP componentWillUnmount ");
     };
   }, []);
 
@@ -141,31 +143,31 @@ const EventApp = ({
 
 // const EventManger = withEventData(EventApp);
 
-const EventManger = () => {
-  return (
-    <WithEventData
-      renderChildren={(
-        events,
-        handleSetEdit,
-        handleOnChangeEditEvent,
-        handleAddEvent,
-        handleUpdateEvent,
-        handleDeleteEvent
-      ) => {
-        return (
-          <EventApp
-            events={events}
-            handleSetEdit={handleSetEdit}
-            handleOnChangeEditEvent={handleOnChangeEditEvent}
-            handleAddEvent={handleAddEvent}
-            handleUpdateEvent={handleUpdateEvent}
-            handleDeleteEvent={handleDeleteEvent}
-          />
-        );
-      }}
-    />
-  );
-};
+// const EventManger = () => {
+//   return (
+//     <WithEventData
+//       renderChildren={(
+//         events,
+//         handleSetEdit,
+//         handleOnChangeEditEvent,
+//         handleAddEvent,
+//         handleUpdateEvent,
+//         handleDeleteEvent
+//       ) => {
+//         return (
+//           <EventApp
+//             events={events}
+//             handleSetEdit={handleSetEdit}
+//             handleOnChangeEditEvent={handleOnChangeEditEvent}
+//             handleAddEvent={handleAddEvent}
+//             handleUpdateEvent={handleUpdateEvent}
+//             handleDeleteEvent={handleDeleteEvent}
+//           />
+//         );
+//       }}
+//     />
+//   );
+// };
 
 // const EventManger = () => {
 //   return (
@@ -200,4 +202,4 @@ const EventManger = () => {
 //   );
 // };
 
-export default EventManger;
+export default EventApp;

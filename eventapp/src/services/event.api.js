@@ -71,16 +71,30 @@ const request = async (url, option) => {
     fetchOption = { ...defaultOption, ...restOptions };
   }
 
-  console.log(fetchOption);
+  // console.log(fetchOption);
 
-  return fetch(url, fetchOption).then(
-    (response) =>
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(response.json());
-        }, 3000);
-      })
-  );
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(
+        fetch(url, fetchOption)
+          .then((response) => {
+            return response.json();
+          })
+          .catch((err) => {
+            reject(err);
+          })
+      );
+    }, 0);
+  });
+
+  // return fetch(url, fetchOption).then(
+  //   (response) =>
+  //     new Promise((resolve, reject) => {
+  //       setTimeout(() => {
+  //         resolve(response.json());
+  //       }, 3000);
+  //     })
+  // );
 };
 
 export const getAllEvents = (signal = null) =>
