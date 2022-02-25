@@ -28,9 +28,9 @@
       url(../../images/apple-1838564_1920-main.jpg); /* Browser prefixes*/
     background-repeat: no-repeat;
     background-position: center center;
-    background-attachment: fixed;
     padding: 14.7% 0; /* Center contents within the container, make background image cover*/
     color: white;
+    background-size: cover;
   }
   
   .entry-banner h1 {
