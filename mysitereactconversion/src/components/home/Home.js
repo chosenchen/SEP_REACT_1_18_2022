@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const Main = () => {
+const Home = () => {
+  
+  // const ref = useRef(null);
+  // const [height, setHeight] = useState("")
+
+  // useEffect(() => {
+  //   setHeight(ref.current.offsetWidth)
+  //   console.log(height)
+  // }, [height]);
+
+  
+
+
   return (
     <div>
       <div className="main">
@@ -16,14 +28,14 @@ const Main = () => {
           </div>
 
           <div className="row text-center">
-            <div className="banner-buttons">
-              <div className="col-sm-1 col-md-1 col-sm-offset-5 col-md-offset-5">
+            <div className="banner-buttons d-flex justify-content-center">
+              <div className="col-sm-1 col-md-1 col-sm-offset-5 col-md-offset-5 mx-2">
                 <a className="btn btn-default btn-border" href="#about">
                   Info
                 </a>
               </div>
 
-              <div className="col-sm-1 col-md-1">
+              <div className="col-sm-1 col-md-1 mx-2">
                 <a className="btn btn-default btn-border" href="#projects">
                   Portfolio
                 </a>
@@ -108,8 +120,8 @@ const Main = () => {
               <div className="col-sm-1 col-md-1">
                 <div className="development-img">
                   <img
-                    className="img-responsive"
-                    src="./images/developerdesign.svg"
+                    className="img-fluid"
+                    src="/images/developerdesign.svg"
                   />
                 </div>
               </div>
@@ -130,8 +142,8 @@ const Main = () => {
               <div className="col-sm-1 col-md-1 col-sm-offset-2 col-md-offset-2">
                 <div className="responsive-img">
                   <img
-                    className="img-responsive"
-                    src="./images/responsivedesign.svg"
+                    className="img-fluid"
+                    src="/images/responsivedesign.svg"
                   />
                 </div>
               </div>
@@ -156,8 +168,8 @@ const Main = () => {
               <div className="col-sm-1 col-md-1">
                 <div className="idea-img">
                   <img
-                    className="img-responsive"
-                    src="./images/innovativesolutions.svg"
+                    className="img-fluid"
+                    src="/images/innovativesolutions.svg"
                   />
                 </div>
               </div>
@@ -177,7 +189,7 @@ const Main = () => {
 
             <div className="passion-summary">
               <div className="col-sm-1 col-md-1 col-sm-offset-2 col-md-offset-2">
-                <img className="img-responsive" src="./images/passion.svg" />
+                <img className="img-fluid" src="/images/passion.svg" />
               </div>
 
               <div className="col-sm-4 col-md-4">
@@ -385,4 +397,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;
