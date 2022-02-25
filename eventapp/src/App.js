@@ -27,10 +27,10 @@ const App = () => {
   let curPage = null;
   switch (currentPage) {
     case PAGESINFO.EventManager:
-      curPage = <EventApp></EventApp>;
+      curPage = <EventApp/>;
       break;
     case PAGESINFO.UpComingEvent:
-      curPage = <UpComingEvent></UpComingEvent>;
+      curPage = <UpComingEvent/>;
       break;
     case PAGESINFO.CounterClass:
       curPage = <Counter />;
@@ -39,7 +39,6 @@ const App = () => {
       curPage = <CounterFn />;
       break;
     default:
-      curPage = <EventApp />;
   }
 
   return (

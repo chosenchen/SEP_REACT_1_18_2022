@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 import {
@@ -7,12 +8,23 @@ import {
   editEvent,
 } from "../services/event.api";
 
+import store from "../store/appStore";
+
 import { EventData } from "../models/EventData";
 import { useAbort } from "./useAbort";
 
+const getEventsState = () => {
+  const { events } = store.getState();
+  return events;
+};
+
 export const useEventData = () => {
   const { createSignal } = useAbort();
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(getEventsState());
+
+  store.subscribe(() => {
+    setEvents(getEventsState());
+  });
 
   useEffect(() => {
     fetchAllEvents();
@@ -40,7 +52,7 @@ export const useEventData = () => {
           return newEvent;
         });
 
-        setEvents(events);
+        store.dispatch({ type: "event/get", payload: events });
       })
       .catch((err) => {
         console.warn(err);
@@ -50,17 +62,10 @@ export const useEventData = () => {
   // API CALL
   const handleUpdateEvent = (updateEvent) => {
     return editEvent(updateEvent, createSignal())
-      .then((data) => {
-        setEvents(
-          events.map((event) => {
-            if (event.id === data.id) {
-              console.log(events);
-              return { ...event, ...data };
-            } else {
-              return event;
-            }
-          })
-        );
+      .then(({ eventName, startDate, endDate, id }) => {
+        const updatedEvent = new EventData(eventName, startDate, endDate, id);
+        generateEditEventstate(updatedEvent);
+        store.dispatch({ type: "event/update", payload: updatedEvent });
       })
       .catch((err) => {
         console.warn(err);
@@ -71,15 +76,7 @@ export const useEventData = () => {
   const handleDeleteEvent = (deletedEvent) => {
     return deleteEvent(deletedEvent, createSignal())
       .then((data) => {
-        setEvents(
-          events.filter((event) => {
-            if (event.id === deletedEvent.id) {
-              return false;
-            } else {
-              return true;
-            }
-          })
-        );
+        store.dispatch({ type: "event/delete", payload: deletedEvent });
       })
       .catch((err) => {
         console.warn(err);
@@ -92,7 +89,8 @@ export const useEventData = () => {
       .then(({ eventName, startDate, endDate, id }) => {
         const newEvent = new EventData(eventName, startDate, endDate, id);
         generateEditEventstate(newEvent);
-        setEvents([...events, newEvent]);
+
+        store.dispatch({ type: "event/add", payload: newEvent });
       })
       .catch((err) => {
         console.warn(err);
@@ -101,31 +99,15 @@ export const useEventData = () => {
 
   // UI STATE
   const handleSetEdit = (setEditEvent, isEdit) => {
-    setEvents(
-      events.map((event) => {
-        if (event.id === setEditEvent.id) {
-          return { ...setEditEvent, isEditing: isEdit };
-        } else {
-          return event;
-        }
-      })
-    );
+    store.dispatch({
+      type: "event/setEdit",
+      payload: { setEditEvent, isEdit },
+    });
   };
 
   // UI STATE
   const handleOnChangeEditEvent = (editEvent) => {
-    setEvents(
-      events.map((event) => {
-        if (event.id === editEvent.id) {
-          return {
-            ...event,
-            editEvent: { ...editEvent },
-          };
-        } else {
-          return event;
-        }
-      })
-    );
+    store.dispatch({ type: "event/onChangeEditEvent", payload: editEvent });
   };
   return {
     events,
