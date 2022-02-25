@@ -7,17 +7,11 @@ import { EventData } from '../../models/EventData';
 import EventDataRow from '../EventDataRow/EventDataRow';
 import EventTable from '../EventTable/EventTable';
 import Button from '../Button/Button';
-import {
-  getAllEvents,
-  addNewEvent,
-  deleteEvent,
-  editEvent,
-} from '../../services/event.api';
 import { useEventData } from '../../hooks/useEventData';
 
 
 const EventApp = (props) => {
-  const [dataCol, setDataCol] = React.useState([
+  const [dataCol] = React.useState([
     'Event Name',
     'Start Date',
     'End Date',
@@ -38,7 +32,6 @@ const EventApp = (props) => {
 
   console.log(events)
 
-  //const events = store.getState();
 
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);

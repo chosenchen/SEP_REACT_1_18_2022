@@ -54,6 +54,7 @@ export const useEventData = () => {
 
     // UI STATE
     const handleOnChangeEditEvent = (editEvent) => {
+        console.log(editEvent)
         store.dispatch(actions.onChangeEditEventAction(editEvent))
     };
 

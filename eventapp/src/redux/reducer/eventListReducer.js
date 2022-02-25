@@ -34,6 +34,7 @@ const eventListReducer = (state = initState, action) => {
 
         case "setEdit":
             return state.map((event) => {
+                console.log(action.payload.isEdit)
                 if (event.id === action.payload.setEditEvent.id) {
                     return { ...event, isEditing: action.payload.isEdit };
                 } else {
@@ -43,6 +44,7 @@ const eventListReducer = (state = initState, action) => {
 
         case "onChangeEditEvent":
             return state.map((event) => {
+                console.log(actions.payload)
                 if (event.id === actions.payload.id) {
                     return {
                         ...event,

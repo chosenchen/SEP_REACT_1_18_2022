@@ -32,21 +32,15 @@
     },
     {
       "eventName": "TEST-6",
-      "startDate": "2022-02-25",
-      "endDate": "2022-03-04",
+      "startDate": "1644710400000",
+      "endDate": "1645747200000",
       "id": 6
     },
     {
       "eventName": "TEST-7",
-      "startDate": "1645833600000",
-      "endDate": "1646265600000",
+      "startDate": "1645315200000",
+      "endDate": "1645747200000",
       "id": 7
-    },
-    {
-      "eventName": "TEST-8",
-      "startDate": "1646265600000",
-      "endDate": "1646956800000",
-      "id": 8
     }
   ]
 }
