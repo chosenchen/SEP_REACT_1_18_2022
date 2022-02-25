@@ -9,14 +9,16 @@ import EventCounter from "./components/EventCounter/EventCounter";
 const PAGESINFO = {
   EventManager: "EventManager",
   UpComingEvent: "UpComingEvent",
-  EventCounter: "CounterFn",
+  EventCounter: "EventCounter",
 };
 const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGESINFO.EventManager);
   const [pagesInfo, setPagesInfo] = useState(PAGESINFO);
+
   const hanldePageChange = (newPageInfo) => {
     setCurrentPage(newPageInfo);
   };
+
   let curPage = null;
   switch (currentPage) {
     case PAGESINFO.EventManager:

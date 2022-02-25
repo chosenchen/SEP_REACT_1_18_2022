@@ -1,11 +1,12 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import {
   getAllEvents,
   addNewEvent,
   deleteEvent,
   editEvent,
-} from "../../services/event.api";
-import { EventData } from "../../models/EventData";
+} from "../services/event.api";
+import { EventData } from "../models/EventData";
 
 export const useEventData = () => {
   const [events, setEvents] = React.useState([]);
@@ -91,18 +92,20 @@ export const useEventData = () => {
   React.useEffect(() => {
     const { fetchResult, controller } = getAllEvents();
     fetchResult.then((data) => {
+      console.log(data);
       const events = data.map(({ eventName, startDate, endDate, id }) => {
         const newEvent = new EventData(eventName, startDate, endDate, id);
         generateEditEventstate(newEvent);
         return newEvent;
       });
-
+      console.log(events);
       setEvents(events);
     });
     return () => {
       controller.abort();
     };
   }, []);
+  console.log(events);
   return [
     events,
     handleUpdateEvent,

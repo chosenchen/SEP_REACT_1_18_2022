@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./EventApp.css";
-import { withEventData } from "../../hoc/withEventData";
+//import { withEventData } from "../../hoc/withEventData";
 
 import { EventData } from "../../models/EventData";
 
@@ -20,14 +20,15 @@ const EventApp = (props) => {
     new EventData("", "" + Date.now(), "" + Date.now())
   );
 
-  const {
+  const [
     events,
-    handleOnChangeEditEvent,
-    handleDeleteEvent,
-    handleSetEdit,
-    handleAddEvent,
     handleUpdateEvent,
-  } = useEventData();
+    handleDeleteEvent,
+    handleAddEvent,
+    handleSetEdit,
+    handleOnChangeEditEvent,
+  ] = useEventData();
+  console.log(events);
 
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);

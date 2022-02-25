@@ -1,10 +1,12 @@
 import React from "react";
 
-const EventTable = ({ children, renderHeader, dataCol, renderFooter }) => {
+function EventTable(props) {
+  const { renderHeader, dataCol, renderFooter } = props;
   const header = renderHeader ? (
     <header className="event-app__header">{renderHeader()}</header>
   ) : null;
   const footer = renderFooter ? <tfoot>{renderFooter()}</tfoot> : null;
+  console.log(props.children);
   return (
     <section className="event-app">
       {header}
@@ -17,12 +19,12 @@ const EventTable = ({ children, renderHeader, dataCol, renderFooter }) => {
             ))}
           </tr>
         </thead>
-        <tbody>{children}</tbody>
+        <tbody>{props.children}</tbody>
         {footer}
       </table>
     </section>
   );
-};
+}
 
 // class EventTable extends React.Component {
 //   render() {
