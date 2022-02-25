@@ -1,54 +1,77 @@
-import React, { useState } from "react";
-import "./EventApp.css";
-import { withEventData } from "../../hoc/withEventData";
+import React from 'react';
+import './EventApp.css';
+import { withEventData } from '../../hoc/withEventData';
 
-import { EventData } from "../../models/EventData";
+import { EventData } from '../../models/EventData';
 
-import EventDataRow from "../EventDataRow/EventDataRow";
-import EventTable from "../EventTable/EventTable";
-import Button from "../Button/Button";
+import EventDataRow from '../EventDataRow/EventDataRow';
+import EventTable from '../EventTable/EventTable';
+import Button from '../Button/Button';
+import {
+  getAllEvents,
+  addNewEvent,
+  deleteEvent,
+  editEvent,
+} from '../../services/event.api';
+import { useEventData } from '../../hooks/useEventData';
 
-function EventApp(props) {
-  const dataCol = ["Event Name", "Start Date", "End Date", "Actions"];
-  const [newEvent, setNewEvent] = useState(
-    new EventData("", "" + Date.now(), "" + Date.now())
+const EventApp = (props) => {
+  const [dataCol, setDataCol] = React.useState([
+    'Event Name',
+    'Start Date',
+    'End Date',
+    'Actions',
+  ]);
+  const [isShowAddEventRow, setIsShowAddEventRow] = React.useState(false);
+  const [newEvent, setNewEvent] = React.useState(
+    new EventData('', '' + Date.now(), '' + Date.now())
   );
-  const [isShowAddEventRow, setShowAddEventRow] = useState(false);
+  const [
+    events,
+    handleUpdateEvent,
+    handleDeleteEvent,
+    handleAddEvent,
+    handleSetEdit,
+    handleOnChangeEditEvent,
+  ] = useEventData();
 
   const hanldeAddEvent = () => {
-    setShowAddEventRow(true);
+    setIsShowAddEventRow(true);
   };
-
   const hanldeOnChange = (newEvent) => {
     setNewEvent(newEvent);
   };
 
   const handleCloseAddNew = () => {
-    setShowAddEventRow(false);
-    setNewEvent(new EventData("", "" + Date.now(), "" + Date.now()));
+    setIsShowAddEventRow(false);
+    setNewEvent(new EventData('', '' + Date.now(), '' + Date.now()));
   };
 
-  const hanldeSaveAddNew = () => {
+  const hanldeSaveAddNew = (newEventD) => {
+    console.log('click');
+    console.log('before', newEventD);
     const { eventName, startDate, endDate } = newEvent;
+
     const newEventData = new EventData(eventName, startDate, endDate);
     newEventData.parseTimeStamp();
+    console.log('after', newEventData);
     if (newEventData.isValidForSave()) {
-      props.handleAddEvent(newEventData).then((data) => {
+      handleAddEvent(newEventData).then((data) => {
         handleCloseAddNew();
       });
     } else {
-      alert("inValid");
+      alert('inValid');
     }
   };
 
   const handleEditSave = (editEventObj) => {
-    props.handleUpdateEvent(editEventObj).then((data) => {
-      props.handleSetEdit(editEventObj, false);
+    handleUpdateEvent(editEventObj).then((data) => {
+      handleSetEdit(editEventObj, false);
     });
   };
 
   const renderHeader = () => (
-    <Button onClick={hanldeAddEvent()}>Add Event</Button>
+    <Button onClick={hanldeAddEvent}>Add Event</Button>
   );
   const renderFooter = () => {
     if (isShowAddEventRow) {
@@ -57,11 +80,11 @@ function EventApp(props) {
           event={newEvent}
           actions={[
             {
-              actionName: "Save",
+              actionName: 'Save',
               actionFn: hanldeSaveAddNew,
             },
             {
-              actionName: "Close",
+              actionName: 'Close',
               actionFn: handleCloseAddNew,
             },
           ]}
@@ -73,10 +96,6 @@ function EventApp(props) {
     }
   };
 
-  console.log("render Event App");
-
-  const { events, handleOnChangeEditEvent, handleDeleteEvent, handleSetEdit } =
-    props;
   return (
     <EventTable
       dataCol={dataCol}
@@ -90,11 +109,11 @@ function EventApp(props) {
             event={event.editEvent}
             actions={[
               {
-                actionName: "Save",
+                actionName: 'Save',
                 actionFn: handleEditSave,
               },
               {
-                actionName: "Cancel",
+                actionName: 'Cancel',
                 actionFn: () => handleSetEdit(event, false),
               },
             ]}
@@ -106,11 +125,11 @@ function EventApp(props) {
             event={event}
             actions={[
               {
-                actionName: "Edit",
+                actionName: 'Edit',
                 actionFn: () => handleSetEdit(event, true),
               },
               {
-                actionName: "Delete",
+                actionName: 'Delete',
                 actionFn: handleDeleteEvent,
               },
             ]}
@@ -119,8 +138,8 @@ function EventApp(props) {
       )}
     </EventTable>
   );
-}
+};
 
-const EventManger = withEventData(EventApp);
+// const EventManger = withEventData(EventApp);
 
-export default EventManger;
+export default EventApp;

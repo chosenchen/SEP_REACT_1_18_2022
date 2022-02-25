@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Logo } from "../../images/logo.svg";
+
 export default class ContactPage extends React.Component {
     render() {
         const { pagesInfo } = this.props;
@@ -13,8 +13,6 @@ export default class ContactPage extends React.Component {
                             </div>
                         </div>
                     </div>
-
-
                     <div class="row">
                         <div class="col-sm-12 col-md-12 text-center">
                             <div class="contact-header-quote">
@@ -23,8 +21,6 @@ export default class ContactPage extends React.Component {
                             </div>
                         </div>
                     </div>
-
-
                     <div class="row">
                         <div class="col-sm-6 col-md-6">
                             <div class="contact-instructions">
