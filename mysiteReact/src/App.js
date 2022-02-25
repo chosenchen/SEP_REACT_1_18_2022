@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import Navigation from "./components/Navigation/Navigation";
+import Main from "./components/Main/Main";
+import Projects from "./components/Projects/Projects";
+import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
+import About from "./components/About/About";
+//import "bootstrap/dist/css/bootstrap.min.css";
+
+const PAGESINFO = {
+  Home: "Home",
+  Portfolio: "Portfolio",
+  Contact: "Contact",
+};
 
 function App() {
+  const [currentPage, setCurrentPage] = React.useState(PAGESINFO.EventManager);
+  const [pagesInfo, setPagesInfo] = React.useState(PAGESINFO);
+
+  const hanldePageChange = (newPageInfo) => {
+    setCurrentPage(newPageInfo);
+  };
+
+  let curPage = null;
+  switch (currentPage) {
+    case PAGESINFO.Home:
+      curPage = <Main></Main>;
+      break;
+    case PAGESINFO.Portfolio:
+      curPage = <Projects></Projects>;
+      break;
+    case PAGESINFO.Contact:
+      curPage = <Contact></Contact>;
+      break;
+    default:
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigation
+        pagesInfo={pagesInfo}
+        hanldePageChange={hanldePageChange}
+      ></Navigation>
+      {curPage}
+      <Main></Main>
+      <About></About>
+      <Footer></Footer>
     </div>
   );
 }

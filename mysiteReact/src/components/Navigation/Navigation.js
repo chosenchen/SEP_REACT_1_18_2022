@@ -1,5 +1,9 @@
 import React from "react";
-import logo from "../../../../images/logo.svg";
+import logo from "../../images/logo.svg";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navigation = (props) => {
   const { pagesInfo, hanldePageChange } = props;
@@ -10,15 +14,16 @@ const Navigation = (props) => {
 
   return (
     <div className="navigation">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center">
+      <Container fluid>
+        <Row>
+          <Col xs={1} sm={1} md={1} lg={1} className="text-center">
             <div className="logo">
-              <img src={logo} />
+              <img src={logo} alt="" />
             </div>
-          </div>
-
-          <div className="col-xs-11 col-sm-11 col-md-11 col-lg-11 text-right">
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={11} sm={11} md={11} lg={11} className="text-right">
             <div className="primary-nav">
               <ul>
                 {Object.keys(pagesInfo).map((key) => (
@@ -34,41 +39,10 @@ const Navigation = (props) => {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
 export default Navigation;
-
-const tem = (
-  <header className="app-header">
-    <nav className="app-header__nav">
-      <EventCounter></EventCounter>
-
-      {Object.keys(pagesInfo).map((key) => (
-        <a href={key} key={key} onClick={(e) => hanldeNavClick(e, key)}>
-          {key}
-        </a>
-      ))}
-    </nav>
-  </header>
-);
-const temNav = (
-  <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 text-right">
-    <div class="primary-nav">
-      <ul>
-        <li>
-          <a href="index.html">Home</a>
-        </li>
-        <li>
-          <a href="portfolio.html">Portfolio</a>
-        </li>
-        <li>
-          <a href="contact.html">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-);
