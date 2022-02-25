@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from "react"
 import './Contact.css'
+import Footer from '../Footer/Footer'
 
 //By new props, useState to update functional components
 const Contact=(props)=>{
@@ -89,6 +90,7 @@ const Contact=(props)=>{
                 </div>
             </div>
         </div>
+        <Footer />
     </div>
     )
     

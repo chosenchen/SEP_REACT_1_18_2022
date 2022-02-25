@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from "react"
 import './Portfolio.css'
+import Footer from '../Footer/Footer'
 
 //By new props, useState to update functional components
 const Portfolio=(props)=>{
@@ -75,8 +76,9 @@ const Portfolio=(props)=>{
                 </div>
             </div>
         </div>
+        <Footer />
     </div>
-
+  
     )
     
 }
