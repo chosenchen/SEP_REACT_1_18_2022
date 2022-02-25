@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 import { getAllEvents, addNewEvent, deleteEvent, editEvent } from "../services/event.api";
 import { EventData } from "../models/EventData";
 
 export const useEventData = () => {
     const [events, setEvents] = useState([]);
+
+    console.log('events', events);
 
     const generateEditEventstate = (event) => {
         event.isEditing = false;
@@ -29,7 +31,8 @@ export const useEventData = () => {
                     } else {
                         return event;
                     }
-                }),
+                }
+                )
             );
         });
     };
@@ -52,7 +55,7 @@ export const useEventData = () => {
         return addNewEvent(addEvent).then(
             ({ eventName, startDate, endDate, id }) => {
                 const newEvent = new EventData(eventName, startDate, endDate, id);
-                
+
                 generateEditEventstate(newEvent);
                 // console.log('egenarated event', newEvent);
                 setEvents([...events, newEvent]);
@@ -89,17 +92,17 @@ export const useEventData = () => {
     };
 
     useEffect(() => {
-            const { fetchResult, controller } = getAllEvents();
-            
-            fetchResult.then((data) => {
-                const events = data.map(({ eventName, startDate, endDate, id }) => {
-                    const newEvent = new EventData(eventName, startDate, endDate, id);
-                    generateEditEventstate(newEvent);
-                    // console.log('res', newEvent);
-                    return newEvent;
-                });
-                setEvents(events);
+        const { fetchResult, controller } = getAllEvents();
+
+        fetchResult.then((data) => {
+            const events = data.map(({ eventName, startDate, endDate, id }) => {
+                const newEvent = new EventData(eventName, startDate, endDate, id);
+                generateEditEventstate(newEvent);
+                // console.log('res', newEvent);
+                return newEvent;
             });
+            setEvents(events);
+        });
         return () => {
             controller.abort();
         }
