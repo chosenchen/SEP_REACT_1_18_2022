@@ -28,10 +28,11 @@ export const useEventData = () => {
 
   useEffect(() => {
     console.log('did mount');
-
+    
     store.subscribe(() => {
       setEvents(store.getState());
     });
+    
 
     const { fetchResult, controller } = getAllEvents();
     fetchResult.then((data) => {

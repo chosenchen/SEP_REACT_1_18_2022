@@ -163,7 +163,7 @@ const EventApp = (props) => {
     setNewEvent(new EventData('', '' + Date.now(), '' + Date.now()));
   };
 
-  const hanldeSaveAddNew = (newEventD) => {
+  const hanldeSaveAddNew = (newEvent) => {
     const { eventName, startDate, endDate } = newEvent;
 
     const newEventData = new EventData(eventName, startDate, endDate);

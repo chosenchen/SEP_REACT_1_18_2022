@@ -1,35 +1,34 @@
 import React from 'react';
 import { store } from '../../EventRedux/EventRedux';
+import { useEventData } from '../../hooks/useEventData';
 import EventDataRow from '../EventDataRow/EventDataRow';
 import EventTable from '../EventTable/EventTable';
 // import WithEventData from '../WithEventData/WithEventData';
-class UpComingEvent extends React.Component {
-  state = {
-    dataCol: ['Event Name', 'Start Date', 'End Date'],
-  };
 
-  renderHeader = () => {
+const UpComingEvent = (props) => {
+  const dataCol = ['Event Name', 'Start Date', 'End Date'];
+  const [events] = useEventData();
+
+  const renderHeader = () => {
     return <h5>UpComingEvent</h5>;
   };
 
-  render() {
-    const { events } = this.props;
-    return (
-      <EventTable renderHeader={this.renderHeader} dataCol={this.state.dataCol}>
-        {store.getState()
-          ?.filter((event) => {
-            if (event.isInTheFuture()) {
-              return true;
-            } else {
-              return false;
-            }
-          })
-          .map((event) => {
-            return <EventDataRow key={event.id} event={event}></EventDataRow>;
-          })}
-      </EventTable>
-    );
-  }
+  return (
+    <EventTable renderHeader={renderHeader} dataCol={dataCol}>
+      {events
+        ?.filter((event) => {
+          if (event.isInTheFuture()) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .map((event) => {
+          return <EventDataRow key={event.id} event={event}></EventDataRow>;
+        })}
+    </EventTable>
+  );
+
 }
 // HOC HELLO
 // const UpComingEventPage =withScanData(withError(withUser(withEventData(UpComingEvent))));
