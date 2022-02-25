@@ -6,10 +6,13 @@ import WithEventData from '../WithEventData/WithEventData';
 
 import { useEventData } from '../../hooks/useEventData';
 
+import store from '../../redux/store';
+
 function UpComingEvent () {
   const dataCol = ['Event Name', 'Start Date', 'End Date']
   
-  const [ events ] = useEventData();
+  const events = store.getState();
+  console.log(events)
 
   const renderHeader = () => {
     return <h5>UpComingEvent</h5>;

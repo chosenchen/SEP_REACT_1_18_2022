@@ -7,9 +7,14 @@ import {
 } from '../services/event.api';
 import { EventData } from '../models/EventData';
 
+import store from '../redux/store';
+import actions from '../redux/actions/actions';
+
 export const useEventData = () => {
-    const [events, setEvents] = React.useState([]);
-    
+    const events = store.getState();
+
+    store.subscribe(() => console.log(store.getState()))
+
     const generateEditEventstate = (event) => {
         event.isEditing = false;
         event.editEvent = new EventData(
@@ -21,34 +26,15 @@ export const useEventData = () => {
     };
 
     const handleUpdateEvent = (updateEvent) => {
-        return editEvent(updateEvent).then((data) => {
-            setEvents(
-                events.map((event) => {
-                    if (event.id === data.id) {
-                        return {
-                            ...event,
-                            ...data,
-                        };
-                    } else {
-                        return event;
-                    }
-                })
-            );
-            console.log(events);
+        return editEvent(updateEvent).then(() => {
+            console.log(updateEvent)
+            store.dispatch(actions.updateEventAction(updateEvent))
         });
     };
 
     const handleDeleteEvent = (deletedEvent) => {
-        return deleteEvent(deletedEvent).then((data) => {
-            setEvents(
-                events.filter((event) => {
-                    if (event.id === deletedEvent.id) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                })
-            );
+        return deleteEvent(deletedEvent).then(() => {
+            store.dispatch(actions.deleteEventAction(deleteEvent))
         });
     };
     // API CALL
@@ -57,54 +43,39 @@ export const useEventData = () => {
             ({ eventName, startDate, endDate, id }) => {
                 const newEvent = new EventData(eventName, startDate, endDate, id);
                 generateEditEventstate(newEvent);
-                setEvents([...events, newEvent]);
+                store.dispatch(actions.addNewEventAction(newEvent))
             }
         );
     };
     // UI STATE
     const handleSetEdit = (setEditEvent, isEdit) => {
-        setEvents(
-            events.map((event) => {
-                if (event.id === setEditEvent.id) {
-                    return { ...event, isEditing: isEdit };
-                } else {
-                    return event;
-                }
-            })
-        );
+        store.dispatch(actions.setEditAction(setEditEvent, isEdit))
     };
+
     // UI STATE
     const handleOnChangeEditEvent = (editEvent) => {
-        setEvents(
-            events.map((event) => {
-                if (event.id === editEvent.id) {
-                    return {
-                        ...event,
-                        editEvent: { ...editEvent },
-                    };
-                } else {
-                    return event;
-                }
-            })
-        );
+        store.dispatch(actions.onChangeEditEventAction(editEvent))
     };
 
     React.useEffect(() => {
         const { fetchResult, controller } = getAllEvents();
+
         fetchResult.then((data) => {
             const events = data.map(({ eventName, startDate, endDate, id }) => {
                 const newEvent = new EventData(eventName, startDate, endDate, id);
                 generateEditEventstate(newEvent);
                 return newEvent;
             });
+            console.log(events)
 
-            setEvents(events);
+            store.dispatch(actions.getEventListAction(events));
         });
         return () => {
             controller.abort();
         };
     }, []);
 
+    console.log(events)
     return [
         events,
         handleUpdateEvent,

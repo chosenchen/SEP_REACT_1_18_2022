@@ -1,9 +1,13 @@
 import React from 'react';
 import { withEventData } from '../../hoc/withEventData';
+import { useEventData } from '../../hooks/useEventData';
 
-function EventCounter (props) {
+import store from '../../redux/store';
 
-    const { events } = props;
+function EventCounter () {
+
+  const events = store.getState()
+  console.log(events)
     return <h1>{events.length}</h1>;
   }
 

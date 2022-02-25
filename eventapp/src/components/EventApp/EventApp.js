@@ -36,6 +36,10 @@ const EventApp = (props) => {
     handleOnChangeEditEvent,
   ] = useEventData();
 
+  console.log(events)
+
+  //const events = store.getState();
+
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
