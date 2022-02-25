@@ -1,11 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import './bootstrap/css/bootstrap.css'
-import './styles/style.css';
+
 import './utils/style.js';
+import './styles/style.css';
+import './bootstrap/css/bootstrap.css'
+
 import NavBar from "./components/navbar";
-import HomePage from "./components/homePage";
 import Footer from "./components/footer";
+import HomePage from "./components/homePage";
+import Contact from "./components/Pages/contact";
+import Projects from "./components/Pages/projects";
 
 class App extends React.Component {
 
@@ -15,6 +19,8 @@ render() {
         <NavBar />
           <Routes>
             <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/portfoilo" element={<Projects />} />
+            <Route exact path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
       </main>

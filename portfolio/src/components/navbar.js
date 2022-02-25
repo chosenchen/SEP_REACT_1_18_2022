@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { navigation } from '../utils/style.js'
 
 function NavBar() {
@@ -20,9 +21,15 @@ function NavBar() {
                     <div className="col-xs-11 col-sm-11 col-md-11 col-lg-11 text-right">
                         <div className="primary-nav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="portfolio.html">Portfolio</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <NavLink to="/">
+                                    <li>Home</li>
+                                </NavLink>
+                                <NavLink to="/portfoilo">
+                                    <li>Portfolio</li>
+                                </NavLink>
+                                <NavLink to="/contact">
+                                    <li>Contact</li>
+                                </NavLink>
                             </ul>
                         </div>
                     </div>

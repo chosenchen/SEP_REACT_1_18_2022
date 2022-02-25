@@ -40,7 +40,7 @@ class About extends React.Component {
                                     <h5><em>And for those that don't fancy reading:</em></h5>
                                     <br />
 
-                                    <p>Male, 200 years old.</p>
+                                    <p>Male, 23 years old.</p>
                                     <p>Five feet 110 inches</p>
                                     <p>Favorite fonts:Roboto </p>
                                     <p>Loves to learn new things</p>

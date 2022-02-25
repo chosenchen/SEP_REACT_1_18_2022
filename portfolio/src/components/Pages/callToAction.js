@@ -10,7 +10,7 @@ class CallToAction extends React.Component {
                     <div className="row">
                         <div className="entry-banner text-center">
                             <h1 id="hello">Hello, I'm</h1>
-                            <h1 id="name">XXXX</h1>
+                            <h1 id="name">Trey Fleshman</h1>
                             <h1 id="person-description">UI Developer. UX Desinger. Problem Solver.</h1>
                         </div>
                     </div>
