@@ -11,16 +11,15 @@ function Contact() {
     }
 
     const handleOnSubmit = () => {
-        const { fName, lName, email, message } = formRes;
         if (formRes.fName === '' || formRes.lName === '' || formRes.email === '' || formRes.message === '') {
             setError('Inputs cannot be empty.');
             alert(error);
-        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formRes.email)) {
+        } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(formRes.email)) {
             setError("Please enter a vaild email.");
             alert(error);
         } else {
             console.log(formRes);
-            alert(`First Name: ${fName}, Last Name: ${formRes.lName}, email: ${formRes.email}, message: ${formRes.email}`);
+            alert(`First Name: ${formRes.fName}, Last Name: ${formRes.lName}, email: ${formRes.email}, message: ${formRes.email}`);
         }
     }
 
@@ -123,7 +122,7 @@ function Contact() {
                                 <div className="row">
                                     <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
                                         <div className="submit-contact">
-                                            <a className="btn btn-default btn-border" onClick={handleOnSubmit} >Submit</a>
+                                            <a className="btn btn-default btn-border" href="#" onClick={handleOnSubmit} >Submit</a>
                                         </div>
                                     </div>
                                 </div>

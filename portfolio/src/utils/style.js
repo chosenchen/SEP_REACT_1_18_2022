@@ -6,10 +6,6 @@ export function navigation() {
     'margin-top',
     ($('.primary-nav').height() - $('.primary-nav li').height()) / 2 + 'px'
   );
-
-  $(window).resize(function () {
-    setTimeout(navigation, 500);
-  });
 }
 
 export function projects() {
@@ -40,9 +36,4 @@ export function projects() {
       $('.strike-zone-project .row').outerHeight()) /
       2
   );
-  var doit;
-  $(window).resize(function () {
-    clearTimeout(doit);
-    doit = setTimeout(projects, 500);
-  });
 }
