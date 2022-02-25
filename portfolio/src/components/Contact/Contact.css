@@ -1,0 +1,44 @@
+.contact {
+    background-color: #3a3a3a;
+    padding: 50px 150px;
+    color: white;
+  }
+  .contact input,
+  textarea {
+    color: black;
+  }
+  
+  .contact h1,
+  .contact h2,
+  .contact h4 {
+    font-family: "Source Sans Pro", Arial, sans-serif;
+  }
+  .contact p {
+    font-family: "Roboto", Helvetica, serif;
+  }
+  .contact-header-quote {
+    font-style: italic;
+  }
+  .contact-header-quote h4 {
+    margin: 5px 0;
+  }
+  .contact-instructions,
+  .contact-form-body {
+    margin-top: 50px;
+    padding: 0px 6%;
+  }
+  
+  .email,
+  .message {
+    margin: 15px 0px;
+  }
+  .contact input,
+  .contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 3px 0px;
+  }
+  
+  .submit-contact .btn-border {
+    margin-top: 10px;
+  }

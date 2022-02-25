@@ -1,0 +1,35 @@
+.luvtalk-project {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+      url(../../images/luvtalklogo.png);
+    background-position: center center;
+  }
+  
+  .personal-website-project {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+      url(../../images/logo.svg);
+    background-position: center center;
+  }
+  
+  .strike-zone-project {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+      url(../../images/mlbproject.png);
+    background-position: center center;
+  }
+  
+  .resume {
+    padding: 50px 0px;
+    font-family: "Calisto MT", Helvetica, serif;
+  }
+  
+  .resume-header {
+    margin-bottom: 20px;
+  }
+  .objective h4,
+  .education h4,
+  .work-experience h4,
+  .resume-projects h4,
+  .activities h4,
+  .skills h4,
+  .endorsements h4 {
+    border-bottom: 1px solid black;
+  }
