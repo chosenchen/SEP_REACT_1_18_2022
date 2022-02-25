@@ -1,0 +1,56 @@
+.homePage-record__list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 35px;
+    row-gap: 35px;
+}
+
+.card{
+    width: 500px;
+}
+
+.card-header{
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.user__img {
+    height: 36px;
+    width: 36px;
+}
+
+.likes__btn{
+    height: 36px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 7.5px;
+}
+
+.like__btn__container{
+    margin-left: auto;
+}
+
+.card-header > p, .card-footer > p{
+    margin: 0;
+}
+
+.card-img-top{
+    height: 285px;
+}
+
+.homePage-location__icon{
+    padding-right: 5px;
+}
+
+.card-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+

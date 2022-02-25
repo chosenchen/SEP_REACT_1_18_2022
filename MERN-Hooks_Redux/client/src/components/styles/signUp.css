@@ -1,0 +1,10 @@
+.signUp-submit__btn{
+    align-self: center;
+    width: 50%;
+}
+
+.user__profile__img__selction{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
