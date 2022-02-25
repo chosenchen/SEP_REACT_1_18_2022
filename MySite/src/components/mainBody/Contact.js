@@ -44,14 +44,14 @@ const Contact = () => {
 									<div className = "col-sm-6 col-md-6">
 										<div className = "firstname">
 											<h4>Full Name *</h4>
-											<input type = "text" placeholder= "First Name">
+											<input type = "text" placeholder= "First Name" />
 										</div>
 									</div>
 
 									<div className = "col-sm-6 col-md-6">
 										<div className = "lastname">
 											<h4>Full Name *</h4>
-											<input type = "text" placeholder= "Last Name">
+											<input type = "text" placeholder= "Last Name" />
 										</div>
 									</div>
 								</div>
@@ -60,7 +60,7 @@ const Contact = () => {
 									<div className = "col-sm-12 col-md-12">
 										<div className = "email">
 											<h4>Email *</h4>
-											<input type = "text" placeholder= "Email">
+											<input type = "text" placeholder= "Email" />
 										</div>
 									</div>
 								</div>
