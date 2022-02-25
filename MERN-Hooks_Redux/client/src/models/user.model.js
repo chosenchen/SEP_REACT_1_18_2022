@@ -1,17 +1,18 @@
+import { USER_API } from '../services/user.connectToDB';
+
 export class UserData {
-    constructor(userName, email, password, confirm_password, profile_img, liked_posts) {
+    constructor(userName, email, password, confirm_password, profile_img) {
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.confirm_password = confirm_password;
         this.profile_img = profile_img;
-        this.liked_posts = liked_posts;
     }
-
+    
     isValidForSave() {
         if (this.userName === '') {
             return { isVaild: false, error: "Please enter an username." }
-        } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        } else if ( this.email === '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email) ){
             return { isVaild: false, error: "Please enter a vaild email." }
         } else if (this.password !== this.confirm_password || this.password === '') {
             return ({ isVaild: false, error: "Passwords do not match" })

@@ -8,8 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
+
+    constructor() {
+        super();
         this.state = {
             isVaild: true,
             error: "",
@@ -24,28 +25,32 @@ class SignUp extends React.Component {
         this.setState({ newUser: { ...this.state.newUser, [e.target.id]: e.target.value } });
     };
 
-
     async handleOnSave() {
         const { userName, email, password, confirm_password, profile_img } = this.state.newUser;
         const newUser = new UserData(userName, email, password, confirm_password, profile_img);
         const res = newUser.isValidForSave();
-        if (res.isVaild) {
-            const currentUserData = await USER_API.findUser(this.state.newUser.email);
-            if (currentUserData === null) {
-                USER_API.addUser(newUser);
-                this.setState({ isVaild: res.isVaild, error: res.error, });
-                window.location.href = "/";
-            } else {
-                this.setState({ isVaild: false, error: 'Your email is linked with another account, please sign in.' });
+        const checkUserData = await USER_API.findUser(this.state.newUser.email);
+
+        if (!res.isVaild) {
+            this.setState({ isVaild: res.isVaild, error: res.error });
+            if (checkUserData === null) {
+                this.setState({ isVaild: res.isVaild, error: res.error });
                 console.log(this.state.isVaild, this.state.error);
+            } else if (checkUserData.email === newUser.email) {
+                this.setState({ isVaild: false, error: 'Email is already in use, please sign in.' });
             }
+        } else {
+            USER_API.addUser(this.state.newUser);
+            this.setState({ isVaild: true, error: '' });
+            sessionStorage.setItem("auth", true);
+            sessionStorage.setItem("user", JSON.stringify(this.state.newUser));
+            window.location.href = "/";
         }
     }
 
-
     render() {
         return (
-            <section className="form">
+            <form className="form">
 
                 <img className="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
 
@@ -136,7 +141,7 @@ class SignUp extends React.Component {
                     </div>
                     : ''}
 
-            </section>
+            </form>
         )
     }
 }
