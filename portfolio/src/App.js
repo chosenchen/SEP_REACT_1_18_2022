@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import './styles/css/bootstrap.min.css';
-import './styles/css/style.css';
-
+import './bootstrap/css/bootstrap.css'
+import './styles/style.css';
+import './utils/style.js';
 import NavBar from "./components/navbar";
 import HomePage from "./components/homePage";
 import Footer from "./components/footer";
