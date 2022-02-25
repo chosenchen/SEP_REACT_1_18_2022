@@ -10,6 +10,8 @@ import Button from "../Button/Button";
 
 import { useEventData } from "../../hooks/useEventData";
 
+import store from "../../Redux/store";
+
 // class EventApp extends React.Component {
 //   state = {
 //     dataCol: ['Event Name', 'Start Date', 'End Date', 'Actions'],
@@ -154,6 +156,8 @@ const EventApp = (props) => {
     handleOnChangeEditEvent,
   ] = useEventData()
 
+  // const eventList = store.getState().eventList;
+  
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
@@ -179,6 +183,8 @@ const EventApp = (props) => {
   };
 
   const handleEditSave = (editEventObj) => {
+
+
     handleUpdateEvent(editEventObj).then((data) => {
       handleSetEdit(editEventObj, false);
     });
@@ -208,6 +214,7 @@ const EventApp = (props) => {
     }
   };
 
+
   return (
     <EventTable
       dataCol={dataCol}
@@ -215,6 +222,7 @@ const EventApp = (props) => {
       renderHeader={renderHeader}
     >
       {events?.map((event) =>
+      
         event.isEditing ? (
           <EventDataRow
             key={event.id}

@@ -5,6 +5,8 @@ import EventDataRow from '../EventDataRow/EventDataRow';
 import EventTable from '../EventTable/EventTable';
 import WithEventData from '../WithEventData/WithEventData';
 
+import store from '../../Redux/store';
+
 // class UpComingEvent extends React.Component {
 //   state = {
 //     dataCol: ['Event Name', 'Start Date', 'End Date'],
@@ -39,7 +41,7 @@ const UpComingEvent = (props)=>{
   const [dataCol, setDataCol] = useState(['Event Name', 'Start Date', 'End Date']
   );
 
- const [events] = useEventData()
+  const eventList = store.getState().eventList;
 
   const renderHeader = () => {
     return <h5>UpComingEvent</h5>;
@@ -47,7 +49,7 @@ const UpComingEvent = (props)=>{
 
   return(
     <EventTable renderHeader={renderHeader} dataCol={dataCol}>
-    {events
+    {eventList
       ?.filter((event) => {
         if (event.isInTheFuture()) {
           return true;

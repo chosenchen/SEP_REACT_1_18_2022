@@ -12,15 +12,15 @@ import { useSelector } from 'react-redux'
 
 import { useEventData } from '../../hooks/useEventData';
 
+import store from '../../Redux/store';
+
 const EventCounter = (props)=>{
 
-  const eventCounter = useSelector(state=>state.eventCounter)
-
-
   const [events] = useEventData()
-  return <h1>{eventCounter}</h1>;
+
+  return <h1>{events.length}</h1>;
 }
 
-const EventCounterConnector = withEventData(EventCounter);
 
-export default EventCounterConnector;
+
+export default EventCounter;
