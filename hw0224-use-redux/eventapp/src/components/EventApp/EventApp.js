@@ -1,9 +1,7 @@
 import React from 'react';
 import './EventApp.css';
-import { withEventData } from '../../hoc/withEventData';
 
 import { EventData } from '../../models/EventData';
-
 import EventDataRow from '../EventDataRow/EventDataRow';
 import EventTable from '../EventTable/EventTable';
 import Button from '../Button/Button';
@@ -13,137 +11,13 @@ import {
   deleteEvent,
   editEvent,
 } from '../../services/event.api';
+
+// import { useEventData } from '../../hooks/useEventData';
+// import { store } from '../../EventRedux/EventRedux';
 import { useEventData } from '../../hooks/useEventData';
 
-// class EventApp extends React.Component {
-//   state = {
-//     dataCol: ['Event Name', 'Start Date', 'End Date', 'Actions'],
-//     isShowAddEventRow: false,
-//     newEvent: new EventData('', '' + Date.now(), '' + Date.now()),
-//   };
-
-//   hanldeAddEvent = () => {
-//     this.setState({
-//       isShowAddEventRow: true,
-//     });
-//   };
-//   hanldeOnChange = (newEvent) => {
-//     this.setState({
-//       newEvent: {
-//         ...newEvent,
-//       },
-//     });
-//   };
-
-//   handleCloseAddNew = () => {
-//     this.setState({
-//       isShowAddEventRow: false,
-//       newEvent: new EventData('', '' + Date.now(), '' + Date.now()),
-//     });
-//   };
-
-//   hanldeSaveAddNew = () => {
-//     const { eventName, startDate, endDate } = this.state.newEvent;
-//     const newEvent = new EventData(eventName, startDate, endDate);
-//     newEvent.parseTimeStamp();
-//     if (newEvent.isValidForSave()) {
-//       this.props.handleAddEvent(newEvent).then((data) => {
-//         this.handleCloseAddNew();
-//       });
-//     } else {
-//       alert('inValid');
-//     }
-//   };
-
-//   handleEditSave = (editEventObj) => {
-//     this.props.handleUpdateEvent(editEventObj).then((data) => {
-//       this.props.handleSetEdit(editEventObj, false);
-//     });
-//   };
-
-//   renderHeader = () => <Button onClick={this.hanldeAddEvent}>Add Event</Button>;
-//   renderFooter = () => {
-//     if (this.state.isShowAddEventRow) {
-//       return (
-//         <EventDataRow
-//           event={this.state.newEvent}
-//           actions={[
-//             {
-//               actionName: 'Save',
-//               actionFn: this.hanldeSaveAddNew,
-//             },
-//             {
-//               actionName: 'Close',
-//               actionFn: this.handleCloseAddNew,
-//             },
-//           ]}
-//           handleOnchange={this.hanldeOnChange}
-//         ></EventDataRow>
-//       );
-//     } else {
-//       return null;
-//     }
-//   };
-
-//   componentWillUnmount() {
-//     console.log('EVENTAPP componentWillUnmount ');
-//   }
-
-//   render() {
-//     console.log('render Event App');
-
-//     const {
-//       events,
-//       handleOnChangeEditEvent,
-//       handleDeleteEvent,
-//       handleSetEdit,
-//     } = this.props;
-//     return (
-//       <EventTable
-//         dataCol={this.state.dataCol}
-//         renderFooter={this.renderFooter}
-//         renderHeader={this.renderHeader}
-//       >
-//         {events?.map((event) =>
-//           event.isEditing ? (
-//             <EventDataRow
-//               key={event.id}
-//               event={event.editEvent}
-//               actions={[
-//                 {
-//                   actionName: 'Save',
-//                   actionFn: this.handleEditSave,
-//                 },
-//                 {
-//                   actionName: 'Cancel',
-//                   actionFn: () => handleSetEdit(event, false),
-//                 },
-//               ]}
-//               handleOnchange={handleOnChangeEditEvent}
-//             ></EventDataRow>
-//           ) : (
-//             <EventDataRow
-//               key={event.id}
-//               event={event}
-//               actions={[
-//                 {
-//                   actionName: 'Edit',
-//                   actionFn: () => handleSetEdit(event, true),
-//                 },
-//                 {
-//                   actionName: 'Delete',
-//                   actionFn: handleDeleteEvent,
-//                 },
-//               ]}
-//             ></EventDataRow>
-//           )
-//         )}
-//       </EventTable>
-//     );
-//   }
-// }
-
 const EventApp = (props) => {
+
   const [dataCol, setDataCol] = React.useState([
     'Event Name',
     'Start Date',
@@ -163,6 +37,120 @@ const EventApp = (props) => {
     handleOnChangeEditEvent,
   ] = useEventData();
 
+  console.log('from hook', events);
+  
+//   const [_, forceUpdate] = React.useState(false);
+
+//   const generateEditEventstate = (event) => {
+//     event.isEditing = false;
+//     event.editEvent = new EventData(
+//       event.eventName,
+//       event.startDate,
+//       event.endDate,
+//       event.id
+//     );
+//   };
+
+//   React.useEffect(() => {
+//     console.log('did mount');
+
+//     store.subscribe(() => {
+//       forceUpdate((_) => !_);
+//     });
+// //API get
+//     const { fetchResult, controller } = getAllEvents();
+//     fetchResult.then((data) => {
+//       const allEvents = data.map(({ eventName, startDate, endDate, id }) => {
+//         const newEvent = new EventData(eventName, startDate, endDate, id);
+//         generateEditEventstate(newEvent);
+//         return newEvent;
+//       });
+//       store.dispatch({ type: 'setEvents/get', data: allEvents });
+//       // setEvents(events);
+//     });
+//     return () => {
+//       // controller.abort();
+//       console.log('click');
+//     };
+//   }, []);
+
+//   const handleUpdateEvent = (updateEvent) => {
+//     return editEvent(updateEvent).then((data) => {
+//       store.dispatch({ type: 'setEvents/edit', data: data });
+//       // setEvents(
+//       //   events.map((event) => {
+//       //     if (event.id === data.id) {
+//       //       return {
+//       //         ...event,
+//       //         ...data,
+//       //       };
+//       //     } else {
+//       //       return event;
+//       //     }
+//       //   })
+//       // );
+//     });
+//   };
+
+//   const handleDeleteEvent = (deletedEvent) => {
+//     return deleteEvent(deletedEvent).then((data) => {
+//       store.dispatch({ type: 'setEvents/delete', data: deleteEvent });
+//       // setEvents(
+//       //   events.filter((event) => {
+//       //     if (event.id === deletedEvent.id) {
+//       //       return false;
+//       //     } else {
+//       //       return true;
+//       //     }
+//       //   })
+//       // );
+//     });
+//   };
+
+//   // API CALL
+//   const handleAddEvent = (addEvent) => {
+//     return addNewEvent(addEvent).then(
+//       ({ eventName, startDate, endDate, id }) => {
+//         const newEvent = new EventData(eventName, startDate, endDate, id);
+//         generateEditEventstate(newEvent);
+//         // setEvents([...events, newEvent]);
+//         store.dispatch({ type: 'setEvents/add', data: newEvent });
+//       }
+//     );
+//   };
+
+//   // UI STATE
+//   const handleSetEdit = (setEditEvent, isEdit) => {
+//     store.dispatch({ type: 'setEvents/handleSetEdit', data: { editEvent: setEditEvent, isEditing: isEdit } });
+//     // setEvents(
+//     //   events.map((event) => {
+//     //     if (event.id === setEditEvent.id) {
+//     //       return { ...event, isEditing: isEdit };
+//     //     } else {
+//     //       return event;
+//     //     }
+//     //   })
+//     // );
+//   };
+
+
+//   // UI STATE
+//   const handleOnChangeEditEvent = (editEvent) => {
+//     store.dispatch({ type: 'setEvents/handleOnChang', data: editEvent });
+//     // setEvents(
+//     //   events.map((event) => {
+//     //     if (event.id === editEvent.id) {
+//     //       return {
+//     //         ...event,
+//     //         editEvent: { ...editEvent },
+//     //       };
+//     //     } else {
+//     //       return event;
+//     //     }
+//     //   })
+//     // );
+//   };
+
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
@@ -176,13 +164,11 @@ const EventApp = (props) => {
   };
 
   const hanldeSaveAddNew = (newEventD) => {
-    console.log('click');
-    console.log('before', newEventD);
     const { eventName, startDate, endDate } = newEvent;
 
     const newEventData = new EventData(eventName, startDate, endDate);
     newEventData.parseTimeStamp();
-    console.log('after', newEventData);
+
     if (newEventData.isValidForSave()) {
       handleAddEvent(newEventData).then((data) => {
         handleCloseAddNew();

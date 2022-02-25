@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   getAllEvents,
   addNewEvent,
@@ -6,9 +6,16 @@ import {
   editEvent,
 } from '../services/event.api';
 import { EventData } from '../models/EventData';
+import { store } from '../EventRedux/EventRedux';
 
 export const useEventData = () => {
-  const [events, setEvents] = React.useState([]);
+  const [events, setEvents] = React.useState(store.getState());
+
+  console.log('events from redux', events);
+  // const [_, forceUpdate] = React.useState(false);
+
+  
+
   const generateEditEventstate = (event) => {
     event.isEditing = false;
     event.editEvent = new EventData(
@@ -19,89 +26,107 @@ export const useEventData = () => {
     );
   };
 
+  useEffect(() => {
+    console.log('did mount');
+
+    store.subscribe(() => {
+      setEvents(store.getState());
+    });
+
+    const { fetchResult, controller } = getAllEvents();
+    fetchResult.then((data) => {
+      const allEvents = data.map(({ eventName, startDate, endDate, id }) => {
+        const newEvent = new EventData(eventName, startDate, endDate, id);
+        generateEditEventstate(newEvent);
+        return newEvent;
+      });
+      store.dispatch({ type: 'setEvents/get', data: allEvents });
+      // setEvents(events);
+    });
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+
   const handleUpdateEvent = (updateEvent) => {
     return editEvent(updateEvent).then((data) => {
-      setEvents(
-        events.map((event) => {
-          if (event.id === data.id) {
-            return {
-              ...event,
-              ...data,
-            };
-          } else {
-            return event;
-          }
-        })
-      );
+      store.dispatch({ type: 'setEvents/edit', data: data });
+      // setEvents(
+      //   events.map((event) => {
+      //     if (event.id === data.id) {
+      //       return {
+      //         ...event,
+      //         ...data,
+      //       };
+      //     } else {
+      //       return event;
+      //     }
+      //   })
+      // );
     });
   };
 
   const handleDeleteEvent = (deletedEvent) => {
     return deleteEvent(deletedEvent).then((data) => {
-      setEvents(
-        events.filter((event) => {
-          if (event.id === deletedEvent.id) {
-            return false;
-          } else {
-            return true;
-          }
-        })
-      );
+      store.dispatch({ type: 'setEvents/delete', data: deleteEvent });
+      // setEvents(
+      //   events.filter((event) => {
+      //     if (event.id === deletedEvent.id) {
+      //       return false;
+      //     } else {
+      //       return true;
+      //     }
+      //   })
+      // );
     });
   };
+
   // API CALL
   const handleAddEvent = (addEvent) => {
     return addNewEvent(addEvent).then(
       ({ eventName, startDate, endDate, id }) => {
         const newEvent = new EventData(eventName, startDate, endDate, id);
         generateEditEventstate(newEvent);
-        setEvents([...events, newEvent]);
+        // setEvents([...events, newEvent]);
+        store.dispatch({ type: 'setEvents/add', data: newEvent });
       }
     );
   };
+
   // UI STATE
   const handleSetEdit = (setEditEvent, isEdit) => {
-    setEvents(
-      events.map((event) => {
-        if (event.id === setEditEvent.id) {
-          return { ...event, isEditing: isEdit };
-        } else {
-          return event;
-        }
-      })
-    );
+    store.dispatch({ type: 'setEvents/handleSetEdit', data: { editEvent: setEditEvent, isEditing: isEdit } });
+    // setEvents(
+    //   events.map((event) => {
+    //     if (event.id === setEditEvent.id) {
+    //       return { ...event, isEditing: isEdit };
+    //     } else {
+    //       return event;
+    //     }
+    //   })
+    // );
   };
+
+
   // UI STATE
   const handleOnChangeEditEvent = (editEvent) => {
-    setEvents(
-      events.map((event) => {
-        if (event.id === editEvent.id) {
-          return {
-            ...event,
-            editEvent: { ...editEvent },
-          };
-        } else {
-          return event;
-        }
-      })
-    );
+    store.dispatch({ type: 'setEvents/handleOnChang', data: editEvent });
+    // setEvents(
+    //   events.map((event) => {
+    //     if (event.id === editEvent.id) {
+    //       return {
+    //         ...event,
+    //         editEvent: { ...editEvent },
+    //       };
+    //     } else {
+    //       return event;
+    //     }
+    //   })
+    // );
   };
 
-  React.useEffect(() => {
-    const { fetchResult, controller } = getAllEvents();
-    fetchResult.then((data) => {
-      const events = data.map(({ eventName, startDate, endDate, id }) => {
-        const newEvent = new EventData(eventName, startDate, endDate, id);
-        generateEditEventstate(newEvent);
-        return newEvent;
-      });
 
-      setEvents(events);
-    });
-    return () => {
-      controller.abort();
-    };
-  }, []);
 
   return [
     events,
