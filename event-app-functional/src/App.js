@@ -9,6 +9,7 @@ const PAGESINFO = {
   EventManager: 'EventManager',
   UpComingEvent: 'UpComingEvent',
 };
+
 const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGESINFO.EventManager);
   const [pagesInfo, setPagesInfo] = useState(PAGESINFO);

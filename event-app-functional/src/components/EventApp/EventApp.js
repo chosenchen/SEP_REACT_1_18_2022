@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+
 import './EventApp.css';
+
+import { fetchEvents } from '../../actions/actions';
 import { withEventData } from '../../hoc/withEventData';
 
 import { EventData } from '../../models/EventData';
@@ -8,14 +12,19 @@ import EventDataRow from '../EventDataRow/EventDataRow';
 import EventTable from '../EventTable/EventTable';
 import Button from '../Button/Button';
 
-const EventApp = ({
-  events,
-  handleOnChangeEditEvent,
-  handleDeleteEvent,
-  handleSetEdit,
-  handleAddEvent,
-  handleUpdateEvent,
-}) => {
+const EventApp = (props) => {
+  const {
+    handleOnChangeEditEvent,
+    handleDeleteEvent,
+    handleSetEdit,
+    handleAddEvent,
+    handleUpdateEvent,
+  } = props;
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
   const [dataCol, setDataCol] = useState([
     'Event Name',
     'Start Date',
@@ -96,7 +105,7 @@ const EventApp = ({
       renderFooter={renderFooter}
       renderHeader={renderHeader}
     >
-      {events?.map((event) =>
+      {props.events?.map((event) =>
         event.isEditing ? (
           <EventDataRow
             key={event.id}
@@ -137,3 +146,9 @@ const EventApp = ({
 const EventManger = withEventData(EventApp);
 
 export default EventManger;
+
+// const mapStateToProps = (state) => {
+//   return { events: state.events };
+// };
+
+// export default connect(mapStateToProps, { fetchEvents })(EventApp);
