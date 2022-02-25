@@ -5,10 +5,6 @@ export default function eventListReducer(state = initialState, action) {
   
   switch (action.type) {
     case "eventList/loadEventList":
-
-    
-
-
       return action.payload;
     case "eventList/updateEvent":
       return state.map((event) => {

@@ -77,8 +77,6 @@ export const useEventData = () => {
 
     store.dispatch(setEditAction(setEditEvent, isEdit))
 
-    console.log(store.getState().eventList)
-
   };
 
   // UI STATE
