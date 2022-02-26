@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+
+import Portfolio from "../portfolio/Portfolio";
+import Contact from "../contact/Contact";
 
 const Home = () => {
-  // const ref = useRef(null);
-  // const [height, setHeight] = useState("")
 
-  // useEffect(() => {
-  //   setHeight(ref.current.offsetWidth)
-  //   console.log(height)
-  // }, [height]);
 
   return (
     <div>
@@ -203,198 +200,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="projects" id="projects">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-12 col-md-12 text-center">
-              <div className="projects-header">
-                <h1>Projects and Portfolio</h1>
-              </div>
-            </div>
-          </div>
 
-          <div className="row">
-            <div className="col-sm-12 col-md-12 text-center">
-              <div className="projects-header-quote">
-                <h3>Sharing my endeavors and passions...</h3>
-              </div>
-            </div>
-          </div>
 
-          <div className="row">
-            <div className="col-sm-4 col-md-4 text-center">
-              <div className="luvtalk-project">
-                <div className="project-content">
-                  <h3>LUV TALK Website</h3>
-                  <p>
-                    Website, created during my first internship, which utilized
-                    HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress.{" "}
-                  </p>
-                  <div className="row justify-content-center">
-                    <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                      <div className="project-more-info">
-                        <a className="btn btn-default btn-border" href="#">
-                          More
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <Portfolio/>
+      <Contact/>
 
-            <div className="col-sm-4 col-md-4 text-center">
-              <div className="personal-website-project">
-                <div className="project-content">
-                <h3>Personal Website</h3>
-                <p>
-                  Enjoyable side project that was created to experiment with
-                  more HTML and CSS, but also provided an outlet to showcase my
-                  abilities and interests.
-                </p>
-                <div className="row justify-content-center">
-                  <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                    <div className="project-more-info">
-                      <a className="btn btn-default btn-border" href="#">
-                        More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-sm-4 col-md-4 text-center">
-              <div className="strike-zone-project">
-                <div className="project-content">
-                <h3>Strike Zone Analysis</h3>
-                <p>
-                  Data analytics project completed during my time at the
-                  Illinois Math and Science Academy which studied the baseball
-                  strike zone based on the state of the game.
-                </p>
-                <div className="row justify-content-center">
-                  <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                    <div className="project-more-info">
-                      <a className="btn btn-default btn-border" href="#">
-                        More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row justify-content-center">
-            <div className="col-sm-2 col-md-2 col-sm-offset-5 col-md-offset-5">
-              <div className="see-more-button">
-                <a className="btn btn-default btn-border" href="#">
-                  More Projects
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="contact" id="contact">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-12 col-md-12 text-center">
-              <div className="contact-header">
-                <h1>Contact</h1>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-12 col-md-12 text-center">
-              <div className="contact-header-quote">
-                <h4>"XXXXX"</h4>
-                <h4>-XXX</h4>
-              </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-6 col-md-6">
-              <div className="contact-instructions">
-                <h2>Reaching out to me</h2>
-                <p>
-                  Don't be afraid to contact me! I'm happy to answer any
-                  questions, provide more information, or just have a nice
-                  conversation! Fill out the form below to being reaching out to
-                  me. If you prefer another email client other than your
-                  default, which will appear after clicking the button and have
-                  all of the information you just entered, you can email me at
-                  XXXXX.
-                </p>
-                <br />
-                <br />
-                <br />
-                <h2>Contact Information</h2>
-                <p>XXXX</p>
-                <p>XXXX</p>
-                <p>(XXXX)-445-7747</p>
-                <p>XXXXXX@gmail.com</p>
-              </div>
-            </div>
-
-            <div className="col-sm-6 col-md-6">
-              <div className="contact-form-body">
-                <form>
-                  <div className="row">
-                    <div className="col-sm-6 col-md-6">
-                      <div className="firstname">
-                        <h4>Full Name *</h4>
-                        <input type="text" placeholder="First Name" />
-                      </div>
-                    </div>
-
-                    <div className="col-sm-6 col-md-6">
-                      <div className="lastname">
-                        <h4>Full Name *</h4>
-                        <input type="text" placeholder="Last Name" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-12 col-md-12">
-                      <div className="email">
-                        <h4>Email *</h4>
-                        <input type="text" placeholder="Email" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-12 col-md-12">
-                      <div className="message">
-                        <h4>Message *</h4>
-                        <textarea placeholder="Message"></textarea>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row justify-content-center">
-                    <div className="col-sm-4 col-md-4">
-                      <div className="submit-contact">
-                        <a className="btn btn-default btn-border" href="#">
-                          Submit
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

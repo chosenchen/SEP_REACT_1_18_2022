@@ -10,6 +10,10 @@ html {
   background: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1));
 }
 
+a{
+  text-decoration: none;
+}
+
 .logo img {
   max-width: 90px;
 }

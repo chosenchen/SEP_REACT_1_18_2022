@@ -5,11 +5,11 @@ const Footer = () => {
     <div className="footer">
       <div className="container-fluid">
         <div className="row">
-          <div className="media-links">
-            <div className="col-sm-1 col-md-1 col-sm-offset-4 col-md-offset-4">
+          <div className="media-links d-flex justify-content-center">
+            <div className="col-sm-1 col-md-1">
               <div className="facebook">
                 <a href="#">
-                  <img className="img-responsive" src="../../.././images/facebook.svg" />
+                  <img className="img-fluid" src="../../.././images/facebook.svg" />
                 </a>
               </div>
             </div>
@@ -17,7 +17,7 @@ const Footer = () => {
             <div className="col-sm-1 col-md-1">
               <div className="linkedin">
                 <a href="#">
-                  <img className="img-responsive" src="../../.././images/linkedin.svg" />
+                  <img className="img-fluid" src="../../.././images/linkedin.svg" />
                 </a>
               </div>
             </div>
@@ -26,7 +26,7 @@ const Footer = () => {
               <div className="pinterest">
                 <a href="#">
                   <img
-                    className="img-responsive"
+                    className="img-fluid"
                     src="./images/pinterest.svg"
                   />
                 </a>
@@ -36,7 +36,7 @@ const Footer = () => {
             <div className="col-sm-1 col-md-1">
               <div className="email-icon">
                 <a href="#">
-                  <img className="img-responsive" src="../../.././images/email.svg" />
+                  <img className="img-fluid" src="../../.././images/email.svg" />
                 </a>
               </div>
             </div>
@@ -44,13 +44,13 @@ const Footer = () => {
         </div>
 
         <div className="row">
-          <div className="col-sm-6 col-md-6 text-right">
+          <div className="col-sm-6 col-md-6 text-end">
             <div className="personal-contact phone">
               <h4>Phone: XXXXXX</h4>
             </div>
           </div>
 
-          <div className="col-sm-6 col-md-6 text-left">
+          <div className="col-sm-6 col-md-6">
             <div className="personal-contact email-personal-contact">
               <h4>Email: XXXXX@gmail.com</h4>
             </div>
