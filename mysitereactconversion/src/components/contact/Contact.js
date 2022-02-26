@@ -22,7 +22,7 @@ const Contact = () => {
       </div>
 
       <div className="row">
-        <div className="col-sm-6 col-md-6">
+        <div className="col-lg-6">
           <div className="contact-instructions">
             <h2>Reaching out to me</h2>
             <p>
@@ -45,7 +45,7 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="col-sm-6 col-md-6">
+        <div className="col-lg-6">
           <div className="contact-form-body">
             <form>
               <div className="row">

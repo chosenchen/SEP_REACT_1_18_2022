@@ -31,6 +31,23 @@ a{
   justify-content: end;
 }
 
+@media only screen and (max-width: 574px) {
+  .primary-nav ul{
+
+    justify-content: center;
+    margin-top: 5px;
+  }
+  .primary-nav {
+    padding-right: 0px;
+  }
+  ul{
+    padding-left: 0px;
+  }
+  .main{
+    padding-top: 7rem !important;
+  }
+}
+
 .primary-nav li {
   display: inline-block;
   margin: 0px 20px;
@@ -87,7 +104,7 @@ a{
   margin-top: 40px;
   color: white;
   font-family: "Roboto", Helvetica, serif;
-  font-size: 16pt;
+  /* font-size: 16pt; */
   border-radius: 0;
   border: 2px solid white;
   -webkit-transition: all 200ms ease-out;
@@ -178,9 +195,9 @@ a{
   color: white;
 }
 
-.development-summary, .responsive-summary, .ideas-summary, .passion-summary{
-  width: 50%;
-}
+
+
+
 
 .summary {
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
@@ -255,8 +272,24 @@ a{
 }
 
 .project-content{
-  padding-top: 33.333%;
+
+  padding-top: 33.333% ;
+
+
 }
+
+@media only screen and (max-width: 575px) {
+  .project-content{
+    padding-top: 20%;
+  }
+
+}
+/* 
+@media only screen and (max-width: 1149px) {
+  .project-content{
+    padding-top: 10%;
+  }
+} */
 
 .resume {
   padding: 50px 0px;

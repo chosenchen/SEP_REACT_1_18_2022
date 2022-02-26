@@ -21,8 +21,8 @@ const Portfolio = () =>{
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-sm-4 col-md-4 text-center">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-7 col-xl-4 mb-3 text-center">
               <div className="luvtalk-project">
                 <div className="project-content">
                   <h3>LUV TALK Website</h3>
@@ -31,7 +31,7 @@ const Portfolio = () =>{
                     HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress.{" "}
                   </p>
                   <div className="row justify-content-center">
-                    <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
+                    <div className="col-sm-4 col-md-4">
                       <div className="project-more-info">
                         <a className="btn btn-default btn-border" href="#">
                           More
@@ -43,7 +43,7 @@ const Portfolio = () =>{
               </div>
             </div>
 
-            <div className="col-sm-4 col-md-4 text-center">
+            <div className="col-12 col-md-7 col-xl-4 mb-3 text-center">
               <div className="personal-website-project">
                 <div className="project-content">
                 <h3>Personal Website</h3>
@@ -53,7 +53,7 @@ const Portfolio = () =>{
                   abilities and interests.
                 </p>
                 <div className="row justify-content-center">
-                  <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
+                  <div className="col-sm-4 col-md-4">
                     <div className="project-more-info">
                       <a className="btn btn-default btn-border" href="#">
                         More
@@ -65,7 +65,7 @@ const Portfolio = () =>{
               </div>
             </div>
 
-            <div className="col-sm-4 col-md-4 text-center">
+            <div className="col-12 col-md-7 col-xl-4 mb-3 text-center">
               <div className="strike-zone-project">
                 <div className="project-content">
                 <h3>Strike Zone Analysis</h3>
@@ -75,7 +75,7 @@ const Portfolio = () =>{
                   strike zone based on the state of the game.
                 </p>
                 <div className="row justify-content-center">
-                  <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
+                  <div className="col-sm-4 col-md-4 ">
                     <div className="project-more-info">
                       <a className="btn btn-default btn-border" href="#">
                         More
@@ -89,7 +89,7 @@ const Portfolio = () =>{
           </div>
 
           <div className="row justify-content-center">
-            <div className="col-sm-2 col-md-2 col-sm-offset-5 col-md-offset-5">
+            <div className="col-sm-2 col-md-2">
               <div className="see-more-button">
                 <a className="btn btn-default btn-border" href="#">
                   More Projects

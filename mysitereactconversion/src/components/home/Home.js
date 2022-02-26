@@ -4,8 +4,6 @@ import Portfolio from "../portfolio/Portfolio";
 import Contact from "../contact/Contact";
 
 const Home = () => {
-
-
   return (
     <div>
       <div className="main">
@@ -22,13 +20,13 @@ const Home = () => {
 
           <div className="row text-center">
             <div className="banner-buttons d-flex justify-content-center">
-              <div className="col-sm-1 col-md-1 col-sm-offset-5 col-md-offset-5 mx-2">
+              <div className="col-4 col-sm-2 col-lg-1 mx-2">
                 <a className="btn btn-default btn-border" href="#about">
                   Info
                 </a>
               </div>
 
-              <div className="col-sm-1 col-md-1 mx-2">
+              <div className="col-4 col-sm-2 col-lg-1 mx-2">
                 <a className="btn btn-default btn-border" href="#projects">
                   Portfolio
                 </a>
@@ -108,19 +106,19 @@ const Home = () => {
       </div>
       <div className="summary">
         <div className="container-fluid">
-          <div className="row">
-            <div className="development-summary">
-              <div className="col-sm-1 col-md-1">
-                <div className="development-img">
-                  <img
-                    className="img-fluid"
-                    src="/images/developerdesign.svg"
-                  />
+          <div className="row pb-0">
+            <div className="development-summary col-12 col-md-6">
+              <div className="row">
+                <div className="col-2">
+                  <div className="development-img">
+                    <img
+                      className="img-fluid"
+                      src="/images/developerdesign.svg"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <div className="development-description">
+                <div className="development-description col-10">
                   <h3>Development and Design</h3>
                   <p>
                     I aim to put my creativity to the test, designing and
@@ -131,18 +129,18 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="responsive-summary">
-              <div className="col-sm-1 col-md-1 col-sm-offset-2 col-md-offset-2">
-                <div className="responsive-img">
-                  <img
-                    className="img-fluid"
-                    src="/images/responsivedesign.svg"
-                  />
+            <div className="responsive-summary col-12 col-md-6">
+              <div className="row">
+                <div className="col-2">
+                  <div className="responsive-img">
+                    <img
+                      className="img-fluid"
+                      src="/images/responsivedesign.svg"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <div className="responsive-description">
+                <div className="responsive-description col-10">
                   <h3>Responsive Layouts</h3>
                   <p>
                     Development and design isn't merely putting information on
@@ -156,19 +154,19 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="row">
-            <div className="ideas-summary">
-              <div className="col-sm-1 col-md-1">
-                <div className="idea-img">
-                  <img
-                    className="img-fluid"
-                    src="/images/innovativesolutions.svg"
-                  />
+          <div className="row pt-0">
+            <div className="ideas-summary col-12 col-md-6">
+              <div className="row">
+                <div className="col-2">
+                  <div className="idea-img">
+                    <img
+                      className="img-fluid"
+                      src="/images/innovativesolutions.svg"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <div className="idea-description">
+                <div className="idea-description col-10">
                   <h3>Ideas and Solutions</h3>
                   <p>
                     There are still many problems that exist in today's society,
@@ -180,13 +178,13 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="passion-summary">
-              <div className="col-sm-1 col-md-1 col-sm-offset-2 col-md-offset-2">
-                <img className="img-fluid" src="/images/passion.svg" />
-              </div>
+            <div className="passion-summary col-12 col-md-6">
+              <div className="row">
+                <div className="col-2">
+                  <img className="img-fluid" src="/images/passion.svg" />
+                </div>
 
-              <div>
-                <div className="passion-description">
+                <div className="passion-description col-10">
                   <h3>Passion and Dedication</h3>
                   <p>
                     With my profound interest and commitment to my field of
@@ -200,11 +198,8 @@ const Home = () => {
         </div>
       </div>
 
-
-
-      <Portfolio/>
-      <Contact/>
-
+      <Portfolio />
+      <Contact />
     </div>
   );
 };
