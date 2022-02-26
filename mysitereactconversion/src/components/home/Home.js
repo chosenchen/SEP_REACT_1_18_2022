@@ -230,7 +230,7 @@ const Home = () => {
                     Website, created during my first internship, which utilized
                     HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress.{" "}
                   </p>
-                  <div className="row">
+                  <div className="row justify-content-center">
                     <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
                       <div className="project-more-info">
                         <a className="btn btn-default btn-border" href="#">
@@ -252,7 +252,7 @@ const Home = () => {
                   more HTML and CSS, but also provided an outlet to showcase my
                   abilities and interests.
                 </p>
-                <div className="row">
+                <div className="row justify-content-center">
                   <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
                     <div className="project-more-info">
                       <a className="btn btn-default btn-border" href="#">
@@ -274,7 +274,7 @@ const Home = () => {
                   Illinois Math and Science Academy which studied the baseball
                   strike zone based on the state of the game.
                 </p>
-                <div className="row">
+                <div className="row justify-content-center">
                   <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
                     <div className="project-more-info">
                       <a className="btn btn-default btn-border" href="#">
@@ -288,7 +288,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="col-sm-2 col-md-2 col-sm-offset-5 col-md-offset-5">
               <div className="see-more-button">
                 <a className="btn btn-default btn-border" href="#">
@@ -380,8 +380,8 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className="row">
-                    <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
+                  <div className="row justify-content-center">
+                    <div className="col-sm-4 col-md-4">
                       <div className="submit-contact">
                         <a className="btn btn-default btn-border" href="#">
                           Submit
