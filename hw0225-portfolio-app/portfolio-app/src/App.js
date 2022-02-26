@@ -7,7 +7,6 @@ import NavigationBar from './components/Navigation/NavigationBar/NavigationBar';
 
 import Footer from './components/Footer/Footer';
 
-
 function App() {
   return (
     <Router>

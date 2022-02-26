@@ -7,7 +7,6 @@ const PortfolioPage = (props) => {
     return (
         <Fragment>
             <ProjectSection />
-            <Footer />
         </Fragment>
     )
 }

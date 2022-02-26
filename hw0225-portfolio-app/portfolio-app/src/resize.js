@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-function navigation() {
+export function navigation() {
     console.log('called');
     $('.primary-nav').css('height', $('.logo').height());
     $('.primary-nav li').css(
@@ -13,7 +13,7 @@ function navigation() {
     });
 }
 
-function projects() {
+export function projects() {
     $('.luvtalk-project').css('height', $('.luvtalk-project').width());
     $('.luvtalk-project h3').css(
         'padding-top',

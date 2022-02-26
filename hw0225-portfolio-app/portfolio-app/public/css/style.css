@@ -8,6 +8,8 @@ html {
   width: 100%;
   padding: 10px 0px;
   background: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1));
+  margin-bottom: 20px;
+
 }
 
 .logo img {
@@ -16,11 +18,20 @@ html {
 .primary-nav {
   padding-right: 50px;
 }
+
+.primary-nav{
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+text-align: right;
+}
+
 .primary-nav li {
   display: inline-block;
   margin: 0px 20px;
   color: white;
   font-size: 13pt;
+  list-style: none;
 }
 
 .primary-nav .nav{
@@ -31,6 +42,7 @@ html {
   -o-transition: border 50ms linear;
   -ms-transition: border 50ms linear;
   transition: border 50ms linear;
+  text-decoration: none;
 }
 
 .primary-nav a:hover {
@@ -44,7 +56,7 @@ html {
   background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
     url(../images/apple-1838564_1920-main.jpg); /* Browser prefixes*/
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   background-attachment: fixed;
   padding: 14.7% 0; /* Center contents within the container, make background image cover*/
   color: white;
@@ -62,6 +74,10 @@ html {
 #person-description {
   font-size: 33pt;
 }
+
+/* .banner-buttons{
+  
+} */
 .banner-buttons .btn-border,
 .submit-contact .btn-border,
 .projects .btn-border {
@@ -173,6 +189,7 @@ html {
 .summary .row {
   padding: 50px 6%;
   width: 100%;
+
 }
 
 .summary h3 {
@@ -334,4 +351,5 @@ textarea {
 .portfolio-footer a:hover,
 .resume-footer a:hover,
 .contact-footer a:hover {
+  columns: rgb(0, 183, 255);
 }
