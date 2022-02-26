@@ -8,14 +8,15 @@
   .footer h3,
   .footer h4 {
     font-family: "Source Sans Pro", Arial, sans-serif;
+  } 
+  .media-links{
+    display: flex;
+    margin: auto;
+    width: 30%;
+    justify-content: space-around;
   }
-  .facebook,
-  .linkedin,
-  .pinterest,
-  .email-icon {
-    padding: 31%;
-  }
-  .footer img {
+  .media-links-icon img {
+    width: 40px;
     background-color: #8a8a8a;
     -webkit-transition: all 200ms ease-out;
     -moz-transition: all 200ms ease-out;
@@ -23,31 +24,44 @@
     -ms-transition: all 200ms ease-out;
     transition: all 200ms ease-out;
   }
-  
-  .footer img:hover {
+
+  .media-links-icon img:hover {
     background-color: white;
   }
-  .company-information,
-  .home-footer,
-  .portfolio-footer,
-  .resume-footer,
-  .contact-footer {
-    margin-top: 50px;
-  }
-  .footer ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .home-footer a,
-  .portfolio-footer a,
-  .resume-footer a,
-  .contact-footer a {
-    color: white;
-  }
-  .home-footer a:hover,
-  .portfolio-footer a:hover,
-  .resume-footer a:hover,
-  .contact-footer a:hover {
-  }
-  
+ .portfolio-item a{
+   color: white;
+   text-decoration: none;
+ }
+ h4 a{
+   color: white;
+   text-decoration: none;
+ }
+.wrapper{
+  display: flex;
+  width: 30%;
+  margin: auto;
+  justify-content: space-around;
+  padding: 5rem 0;
+}
+
+ul li{
+  list-style-type: none;
+}
+
+ul li a{
+  color: white;
+  text-decoration: none;
+}
+
+
+@media only screen and (max-width: 420px) {
+ .wrapper{
+   width: 100%;
+ }
+ .banner-buttons .btn-border, .submit-contact .btn-border, .projects .btn-border {
+  width: 100px;
+}
+.media-links{
+  width: 70%;
+}
+}

@@ -1,35 +1,71 @@
-.luvtalk-project {
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-      url(../../images/luvtalklogo.png);
-    background-position: center center;
-  }
-  
-  .personal-website-project {
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-      url(../../images/logo.svg);
-    background-position: center center;
-  }
-  
-  .strike-zone-project {
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
-      url(../../images/mlbproject.png);
-    background-position: center center;
-  }
-  
-  .resume {
-    padding: 50px 0px;
-    font-family: "Calisto MT", Helvetica, serif;
-  }
-  
-  .resume-header {
-    margin-bottom: 20px;
-  }
-  .objective h4,
-  .education h4,
-  .work-experience h4,
-  .resume-projects h4,
-  .activities h4,
-  .skills h4,
-  .endorsements h4 {
-    border-bottom: 1px solid black;
-  }
+.projects {
+  background-color: #59585d;
+  padding: 50px;
+  color: white;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.projects-header-quote {
+  margin-bottom: 20px;
+}
+
+.projects h3 {
+  margin-top: 3vh;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+}
+.projects p {
+  font-family: "Roboto", Helvetica, serif;
+  padding: 0 10px;
+}
+
+.projects-header-quote {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.projects-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.Portfolio-item{
+ width: 30%;
+ min-width: 450px;
+ min-height: 450px;
+ height: auto;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.Portfolio-item__content{
+  width: 80%;
+  margin: auto;
+}
+
+.Portfolio-item__content a {
+  background-color: transparent;
+  display: block;
+  width: 100px;
+  margin: auto;
+  text-decoration: none;
+  margin-top: 40px;
+  color: white;
+  font-family: "Roboto", Helvetica, serif;
+  font-size: 16pt;
+  border-radius: 0;
+  border: 2px solid white;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  -ms-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+
+.Portfolio-item__content a:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}

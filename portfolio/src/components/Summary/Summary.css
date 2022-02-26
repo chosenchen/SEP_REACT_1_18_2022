@@ -1,0 +1,26 @@
+.Summary-item{
+    padding: 20px;
+    width: 45%;
+    min-width: 350px;
+    margin: auto;
+    display: flex;
+}
+
+.Summary-item img {
+   display: block;
+   width: 10%;
+   min-width: 45px;
+  
+}
+.Summary-item div{
+    width: 70%;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.Summary-item h3 {
+    font-family: "Source Sans Pro", Arial, sans-serif;
+  }
+.Summary-item p {
+    font-family: "Roboto", Helvetica, serif;
+  }

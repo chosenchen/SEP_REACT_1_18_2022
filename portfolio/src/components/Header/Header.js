@@ -11,19 +11,21 @@ export default class Header extends React.Component {
     const { pagesInfo } = this.props;
     return (
       <header className="app-header">
-        <img className="logo" src={logo} alt="logo" />
-        <nav className="app-header__navtext">
-        
-          {Object.keys(pagesInfo).map((key) => (
-            <a
-              href={key}
-              key={key}
-              onClick={(e) => this.hanldeNavClick(e, key)}
-            >
-              {key}
-            </a>
-          ))}
-        </nav>
+      
+          <img className="logo" src={logo} alt="logo" />
+          <nav className="app-header__navtext">
+          
+            {Object.keys(pagesInfo).map((key) => (
+              <a
+                href={key}
+                key={key}
+                onClick={(e) => this.hanldeNavClick(e, key)}
+              >
+                {key}
+              </a>
+            ))}
+          </nav>
+      
       </header>
     );
   }

@@ -10,15 +10,15 @@
     display: flex;
   }
   .logo{
-     width: 1.7em;
-     margin-left: 2rem;
+     width: 2.5em;
+     display: block;
+     margin-left: 40px;
    }
   .app-header__navtext {
-    width: 100%;
-    height: 100%;
     display: flex;
-    justify-content: right;
+    width: 100%;
     align-items: center;
+    justify-content: flex-end;
   }
   
   .app-header__navtext a {

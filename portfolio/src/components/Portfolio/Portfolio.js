@@ -1,86 +1,76 @@
-import React, {useState, useRef, useEffect} from "react"
+import React from "react";
+import luvtalklogo from '../../images/luvtalklogo.png'
+import logo from '../../images/logo.svg'
+import mlbproject from '../../images/mlbproject.png'
 import './Portfolio.css'
-import Footer from '../Footer/Footer'
 
-//By new props, useState to update functional components
-const Portfolio=(props)=>{
-   
+
+export const PortfolioArr = [
+    {
+        title: 'LUV TALK Website',
+        info: 'Website, created during my first internship, which utilized HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress.',
+        icon: luvtalklogo,
+        link: ''
+    },
+    {
+        title: 'Personal Website',
+        info: "Enjoyable side project that was created to experiment with more HTML and CSS, but also provided an outlet to showcase my abilities and interests.",
+        icon: logo,
+        link: ''
+    },
+    {
+        title: 'Strike Zone Analysis',
+        info: "Data analytics project completed during my time at the Illinois Math and Science Academy which studied the baseball strike zone based on the state of the game.",
+        icon: mlbproject,
+        link: ''
+    }
+
+]
+
+
+
+const Portfolio = () => {
+
     return (
-        <div className = "projects" id="projects">
-        <div className = "container-fluid">
-            <div className = "row">
-                <div className = "col-sm-12 col-md-12 text-center">
-                    <div className = "projects-header">
-                        <h1>Projects and Portfolio</h1>
-                    </div>
-                </div>
+        <>
+            <div className="projects" id="projects">
+                <h1>Projects and Portfolio</h1>
+                <p className="projects-header-quote ">Sharing my endeavors and passions...</p>
+               <div className="projects-wrapper">
+                {
+                    
+                    PortfolioArr.map((item) => {
+                        const bgstyle={ 
+                            background:  `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                            url(${item.icon})`,
+                            backgroundPosition: 'center center',
+                          }
+                          
+                        return (
+                            <>
+                                    <section key={item.title} className="Portfolio-item" style={bgstyle} >
+                                        <div className="Portfolio-item__content">
+                                            <h3>{item.title}</h3>
+                                            <p>{item.info}</p>
+                                            <a href={item.link}>More</a>
+                                        </div>
+                                    </section>
+                   
+                            </>
+                        )
+                    }
+                    
+                   
+                       
+                    )
+                    
+                }
+                 </div>
             </div>
+        </>
 
-            <div className = "row">
-                <div className = "col-sm-12 col-md-12 text-center">
-                    <div className = "projects-header-quote">
-                        <h3>Sharing my endeavors and passions...</h3>
-                    </div>
-                </div>
-            </div>
 
-            <div className = "row">
-                <div className = "col-sm-4 col-md-4 text-center">
-                    <div className = "luvtalk-project">
-                        <h3>LUV TALK Website</h3>
-                        <p>Website, created during my first internship, which utilized HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress. </p>
-                        <div className = "row">
-                            <div className = "col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                                <div className = "project-more-info">
-                                    <a className = "btn btn-default btn-border" href = "#">More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className = "col-sm-4 col-md-4 text-center">
-                    <div className = "personal-website-project">
-                        <h3>Personal Website</h3>
-                        <p>Enjoyable side project that was created to experiment with more HTML and CSS, but also provided an outlet to showcase my abilities and interests.</p>
-                        <div className = "row">
-                            <div className = "col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                                <div className = "project-more-info">
-                                    <a className = "btn btn-default btn-border" href = "#">More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className = "col-sm-4 col-md-4 text-center">
-                    <div className = "strike-zone-project">
-                        <h3>Strike Zone Analysis</h3>
-                        <p>Data analytics project completed during my time at the Illinois Math and Science Academy which studied the baseball strike zone based on the state of the game.</p>
-                        <div className = "row">
-                            <div className = "col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                                <div className = "project-more-info">
-                                    <a className = "btn btn-default btn-border" href = "#">More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className = "row">
-                <div className = "col-sm-2 col-md-2 col-sm-offset-5 col-md-offset-5">
-                    <div className = "see-more-button">
-                        <a className = "btn btn-default btn-border" href = "#">More Projects</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <Footer />
-    </div>
-  
     )
-    
 }
 
 export default Portfolio

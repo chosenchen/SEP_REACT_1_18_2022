@@ -5,6 +5,7 @@ import Portfolio from './components/Portfolio/Portfolio.js'
 import Contact from './components/Contact/Contact.js'
 
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer'
 
 const PAGESINFO = {
   Home: 'Home',
@@ -47,6 +48,7 @@ class App extends React.Component {
           hanldePageChange={this.hanldePageChange}
         ></Header>
         {curPage}
+        <Footer />
       </div>
     );
   }

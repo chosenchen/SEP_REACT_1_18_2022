@@ -1,6 +1,12 @@
 import React from 'react';
 import './Footer.css';
+import facebook from '../../images/facebook.svg'
+import linkedin from '../../images/linkedin.svg'
+import pinterest from '../../images/pinterest.svg'
+import email from '../../images/email.svg'
+import {PortfolioArr} from '../Portfolio/Portfolio'
 
+const socialMedia = [facebook, linkedin, pinterest, email]
 
 export default class Footer extends React.Component {
  
@@ -11,44 +17,16 @@ export default class Footer extends React.Component {
 			<div className = "container-fluid">
 				<div className = "row">
 					<div className = "media-links">
-						<div className = "col-sm-1 col-md-1 col-sm-offset-4 col-md-offset-4">
-							<div className = "facebook">
-								<a href = "#"><img className = "img-responsive" src = "./images/facebook.svg" /></a>
-							</div>
-						</div>
-
-						<div className = "col-sm-1 col-md-1">
-							<div className = "linkedin">
-								<a href = "#"><img className = "img-responsive" src = "../../images/linkedin.svg" /></a>
-							</div>
-						</div>
-
-						<div className = "col-sm-1 col-md-1">
-							<div className = "pinterest">
-								<a href = "#"><img className = "img-responsive" src = "../../images/pinterest.svg" /></a>
-							</div>
-						</div>
-
-						<div className = "col-sm-1 col-md-1">
-							<div className = "email-icon">
-								<a href = "#"><img className = "img-responsive" src = "../../images/email.svg" /></a>
-							</div>
-						</div>
+						{socialMedia.map((icon, index)=>
+							<div className ="media-links-icon" key={`${icon}_${index}`}>
+							<a href = "#"><img className = "img-responsive" src ={icon} /></a>
+						</div>)}
 					</div>
 				</div>
 
-				<div className = "row">
-					<div className = "col-sm-6 col-md-6 text-right">
-						<div className = "personal-contact phone">
-							<h4>Phone: XXXXXX</h4>
-						</div>
-					</div>
-
-					<div className = "col-sm-6 col-md-6 text-left">
-						<div className = "personal-contact email-personal-contact">
-							<h4>Email: XXXXX@gmail.com</h4>
-						</div>
-					</div>
+				<div className ="wrapper">
+					<h4>Phone: XXXXXX</h4>
+					<h4>Email: XXXXX@gmail.com</h4>
 				</div>
 
 				<div className = "row">
@@ -70,10 +48,10 @@ export default class Footer extends React.Component {
 						<div className = "portfolio-footer">
 							<h4><a href = "#">Portfolio</a></h4>
 							<ul>
-								<li><a href = "#">Project1</a></li>
-								<li><a href = "#">Project2</a></li>
-								<li><a href = "#">Project3</a></li>
-								<li><a href = "#">See All</a></li>
+								{
+								  PortfolioArr.map(Portfolio=><li className="portfolio-item"><a href = "#">{Portfolio.title}</a></li>)
+								}
+							
 							</ul>
 						</div>
 					</div>

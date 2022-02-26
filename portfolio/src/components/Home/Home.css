@@ -47,13 +47,14 @@
   }
 .banner-buttons{
     display: flex;
-    justify-content: center;
+    width: 70%;
+    justify-content: space-between;
 }
   .banner-buttons .btn-border,
   .submit-contact .btn-border,
   .projects .btn-border {
     background-color: transparent;
-    width: 90%;
+    width: 150px;
     margin-top: 40px;
     color: white;
     font-family: "Roboto", Helvetica, serif;
@@ -155,22 +156,10 @@
     background-attachment: center center;
     color: white;
     padding: 60px 30px;
+    display: flex;
+    flex-wrap: wrap;
   }
   
-  .summary .row {
-    padding: 50px 6%;
-    width: 100%;
-  }
-  .summary-row>* {
-    width: 50%;
-
-}
-  .summary h3 {
-    font-family: "Source Sans Pro", Arial, sans-serif;
-  }
-  .summary p {
-    font-family: "Roboto", Helvetica, serif;
-  }
   
   .projects {
     background-color: #59585d;

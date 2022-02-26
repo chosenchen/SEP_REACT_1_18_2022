@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from "react"
 import './Home.css';
-import developerdesign from '../../images/developerdesign.svg'
-import responsivedesign from '../../images/responsivedesign.svg'
-import innovativesolutions from '../../images/innovativesolutions.svg'
-import passion from '../../images/passion.svg'
+import Summary from "../Summary/Summary";
+
 import Footer from '../Footer/Footer'
 
 //By new props, useState to update functional components
@@ -23,17 +21,14 @@ const Home = (props) => {
 
                     <div className="row wrapper">
                         <div className="banner-buttons">
-                            <div className="col-sm-1 col-md-1 col-sm-offset-5 col-md-offset-5">
                                 <a className="btn btn-default btn-border" href="#about">Info</a>
-                            </div>
-
-                            <div className="col-sm-1 col-md-1">
                                 <a className="btn btn-default btn-border" href="#projects">Portfolio</a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/* About Section */}
             <section>
                 <div className="about" id="about">
                     <div className="container-fluid">
@@ -80,10 +75,10 @@ const Home = (props) => {
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="about-option-buttons">
-                                <div class="col-sm-2 col-md-2">
-                                    <a href="#contact" class="btn btn-default btn-black-border">Contact</a>
+                        <div className="row">
+                            <div className="about-option-buttons">
+                                <div className="col-sm-2 col-md-2">
+                                    <a href="#contact" className="btn btn-default btn-black-border">Contact</a>
                                 </div>
                             </div>
                         </div>
@@ -91,74 +86,12 @@ const Home = (props) => {
                 </div>
             </section>
 
-
-        <div className = "summary">
-			<div className = "container-fluid">
-				<div className = "row summary-row" >
-					<div className = "development-summary">
-						<div className = "col-sm-1 col-md-1">
-							<div className = "development-img">
-								<img className = "img-responsive" src ={developerdesign} />
-							</div>
-						</div>
-
-						<div className = "col-sm-4 col-md-4">
-							<div className = "development-description">
-								<h3>Development and Design</h3>
-								<p>I aim to put my creativity to the test, designing and building unique, meaningful products for clients or merely for my own interests.</p>
-							</div>
-						</div>
-					</div>
-
-					<div className = "responsive-summary">
-						<div className = "col-sm-1 col-md-1 col-sm-offset-2 col-md-offset-2">
-							<div className = "responsive-img">
-								<img className = "img-responsive" src = {responsivedesign} />
-							</div>
-						</div>
-
-						<div className = "col-sm-4 col-md-4">
-							<div className = "responsive-description">
-								<h3>Responsive Layouts</h3>
-								<p>Development and design isn't merely putting information on the site or preferred media outlet. I organize content and present information in an engaging fashion, driving new and unique layouts in tandem with novel solutions and cool animations.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className = "row summary-row">
-					<div className = "ideas-summary">
-						<div className = "col-sm-1 col-md-1">
-							<div className = "idea-img">
-								<img className = "img-responsive" src = {innovativesolutions} />
-							</div>
-						</div>
-
-						<div className = "col-sm-4 col-md-4">
-							<div className = "idea-description">
-								<h3>Ideas and Solutions</h3>
-								<p>There are still many problems that exist in today's society, including laziness. Luckily, I hope to combat these issues by innovating, developing easy-to-use programs, solutions, or products.</p>
-							</div>
-						</div>
-					</div>
-
-					<div className = "passion-summary">
-						<div className = "col-sm-1 col-md-1 col-sm-offset-2 col-md-offset-2">
-							<img className = "img-responsive" src = {passion} />
-						</div>
-
-						<div className = "col-sm-4 col-md-4">
-							<div className = "passion-description">
-								<h3>Passion and Dedication</h3>
-								<p>With my profound interest and commitment to my field of study, my projects rarely go unfinished and my problems are never left unresolved. </p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-        <Footer />
+           {/* Summary section */}
+           <section>
+             <div class = "summary">
+                <Summary />
+              </div>
+           </section>
 
         </section>
        
