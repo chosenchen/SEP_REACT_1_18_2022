@@ -174,6 +174,10 @@ html {
   color: white;
 }
 
+.development-summary, .responsive-summary, .ideas-summary, .passion-summary{
+  width: 50%;
+}
+
 .summary {
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
     url(.././public/images/architecture-2178604_1920-main1.jpg);
@@ -221,19 +225,33 @@ html {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
     url(.././public/images/luvtalklogo.png);
   background-position: center center;
-  height: auto;
+  
 }
 
 .personal-website-project {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
     url(.././public/images/logo.svg);
   background-position: center center;
+
 }
 
 .strike-zone-project {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
     url(.././public/images/mlbproject.png);
   background-position: center center;
+
+}
+
+/* creates responsive square: padding is calculated based on the percentage of the box's width. height must be 0*/
+.luvtalk-project, .personal-website-project, .strike-zone-project{
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+}
+
+.project-content{
+  padding-top: 33.333%;
 }
 
 .resume {

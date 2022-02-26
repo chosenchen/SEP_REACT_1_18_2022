@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const Home = () => {
-  
   // const ref = useRef(null);
   // const [height, setHeight] = useState("")
 
@@ -9,9 +8,6 @@ const Home = () => {
   //   setHeight(ref.current.offsetWidth)
   //   console.log(height)
   // }, [height]);
-
-  
-
 
   return (
     <div>
@@ -126,7 +122,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-sm-4 col-md-4">
+              <div>
                 <div className="development-description">
                   <h3>Development and Design</h3>
                   <p>
@@ -148,7 +144,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-sm-4 col-md-4">
+              <div>
                 <div className="responsive-description">
                   <h3>Responsive Layouts</h3>
                   <p>
@@ -174,7 +170,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="col-sm-4 col-md-4">
+              <div>
                 <div className="idea-description">
                   <h3>Ideas and Solutions</h3>
                   <p>
@@ -192,7 +188,7 @@ const Home = () => {
                 <img className="img-fluid" src="/images/passion.svg" />
               </div>
 
-              <div className="col-sm-4 col-md-4">
+              <div>
                 <div className="passion-description">
                   <h3>Passion and Dedication</h3>
                   <p>
@@ -228,17 +224,19 @@ const Home = () => {
           <div className="row">
             <div className="col-sm-4 col-md-4 text-center">
               <div className="luvtalk-project">
-                <h3>LUV TALK Website</h3>
-                <p>
-                  Website, created during my first internship, which utilized
-                  HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress.{" "}
-                </p>
-                <div className="row">
-                  <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
-                    <div className="project-more-info">
-                      <a className="btn btn-default btn-border" href="#">
-                        More
-                      </a>
+                <div className="project-content">
+                  <h3>LUV TALK Website</h3>
+                  <p>
+                    Website, created during my first internship, which utilized
+                    HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress.{" "}
+                  </p>
+                  <div className="row">
+                    <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
+                      <div className="project-more-info">
+                        <a className="btn btn-default btn-border" href="#">
+                          More
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -247,6 +245,7 @@ const Home = () => {
 
             <div className="col-sm-4 col-md-4 text-center">
               <div className="personal-website-project">
+                <div className="project-content">
                 <h3>Personal Website</h3>
                 <p>
                   Enjoyable side project that was created to experiment with
@@ -262,11 +261,13 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
 
             <div className="col-sm-4 col-md-4 text-center">
               <div className="strike-zone-project">
+                <div className="project-content">
                 <h3>Strike Zone Analysis</h3>
                 <p>
                   Data analytics project completed during my time at the
@@ -281,6 +282,7 @@ const Home = () => {
                       </a>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
