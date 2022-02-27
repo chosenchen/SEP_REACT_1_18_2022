@@ -47,7 +47,7 @@ const ProjectSection = () => {
                         )}
                     </div>
 
-                    <div className="row">
+                    <div className="row see-more-btn">
                         <div className="col-sm-2 col-md-2 col-sm-offset-5 col-md-offset-5">
                             <div className="see-more-button">
                                 <a className="btn btn-default btn-border" href="#">More Projects</a>

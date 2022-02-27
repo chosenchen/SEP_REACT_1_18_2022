@@ -75,9 +75,9 @@ text-align: right;
   font-size: 33pt;
 }
 
-/* .banner-buttons{
-  
-} */
+.banner-buttons{
+  padding-left: 40%;
+}
 .banner-buttons .btn-border,
 .submit-contact .btn-border,
 .projects .btn-border {
@@ -211,7 +211,9 @@ text-align: right;
 .projects h1,
 .projects h3 {
   font-family: "Source Sans Pro", Arial, sans-serif;
+  margin-top: 2rem;
 }
+
 .projects p {
   font-family: "Roboto", Helvetica, serif;
   padding: 0 10px;
@@ -220,7 +222,22 @@ text-align: right;
 .projects-header-quote {
   font-style: italic;
 }
-/*.luvtalk-project, .personal-website-project, .strike-zone-project, .resume {border: 3px solid white;}*/
+
+.title{
+  padding-top: 10rem;
+}
+
+.more-info-btns{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3rem;
+}
+
+.see-more-btn{
+  display: flex;
+  justify-content: center;
+}
+/* .luvtalk-project, .personal-website-project, .strike-zone-project, .resume {border: 3px solid white;} */
 .luvtalk-project {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
     url(../images/luvtalklogo.png);
@@ -352,4 +369,16 @@ textarea {
 .resume-footer a:hover,
 .contact-footer a:hover {
   columns: rgb(0, 183, 255);
+}
+.media-links {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+}
+.phone{
+  padding-left: 15rem;
 }
