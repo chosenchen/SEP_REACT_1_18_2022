@@ -53,7 +53,7 @@ class About extends React.Component{
           <Row>
             <div className="about-option-buttons">
               <Col sm={2} md={2}>
-                <a href = "#contact" class = "btn btn-default btn-black-border">Contact</a>
+                <a href = "#contact" className="btn btn-default btn-black-border">Contact</a>
               </Col>
             </div>
           </Row>

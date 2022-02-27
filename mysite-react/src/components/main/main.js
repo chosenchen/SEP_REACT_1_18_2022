@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import About from '../about/about.js';
+import Summary from '../about/summary.js';
 
 class Main extends React.Component{
   render(){
@@ -30,6 +31,7 @@ class Main extends React.Component{
           </Row>
         </Container>
         <About/>
+        <Summary/>
       </div>
     )
   }
