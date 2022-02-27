@@ -4,8 +4,10 @@ import Header from "./components/Header/Header";
 import HomePage from "./components/HomePage/HomePage";
 import PortfolioPage from "./components/PortfolioPage/PortfolioPage";
 import ContactPage from "./components/ContactPage/ContactPage";
+// import './boostrap/css/bootstrap.min.css'
+// import './boostrap/css'
 
-// import './boostrap/css/boostrap.min.css'
+
 const PAGESINFO = {
   Home: "HomePage ",
   Portfolio: "PortfolioPage",
@@ -19,7 +21,7 @@ function App() {
   function hanldePageChange(newPageInfo) {
     setCurPage(newPageInfo);
   }
-  let curPage = <HomePage />;
+  let curPage = <HomePage/>;
   switch (currentPage) {
     case PAGESINFO.Portfolio:
       curPage = <PortfolioPage></PortfolioPage>;
