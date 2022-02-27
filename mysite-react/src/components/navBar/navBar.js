@@ -17,8 +17,6 @@ class NavBar extends React.Component{
                 <img src={logo}/>
               </div>
             </Col>
-          </Row>
-          <Row>
             <Col xs={11} sm={11} md={11} lg={11} className="text-right">
               <div className="primary-nav">
                 <ul>

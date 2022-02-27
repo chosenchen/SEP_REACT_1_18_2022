@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import About from '../about/about.js';
+
 class Main extends React.Component{
   render(){
     return (
@@ -21,12 +23,13 @@ class Main extends React.Component{
               <Col sm={1} md={1} sm-offset={5} col-md-offset={5}>
                 <Button className="btn-default btn-border">Info</Button>
               </Col>
-              <Col sm={1} md={1}>
+              <Col sm={1} md={1} sm-offset={5} col-md-offset={5}>
                 <Button className="btn-default btn-border">Portfolio</Button>
               </Col>
             </div>
           </Row>
         </Container>
+        <About/>
       </div>
     )
   }
