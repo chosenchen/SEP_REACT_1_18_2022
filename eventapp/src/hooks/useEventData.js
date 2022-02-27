@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     getAllEvents,
     addNewEvent,
@@ -11,9 +11,13 @@ import store from '../redux/store';
 import actions from '../redux/actions/actions';
 
 export const useEventData = () => {
-    const events = store.getState();
+    const [events, setEvents] = useState(store.getState());
 
-    store.subscribe(() => console.log(store.getState()))
+
+    store.subscribe(() => {
+        setEvents(store.getState());
+    });
+
 
     const generateEditEventstate = (event) => {
         event.isEditing = false;
@@ -34,7 +38,7 @@ export const useEventData = () => {
 
     const handleDeleteEvent = (deletedEvent) => {
         return deleteEvent(deletedEvent).then(() => {
-            store.dispatch(actions.deleteEventAction(deleteEvent))
+            store.dispatch(actions.deleteEventAction(deletedEvent))
         });
     };
     // API CALL

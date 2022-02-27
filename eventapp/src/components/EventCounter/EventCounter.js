@@ -6,12 +6,13 @@ import store from '../../redux/store';
 
 function EventCounter () {
 
-  const events = store.getState()
+  const [events] = useEventData()
+
   console.log(events)
     return <h1>{events.length}</h1>;
   }
 
 
-const EventCounterConnector = withEventData(EventCounter);
+//const EventCounterConnector = withEventData(EventCounter);
 
-export default EventCounterConnector;
+export default EventCounter;

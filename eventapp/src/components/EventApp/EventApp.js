@@ -1,7 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './EventApp.css';
-import { withEventData } from '../../hoc/withEventData';
-
 import { EventData } from '../../models/EventData';
 
 import EventDataRow from '../EventDataRow/EventDataRow';
@@ -10,17 +8,13 @@ import Button from '../Button/Button';
 import { useEventData } from '../../hooks/useEventData';
 
 
-const EventApp = (props) => {
-  const [dataCol] = React.useState([
-    'Event Name',
-    'Start Date',
-    'End Date',
-    'Actions',
-  ]);
-  const [isShowAddEventRow, setIsShowAddEventRow] = React.useState(false);
-  const [newEvent, setNewEvent] = React.useState(
-    new EventData('', '' + Date.now(), '' + Date.now())
-  );
+
+const EventApp = () => {
+
+  const [dataCol] = useState(['Event Name', 'Start Date', 'End Date', 'Actions']);
+  const [isShowAddEventRow, setIsShowAddEventRow] = useState(false);
+  const [newEvent, setNewEvent] = useState(new EventData('', '' + Date.now(), '' + Date.now()));
+
   const [
     events,
     handleUpdateEvent,
@@ -28,33 +22,27 @@ const EventApp = (props) => {
     handleAddEvent,
     handleSetEdit,
     handleOnChangeEditEvent,
-  ] = useEventData();
+  ] = useEventData()
 
-  console.log(events)
-
+  // const eventList = store.getState().eventList;
 
   const hanldeAddEvent = () => {
     setIsShowAddEventRow(true);
   };
   const hanldeOnChange = (newEvent) => {
-    setNewEvent(newEvent);
+    setNewEvent({ ...newEvent });
   };
-
   const handleCloseAddNew = () => {
     setIsShowAddEventRow(false);
     setNewEvent(new EventData('', '' + Date.now(), '' + Date.now()));
   };
 
-  const hanldeSaveAddNew = (newEventD) => {
-    console.log('click');
-    console.log('before', newEventD);
+  const hanldeSaveAddNew = () => {
     const { eventName, startDate, endDate } = newEvent;
-
-    const newEventData = new EventData(eventName, startDate, endDate);
-    newEventData.parseTimeStamp();
-    console.log('after', newEventData);
-    if (newEventData.isValidForSave()) {
-      handleAddEvent(newEventData).then((data) => {
+    const myNewEvent = new EventData(eventName, startDate, endDate);
+    myNewEvent.parseTimeStamp();
+    if (myNewEvent.isValidForSave()) {
+      handleAddEvent(myNewEvent).then((data) => {
         handleCloseAddNew();
       });
     } else {
@@ -63,14 +51,14 @@ const EventApp = (props) => {
   };
 
   const handleEditSave = (editEventObj) => {
+
+
     handleUpdateEvent(editEventObj).then((data) => {
       handleSetEdit(editEventObj, false);
     });
   };
 
-  const renderHeader = () => (
-    <Button onClick={hanldeAddEvent}>Add Event</Button>
-  );
+  const renderHeader = () => <Button onClick={hanldeAddEvent}>Add Event</Button>;
   const renderFooter = () => {
     if (isShowAddEventRow) {
       return (
@@ -94,6 +82,7 @@ const EventApp = (props) => {
     }
   };
 
+
   return (
     <EventTable
       dataCol={dataCol}
@@ -101,6 +90,7 @@ const EventApp = (props) => {
       renderHeader={renderHeader}
     >
       {events?.map((event) =>
+
         event.isEditing ? (
           <EventDataRow
             key={event.id}
@@ -137,7 +127,5 @@ const EventApp = (props) => {
     </EventTable>
   );
 };
-
-// const EventManger = withEventData(EventApp);
 
 export default EventApp;

@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { SizeMe } from 'react-sizeme';
+import $ from 'jquery';
 
 import projects from './Jquery'
 
 export default function Portfolio() {
-  projects()
+  
+
   return (
     <div className="projects" id="projects">
       <div className="container-fluid">
@@ -26,10 +28,9 @@ export default function Portfolio() {
 
         <div className="row">
           <div className="col-sm-4 col-md-4 text-center">
-            <SizeMe>
-              {({ size })=>
-                <div className="luvtalk-project"  style={{ 'height': `${size.width}px` }}>
-                  <h3 style={{'paddingTop':`${(size.height )}`}}>LUV TALK Website</h3>
+            
+                <div className="luvtalk-project"  >
+                  <h3 >LUV TALK Website</h3>
                   <p>Website, created during my first internship, which utilized HTML, CSS, PHP, Ajax, Javascript/jQuery, and Wordpress. </p>
                   <div className="row">
                     <div className="col-sm-4 col-md-4 col-sm-offset-4 col-md-offset-4">
@@ -39,8 +40,7 @@ export default function Portfolio() {
                     </div>
                   </div>
                 </div>
-              }
-            </SizeMe>
+              
             
           </div>
 

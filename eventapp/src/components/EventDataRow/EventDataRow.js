@@ -6,7 +6,7 @@ const EventDataRow = (props) => {
     props.handleOnchange({ ...event, [name]: value });
   };
   const { event, handleOnchange, actions } = props;
-
+ 
   return (
     <tr key={event.id}>
       <td>

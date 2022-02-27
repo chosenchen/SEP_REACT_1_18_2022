@@ -11,7 +11,7 @@ import './Navgation.css'
 
 
 export default function NavBar() {
-    navigation();
+    //navigation();
     const [currentComponent, setCurrentComponent] = useState('Home')
 
     const clikeHandle = (e) => {

@@ -34,6 +34,7 @@ function setEditAction(setEditEvent, isEdit) {
 }
 
 function onChangeEditEventAction(editEvent) {
+    console.log(editEvent.id)
     return {
         type: "onChangeEditEvent",
         payload: editEvent,

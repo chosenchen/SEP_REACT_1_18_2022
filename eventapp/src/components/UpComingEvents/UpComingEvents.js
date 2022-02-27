@@ -6,12 +6,11 @@ import WithEventData from '../WithEventData/WithEventData';
 
 import { useEventData } from '../../hooks/useEventData';
 
-import store from '../../redux/store';
 
 function UpComingEvent () {
   const dataCol = ['Event Name', 'Start Date', 'End Date']
   
-  const events = store.getState();
+  const [events] = useEventData()
   console.log(events)
 
   const renderHeader = () => {
@@ -23,13 +22,14 @@ function UpComingEvent () {
     return (
       <EventTable renderHeader={renderHeader} dataCol={dataCol}>
         {events
-          ?.filter((event) => {
-            if (event.isInTheFuture()) {
-              return true;
-            } else {
-              return false;
-            }
-          })
+          // ?.filter((event) => {
+          //   console.log(event)
+          //   if (event.isInTheFuture()) {
+          //     return true;
+          //   } else {
+          //     return false;
+          //   }
+          // })
           .map((event) => {
             return <EventDataRow key={event.id} event={event}></EventDataRow>;
           })}

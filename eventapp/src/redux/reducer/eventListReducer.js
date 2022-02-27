@@ -1,5 +1,3 @@
-import actions from "../actions/actions";
-
 const initState = []
 
 const eventListReducer = (state = initState, action) => {
@@ -30,7 +28,7 @@ const eventListReducer = (state = initState, action) => {
             })
 
         case "addNewEvent":
-            return [...state, actions.payload]
+            return [...state, action.payload]
 
         case "setEdit":
             return state.map((event) => {
@@ -44,11 +42,11 @@ const eventListReducer = (state = initState, action) => {
 
         case "onChangeEditEvent":
             return state.map((event) => {
-                console.log(actions.payload)
-                if (event.id === actions.payload.id) {
+                console.log(action.payload)
+                if (event.id === action.payload.id) {
                     return {
                         ...event,
-                        editEvent: { ...actions.payload },
+                        editEvent: { ...action.payload },
                     };
                 } else {
                     return event;
