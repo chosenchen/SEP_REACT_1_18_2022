@@ -44,7 +44,7 @@ class Projects extends React.Component{
             />
           </Row>
 
-          <Row>
+          <Row className="see-more-button-container">
             <Col sm={2} md={2} sm-offset={5} md-offset={5}>
               <div className="see-more-button">
                 <Button className="btn-default btn-border">More Projects</Button>

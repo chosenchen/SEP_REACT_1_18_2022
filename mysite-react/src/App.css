@@ -67,6 +67,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 30vh;
 }
 
 .banner-buttons .btn-border,
@@ -96,6 +97,7 @@ html {
 
 /* About Me */
 .about {
+  color: black;
   padding: 3% 0;
   background: linear-gradient(
       rgba(225, 225, 225, 0.94),
@@ -181,7 +183,7 @@ html {
   display: flex;
   padding: 50px 6%;
   width: 100%;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -213,6 +215,23 @@ html {
 .projects-header-quote {
   font-style: italic;
 }
+
+.projects .col{
+  min-height: 50vh;
+}
+
+.card{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card .row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*.luvtalk-project, .personal-website-project, .strike-zone-project, .resume {border: 3px solid white;}*/
 .luvtalk-project {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
@@ -230,6 +249,12 @@ html {
   background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
     url(./assets/mlbproject.png);
   background-position: center center;
+}
+
+.see-more-button-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .resume {

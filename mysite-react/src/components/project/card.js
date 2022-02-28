@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/Button';
 class Card extends React.Component{
   render(){
     return(
-      <Col sm={4} col={4} className="text-center">
-        <div className={this.props.className}>
+      <Col sm={4} col={4} className="col text-center">
+        <div className={`${this.props.className} card`} >
           <h3>{this.props.header}</h3>
           <p>{this.props.description}</p>
           <Row>
