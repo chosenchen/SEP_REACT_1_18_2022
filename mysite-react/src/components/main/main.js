@@ -21,10 +21,10 @@ class Main extends React.Component{
           </Row>
           <Row className="text-center">
             <div className="banner-buttons">
-              <Col sm={1} md={1} sm-offset={5} col-md-offset={5}>
+              <Col sm={2} md={2} sm-offset={5} col-md-offset={5}>
                 <Button className="btn-default btn-border">Info</Button>
               </Col>
-              <Col sm={1} md={1} sm-offset={5} col-md-offset={5}>
+              <Col sm={2} md={2} sm-offset={5} col-md-offset={5}>
                 <Button className="btn-default btn-border">Portfolio</Button>
               </Col>
             </div>

@@ -47,6 +47,7 @@ html {
   background-attachment: fixed;
   padding: 14.7% 0; /* Center contents within the container, make background image cover*/
   color: white;
+  height: 100vh;
 }
 
 .entry-banner h1 {
@@ -61,12 +62,19 @@ html {
 #person-description {
   font-size: 33pt;
 }
+
+.banner-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .banner-buttons .btn-border,
 .submit-contact .btn-border,
 .projects .btn-border {
   background-color: transparent;
   width: 100%;
-  margin-top: 40px;
+  margin: 40px 0;
   color: white;
   font-family: "Roboto", Helvetica, serif;
   font-size: 16pt;
@@ -170,8 +178,11 @@ html {
 }
 
 .summary .row {
+  display: flex;
   padding: 50px 6%;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .summary h3 {
