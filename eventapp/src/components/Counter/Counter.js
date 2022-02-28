@@ -1,6 +1,7 @@
 import React from 'react';
+import { myConnect } from '../../MyReactRedux/MyReactRedux';
 
-export default class Counter extends React.Component {
+class Counter extends React.Component {
   state = {
     title: 'Counter Class ',
     counter: 0,
@@ -25,3 +26,6 @@ export default class Counter extends React.Component {
     );
   }
 }
+
+// currying function
+export default myConnect()(Counter);
