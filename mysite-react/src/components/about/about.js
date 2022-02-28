@@ -43,7 +43,7 @@ class About extends React.Component{
 
                   <p>Male, 200 years old.</p>
                   <p>Five feet 110 inches</p>
-                  <p>Favorite fonts:Roboto </p>
+                  <p>Favorite fonts: Roboto </p>
                   <p>Loves to learn new things</p>
                 </Col>
               </div>

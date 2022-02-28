@@ -45,9 +45,8 @@ html {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  padding: 14.7% 0; /* Center contents within the container, make background image cover*/
+  padding-top: 14.7%; /* Center contents within the container, make background image cover*/
   color: white;
-  height: 100vh;
 }
 
 .entry-banner h1 {
@@ -329,6 +328,12 @@ textarea {
 .footer h4 {
   font-family: "Source Sans Pro", Arial, sans-serif;
 }
+
+.media-links{
+  display: flex;
+  justify-content: center;
+}
+
 .facebook,
 .linkedin,
 .pinterest,
@@ -370,3 +375,4 @@ textarea {
 .resume-footer a:hover,
 .contact-footer a:hover {
 }
+
