@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import About from '../about/about.js';
 import Summary from '../about/summary.js';
 import Projects from '../project/projects.js';
+import Contact from '../contact/Contact.js';
 
 class Main extends React.Component{
   render(){
@@ -34,6 +35,7 @@ class Main extends React.Component{
         <About/>
         <Summary/>
         <Projects/>
+        <Contact/>
       </div>
     )
   }
