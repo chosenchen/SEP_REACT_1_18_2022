@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react"
 import './Home.css';
 import Summary from "../Summary/Summary";
 
-import Footer from '../Footer/Footer'
+import Portfolio from '../Portfolio/Portfolio'
+import Contact from '../Contact/Contact'
 
 //By new props, useState to update functional components
 const Home = (props) => {
@@ -92,7 +93,8 @@ const Home = (props) => {
                 <Summary />
               </div>
            </section>
-
+           <Portfolio />
+           <Contact /> 
         </section>
        
     )
