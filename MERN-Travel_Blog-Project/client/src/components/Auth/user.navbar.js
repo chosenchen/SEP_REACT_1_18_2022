@@ -41,10 +41,10 @@ class UserNavbar extends React.Component {
             </NavLink>
 
             <div className="dropdown">
-              <a className="btn dropdown-toggle" style={{ color: 'white' }} href="#" role="button"
+              <button className="btn dropdown-toggle" style={{ color: 'white' }}
                 id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 <img className="nav-user__img" src={this.state.user.profile_img} alt='' />
-              </a>
+              </button>
 
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li> <NavLink to="/profile" style={{ display: 'inline' }}>

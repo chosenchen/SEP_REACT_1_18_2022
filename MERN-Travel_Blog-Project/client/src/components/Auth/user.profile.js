@@ -18,6 +18,7 @@ function UserProfile() {
        if(log.user.userName === authUser.userName){
             userLogs.push(log);
        }
+       return userLogs;
     });
 
     return (
