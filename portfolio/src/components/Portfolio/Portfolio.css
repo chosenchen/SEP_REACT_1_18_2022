@@ -32,8 +32,8 @@
 
 .Portfolio-item{
  width: 30%;
- min-width: 350px;
- min-height: 350px;
+ min-width: 340px;
+ min-height: 340px;
  height: auto;
  display: flex;
  justify-content: center;
