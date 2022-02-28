@@ -23,17 +23,15 @@ export default function useLogData() {
         );
     };
 
-    const handleOnDelete = (e) => {
-        return deleteRecord(e.target.id).then((data) => {
-            dispatch(setRecords(records.filter((record) => {
-                if (record._id === e.target.id) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }),
-            ));
-        });
+    const handleOnDelete = async (e) => {
+        await deleteRecord(e.target.id);
+        dispatch(setRecords(records.filter((record) => {
+            if (record._id === e.target.id) {
+                return false;
+            } else {
+                return true;
+            }
+        })));
     };
 
     const handleAddRecord = (newRecord) => {
