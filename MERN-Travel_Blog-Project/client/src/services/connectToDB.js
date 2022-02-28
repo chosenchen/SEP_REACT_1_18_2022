@@ -33,7 +33,7 @@ export const addNewRecord = (newRecord) => {
     }).then((response) => response.json());
 }
 
-export const editRecord = (record) => 
+export const editRecord = (record) =>
     fetch([baseURL, 'update', record._id].join('/'), {
         method: 'POST',
         headers: {
@@ -43,9 +43,11 @@ export const editRecord = (record) =>
         body: JSON.stringify(record),
     }).then((response) => response.json());
 
-export const deleteRecord = (id) => {
-    console.log([baseURL, id].join('/'));
+export const deleteRecord = (id) =>
     fetch([baseURL, id].join('/'), {
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
     }).then((response) => response.json());
-}

@@ -1,5 +1,5 @@
 import React from 'react';
-import UserLogCard from "../Auth/user.LogCard";
+import LogCard from "../LogCard";
 import useLogData from "../../hooks/useLogData";
 
 function UserProfile() {
@@ -24,7 +24,7 @@ function UserProfile() {
         <div className="homePage-record__list">
             {userLogs?.map((log) => {
                 return (
-                    <UserLogCard log={log} key={log._id} />
+                    <LogCard log={log} key={log._id} auth={true}/>
                 )
             })}
         </div>

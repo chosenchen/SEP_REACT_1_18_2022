@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { LogData } from '../models/log.model';
 import { setRecords } from '../redux/recordSlice';
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllRecords, addNewRecord } from '../services/connectToDB';
+import { getAllRecords, addNewRecord, deleteRecord } from '../services/connectToDB';
 
 export default function useLogData() {
 
@@ -23,8 +23,20 @@ export default function useLogData() {
         );
     };
 
+    const handleOnDelete = (e) => {
+        return deleteRecord(e.target.id).then((data) => {
+            dispatch(setRecords(records.filter((record) => {
+                if (record._id === e.target.id) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }),
+            ));
+        });
+    };
+
     const handleAddRecord = (newRecord) => {
-        console.log("POST", newRecord);
         return addNewRecord(newRecord);
     };
 
@@ -46,5 +58,5 @@ export default function useLogData() {
 
     }, [dispatch]);
 
-    return { records, generateRecordState, handleAddRecord }
+    return { records, generateRecordState, handleAddRecord, handleOnDelete }
 }

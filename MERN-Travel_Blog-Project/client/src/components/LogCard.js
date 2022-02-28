@@ -1,14 +1,18 @@
 import React from "react";
 import { findRecord, editRecord } from '../services/connectToDB';
 import { USER_API } from "../services/user.connectToDB";
-
+import useLogData from "../hooks/useLogData";
 function LogCard(props) {
+
+    const {
+        handleOnDelete
+    } = useLogData();
 
     let authUser = sessionStorage.getItem("user");
     if (authUser === 'null') {
     } else { authUser = JSON.parse(authUser); }
 
-    const { log } = props;
+    const { log, auth } = props;
     const [likes, setlikes] = React.useState(log.likes);
     const [userLikedPost, setUserLikedPost] = React.useState(log.liked_users.includes(authUser._id));
 
@@ -27,7 +31,6 @@ function LogCard(props) {
         setlikes(currentLog.likes);
         setUserLikedPost(true);
     }
-
 
     return (
         <div className="card">
@@ -57,6 +60,14 @@ function LogCard(props) {
                         }
                     </section>
                 }
+
+                {auth === true ?
+                    <button type="button" className="btn btn-danger"
+                        id={log._id} onClick={handleOnDelete}>
+                        <i className="bi bi-trash" id={log._id}></i>
+                    </button>
+                :null}
+
             </div>
             <img className="card-img-top" src={log.url} alt="" />
             <div className="card-footer text-muted">
