@@ -9,6 +9,7 @@ import HomePage from "./components/homePage";
 import LogIn from "./components/logIn";
 import SignUp from "./components/signUp";
 import CreateLog from "./components/createLog";
+import UserProfile from "./components/user.profile";
 
 class App extends React.Component {
 
@@ -37,6 +38,7 @@ class App extends React.Component {
             <Route exact path="/log-in" element={<LogIn />} />
             <Route exact path="/sign-up" element={<SignUp />} />
             <Route exact path="/create-log" element={<CreateLog />} />
+            <Route exact path="/profile" element={<UserProfile /> } />
           </Routes>
         </section>
       </main>

@@ -42,3 +42,10 @@ export const editRecord = (record) =>
         },
         body: JSON.stringify(record),
     }).then((response) => response.json());
+
+export const deleteRecord = (id) => {
+    console.log([baseURL, id].join('/'));
+    fetch([baseURL, id].join('/'), {
+        method: 'DELETE',
+    }).then((response) => response.json());
+}
