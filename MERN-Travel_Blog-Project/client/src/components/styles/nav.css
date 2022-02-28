@@ -8,3 +8,7 @@
     height: 45px;
     width: 45px;
 }
+
+.btn_log_out:hover{
+    color: red;
+}

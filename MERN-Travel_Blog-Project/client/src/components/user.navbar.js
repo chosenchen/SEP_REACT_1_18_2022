@@ -15,7 +15,7 @@ class UserNavbar extends React.Component {
     this.userLogOut = this.userLogOut.bind(this);
   }
 
-  userLogOut(){
+  userLogOut() {
     sessionStorage.setItem("auth", false);
     sessionStorage.setItem("user", null);
     window.location.href = "/";
@@ -39,17 +39,26 @@ class UserNavbar extends React.Component {
             <NavLink className="nav-link" to="/create-log">
               <button type="button" className="btn btn-outline-success me-2">Create Log</button>
             </NavLink>
-            <NavLink className="nav-link" to="/">
-              <button type="button" className="btn btn-warning me-2" onClick={this.userLogOut}>Log Out</button>
-            </NavLink>
-            <NavLink className="nav-link" to="/profile">
-              <button type="button" className="btn nav-user__btn">
-              <img className="nav-user__img" src={this.state.user.profile_img} alt=''/>
-              </button>
-            </NavLink>
+
+            <div class="dropdown">
+              <a className="btn dropdown-toggle" style={{ color: 'white' }} href="#" role="button"
+                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <img className="nav-user__img" src={this.state.user.profile_img} alt='' />
+              </a>
+
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li> <NavLink to="/profile" style={{ display: 'inline' }}>
+                  <button type="button" className="btn">Your Posts</button>
+                </NavLink></li>
+                <li><NavLink to="/">
+                  <button type="button" className="btn btn_log_out" onClick={this.userLogOut}>Log Out</button>
+                </NavLink></li>
+              </ul>
+            </div>
+
           </div>
         </div>
-      </nav>
+      </nav >
     );
   }
 }
