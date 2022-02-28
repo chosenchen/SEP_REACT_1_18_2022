@@ -8,13 +8,28 @@ export const MyReactReduxContext = React.createContext(null);
 
 // export default connect(mapStateToProps)(TodoList)
 
-export const myConnect = function (mapStateToPropsFn) {
+export const myConnect = function (mapStateToPropsFn, mapDispatchToPropsFn) {
   return function (WrappedComponent) {
     return class NewComponent extends React.Component {
       static contextType = MyReactReduxContext;
+      componentDidMount() {
+        const { subscribe } = this.context;
+        subscribe(() => {
+          this.forceUpdate();
+        });
+      }
       render() {
-        console.log('test', this.context);
-        return <WrappedComponent></WrappedComponent>;
+        const { getState, dispatch, subscribe } = this.context;
+        const mapStateToProps = mapStateToPropsFn(getState());
+        const mapDispatchToProps = mapDispatchToPropsFn(dispatch);
+        const { children, ...rest } = this.props;
+        return (
+          <WrappedComponent
+            {...mapStateToProps}
+            {...mapDispatchToProps}
+            {...rest}
+          ></WrappedComponent>
+        );
       }
     };
   };

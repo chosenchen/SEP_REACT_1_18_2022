@@ -8,7 +8,8 @@ class Counter extends React.Component {
   };
 
   handleClick = () => {
-    this.setState({ counter: this.state.counter + 1 });
+    console.log('hello');
+    this.props.add();
   };
   handleAlert = () => {
     setTimeout(() => {
@@ -19,7 +20,7 @@ class Counter extends React.Component {
     return (
       <section>
         <header>{this.state.title}</header>
-        <p>Counter: {this.state.counter}</p>
+        <p>Counter: {this.props.CounterValue}</p>
         <button onClick={this.handleClick}>Add</button>
         <button onClick={this.handleAlert}>AlertCounter After 5s</button>
       </section>
@@ -27,5 +28,16 @@ class Counter extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    CounterValue: state.value,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: () => dispatch({ type: 'counter/incremented' }),
+  };
+};
 // currying function
-export default myConnect()(Counter);
+export default myConnect(mapStateToProps, mapDispatchToProps)(Counter);
