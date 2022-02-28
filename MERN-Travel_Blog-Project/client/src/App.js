@@ -3,13 +3,13 @@ import { Route, Routes } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navbar from "./components/navbar";
-import UserNavbar from "./components/user.navbar";
-import HomePage from "./components/homePage";
-import LogIn from "./components/logIn";
-import SignUp from "./components/signUp";
-import CreateLog from "./components/createLog";
-import UserProfile from "./components/user.profile";
+import Navbar from "./components/navbar"
+import UserNavbar from "./components/Auth/user.navbar";
+import HomePage from "./components/Pages/homePage";
+import LogIn from "./components/Pages/logIn";
+import SignUp from "./components/Pages/signUp";
+import CreateLog from "./components/Pages/createLog";
+import UserProfile from "./components/Auth/user.profile";
 
 class App extends React.Component {
 

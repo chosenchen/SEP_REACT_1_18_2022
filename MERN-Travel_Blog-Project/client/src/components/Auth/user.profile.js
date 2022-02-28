@@ -1,6 +1,6 @@
 import React from 'react';
-import UserLogCard from "./user.LogCard";
-import useLogData from "../hooks/useLogData";
+import UserLogCard from "../Auth/user.LogCard";
+import useLogData from "../../hooks/useLogData";
 
 function UserProfile() {
 

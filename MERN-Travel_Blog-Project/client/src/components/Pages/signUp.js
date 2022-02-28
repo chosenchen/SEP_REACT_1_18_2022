@@ -1,9 +1,9 @@
 import React from "react";
 
-import { USER_API } from '../services/user.connectToDB';
-import { UserData } from '../models/user.model.js';
+import { USER_API } from '../../services/user.connectToDB';
+import { UserData } from '../../models/user.model.js';
 
-import './styles/signUp.css';
+import '../../styles/signUp.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 

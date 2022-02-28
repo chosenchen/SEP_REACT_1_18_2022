@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import './styles/createLog.css';
+import '../../styles/createLog.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { LogData } from "../models/log.model";
-import useLogData from "../hooks/useLogData";
+import { LogData } from "../../models/log.model";
+import useLogData from "../../hooks/useLogData";
 
 function CreateLog() {
 

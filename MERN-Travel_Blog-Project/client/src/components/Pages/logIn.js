@@ -1,11 +1,10 @@
 import React from "react";
-import './styles/logIn.css';
 
-import './styles/logIn.css';
+import '../../styles/logIn.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { USER_API } from "../services/user.connectToDB";
-import { UserData } from '../models/user.model.js';
+import { USER_API } from "../../services/user.connectToDB";
+import { UserData } from '../../models/user.model.js';
 
 class LogIn extends React.Component {
 

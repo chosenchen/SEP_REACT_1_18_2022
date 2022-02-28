@@ -1,7 +1,7 @@
 import React from "react";
-import './styles/homePage.css';
-import LogCard from "./LogCard";
-import useLogData from "../hooks/useLogData";
+import '../../styles/homePage.css';
+import LogCard from "../LogCard";
+import useLogData from "../../hooks/useLogData";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function HomePage() {

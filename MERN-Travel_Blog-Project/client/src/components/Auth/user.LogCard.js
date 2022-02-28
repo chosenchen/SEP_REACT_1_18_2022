@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteRecord } from "../services/connectToDB";
+import { deleteRecord } from "../../services/connectToDB";
 
 function UserLogCard(props) {
 
