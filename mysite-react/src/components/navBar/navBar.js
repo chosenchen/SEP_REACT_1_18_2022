@@ -1,10 +1,9 @@
 import React from 'react';
-// import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import logo from '../../assets/logo.svg';
-// import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import {Link } from 'react-router-dom';
 
 class NavBar extends React.Component{
   render(){
@@ -20,9 +19,9 @@ class NavBar extends React.Component{
             <Col xs={11} sm={11} md={11} lg={11} className="text-right">
               <div className="primary-nav">
                 <ul>
-                  <li>Home</li>
-                  <li>Portfolio</li>
-                  <li>Contact</li>
+                  <li><Link to={"/"}>Home</Link></li>
+                  <li><Link to={"/projects"}>Portfolio</Link></li>
+                  <li><Link to={"/contact"}>Contact</Link></li>
                 </ul>
               </div>
             </Col>

@@ -24,10 +24,10 @@ class Main extends React.Component{
           <Row className="text-center">
             <div className="banner-buttons">
               <Col sm={2} md={2} sm-offset={5} col-md-offset={5}>
-                <Button className="btn-default btn-border">Info</Button>
+                <Button className="btn-default btn-border" href="#about">Info</Button>
               </Col>
               <Col sm={2} md={2} sm-offset={5} col-md-offset={5}>
-                <Button className="btn-default btn-border">Portfolio</Button>
+                <Button className="btn-default btn-border" href="#projects">Portfolio</Button>
               </Col>
             </div>
           </Row>
