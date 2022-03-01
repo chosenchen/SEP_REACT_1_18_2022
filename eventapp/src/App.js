@@ -16,7 +16,7 @@ const PAGESINFO = {
 };
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState(PAGESINFO.EventManager);
+  const [currentPage, setCurrentPage] = useState(PAGESINFO.CounterClass);
   // eslint-disable-next-line no-unused-vars
   const [pagesInfo, setPagesInfo] = useState(PAGESINFO);
 

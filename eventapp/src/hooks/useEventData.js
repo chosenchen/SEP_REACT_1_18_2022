@@ -15,8 +15,6 @@ import { useAbort } from "./useAbort";
 const getEventsState = () => {
   const { events } = store.getState();
 
-  console.log(events);
-
   return events;
 };
 

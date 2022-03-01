@@ -1,4 +1,5 @@
 import React from "react";
+import { myConnect } from "../../MyReactRedux/MyReactRedux";
 
 class Counter extends React.Component {
   state = {
@@ -7,7 +8,8 @@ class Counter extends React.Component {
   };
 
   handleOnClick = () => {
-    this.setState({ counter: this.state.counter + 1 });
+    // this.setState({ counter: this.state.counter + 1 });
+    this.props.add();
   };
 
   handleAlert = () => {
@@ -20,7 +22,7 @@ class Counter extends React.Component {
     return (
       <section>
         <header>{this.state.title}</header>
-        <p>Counter: {this.state.counter}</p>
+        <p>Counter: {this.props.count}</p>
         <button onClick={this.handleOnClick}>Add</button>
         <button onClick={this.handleAlert}>Alert</button>
       </section>
@@ -28,4 +30,20 @@ class Counter extends React.Component {
   }
 }
 
-export default Counter;
+const mapStateToProps = (state) => {
+  return {
+    count: state.value,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    add: () => {
+      dispatch({ type: "counter/incremented" });
+    },
+  };
+};
+
+export default myConnect(mapStateToProps, mapDispatchToProps)(Counter);
+
+// export default Counter;
