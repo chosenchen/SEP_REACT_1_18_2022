@@ -15,7 +15,7 @@ export const myConnect = function (mapStateToPropsFn, mapDispatchToPropsFn) {
 
       componentDidMount() {
         const { subscribe } = this.context;
-        subscribe(() => {
+        this.unsubscribe = subscribe(() => {
           console.log("add sub", this);
           this.forceUpdate();
         });
@@ -23,6 +23,7 @@ export const myConnect = function (mapStateToPropsFn, mapDispatchToPropsFn) {
 
       componentWillUnmount() {
         console.log("will unmount");
+        this.unsubscribe();
       }
 
       render() {
@@ -53,10 +54,10 @@ const useForceUpdate = () => {
 const useSubscribe = (store) => {
   const forceUpdate = useForceUpdate();
   React.useEffect(() => {
-    store.subscribe(forceUpdate);
+    const unsubscribe = store.subscribe(forceUpdate);
 
     return () => {
-      store.unsubscribe();
+      unsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
