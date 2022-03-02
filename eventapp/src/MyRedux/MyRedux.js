@@ -33,6 +33,7 @@ function myCreateStore(reducerFn) {
   let subscriberList = [];
   function dispatch(action) {
     state = reducerFn(state, action);
+    console.log('state', state);
     notify();
   }
   function notify() {

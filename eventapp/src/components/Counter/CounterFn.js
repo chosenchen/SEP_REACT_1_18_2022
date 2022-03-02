@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { myStore } from '../../MyRedux/MyRedux';
+import {useMySelector, useMyDispatch } from '../../MyReactRedux/MyReactRedux';
 
 const CounterFn = (props) => {
   //   const [state, setState] = React.useState({
@@ -9,9 +10,11 @@ const CounterFn = (props) => {
 
   console.log('CounterFn called');
   const [title] = React.useState('Counter Fn !');
-  const [counter, setCounter] = React.useState(0);
+  // const [counter, setCounter] = React.useState(0);
   const [shouldAlert, setShouldAlert] = React.useState(false);
   const [_, forceUpdate] = React.useState(false);
+  const counter = useMySelector(counter => counter.value);
+  const dispatch = useMyDispatch();
 
   useEffect(() => {
     myStore.subscribe(() => {
@@ -36,7 +39,8 @@ const CounterFn = (props) => {
   }, [shouldAlert]);
 
   const hanldeClick = () => {
-    setCounter((preCounter) => preCounter + 1);
+    // setCounter((preCounter) => preCounter + 1);
+    dispatch({type: 'counter/incremented'});
   };
   const handleAlert = () => {
     setTimeout(() => {
@@ -46,7 +50,7 @@ const CounterFn = (props) => {
   return (
     <section>
       <header>{title}</header>
-      <p>Counter: {myStore.getState().value}</p>
+      <p>Counter: {counter}</p>
       <button onClick={hanldeClick}>Add</button>
       <button onClick={handleAlert}>AlertCounterAfter5s</button>
     </section>

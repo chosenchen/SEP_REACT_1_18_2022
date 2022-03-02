@@ -26,7 +26,7 @@ export const myConnect = function (mapStateToPropsFn, mapDispatchToPropsFn) {
         this.unsub();
       }
       render() {
-        const { getState, dispatch, subscribe } = this.context;
+        const { getState, dispatch } = this.context;
         const mapStateToProps = mapStateToPropsFn(getState());
         const mapDispatchToProps = mapDispatchToPropsFn(dispatch);
         const { children, ...rest } = this.props;
@@ -63,6 +63,7 @@ export const useMySelector = (selectFn) => {
 export const useMyDispatch = () => {
   const store = React.useContext(MyReactReduxContext);
   useSubscribe(store);
+  console.log('useMyDispatch');
   return store.dispatch;
 };
 
