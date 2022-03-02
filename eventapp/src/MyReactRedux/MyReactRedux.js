@@ -12,11 +12,18 @@ export const myConnect = function (mapStateToPropsFn, mapDispatchToPropsFn) {
   return function (WrappedComponent) {
     return class NewComponent extends React.Component {
       static contextType = MyReactReduxContext;
+
+      unsub = null;
+      
       componentDidMount() {
         const { subscribe } = this.context;
-        subscribe(() => {
+        this.unsub = subscribe(() => {
           this.forceUpdate();
         });
+      }
+
+      componentWillUnmount() {
+        this.unsub();
       }
       render() {
         const { getState, dispatch, subscribe } = this.context;

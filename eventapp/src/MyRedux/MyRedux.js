@@ -42,7 +42,14 @@ function myCreateStore(reducerFn) {
   }
   function subscribe(subscriberFn) {
     subscriberList.push(subscriberFn);
+
+    return ()=>{
+      subscriberList = subscriberList.filter((subscriber) => {
+        return subscriberFn !== subscriber;
+      });
+    }
   }
+
   function getState() {
     return state;
   }
